@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mogoverse — Your Brand Has a Logo. Now Give It a Voice.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',sans-serif;background:#fafafa;color:#1a1a2e;line-height:1.6;overflow-x:hidden;}
+
+  nav{display:flex;justify-content:space-between;align-items:center;padding:16px 60px;position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-bottom:1px solid #eee;}
+  .logo-group{display:flex;align-items:center;gap:16px;}
+  .logo{font-size:24px;font-weight:900;letter-spacing:-1px;color:#1a1a2e;}
+  .logo span{color:#6d28d9;}
+  .powered-by{font-size:11px;color:#999;border-left:1px solid #ddd;padding-left:16px;}
+  .powered-by strong{color:#666;}
+  .nav-cta{background:#1a1a2e;color:white;padding:10px 24px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;transition:all 0.2s;}
+  .nav-cta:hover{background:#6d28d9;}
+
+  .hero{padding:140px 60px 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .hero-text .eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#6d28d9;margin-bottom:16px;}
+  .hero-text h1{font-size:52px;font-weight:900;line-height:1.08;letter-spacing:-2px;margin-bottom:20px;color:#1a1a2e;}
+  .hero-text h1 em{font-style:normal;color:#6d28d9;}
+  .hero-text .subtitle{font-size:18px;color:#666;line-height:1.7;margin-bottom:32px;max-width:480px;}
+  .hero-text .subtitle strong{color:#1a1a2e;}
+
+  /* Multi-step form */
+  .form-container{max-width:440px;}
+  .form-step{display:none;}
+  .form-step.active{display:block;}
+  .form-row{display:flex;gap:8px;margin-bottom:8px;}
+  .form-row input,.form-row select{flex:1;padding:14px 18px;border-radius:6px;border:2px solid #e5e5e5;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;}
+  .form-row input:focus,.form-row select:focus{border-color:#6d28d9;}
+  .form-row input::placeholder{color:#bbb;}
+  .form-row select{cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;}
+  .form-row select option{color:#1a1a2e;}
+  .btn-primary{padding:14px 28px;background:#1a1a2e;color:white;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s;font-family:'Inter',sans-serif;}
+  .btn-primary:hover{background:#6d28d9;}
+  .cta-note{font-size:12px;color:#999;margin-top:8px;}
+  .form-step-indicator{display:flex;gap:6px;margin-bottom:16px;}
+  .form-step-indicator .dot{width:8px;height:8px;border-radius:50%;background:#ddd;}
+  .form-step-indicator .dot.active{background:#6d28d9;}
+  .form-step-indicator .dot.done{background:#10b981;}
+  .time-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+  .time-slot{padding:12px;border:2px solid #e5e5e5;border-radius:8px;text-align:center;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;background:white;}
+  .time-slot:hover{border-color:#6d28d9;background:#f5f3ff;}
+  .time-slot.selected{border-color:#6d28d9;background:#6d28d9;color:white;}
+  .time-slot .slot-label{font-size:12px;color:#999;font-weight:400;margin-top:2px;}
+  .time-slot.selected .slot-label{color:rgba(255,255,255,0.7);}
+  .day-tabs{display:flex;gap:8px;margin-bottom:12px;}
+  .day-tab{padding:10px 20px;border:2px solid #e5e5e5;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;background:white;flex:1;text-align:center;}
+  .day-tab:hover{border-color:#6d28d9;}
+  .day-tab.selected{border-color:#6d28d9;background:#6d28d9;color:white;}
+  .success-msg{background:#f0fdf4;border:2px solid #86efac;border-radius:12px;padding:28px;text-align:center;}
+  .success-msg .check-icon{width:48px;height:48px;border-radius:50%;background:#10b981;color:white;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;margin:0 auto 12px;}
+  .success-msg h3{font-size:18px;font-weight:700;margin-bottom:8px;color:#1a1a2e;}
+  .success-msg p{font-size:14px;color:#666;}
+
+  .hero-media{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.12);background:#000;aspect-ratio:16/9;}
+  .hero-media iframe{width:100%;height:100%;border:none;display:block;}
+
+  /* Client logos */
+  .client-bar{background:#fff;border-top:1px solid #eee;border-bottom:1px solid #eee;padding:40px 60px;}
+  .client-bar .label{text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#bbb;margin-bottom:28px;}
+  .client-logos{display:flex;justify-content:center;align-items:center;gap:36px;flex-wrap:wrap;}
+  .client-logos img{height:28px;object-fit:contain;filter:grayscale(100%) opacity(0.5);transition:all 0.3s;}
+  .client-logos img:hover{filter:grayscale(0%) opacity(1);}
+  .client-logos img.taller{height:32px;}
+
+  .stats-bar{background:#1a1a2e;color:white;padding:48px 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center;}
+  .stat-item .number{font-size:42px;font-weight:900;letter-spacing:-1px;}
+  .stat-item .number.purple{color:#a78bfa;}
+  .stat-item .label{font-size:13px;color:#999;margin-top:4px;}
+
+  .section{padding:80px 60px;max-width:1200px;margin:0 auto;}
+  .section-dark{background:#1a1a2e;color:white;max-width:none;padding:80px 60px;}
+  .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#6d28d9;margin-bottom:12px;}
+  .section-dark .section-label{color:#a78bfa;}
+  .section h2{font-size:40px;font-weight:900;letter-spacing:-1.5px;margin-bottom:16px;}
+  .section .desc{font-size:17px;color:#777;max-width:560px;margin-bottom:48px;line-height:1.7;}
+  .section-dark .desc{color:#999;}
+
+  .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;}
+  .problem-card{background:white;border:1px solid #eee;border-radius:12px;padding:32px;transition:all 0.3s;}
+  .problem-card:hover{border-color:#6d28d9;box-shadow:0 8px 30px rgba(109,40,217,0.08);}
+  .problem-card .price-tag{font-size:28px;font-weight:900;color:#ef4444;margin-bottom:12px;}
+  .problem-card h3{font-size:17px;font-weight:700;margin-bottom:8px;}
+  .problem-card p{font-size:14px;color:#888;line-height:1.6;}
+  .problem-card .source{margin-top:12px;font-size:11px;color:#bbb;font-style:italic;}
+
+  .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:1100px;margin:0 auto;}
+  .step-card{text-align:center;padding:40px 28px;}
+  .step-num{width:52px;height:52px;border-radius:50%;background:#6d28d9;color:white;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;margin:0 auto 20px;}
+  .step-card h3{font-size:18px;font-weight:700;margin-bottom:10px;}
+  .step-card p{font-size:14px;color:#999;line-height:1.6;}
+  .step-card .time-badge{display:inline-block;margin-top:12px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(167,139,250,0.15);color:#a78bfa;}
+
+  .comparison{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:800px;margin:0 auto;}
+  .comp-card{padding:40px;border-radius:12px;border:2px solid #eee;}
+  .comp-card.old{background:#fef2f2;border-color:#fecaca;}
+  .comp-card.new{background:#f5f3ff;border-color:#c4b5fd;}
+  .comp-card h3{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;}
+  .comp-card.old h3{color:#ef4444;}
+  .comp-card.new h3{color:#6d28d9;}
+  .comp-card ul{list-style:none;display:flex;flex-direction:column;gap:14px;}
+  .comp-card li{font-size:15px;padding-left:28px;position:relative;color:#555;}
+  .comp-card.old li::before{content:'✕';position:absolute;left:0;color:#ef4444;font-weight:700;}
+  .comp-card.new li::before{content:'✓';position:absolute;left:0;color:#6d28d9;font-weight:700;}
+
+  .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto;}
+  .testimonial-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:28px;}
+  .testimonial-card .quote{font-size:15px;color:#ccc;line-height:1.7;margin-bottom:20px;font-style:italic;}
+  .testimonial-card .author{display:flex;align-items:center;gap:12px;}
+  .testimonial-card .avatar{width:40px;height:40px;border-radius:50%;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:white;}
+  .testimonial-card .name{font-size:14px;font-weight:700;color:white;}
+  .testimonial-card .title{font-size:12px;color:#888;}
+
+  .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto;}
+  .video-card{border-radius:12px;overflow:hidden;background:white;border:1px solid #eee;transition:all 0.3s;}
+  .video-card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.1);transform:translateY(-2px);}
+  .video-card .embed{aspect-ratio:16/9;background:#000;}
+  .video-card .embed iframe{width:100%;height:100%;border:none;display:block;}
+  .video-card .info{padding:16px 20px;}
+  .video-card .info h3{font-size:15px;font-weight:700;margin-bottom:4px;}
+  .video-card .info p{font-size:13px;color:#999;}
+
+  .final-cta{text-align:center;padding:100px 20px;background:linear-gradient(180deg,#fafafa,#f0ecff);}
+  .final-cta h2{font-size:48px;font-weight:900;letter-spacing:-2px;margin-bottom:16px;}
+  .final-cta h2 em{font-style:normal;color:#6d28d9;}
+  .final-cta .subtitle{margin:0 auto 32px;max-width:480px;font-size:17px;color:#888;}
+  .final-cta .form-container{max-width:440px;margin:0 auto;}
+  .final-cta .guarantee{margin-top:20px;font-size:13px;color:#999;}
+
+  footer{text-align:center;padding:40px;color:#ccc;font-size:12px;border-top:1px solid #eee;background:white;}
+  footer a{color:#6d28d9;text-decoration:none;}
+
+  @media(max-width:768px){
+    nav{padding:12px 20px;}
+    .hero{grid-template-columns:1fr;padding:100px 20px 40px;gap:32px;}
+    .hero-text h1{font-size:36px;}
+    .section,.section-dark,.client-bar{padding:60px 20px;}
+    .stats-bar{grid-template-columns:1fr 1fr;padding:40px 20px;}
+    .problem-grid,.steps-grid,.comparison,.testimonials-grid,.video-grid{grid-template-columns:1fr;}
+    .form-row{flex-direction:column;}
+    .client-logos{gap:20px;}
+    .client-logos img{height:22px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-group">
+    <div class="logo">mogo<span>verse</span></div>
+    <div class="powered-by">by <strong>BrandMusiq</strong> — Asia's #1 Sonic Branding Agency</div>
+  </div>
+  <a href="#signup" class="nav-cta">Get Early Access</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="eyebrow">From the creators of Mastercard's sonic identity</div>
+    <h1>Your brand has a logo.<br>Now give it <em>a voice.</em></h1>
+    <p class="subtitle">BrandMusiq has created sonic identities for <strong>40+ brands like Mastercard, Zomato, and HDFC Bank.</strong> Now, Mogoverse puts that same expertise in your hands — powered by AI, at a fraction of the cost.</p>
+
+    <!-- Multi-step form -->
+    <div class="form-container" id="signup">
+      <div class="form-step active" id="step1">
+        <div class="form-step-indicator"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+        <div class="form-row">
+          <input type="email" id="email" placeholder="Enter your work email">
+          <button class="btn-primary" onclick="nextStep(1)">Next</button>
+        </div>
+        <p class="cta-note">Free to start. No credit card required.</p>
+      </div>
+      <div class="form-step" id="step2">
+        <div class="form-step-indicator"><div class="dot done"></div><div class="dot active"></div><div class="dot"></div></div>
+        <div class="form-row">
+          <input type="tel" id="phone" placeholder="Phone number (we'll call to confirm)">
+          <button class="btn-primary" onclick="nextStep(2)">Next</button>
+        </div>
+        <p class="cta-note">We'll send a quick confirmation — no spam, ever.</p>
+      </div>
+      <div class="form-step" id="step3">
+        <div class="form-step-indicator"><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div></div>
+        <p style="font-size:14px;font-weight:600;margin-bottom:12px;color:#1a1a2e;">When should we call you for a demo?</p>
+        <div class="day-tabs">
+          <div class="day-tab selected" onclick="selectDay(this)">Today</div>
+          <div class="day-tab" onclick="selectDay(this)">Tomorrow</div>
+        </div>
+        <div class="time-grid">
+          <div class="time-slot" onclick="selectTime(this)">Morning<div class="slot-label">9 AM – 12 PM</div></div>
+          <div class="time-slot" onclick="selectTime(this)">Afternoon<div class="slot-label">12 PM – 3 PM</div></div>
+          <div class="time-slot" onclick="selectTime(this)">Evening<div class="slot-label">3 PM – 6 PM</div></div>
+          <div class="time-slot" onclick="selectTime(this)">Late Evening<div class="slot-label">6 PM – 9 PM</div></div>
+        </div>
+        <button class="btn-primary" style="width:100%;" onclick="nextStep(3)">Book My Demo</button>
+      </div>
+      <div class="form-step" id="step4">
+        <div class="success-msg">
+          <div class="check-icon">✓</div>
+          <h3>You're in! Demo booked.</h3>
+          <p>We'll call you <strong id="confirmDay">today</strong> during your selected time slot to walk you through Mogoverse. Check your email for confirmation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-media">
+    <div onclick="openVideo('bSlN694crNY')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard MOGO by BrandMusiq" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div>
+  </div>
+</section>
+
+<!-- Client logos -->
+<section class="client-bar">
+  <div class="label">Trusted by brands you know</div>
+  <div class="client-logos">
+    <img src="logos/mastercard.png" alt="Mastercard" title="Mastercard">
+    <img src="logos/zomato.svg" alt="Zomato" title="Zomato">
+    <img src="logos/hdfc.png" alt="HDFC Bank" title="HDFC Bank">
+    <img src="logos/asianpaints.svg" alt="Asian Paints" title="Asian Paints">
+    <img src="logos/vistara.svg" alt="Vistara" title="Vistara">
+    <img src="logos/raymond.svg" alt="Raymond" title="Raymond">
+    <img src="logos/mg.svg" alt="MG Motors" title="MG Motors">
+    <img src="logos/infosys.png" alt="Infosys" title="Infosys">
+    <img src="logos/amazonpay.png" alt="Amazon Pay" title="Amazon Pay">
+    <img src="logos/tata.png" alt="Tata" title="Tata">
+    <img src="logos/truecaller.svg" alt="Truecaller" title="Truecaller">
+    <img src="logos/toyota.png" alt="Toyota" title="Toyota">
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats-bar">
+  <div class="stat-item"><div class="number purple">40+</div><div class="label">Brands powered by BrandMusiq</div></div>
+  <div class="stat-item"><div class="number purple">2.5M+</div><div class="label">Earpoints worldwide (Mastercard alone)</div></div>
+  <div class="stat-item"><div class="number purple">3x</div><div class="label">Best Audio Brand winner (Mastercard)</div></div>
+  <div class="stat-item"><div class="number purple">86%</div><div class="label">Increase in engagement with sound</div></div>
+</section>
+
+<!-- Problem -->
+<section class="section">
+  <div class="section-label">The Problem</div>
+  <h2>Sonic branding has been locked behind agency walls.</h2>
+  <p class="desc">Until now, getting a professional audio identity meant hiring an agency, waiting months, and spending a fortune. Most brands simply couldn't afford it.</p>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="price-tag">$15,000+</div>
+      <h3>The minimum agency cost</h3>
+      <p>A basic sonic logo starts at $15K. A full sonic identity system? $50K–$500K. That's why 44% of major brands still don't have one.</p>
+      <div class="source">Source: Sixième Son, amp Sound Branding published rates</div>
+    </div>
+    <div class="problem-card">
+      <div class="price-tag">3–6 months</div>
+      <h3>The typical timeline</h3>
+      <p>Workshops, moodboards, revisions, approvals. By the time you have your sonic identity, you've launched three campaigns without it.</p>
+      <div class="source">Source: Industry standard agency timelines</div>
+    </div>
+    <div class="problem-card">
+      <div class="price-tag">0 tools</div>
+      <h3>No self-serve option exists</h3>
+      <p>Suno makes songs. Epidemic Sound sells stock music. No platform lets you build and manage a complete brand audio identity yourself.</p>
+      <div class="source">Source: Competitive analysis, March 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section-dark">
+  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+    <div class="section-label">How It Works</div>
+    <h2>Agency-grade sonic branding. In five minutes.</h2>
+    <p class="desc" style="margin:0 auto 48px;text-align:center;">Built on BrandMusiq's MUSE methodology — the same process used for Mastercard, Zomato, and HDFC Bank — now automated by AI.</p>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">1</div><h3>Define your brand DNA</h3><p>Answer a few questions about your brand's personality, values, and audience. Our AI maps this to a sonic profile — just like BrandMusiq's Avatar & Rasa framework.</p><div class="time-badge">30 seconds</div></div>
+      <div class="step-card"><div class="step-num">2</div><h3>AI creates your MOGO®</h3><p>Get a professional audio logo (MOGO®) and full MOGOSCAPE® — your brand's unique sonic palette, with variations for every touchpoint.</p><div class="time-badge">2 minutes</div></div>
+      <div class="step-card"><div class="step-num">3</div><h3>Deploy at every earpoint</h3><p>Download files for ads, social, hold music, app sounds, and events. Get brand audio guidelines to keep your team on-brand.</p><div class="time-badge">Ready to use</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Case studies -->
+<section class="section" style="text-align:center;">
+  <div class="section-label">Proof It Works</div>
+  <h2 style="margin:0 auto 16px;">Hear what $15K–$500K sonic branding sounds like.</h2>
+  <p class="desc" style="margin:0 auto 48px;text-align:center;">These MOGOs® were created by BrandMusiq for the world's biggest brands. Mogoverse brings the same quality to every business.</p>
+  <div class="video-grid">
+    <div class="video-card"><div class="embed"><div onclick="openVideo('bSlN694crNY')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Mastercard</h3><p>Best Audio Brand 3 years running. 2.5M+ earpoints.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('C2YEn8aDOmo')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/C2YEn8aDOmo/hqdefault.jpg" alt="Zomato" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Zomato</h3><p>Sonic identity for orders, app sounds, and brand comms.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('ACkQPHKuN7w')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/ACkQPHKuN7w/hqdefault.jpg" alt="MG Motors" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>MG Motors</h3><p>Anthemic sonic identity for the MG Hector launch.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('B5M_5mEBL4Y')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/B5M_5mEBL4Y/hqdefault.jpg" alt="Vistara" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Vistara</h3><p>Sensorial airline experience — compassion and freedom.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('BiTJmnK4oj4')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/BiTJmnK4oj4/hqdefault.jpg" alt="Raymond" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Raymond</h3><p>Classical heritage reimagined for modern brand relevance.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('RvyRcxuxuP0')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/RvyRcxuxuP0/hqdefault.jpg" alt="RCB" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Royal Challengers Bangalore</h3><p>The iconic fan chant reverberating across India.</p></div></div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section-dark">
+  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+    <div class="section-label">What Leaders Say</div>
+    <h2 style="margin:0 auto 48px;">Audio strategy is no longer a nice-to-have.</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card"><div class="quote">"Audio strategy is no longer a nice to have but a must have for brands looking to connect with consumers."</div><div class="author"><div class="avatar">RR</div><div><div class="name">Raja Rajamannar</div><div class="title">CMO & President, Mastercard</div></div></div></div>
+      <div class="testimonial-card"><div class="quote">"BrandMusiq created a unique sound encapsulating our brand identity and user interaction. Exactly what we needed."</div><div class="author"><div class="avatar">GV</div><div><div class="name">Gaurav Verma</div><div class="title">CMO — Branding, Zomato</div></div></div></div>
+      <div class="testimonial-card"><div class="quote">"MOGO® and MOGOSCAPE® was in perfect alignment with our brand. The sonic identity captures who we are."</div><div class="author"><div class="avatar">PT</div><div><div class="name">Phee Teik Yeoh</div><div class="title">CEO, Vistara</div></div></div></div>
+      <div class="testimonial-card"><div class="quote">"Perfect embodiment of MG's ultramodern sensibilities mixed with our heritage. Sound that tells our story."</div><div class="author"><div class="avatar">PS</div><div><div class="name">Pallavi Singh</div><div class="title">Head of Marketing, MG India</div></div></div></div>
+      <div class="testimonial-card"><div class="quote">"When you close your eyes, you should recognize the Rupeek sound. That's exactly what BrandMusiq delivered."</div><div class="author"><div class="avatar">SA</div><div><div class="name">Shalabh Atray</div><div class="title">Sr. VP, Rupeek</div></div></div></div>
+      <div class="testimonial-card"><div class="quote">"Capture brand vision into sound... memorable... always. Sonic branding transformed how our customers perceive us."</div><div class="author"><div class="avatar">DA</div><div><div class="name">Dhiren Amin</div><div class="title">CMO, NTUC Income, Singapore</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section class="section" style="text-align:center;">
+  <div class="section-label">The Difference</div>
+  <h2 style="margin:0 auto 48px;">Premium quality. Startup-friendly pricing.</h2>
+  <div class="comparison">
+    <div class="comp-card old"><h3>Traditional Agency</h3><ul><li>$15,000 — $500,000 per project</li><li>3–6 months timeline</li><li>Endless revision rounds</li><li>Pay again for every adaptation</li><li>No self-serve management</li><li>Locked into annual retainer</li></ul></div>
+    <div class="comp-card new"><h3>Mogoverse by BrandMusiq</h3><ul><li>Starting at $79/month</li><li>Ready in 5 minutes</li><li>Unlimited AI generations</li><li>Auto-adapt for every format & earpoint</li><li>Manage your brand audio library</li><li>Built on MUSE methodology — same as Mastercard</li></ul></div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <div class="eyebrow" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#6d28d9;margin-bottom:16px;">Limited Early Access</div>
+  <h2>Sound like a <em>Mastercard.</em><br>Pay like a startup.</h2>
+  <p class="subtitle">Join the waitlist for Mogoverse — the AI-powered sonic branding platform from the team behind 40+ iconic brand sounds.</p>
+  <div class="form-container">
+    <div class="form-step active" id="step1b">
+      <div class="form-step-indicator"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="form-row"><input type="email" id="email-b" placeholder="Enter your work email"><button class="btn-primary" onclick="nextStepB(1)">Next</button></div>
+    </div>
+    <div class="form-step" id="step2b">
+      <div class="form-step-indicator"><div class="dot done"></div><div class="dot active"></div><div class="dot"></div></div>
+      <div class="form-row"><input type="tel" id="phone-b" placeholder="Phone number"><button class="btn-primary" onclick="nextStepB(2)">Next</button></div>
+    </div>
+    <div class="form-step" id="step3b">
+      <div class="form-step-indicator"><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div></div>
+      <p style="font-size:14px;font-weight:600;margin-bottom:12px;">When should we call for a demo?</p>
+      <div class="day-tabs"><div class="day-tab selected" onclick="selectDay(this)">Today</div><div class="day-tab" onclick="selectDay(this)">Tomorrow</div></div>
+      <div class="time-grid">
+        <div class="time-slot" onclick="selectTime(this)">Morning<div class="slot-label">9 AM – 12 PM</div></div>
+        <div class="time-slot" onclick="selectTime(this)">Afternoon<div class="slot-label">12 PM – 3 PM</div></div>
+        <div class="time-slot" onclick="selectTime(this)">Evening<div class="slot-label">3 PM – 6 PM</div></div>
+        <div class="time-slot" onclick="selectTime(this)">Late Evening<div class="slot-label">6 PM – 9 PM</div></div>
+      </div>
+      <button class="btn-primary" style="width:100%;" onclick="nextStepB(3)">Book My Demo</button>
+    </div>
+    <div class="form-step" id="step4b">
+      <div class="success-msg"><div class="check-icon">✓</div><h3>You're in! Demo booked.</h3><p>We'll call you during your selected time slot. Check your email for confirmation.</p></div>
+    </div>
+  </div>
+  <p class="guarantee" style="margin-top:20px;">Built on 10+ years of BrandMusiq's sonic branding expertise.</p>
+</section>
+
+<footer>&copy; 2026 Mogoverse — a <a href="https://brandmusiq.com" target="_blank">BrandMusiq</a> company. Asia's first and leading sonic branding agency.</footer>
+
+<script>
+// Form logic — Hero form
+function nextStep(step) {
+  if (step === 1) {
+    const email = document.getElementById('email').value;
+    if (!email || !email.includes('@')) { document.getElementById('email').style.borderColor='#ef4444'; return; }
+  }
+  if (step === 2) {
+    const phone = document.getElementById('phone').value;
+    if (!phone || phone.length < 7) { document.getElementById('phone').style.borderColor='#ef4444'; return; }
+  }
+  document.getElementById('step' + step).classList.remove('active');
+  document.getElementById('step' + (step + 1)).classList.add('active');
+  if (step === 3) {
+    const day = document.querySelector('#step3 .day-tab.selected');
+    if (day) document.getElementById('confirmDay').textContent = day.textContent.toLowerCase();
+  }
+}
+// Form logic — Footer form
+function nextStepB(step) {
+  if (step === 1) {
+    const email = document.getElementById('email-b').value;
+    if (!email || !email.includes('@')) { document.getElementById('email-b').style.borderColor='#ef4444'; return; }
+  }
+  if (step === 2) {
+    const phone = document.getElementById('phone-b').value;
+    if (!phone || phone.length < 7) { document.getElementById('phone-b').style.borderColor='#ef4444'; return; }
+  }
+  document.getElementById('step' + step + 'b').classList.remove('active');
+  document.getElementById('step' + (step + 1) + 'b').classList.add('active');
+}
+// Day tab selection
+function selectDay(el) {
+  el.parentElement.querySelectorAll('.day-tab').forEach(t => t.classList.remove('selected'));
+  el.classList.add('selected');
+}
+// Time slot selection
+function selectTime(el) {
+  el.closest('.time-grid').querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
+  el.classList.add('selected');
+}
+</script>
+
+<!-- Video Popup Modal --><div id="videoModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;cursor:pointer;backdrop-filter:blur(6px);" onclick="if(event.target===this)closeVideo()"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:860px;"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.5);"><iframe id="videoFrame" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><button onclick="closeVideo()" style="position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:white;border:none;font-size:18px;font-weight:700;cursor:pointer;color:#1a1a2e;box-shadow:0 4px 16px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">X</button></div></div><script>function openVideo(id){document.getElementById('videoFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';document.getElementById('videoModal').style.display='block';document.body.style.overflow='hidden';}function closeVideo(){document.getElementById('videoFrame').src='';document.getElementById('videoModal').style.display='none';document.body.style.overflow='';}document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideo();});</script><!-- LEAD CAPTURE POPUPS — include before </body> -->
+
+<!-- 1. Timed Popup (15 seconds) -->
+<div id="timedPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9990;backdrop-filter:blur(4px);" onclick="if(event.target===this)closePopup('timedPopup')">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:white;border-radius:16px;padding:44px;max-width:460px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.25);text-align:center;">
+    <button onclick="closePopup('timedPopup')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#999;">✕</button>
+    <div style="font-size:48px;margin-bottom:12px;">🎧</div>
+    <h3 style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;color:#1a1a2e;">Hear your brand's sound — free</h3>
+    <p style="font-size:15px;color:#888;margin-bottom:24px;line-height:1.6;">Book a 15-min demo. We'll create a sample sonic identity for your brand — on the house. Powered by BrandMusiq's 40+ brand portfolio.</p>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <input type="email" id="timed-email" placeholder="Work email" style="flex:1;padding:14px 16px;border:2px solid #e5e5e5;border-radius:8px;font-size:15px;outline:none;font-family:Inter,sans-serif;">
+      <button onclick="submitTimedPopup()" style="padding:14px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;">Book Free Demo</button>
+    </div>
+    <p style="font-size:12px;color:#bbb;">No spam. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<!-- 2. Exit Intent Popup -->
+<div id="exitPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9991;backdrop-filter:blur(4px);" onclick="if(event.target===this)closePopup('exitPopup')">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#1a1a2e;border-radius:16px;padding:44px;max-width:480px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.4);text-align:center;color:white;">
+    <button onclick="closePopup('exitPopup')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#666;">✕</button>
+    <div style="font-size:48px;margin-bottom:12px;">⏳</div>
+    <h3 style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;">Wait — don't leave without this</h3>
+    <p style="font-size:15px;color:#999;margin-bottom:8px;line-height:1.6;">Get a <strong style="color:#a78bfa;">free sonic brand audit</strong> — we'll analyze your current brand audio and show you what's missing. Only takes 5 minutes.</p>
+    <div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:12px;margin-bottom:20px;">
+      <p style="font-size:13px;color:#a78bfa;font-weight:600;">✓ Free audit &nbsp;·&nbsp; ✓ No commitment &nbsp;·&nbsp; ✓ Results in 24h</p>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <input type="email" id="exit-email" placeholder="Work email" style="flex:1;padding:14px 16px;border:2px solid #333;border-radius:8px;font-size:15px;outline:none;background:#111;color:white;font-family:Inter,sans-serif;">
+      <button onclick="submitExitPopup()" style="padding:14px 24px;background:#7c5cfc;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;">Get Free Audit</button>
+    </div>
+    <p style="font-size:12px;color:#555;">Join 200+ brands already on the waitlist.</p>
+  </div>
+</div>
+
+<!-- 3. Sticky Bottom CTA Bar (appears on mobile after scroll) -->
+<div id="stickyCTA" style="display:none;position:fixed;bottom:0;left:0;width:100%;background:white;border-top:2px solid #eee;padding:12px 20px;z-index:9980;box-shadow:0 -4px 20px rgba(0,0,0,0.08);">
+  <div style="max-width:600px;margin:0 auto;display:flex;gap:8px;align-items:center;">
+    <div style="flex:1;">
+      <p style="font-size:14px;font-weight:700;color:#1a1a2e;margin:0;">Get your free sonic brand demo</p>
+      <p style="font-size:12px;color:#999;margin:2px 0 0;">Powered by BrandMusiq · No credit card</p>
+    </div>
+    <a href="#signup" onclick="closePopup('stickyCTA')" style="padding:12px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;font-family:Inter,sans-serif;">Book Demo</a>
+  </div>
+</div>
+
+<script>
+// State tracking
+var popupState = { timed: false, exit: false, anyFormSubmitted: false };
+
+// ====== 1. TIMED POPUP — 15 seconds ======
+setTimeout(function() {
+  if (!popupState.anyFormSubmitted && !popupState.timed) {
+    document.getElementById('timedPopup').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    popupState.timed = true;
+  }
+}, 15000);
+
+function submitTimedPopup() {
+  var email = document.getElementById('timed-email').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('timed-email').style.borderColor = '#ef4444';
+    return;
+  }
+  popupState.anyFormSubmitted = true;
+  var popup = document.getElementById('timedPopup').querySelector('div > div:first-child') || document.getElementById('timedPopup').children[0];
+  document.getElementById('timedPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:#1a1a2e;">You\'re in!</h3><p style="font-size:15px;color:#888;">We\'ll reach out within 24 hours to schedule your free demo.</p></div>';
+  setTimeout(function() { closePopup('timedPopup'); }, 2500);
+}
+
+// ====== 2. EXIT INTENT — mouse leaves viewport ======
+document.addEventListener('mouseout', function(e) {
+  if (e.clientY < 5 && !popupState.exit && !popupState.anyFormSubmitted) {
+    document.getElementById('exitPopup').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    popupState.exit = true;
+  }
+});
+
+function submitExitPopup() {
+  var email = document.getElementById('exit-email').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('exit-email').style.borderColor = '#ef4444';
+    return;
+  }
+  popupState.anyFormSubmitted = true;
+  document.getElementById('exitPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:white;">Audit requested!</h3><p style="font-size:15px;color:#999;">Check your email — we\'ll send your free sonic brand audit within 24 hours.</p></div>';
+  setTimeout(function() { closePopup('exitPopup'); }, 2500);
+}
+
+// ====== 3. STICKY CTA BAR — shows after scrolling 30% ======
+var stickyShown = false;
+window.addEventListener('scroll', function() {
+  if (stickyShown) return;
+  var scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  if (scrollPercent > 30) {
+    document.getElementById('stickyCTA').style.display = 'block';
+    stickyShown = true;
+  }
+});
+
+// ====== Shared: close popup ======
+function closePopup(id) {
+  document.getElementById(id).style.display = 'none';
+  // Only restore scroll if no other popup is open
+  if (document.getElementById('timedPopup').style.display !== 'block' &&
+      document.getElementById('exitPopup').style.display !== 'block' &&
+      document.getElementById('videoModal').style.display !== 'block') {
+    document.body.style.overflow = '';
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!-- LEAD CAPTURE POPUPS — include before </body> -->
+
+<!-- 1. Timed Popup (15 seconds) -->
+<div id="timedPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9990;backdrop-filter:blur(4px);" onclick="if(event.target===this)closePopup('timedPopup')">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:white;border-radius:16px;padding:44px;max-width:460px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.25);text-align:center;">
+    <button onclick="closePopup('timedPopup')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#999;">✕</button>
+    <div style="font-size:48px;margin-bottom:12px;">🎧</div>
+    <h3 style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;color:#1a1a2e;">Hear your brand's sound — free</h3>
+    <p style="font-size:15px;color:#888;margin-bottom:24px;line-height:1.6;">Book a 15-min demo. We'll create a sample sonic identity for your brand — on the house. Powered by BrandMusiq's 40+ brand portfolio.</p>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <input type="email" id="timed-email" placeholder="Work email" style="flex:1;padding:14px 16px;border:2px solid #e5e5e5;border-radius:8px;font-size:15px;outline:none;font-family:Inter,sans-serif;">
+      <button onclick="submitTimedPopup()" style="padding:14px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;">Book Free Demo</button>
+    </div>
+    <p style="font-size:12px;color:#bbb;">No spam. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<!-- 2. Exit Intent Popup -->
+<div id="exitPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9991;backdrop-filter:blur(4px);" onclick="if(event.target===this)closePopup('exitPopup')">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#1a1a2e;border-radius:16px;padding:44px;max-width:480px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.4);text-align:center;color:white;">
+    <button onclick="closePopup('exitPopup')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#666;">✕</button>
+    <div style="font-size:48px;margin-bottom:12px;">⏳</div>
+    <h3 style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;">Wait — don't leave without this</h3>
+    <p style="font-size:15px;color:#999;margin-bottom:8px;line-height:1.6;">Get a <strong style="color:#a78bfa;">free sonic brand audit</strong> — we'll analyze your current brand audio and show you what's missing. Only takes 5 minutes.</p>
+    <div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:12px;margin-bottom:20px;">
+      <p style="font-size:13px;color:#a78bfa;font-weight:600;">✓ Free audit &nbsp;·&nbsp; ✓ No commitment &nbsp;·&nbsp; ✓ Results in 24h</p>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <input type="email" id="exit-email" placeholder="Work email" style="flex:1;padding:14px 16px;border:2px solid #333;border-radius:8px;font-size:15px;outline:none;background:#111;color:white;font-family:Inter,sans-serif;">
+      <button onclick="submitExitPopup()" style="padding:14px 24px;background:#7c5cfc;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;">Get Free Audit</button>
+    </div>
+    <p style="font-size:12px;color:#555;">Join 200+ brands already on the waitlist.</p>
+  </div>
+</div>
+
+<!-- 3. Sticky Bottom CTA Bar (appears on mobile after scroll) -->
+<div id="stickyCTA" style="display:none;position:fixed;bottom:0;left:0;width:100%;background:white;border-top:2px solid #eee;padding:12px 20px;z-index:9980;box-shadow:0 -4px 20px rgba(0,0,0,0.08);">
+  <div style="max-width:600px;margin:0 auto;display:flex;gap:8px;align-items:center;">
+    <div style="flex:1;">
+      <p style="font-size:14px;font-weight:700;color:#1a1a2e;margin:0;">Get your free sonic brand demo</p>
+      <p style="font-size:12px;color:#999;margin:2px 0 0;">Powered by BrandMusiq · No credit card</p>
+    </div>
+    <a href="#signup" onclick="closePopup('stickyCTA')" style="padding:12px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;font-family:Inter,sans-serif;">Book Demo</a>
+  </div>
+</div>
+
+<script>
+// State tracking
+var popupState = { timed: false, exit: false, anyFormSubmitted: false };
+
+// ====== 1. TIMED POPUP — 15 seconds ======
+setTimeout(function() {
+  if (!popupState.anyFormSubmitted && !popupState.timed) {
+    document.getElementById('timedPopup').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    popupState.timed = true;
+  }
+}, 15000);
+
+function submitTimedPopup() {
+  var email = document.getElementById('timed-email').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('timed-email').style.borderColor = '#ef4444';
+    return;
+  }
+  popupState.anyFormSubmitted = true;
+  var popup = document.getElementById('timedPopup').querySelector('div > div:first-child') || document.getElementById('timedPopup').children[0];
+  document.getElementById('timedPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:#1a1a2e;">You\'re in!</h3><p style="font-size:15px;color:#888;">We\'ll reach out within 24 hours to schedule your free demo.</p></div>';
+  setTimeout(function() { closePopup('timedPopup'); }, 2500);
+}
+
+// ====== 2. EXIT INTENT — mouse leaves viewport ======
+document.addEventListener('mouseout', function(e) {
+  if (e.clientY < 5 && !popupState.exit && !popupState.anyFormSubmitted) {
+    document.getElementById('exitPopup').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    popupState.exit = true;
+  }
+});
+
+function submitExitPopup() {
+  var email = document.getElementById('exit-email').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('exit-email').style.borderColor = '#ef4444';
+    return;
+  }
+  popupState.anyFormSubmitted = true;
+  document.getElementById('exitPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:white;">Audit requested!</h3><p style="font-size:15px;color:#999;">Check your email — we\'ll send your free sonic brand audit within 24 hours.</p></div>';
+  setTimeout(function() { closePopup('exitPopup'); }, 2500);
+}
+
+// ====== 3. STICKY CTA BAR — shows after scrolling 30% ======
+var stickyShown = false;
+window.addEventListener('scroll', function() {
+  if (stickyShown) return;
+  var scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  if (scrollPercent > 30) {
+    document.getElementById('stickyCTA').style.display = 'block';
+    stickyShown = true;
+  }
+});
+
+// ====== Shared: close popup ======
+function closePopup(id) {
+  document.getElementById(id).style.display = 'none';
+  // Only restore scroll if no other popup is open
+  if (document.getElementById('timedPopup').style.display !== 'block' &&
+      document.getElementById('exitPopup').style.display !== 'block' &&
+      document.getElementById('videoModal').style.display !== 'block') {
+    document.body.style.overflow = '';
+  }
+}
+</script>

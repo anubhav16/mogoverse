@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mogoverse — Business Audio That Matches Your Brand</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',sans-serif;background:#fafafa;color:#1a1a2e;line-height:1.6;overflow-x:hidden;}
+
+  nav{display:flex;justify-content:space-between;align-items:center;padding:16px 60px;position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-bottom:1px solid #eee;}
+  .logo-group{display:flex;align-items:center;gap:16px;}
+  .logo{font-size:24px;font-weight:900;letter-spacing:-1px;color:#1a1a2e;}
+  .logo span{color:#059669;}
+  .powered-by{font-size:11px;color:#999;border-left:1px solid #ddd;padding-left:16px;}
+  .powered-by strong{color:#666;}
+  .nav-cta{background:#1a1a2e;color:white;padding:10px 24px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;transition:all 0.2s;}
+  .nav-cta:hover{background:#059669;}
+
+  .hero{padding:140px 60px 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .hero-text .eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#059669;margin-bottom:16px;}
+  .hero-text h1{font-size:50px;font-weight:900;line-height:1.08;letter-spacing:-2px;margin-bottom:20px;}
+  .hero-text h1 em{font-style:normal;color:#059669;}
+  .hero-text .subtitle{font-size:18px;color:#666;line-height:1.7;margin-bottom:32px;max-width:480px;}
+  .hero-text .subtitle strong{color:#1a1a2e;}
+
+  .form-container{max-width:440px;}
+  .form-step{display:none;}
+  .form-step.active{display:block;}
+  .form-row{display:flex;gap:8px;margin-bottom:8px;}
+  .form-row input{flex:1;padding:14px 18px;border-radius:6px;border:2px solid #e5e5e5;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;}
+  .form-row input:focus{border-color:#059669;}
+  .form-row input::placeholder{color:#bbb;}
+  .btn-primary{padding:14px 28px;background:#1a1a2e;color:white;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s;font-family:'Inter',sans-serif;}
+  .btn-primary:hover{background:#059669;}
+  .cta-note{font-size:12px;color:#999;margin-top:8px;}
+  .form-step-indicator{display:flex;gap:6px;margin-bottom:16px;}
+  .form-step-indicator .dot{width:8px;height:8px;border-radius:50%;background:#ddd;}
+  .form-step-indicator .dot.active{background:#059669;}
+  .form-step-indicator .dot.done{background:#10b981;}
+  .time-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+  .time-slot{padding:12px;border:2px solid #e5e5e5;border-radius:8px;text-align:center;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;background:white;}
+  .time-slot:hover{border-color:#059669;background:#ecfdf5;}
+  .time-slot.selected{border-color:#059669;background:#059669;color:white;}
+  .time-slot .slot-label{font-size:12px;color:#999;font-weight:400;margin-top:2px;}
+  .time-slot.selected .slot-label{color:rgba(255,255,255,0.7);}
+  .day-tabs{display:flex;gap:8px;margin-bottom:12px;}
+  .day-tab{padding:10px 20px;border:2px solid #e5e5e5;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;background:white;flex:1;text-align:center;}
+  .day-tab:hover{border-color:#059669;}
+  .day-tab.selected{border-color:#059669;background:#059669;color:white;}
+  .success-msg{background:#f0fdf4;border:2px solid #86efac;border-radius:12px;padding:28px;text-align:center;}
+  .success-msg .check-icon{width:48px;height:48px;border-radius:50%;background:#10b981;color:white;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;margin:0 auto 12px;}
+  .success-msg h3{font-size:18px;font-weight:700;margin-bottom:8px;color:#1a1a2e;}
+  .success-msg p{font-size:14px;color:#666;}
+
+  .trust-checks{display:flex;gap:20px;margin-top:20px;}
+  .trust-check{display:flex;align-items:center;gap:6px;font-size:13px;color:#666;}
+  .trust-check .check{color:#059669;font-weight:700;}
+
+  .hero-visual{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .loc-card{background:white;border:2px solid #eee;border-radius:12px;padding:24px;text-align:center;transition:all 0.3s;}
+  .loc-card:hover{border-color:#059669;box-shadow:0 4px 20px rgba(5,150,105,0.08);}
+  .loc-card .icon{font-size:32px;margin-bottom:8px;}
+  .loc-card h3{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .loc-card p{font-size:12px;color:#999;}
+  .loc-card.featured{border-color:#059669;background:#f0fdf4;}
+
+  .client-bar{background:#fff;border-top:1px solid #eee;border-bottom:1px solid #eee;padding:40px 60px;}
+  .client-bar .label{text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#bbb;margin-bottom:28px;}
+  .client-logos{display:flex;justify-content:center;align-items:center;gap:36px;flex-wrap:wrap;}
+  .client-logos img{height:28px;object-fit:contain;filter:grayscale(100%) opacity(0.5);transition:all 0.3s;}
+  .client-logos img:hover{filter:grayscale(0%) opacity(1);}
+
+  .stats-bar{background:#1a1a2e;color:white;padding:48px 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center;}
+  .stat-item .number{font-size:42px;font-weight:900;letter-spacing:-1px;color:#34d399;}
+  .stat-item .label{font-size:13px;color:#999;margin-top:4px;}
+
+  .section{padding:80px 60px;max-width:1200px;margin:0 auto;}
+  .section-dark{background:#1a1a2e;color:white;max-width:none;padding:80px 60px;}
+  .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#059669;margin-bottom:12px;}
+  .section-dark .section-label{color:#34d399;}
+  .section h2{font-size:40px;font-weight:900;letter-spacing:-1.5px;margin-bottom:16px;}
+  .section .desc{font-size:17px;color:#777;max-width:560px;margin-bottom:48px;line-height:1.7;}
+  .section-dark .desc{color:#999;}
+
+  .pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;}
+  .pain-card{background:white;border:2px solid #fecaca;border-radius:12px;padding:28px;}
+  .pain-card .stat{font-size:28px;font-weight:900;color:#ef4444;margin-bottom:8px;}
+  .pain-card h3{font-size:16px;font-weight:700;margin-bottom:6px;}
+  .pain-card p{font-size:14px;color:#888;line-height:1.6;}
+
+  .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto;}
+  .video-card{border-radius:12px;overflow:hidden;background:white;border:1px solid #eee;transition:all 0.3s;}
+  .video-card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.1);transform:translateY(-2px);}
+  .video-card .embed{aspect-ratio:16/9;background:#000;}
+  .video-card .embed iframe{width:100%;height:100%;border:none;display:block;}
+  .video-card .info{padding:16px 20px;}
+  .video-card .info h3{font-size:15px;font-weight:700;margin-bottom:4px;}
+  .video-card .info p{font-size:13px;color:#999;}
+
+  .pricing-table{max-width:750px;margin:0 auto;border:2px solid #eee;border-radius:12px;overflow:hidden;background:white;}
+  .pricing-row{display:grid;grid-template-columns:2fr 1fr 1fr;padding:16px 28px;border-bottom:1px solid #f0f0f0;align-items:center;}
+  .pricing-row:last-child{border-bottom:none;}
+  .pricing-row.header{background:#f9fafb;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#999;}
+  .pricing-row .feature{font-size:15px;}
+  .pricing-row .old-price{text-align:center;color:#ef4444;font-size:14px;}
+  .pricing-row .new-price{text-align:center;color:#059669;font-weight:700;font-size:14px;}
+  .pricing-row.total{background:#f0fdf4;border-top:2px solid #059669;}
+  .pricing-row.total .feature{font-weight:800;}
+  .pricing-row.total .new-price{font-size:18px;font-weight:900;}
+
+  .industry-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:900px;margin:0 auto;}
+  .industry-tag{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:20px 12px;text-align:center;font-size:14px;color:#ccc;}
+  .industry-tag .icon{font-size:28px;display:block;margin-bottom:8px;}
+
+  .testimonials-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto;}
+  .testimonial-card{background:white;border:2px solid #eee;border-radius:12px;padding:28px;}
+  .testimonial-card .quote{font-size:15px;color:#555;line-height:1.7;margin-bottom:20px;font-style:italic;}
+  .testimonial-card .author{display:flex;align-items:center;gap:12px;}
+  .testimonial-card .avatar{width:40px;height:40px;border-radius:50%;background:#059669;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:white;}
+  .testimonial-card .name{font-size:14px;font-weight:700;color:#1a1a2e;}
+  .testimonial-card .title{font-size:12px;color:#999;}
+
+  .final-cta{text-align:center;padding:100px 20px;background:linear-gradient(180deg,#fafafa,#ecfdf5);}
+  .final-cta h2{font-size:48px;font-weight:900;letter-spacing:-2px;margin-bottom:16px;}
+  .final-cta h2 em{font-style:normal;color:#059669;}
+  .final-cta .subtitle{margin:0 auto 32px;max-width:520px;font-size:17px;color:#888;}
+  .final-cta .form-container{max-width:440px;margin:0 auto;}
+  .final-cta .guarantee{margin-top:20px;font-size:13px;color:#999;}
+
+  footer{text-align:center;padding:40px;color:#ccc;font-size:12px;border-top:1px solid #eee;background:white;}
+  footer a{color:#059669;text-decoration:none;}
+
+  @media(max-width:768px){
+    nav{padding:12px 20px;}
+    .hero{grid-template-columns:1fr;padding:100px 20px 40px;gap:32px;}
+    .hero-text h1{font-size:36px;}
+    .hero-visual{grid-template-columns:1fr 1fr;}
+    .section,.section-dark,.client-bar{padding:60px 20px;}
+    .stats-bar{grid-template-columns:1fr 1fr;padding:40px 20px;}
+    .pain-grid,.testimonials-row,.video-grid{grid-template-columns:1fr;}
+    .industry-grid{grid-template-columns:1fr 1fr;}
+    .form-row{flex-direction:column;}
+    .trust-checks{flex-direction:column;gap:8px;}
+    .pricing-row{grid-template-columns:1.5fr 1fr 1fr;padding:12px 16px;}
+    .client-logos{gap:20px;}
+    .client-logos img{height:22px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-group">
+    <div class="logo">mogo<span>verse</span></div>
+    <div class="powered-by">by <strong>BrandMusiq</strong> — Asia's #1 Sonic Branding Agency</div>
+  </div>
+  <a href="#signup" class="nav-cta">Get a Quote</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <div class="eyebrow">Business Audio Platform by BrandMusiq</div>
+    <h1>Background music that <em>matches your brand.</em> Not someone else's.</h1>
+    <p class="subtitle">AI-generated, brand-consistent audio for your <strong>stores, phone system, ads, and events.</strong> Built by the team behind Mastercard, HDFC Bank, and Asian Paints' sonic identities.</p>
+    <div class="form-container" id="signup">
+      <div class="form-step active" id="step1">
+        <div class="form-step-indicator"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+        <div class="form-row"><input type="email" id="email" placeholder="Enter your work email"><button class="btn-primary" onclick="nextStep(1)">Next</button></div>
+        <p class="cta-note">Free consultation. Custom pricing for your business.</p>
+      </div>
+      <div class="form-step" id="step2">
+        <div class="form-step-indicator"><div class="dot done"></div><div class="dot active"></div><div class="dot"></div></div>
+        <div class="form-row"><input type="tel" id="phone" placeholder="Phone number (we'll call to confirm)"><button class="btn-primary" onclick="nextStep(2)">Next</button></div>
+        <p class="cta-note">Quick call to understand your audio needs.</p>
+      </div>
+      <div class="form-step" id="step3">
+        <div class="form-step-indicator"><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div></div>
+        <p style="font-size:14px;font-weight:600;margin-bottom:12px;color:#1a1a2e;">When should we call you?</p>
+        <div class="day-tabs"><div class="day-tab selected" onclick="selectDay(this)">Today</div><div class="day-tab" onclick="selectDay(this)">Tomorrow</div></div>
+        <div class="time-grid">
+          <div class="time-slot" onclick="selectTime(this)">Morning<div class="slot-label">9 AM – 12 PM</div></div>
+          <div class="time-slot" onclick="selectTime(this)">Afternoon<div class="slot-label">12 PM – 3 PM</div></div>
+          <div class="time-slot" onclick="selectTime(this)">Evening<div class="slot-label">3 PM – 6 PM</div></div>
+          <div class="time-slot" onclick="selectTime(this)">Late Evening<div class="slot-label">6 PM – 9 PM</div></div>
+        </div>
+        <button class="btn-primary" style="width:100%;" onclick="nextStep(3)">Book My Consultation</button>
+      </div>
+      <div class="form-step" id="step4">
+        <div class="success-msg"><div class="check-icon">✓</div><h3>Consultation booked!</h3><p>We'll call you <strong id="confirmDay">today</strong> during your selected slot to discuss your business audio needs.</p></div>
+      </div>
+    </div>
+    <div class="trust-checks">
+      <div class="trust-check"><span class="check">✓</span> No royalty fees</div>
+      <div class="trust-check"><span class="check">✓</span> Fully licensed</div>
+      <div class="trust-check"><span class="check">✓</span> Brand-consistent</div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="loc-card featured"><div class="icon">📞</div><h3>Hold Music</h3><p>On-brand, not on-hold</p></div>
+    <div class="loc-card"><div class="icon">🏪</div><h3>In-Store</h3><p>Your sound, every location</p></div>
+    <div class="loc-card"><div class="icon">📺</div><h3>Ads & Social</h3><p>Consistent across campaigns</p></div>
+    <div class="loc-card"><div class="icon">🎪</div><h3>Events</h3><p>Brand experience, amplified</p></div>
+  </div>
+</section>
+
+<section class="client-bar">
+  <div class="label">BrandMusiq powers the sound of 40+ leading brands</div>
+  <div class="client-logos">
+    <img src="logos/mastercard.png" alt="Mastercard" title="Mastercard">
+    <img src="logos/zomato.svg" alt="Zomato" title="Zomato">
+    <img src="logos/hdfc.png" alt="HDFC Bank" title="HDFC Bank">
+    <img src="logos/asianpaints.svg" alt="Asian Paints" title="Asian Paints">
+    <img src="logos/vistara.svg" alt="Vistara" title="Vistara">
+    <img src="logos/raymond.svg" alt="Raymond" title="Raymond">
+    <img src="logos/mg.svg" alt="MG Motors" title="MG Motors">
+    <img src="logos/infosys.png" alt="Infosys" title="Infosys">
+    <img src="logos/amazonpay.png" alt="Amazon Pay" title="Amazon Pay">
+    <img src="logos/tata.png" alt="Tata" title="Tata">
+    <img src="logos/truecaller.svg" alt="Truecaller" title="Truecaller">
+    <img src="logos/toyota.png" alt="Toyota" title="Toyota">
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="stat-item"><div class="number">86%</div><div class="label">Increase in engagement with branded sound</div></div>
+  <div class="stat-item"><div class="number">5x</div><div class="label">More memorable with audio identity (System1)</div></div>
+  <div class="stat-item"><div class="number">60%</div><div class="label">Higher hang-up rate with generic hold music</div></div>
+  <div class="stat-item"><div class="number">$15K+</div><div class="label">Typical yearly cost of per-location music</div></div>
+</section>
+
+<section class="section">
+  <div class="section-label">The Problem</div>
+  <h2>Your business audio is an afterthought.</h2>
+  <p class="desc">You spent thousands on your logo, website, and interiors. Then someone grabbed a random playlist for the store and a stock track for hold music.</p>
+  <div class="pain-grid">
+    <div class="pain-card"><div class="stat">$30–$100/mo</div><h3>Per-location music fees add up</h3><p>Traditional services charge per location. 10 stores = $12,000/year for music that doesn't even match your brand.</p></div>
+    <div class="pain-card"><div class="stat">13 min</div><h3>Average hold time. Generic music = hang-ups.</h3><p>Your callers wait. Generic hold music makes them hate the wait more. Branded hold music reduces perceived wait time.</p></div>
+    <div class="pain-card"><div class="stat">⚖️ Illegal</div><h3>Playing Spotify in your store is copyright infringement</h3><p>Consumer streaming licenses don't cover public performance. One audit = thousands in fines.</p></div>
+    <div class="pain-card"><div class="stat">0% branded</div><h3>Your hold music sounds like everyone else's</h3><p>Stock hold music is the audio equivalent of a clip-art logo. Your customers hear the same music at your competitor's office.</p></div>
+  </div>
+</section>
+
+<section class="section" style="text-align:center;">
+  <div class="section-label">Hear the BrandMusiq Difference</div>
+  <h2 style="margin:0 auto 16px;">This is what branded audio sounds like.</h2>
+  <p class="desc" style="margin:0 auto 48px;text-align:center;">Real sonic identities for real businesses. Mogoverse brings this quality to your hold music, stores, and ads.</p>
+  <div class="video-grid">
+    <div class="video-card"><div class="embed"><div onclick="openVideo('bSlN694crNY')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Mastercard</h3><p>2.5M+ earpoints. Best Audio Brand 3x winner.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('ACkQPHKuN7w')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/ACkQPHKuN7w/hqdefault.jpg" alt="MG Motors" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>MG Motors</h3><p>Showroom, ads, digital — one sound system.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('X_4WoPcMsTg')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/X_4WoPcMsTg/hqdefault.jpg" alt="ABC Soy" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>ABC Soy (Indonesia)</h3><p>Heritage brand, global reach — sonic identity that travels.</p></div></div>
+  </div>
+</section>
+
+<section class="section" style="text-align:center;">
+  <div class="section-label">Pricing</div>
+  <h2 style="margin:0 auto 48px;">Replace patchwork audio with one platform.</h2>
+  <div class="pricing-table">
+    <div class="pricing-row header"><div>What You Need</div><div style="text-align:center;">Traditional</div><div style="text-align:center;">Mogoverse</div></div>
+    <div class="pricing-row"><div class="feature">Custom hold music</div><div class="old-price">$500–$2,000 one-time</div><div class="new-price">Included</div></div>
+    <div class="pricing-row"><div class="feature">In-store music (per location)</div><div class="old-price">$30–$100/mo each</div><div class="new-price">Included</div></div>
+    <div class="pricing-row"><div class="feature">Ad & commercial music</div><div class="old-price">$500–$5,000/track</div><div class="new-price">Included</div></div>
+    <div class="pricing-row"><div class="feature">Brand audio consistency</div><div class="old-price">Not available</div><div class="new-price">Built-in</div></div>
+    <div class="pricing-row"><div class="feature">Licensing & copyright</div><div class="old-price">Complex, per-use</div><div class="new-price">Full rights, forever</div></div>
+    <div class="pricing-row total"><div class="feature">Total (10 locations + ads + hold)</div><div class="old-price" style="font-weight:800;">$15,000+/year</div><div class="new-price">From $199/mo</div></div>
+  </div>
+</section>
+
+<section class="section-dark">
+  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+    <div class="section-label">Built For</div>
+    <h2 style="margin:0 auto 48px;">Any business with a brand and a speaker.</h2>
+    <div class="industry-grid">
+      <div class="industry-tag"><span class="icon">☕</span>Cafes & Restaurants</div>
+      <div class="industry-tag"><span class="icon">🛍️</span>Retail Chains</div>
+      <div class="industry-tag"><span class="icon">🏥</span>Clinics & Spas</div>
+      <div class="industry-tag"><span class="icon">🏨</span>Hotels & Resorts</div>
+      <div class="industry-tag"><span class="icon">💼</span>Corporate Offices</div>
+      <div class="industry-tag"><span class="icon">🏋️</span>Gyms & Studios</div>
+      <div class="industry-tag"><span class="icon">🏦</span>Banks & Finance</div>
+      <div class="industry-tag"><span class="icon">🚗</span>Auto Dealerships</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="text-align:center;">
+  <div class="section-label">Trusted by the C-Suite</div>
+  <h2 style="margin:0 auto 48px;">The brands that invested in sound — and won.</h2>
+  <div class="testimonials-row">
+    <div class="testimonial-card"><div class="quote">"Audio strategy is no longer a nice to have but a must have for brands looking to connect with consumers."</div><div class="author"><div class="avatar">RR</div><div><div class="name">Raja Rajamannar</div><div class="title">CMO & President, Mastercard</div></div></div></div>
+    <div class="testimonial-card"><div class="quote">"Focus on emotional engagement across rural and urban stakeholders. Sound reaches where visuals can't."</div><div class="author"><div class="avatar">KJ</div><div><div class="name">Kartik Jain</div><div class="title">EVP & Head Marketing, HDFC Bank</div></div></div></div>
+    <div class="testimonial-card"><div class="quote">"Capture brand vision into sound... memorable... always. It transformed how our customers perceive us."</div><div class="author"><div class="avatar">DA</div><div><div class="name">Dhiren Amin</div><div class="title">CMO, NTUC Income, Singapore</div></div></div></div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="eyebrow" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#059669;margin-bottom:16px;">Enterprise-Grade Audio, Startup-Friendly Pricing</div>
+  <h2>Your brand deserves to<br><em>sound like your brand.</em></h2>
+  <p class="subtitle">Get a custom quote. Replace patchwork audio with one consistent, branded sound system — powered by the team behind Mastercard and HDFC Bank.</p>
+  <div class="form-container">
+    <div class="form-step active" id="step1b">
+      <div class="form-row"><input type="email" id="email-b" placeholder="Enter your work email"><button class="btn-primary" onclick="nextStepB(1)">Get a Quote</button></div>
+    </div>
+    <div class="form-step" id="step2b">
+      <div class="form-row"><input type="tel" id="phone-b" placeholder="Phone number"><button class="btn-primary" onclick="nextStepB(2)">Next</button></div>
+    </div>
+    <div class="form-step" id="step3b">
+      <p style="font-size:14px;font-weight:600;margin-bottom:12px;">When should we call?</p>
+      <div class="day-tabs"><div class="day-tab selected" onclick="selectDay(this)">Today</div><div class="day-tab" onclick="selectDay(this)">Tomorrow</div></div>
+      <div class="time-grid">
+        <div class="time-slot" onclick="selectTime(this)">Morning<div class="slot-label">9 AM – 12 PM</div></div>
+        <div class="time-slot" onclick="selectTime(this)">Afternoon<div class="slot-label">12 PM – 3 PM</div></div>
+        <div class="time-slot" onclick="selectTime(this)">Evening<div class="slot-label">3 PM – 6 PM</div></div>
+        <div class="time-slot" onclick="selectTime(this)">Late Evening<div class="slot-label">6 PM – 9 PM</div></div>
+      </div>
+      <button class="btn-primary" style="width:100%;" onclick="nextStepB(3)">Book Consultation</button>
+    </div>
+    <div class="form-step" id="step4b">
+      <div class="success-msg"><div class="check-icon">✓</div><h3>Consultation booked!</h3><p>We'll call during your selected slot to discuss your needs.</p></div>
+    </div>
+  </div>
+  <p class="guarantee" style="margin-top:20px;">Powered by BrandMusiq. 40+ brands. 10+ years. Now available to every business.</p>
+</section>
+
+<footer>&copy; 2026 Mogoverse — a <a href="https://brandmusiq.com" target="_blank">BrandMusiq</a> company. Asia's first and leading sonic branding agency.</footer>
+
+<script>
+function nextStep(step){
+  if(step===1){const e=document.getElementById('email').value;if(!e||!e.includes('@')){document.getElementById('email').style.borderColor='#ef4444';return;}}
+  if(step===2){const p=document.getElementById('phone').value;if(!p||p.length<7){document.getElementById('phone').style.borderColor='#ef4444';return;}}
+  document.getElementById('step'+step).classList.remove('active');
+  document.getElementById('step'+(step+1)).classList.add('active');
+  if(step===3){const d=document.querySelector('#step3 .day-tab.selected');if(d)document.getElementById('confirmDay').textContent=d.textContent.toLowerCase();}
+}
+function nextStepB(step){
+  if(step===1){const e=document.getElementById('email-b').value;if(!e||!e.includes('@')){document.getElementById('email-b').style.borderColor='#ef4444';return;}}
+  if(step===2){const p=document.getElementById('phone-b').value;if(!p||p.length<7){document.getElementById('phone-b').style.borderColor='#ef4444';return;}}
+  document.getElementById('step'+step+'b').classList.remove('active');
+  document.getElementById('step'+(step+1)+'b').classList.add('active');
+}
+function selectDay(el){el.parentElement.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('selected'));el.classList.add('selected');}
+function selectTime(el){el.closest('.time-grid').querySelectorAll('.time-slot').forEach(t=>t.classList.remove('selected'));el.classList.add('selected');}
+</script>
+<!-- Video Popup Modal --><div id="videoModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;cursor:pointer;backdrop-filter:blur(6px);" onclick="if(event.target===this)closeVideo()"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:860px;"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.5);"><iframe id="videoFrame" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><button onclick="closeVideo()" style="position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:white;border:none;font-size:18px;font-weight:700;cursor:pointer;color:#1a1a2e;box-shadow:0 4px 16px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">X</button></div></div><script>function openVideo(id){document.getElementById('videoFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';document.getElementById('videoModal').style.display='block';document.body.style.overflow='hidden';}function closeVideo(){document.getElementById('videoFrame').src='';document.getElementById('videoModal').style.display='none';document.body.style.overflow='';}document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideo();});</script><!-- LEAD CAPTURE POPUPS — include before </body> -->
+
+<!-- 1. Timed Popup (15 seconds) -->
+<div id="timedPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9990;backdrop-filter:blur(4px);" onclick="if(event.target===this)closePopup('timedPopup')">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:white;border-radius:16px;padding:44px;max-width:460px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.25);text-align:center;">
+    <button onclick="closePopup('timedPopup')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#999;">✕</button>
+    <div style="font-size:48px;margin-bottom:12px;">🎧</div>
+    <h3 style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;color:#1a1a2e;">Hear your brand's sound — free</h3>
+    <p style="font-size:15px;color:#888;margin-bottom:24px;line-height:1.6;">Book a 15-min demo. We'll create a sample sonic identity for your brand — on the house. Powered by BrandMusiq's 40+ brand portfolio.</p>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <input type="email" id="timed-email" placeholder="Work email" style="flex:1;padding:14px 16px;border:2px solid #e5e5e5;border-radius:8px;font-size:15px;outline:none;font-family:Inter,sans-serif;">
+      <button onclick="submitTimedPopup()" style="padding:14px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;">Book Free Demo</button>
+    </div>
+    <p style="font-size:12px;color:#bbb;">No spam. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<!-- 2. Exit Intent Popup -->
+<div id="exitPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9991;backdrop-filter:blur(4px);" onclick="if(event.target===this)closePopup('exitPopup')">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#1a1a2e;border-radius:16px;padding:44px;max-width:480px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.4);text-align:center;color:white;">
+    <button onclick="closePopup('exitPopup')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#666;">✕</button>
+    <div style="font-size:48px;margin-bottom:12px;">⏳</div>
+    <h3 style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;">Wait — don't leave without this</h3>
+    <p style="font-size:15px;color:#999;margin-bottom:8px;line-height:1.6;">Get a <strong style="color:#a78bfa;">free sonic brand audit</strong> — we'll analyze your current brand audio and show you what's missing. Only takes 5 minutes.</p>
+    <div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:12px;margin-bottom:20px;">
+      <p style="font-size:13px;color:#a78bfa;font-weight:600;">✓ Free audit &nbsp;·&nbsp; ✓ No commitment &nbsp;·&nbsp; ✓ Results in 24h</p>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <input type="email" id="exit-email" placeholder="Work email" style="flex:1;padding:14px 16px;border:2px solid #333;border-radius:8px;font-size:15px;outline:none;background:#111;color:white;font-family:Inter,sans-serif;">
+      <button onclick="submitExitPopup()" style="padding:14px 24px;background:#7c5cfc;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;">Get Free Audit</button>
+    </div>
+    <p style="font-size:12px;color:#555;">Join 200+ brands already on the waitlist.</p>
+  </div>
+</div>
+
+<!-- 3. Sticky Bottom CTA Bar (appears on mobile after scroll) -->
+<div id="stickyCTA" style="display:none;position:fixed;bottom:0;left:0;width:100%;background:white;border-top:2px solid #eee;padding:12px 20px;z-index:9980;box-shadow:0 -4px 20px rgba(0,0,0,0.08);">
+  <div style="max-width:600px;margin:0 auto;display:flex;gap:8px;align-items:center;">
+    <div style="flex:1;">
+      <p style="font-size:14px;font-weight:700;color:#1a1a2e;margin:0;">Get your free sonic brand demo</p>
+      <p style="font-size:12px;color:#999;margin:2px 0 0;">Powered by BrandMusiq · No credit card</p>
+    </div>
+    <a href="#signup" onclick="closePopup('stickyCTA')" style="padding:12px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;font-family:Inter,sans-serif;">Book Demo</a>
+  </div>
+</div>
+
+<script>
+// State tracking
+var popupState = { timed: false, exit: false, anyFormSubmitted: false };
+
+// ====== 1. TIMED POPUP — 15 seconds ======
+setTimeout(function() {
+  if (!popupState.anyFormSubmitted && !popupState.timed) {
+    document.getElementById('timedPopup').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    popupState.timed = true;
+  }
+}, 15000);
+
+function submitTimedPopup() {
+  var email = document.getElementById('timed-email').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('timed-email').style.borderColor = '#ef4444';
+    return;
+  }
+  popupState.anyFormSubmitted = true;
+  var popup = document.getElementById('timedPopup').querySelector('div > div:first-child') || document.getElementById('timedPopup').children[0];
+  document.getElementById('timedPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:#1a1a2e;">You\'re in!</h3><p style="font-size:15px;color:#888;">We\'ll reach out within 24 hours to schedule your free demo.</p></div>';
+  setTimeout(function() { closePopup('timedPopup'); }, 2500);
+}
+
+// ====== 2. EXIT INTENT — mouse leaves viewport ======
+document.addEventListener('mouseout', function(e) {
+  if (e.clientY < 5 && !popupState.exit && !popupState.anyFormSubmitted) {
+    document.getElementById('exitPopup').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    popupState.exit = true;
+  }
+});
+
+function submitExitPopup() {
+  var email = document.getElementById('exit-email').value;
+  if (!email || !email.includes('@')) {
+    document.getElementById('exit-email').style.borderColor = '#ef4444';
+    return;
+  }
+  popupState.anyFormSubmitted = true;
+  document.getElementById('exitPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:white;">Audit requested!</h3><p style="font-size:15px;color:#999;">Check your email — we\'ll send your free sonic brand audit within 24 hours.</p></div>';
+  setTimeout(function() { closePopup('exitPopup'); }, 2500);
+}
+
+// ====== 3. STICKY CTA BAR — shows after scrolling 30% ======
+var stickyShown = false;
+window.addEventListener('scroll', function() {
+  if (stickyShown) return;
+  var scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  if (scrollPercent > 30) {
+    document.getElementById('stickyCTA').style.display = 'block';
+    stickyShown = true;
+  }
+});
+
+// ====== Shared: close popup ======
+function closePopup(id) {
+  document.getElementById(id).style.display = 'none';
+  // Only restore scroll if no other popup is open
+  if (document.getElementById('timedPopup').style.display !== 'block' &&
+      document.getElementById('exitPopup').style.display !== 'block' &&
+      document.getElementById('videoModal').style.display !== 'block') {
+    document.body.style.overflow = '';
+  }
+}
+</script>
+</body>
+</html>
