@@ -8,7 +8,7 @@
 // ============================================================
 
 var MOGO_TRACKING = {
-  GTM_ID: '',                                  // No GTM container yet — leave blank to skip
+  GTM_ID: 'GTM-TFX2NPMP',                      // Mogoverse GTM container
   GADS_ID: 'AW-18045691311',                 // Google Ads conversion ID
   CONVERSION_LABELS: {
     demo_booked: 'XXXXXXXXXXXXXXXXXXX',      // Replace: conversion label for "Book Demo"
