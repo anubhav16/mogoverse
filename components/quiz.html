@@ -7,10 +7,18 @@
 .quiz-wrapper.quiz-inline h2{font-size:24px;color:white;letter-spacing:-1px;margin-bottom:8px;}
 .quiz-wrapper.quiz-inline h2 em{color:#a78bfa;}
 .quiz-wrapper.quiz-inline .desc{color:#999;font-size:14px;margin-bottom:24px;}
-.quiz-wrapper.quiz-inline .quiz-option{color:#ccc;border-color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);}
+.quiz-wrapper.quiz-inline .quiz-option{color:#e5e5e5;border-color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);}
 .quiz-wrapper.quiz-inline .quiz-option:hover{border-color:#a78bfa;background:rgba(109,40,217,0.15);}
 .quiz-wrapper.quiz-inline #quizFeedback{color:#ccc;}
 .quiz-wrapper.quiz-inline #quizPlayLabel{color:#888;}
+.quiz-wave-bars{display:flex;align-items:center;justify-content:center;gap:3px;height:36px;}
+.quiz-wave-bars span{display:block;width:4px;background:white;border-radius:2px;animation:quizWave 0.8s ease-in-out infinite;}
+.quiz-wave-bars span:nth-child(1){height:12px;animation-delay:0s;}
+.quiz-wave-bars span:nth-child(2){height:24px;animation-delay:0.15s;}
+.quiz-wave-bars span:nth-child(3){height:18px;animation-delay:0.3s;}
+.quiz-wave-bars span:nth-child(4){height:28px;animation-delay:0.1s;}
+.quiz-wave-bars span:nth-child(5){height:14px;animation-delay:0.25s;}
+@keyframes quizWave{0%,100%{transform:scaleY(0.4);}50%{transform:scaleY(1);}}
 @media(max-width:768px){.quiz-wrapper.quiz-standalone{padding:60px 20px;}}
 </style>
 
@@ -19,7 +27,7 @@
     <div class="section-label">Interactive Quiz</div>
     <h2>Can You Recognize These Brands <em>By Sound Alone?</em></h2>
     <p class="desc" style="max-width:560px;margin:0 auto 24px;">
-      The world's most iconic brands are recognized in under 0.146 seconds — by sound. Test yourself.
+      The world's most iconic brands are recognized in under 0.15 seconds — faster than you can blink. Test yourself.
     </p>
 
     <!-- Quiz container -->
@@ -141,7 +149,7 @@
     var optHtml = '';
     var shuffled = r.options.slice().sort(function() { return 0.5 - Math.random(); });
     for (var j = 0; j < shuffled.length; j++) {
-      optHtml += '<button class="quiz-option" data-answer="' + shuffled[j] + '" style="padding:20px;border:2px solid #e5e5e5;border-radius:12px;background:white;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:Inter,sans-serif;">' + shuffled[j] + '</button>';
+      optHtml += '<button class="quiz-option" data-answer="' + shuffled[j] + '" style="padding:14px 20px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.04);font-size:15px;font-weight:600;color:#e5e5e5;cursor:pointer;transition:all 0.2s;font-family:Inter,sans-serif;">' + shuffled[j] + '</button>';
     }
     document.getElementById('quizOptions').innerHTML = optHtml;
 
@@ -152,6 +160,13 @@
         answerQuiz(this.getAttribute('data-answer'));
       });
     }
+
+    /* Hover states for options */
+    var allOpts = document.querySelectorAll('.quiz-option');
+    allOpts.forEach(function(o) {
+      o.addEventListener('mouseenter', function() { if (!quizState.answered) { this.style.borderColor='#a78bfa'; this.style.background='rgba(109,40,217,0.15)'; } });
+      o.addEventListener('mouseleave', function() { if (!quizState.answered) { this.style.borderColor='rgba(255,255,255,0.15)'; this.style.background='rgba(255,255,255,0.04)'; } });
+    });
 
     /* Reset play button */
     document.getElementById('quizPlayBtn').style.background = 'linear-gradient(135deg,#6d28d9,#a78bfa)';
@@ -164,7 +179,10 @@
 
   function playQuizAudio() {
     var audio = document.getElementById('quizAudio');
+    var playBtn = document.getElementById('quizPlayBtn');
     var r = quizData[quizState.round];
+    var originalSVG = '<svg width="36" height="36" viewBox="0 0 24 24" fill="white"><polygon points="6,3 20,12 6,21"/></svg>';
+    var waveBarsHTML = '<div class="quiz-wave-bars"><span></span><span></span><span></span><span></span><span></span></div>';
 
     /* Lazy-load: set src only on first play */
     if (!audio.src || !audio.src.endsWith(r.audio.replace(_bp, ''))) {
@@ -172,11 +190,18 @@
     }
 
     audio.play().then(function() {
+      playBtn.innerHTML = waveBarsHTML;
+      playBtn.style.background = 'linear-gradient(135deg,#10b981,#34d399)';
       document.getElementById('quizPlayLabel').textContent = 'Playing... now guess the brand!';
-      document.getElementById('quizPlayBtn').style.background = 'linear-gradient(135deg,#10b981,#34d399)';
     }).catch(function() {
       document.getElementById('quizPlayLabel').textContent = 'Tap again to play';
     });
+
+    audio.onended = function() {
+      playBtn.innerHTML = originalSVG;
+      playBtn.style.background = 'linear-gradient(135deg,#6d28d9,#a78bfa)';
+      document.getElementById('quizPlayLabel').textContent = 'Tap to play again';
+    };
   }
 
   function answerQuiz(answer) {

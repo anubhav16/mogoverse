@@ -181,17 +181,18 @@
     <p class="subtitle">You pay $9–$49/mo in subscriptions. You pay in hours spent browsing. You pay in copyright claims that demonetize your videos. And the biggest cost? <strong>Your brand sounds exactly like your competitor's.</strong></p>
 
   </div>
-  <div class="hero-right">
-    <!-- Lead capture form -->
-    <div class="form-container" id="signup">
-      <div id="heroLeadForm"></div>
-    </div>
-    <script>document.addEventListener('DOMContentLoaded', function(){ mogoRenderLeadForm('heroLeadForm', 'hero'); });</script>
-  </div>
+  <!-- Hero right: Interactive quiz -->
+  <div id="quizComponent" style="min-height:380px;"></div>
 </section>
 
-<!-- Quiz Component -->
-<div id="quizComponent"></div>
+<!-- Lead form (moved below hero for better first-fold engagement) -->
+<div style="background:#f5f3ff;padding:40px 60px;text-align:center;">
+  <div style="max-width:440px;margin:0 auto;">
+    <p style="font-size:18px;font-weight:700;margin-bottom:16px;color:#1a1a2e;">Get Early Access</p>
+    <div id="heroLeadForm"></div>
+    <script>document.addEventListener('DOMContentLoaded', function(){ mogoRenderLeadForm('heroLeadForm', 'hero'); });</script>
+  </div>
+</div>
 
 <!-- Logo Wall Component -->
 <div id="logoWallComponent"></div>
