@@ -19,7 +19,7 @@
 .quiz-wave-bars span:nth-child(4){height:28px;animation-delay:0.1s;}
 .quiz-wave-bars span:nth-child(5){height:14px;animation-delay:0.25s;}
 @keyframes quizWave{0%,100%{transform:scaleY(0.4);}50%{transform:scaleY(1);}}
-@media(max-width:768px){.quiz-wrapper.quiz-standalone{padding:60px 20px;}}
+@media(max-width:768px){.quiz-wrapper.quiz-standalone{padding:60px 20px;}#quizOptions{grid-template-columns:1fr !important;}}
 </style>
 
 <div id="quizWrap" class="quiz-wrapper">
@@ -59,7 +59,7 @@
       </div>
 
       <!-- Next round button -->
-      <button id="quizNextBtn" style="display:none;background:#6d28d9;color:white;border:none;border-radius:8px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;transition:all 0.2s;">
+      <button id="quizNextBtn" style="display:none;background:#6d28d9;color:white;border:none;border-radius:8px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;transition:all 0.2s;min-height:44px;">
         Next Round
       </button>
     </div>
@@ -71,14 +71,10 @@
       <p style="font-size:17px;color:#666;margin-bottom:32px;" id="quizScoreDesc"></p>
       <p style="font-size:15px;color:#888;margin-bottom:32px;">Sound is more memorable than you think. That's the power of a <strong style="color:#6d28d9;">MOGO</strong>.</p>
 
-      <!-- Post-quiz email capture -->
+      <!-- [2026-03-28 23:30] Post-quiz lead form — uses shared lead-form.js with quiz_result identifier -->
       <div style="max-width:400px;margin:0 auto;">
         <p style="font-size:15px;font-weight:600;margin-bottom:12px;">Want your brand to be this recognizable?</p>
-        <div class="form-row">
-          <input type="email" id="quizEmail" placeholder="Your work email" aria-label="Work email for early access">
-          <button class="btn-purple" id="quizEmailBtn">Get Early Access</button>
-        </div>
-        <div id="quizEmailSuccess" style="display:none;color:#10b981;font-size:14px;font-weight:600;margin-top:8px;">You're on the list!</div>
+        <div id="quizLeadForm"></div>
       </div>
     </div>
   </div>
@@ -149,7 +145,7 @@
     var optHtml = '';
     var shuffled = r.options.slice().sort(function() { return 0.5 - Math.random(); });
     for (var j = 0; j < shuffled.length; j++) {
-      optHtml += '<button class="quiz-option" data-answer="' + shuffled[j] + '" style="padding:14px 20px;border:1.5px solid #e5e5e5;border-radius:10px;background:white;font-size:15px;font-weight:600;color:#1a1a2e;cursor:pointer;transition:all 0.2s;font-family:Inter,sans-serif;">' + shuffled[j] + '</button>';
+      optHtml += '<button class="quiz-option" data-answer="' + shuffled[j] + '" style="padding:14px 20px;border:1.5px solid #e5e5e5;border-radius:10px;background:white;font-size:15px;font-weight:600;color:#1a1a2e;cursor:pointer;transition:all 0.2s;font-family:Inter,sans-serif;min-height:44px;">' + shuffled[j] + '</button>';
     }
     document.getElementById('quizOptions').innerHTML = optHtml;
 
@@ -291,37 +287,20 @@
 
     /* Clarity event */
     if (window.clarity) { try { clarity('event', 'quiz_completed'); } catch(e) {} }
-  }
 
-  function captureQuizEmail() {
-    var email = document.getElementById('quizEmail').value.trim();
-    if (!email || email.indexOf('@') === -1) {
-      document.getElementById('quizEmail').style.borderColor = '#ef4444';
-      return;
+    /* [2026-03-28 23:30] Render lead form in quiz result — source: quiz_result */
+    if (typeof mogoRenderLeadForm === 'function') {
+      mogoRenderLeadForm('quizLeadForm', 'quiz_result');
     }
-    document.getElementById('quizEmailSuccess').style.display = 'block';
-    document.getElementById('quizEmail').disabled = true;
-    document.querySelector('#quizEmailBtn').disabled = true;
-
-    /* GTM: quiz email captured */
-    window.dataLayer = window.dataLayer || [];
-    dataLayer.push({ event: 'quiz_email_captured', source: 'quiz_result' });
-
-    /* Clarity event */
-    if (window.clarity) { try { clarity('event', 'quiz_email_captured'); } catch(e) {} }
-
-    if (typeof mogoTrackEmailCaptured === 'function') mogoTrackEmailCaptured(email);
   }
 
-  /* Bind event listeners (no inline onclick for component compatibility) */
+  /* Bind event listeners */
   document.getElementById('quizPlayBtn').addEventListener('click', playQuizAudio);
   document.getElementById('quizNextBtn').addEventListener('click', nextQuizRound);
-  document.getElementById('quizEmailBtn').addEventListener('click', captureQuizEmail);
 
-  /* Expose globally for any external callers */
+  /* Expose globally */
   window.playQuizAudio = playQuizAudio;
   window.nextQuizRound = nextQuizRound;
-  window.captureQuizEmail = captureQuizEmail;
 
   /* Initialize */
   initQuiz();
