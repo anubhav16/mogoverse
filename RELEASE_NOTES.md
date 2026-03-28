@@ -1,5 +1,28 @@
 # Mogoverse Release Notes
 
+## v2.4.0 — Lighthouse Performance, Accessibility & SEO Fixes (2026-03-29)
+
+### Performance
+- **Image optimization**: Resized 41 PNG/JPG images (logos max 200px, headshots max 128px). Total image weight: 5.2MB -> 964KB (81% reduction)
+- **Render-blocking scripts removed**: `tracking.js` and `components.js` now use `defer` on homepage + all 8 landing pages
+- **Non-critical CSS deferred**: `lead-form.css` loads with `media="print"` + `onload` swap
+- **Preload hints removed**: Removed 3 `<link rel="preload">` for below-fold components
+- **CLS fix**: Added explicit `width`/`height` attributes to all logo-wall (35), testimonial headshot, and landing page client logo images
+
+### Accessibility
+- **`<main>` landmark**: Added to homepage and all 8 landing pages
+- **Form labels**: Added `sr-only` labels to all dynamically-generated lead form inputs (name, phone, country code, persona select). Added `for` attributes to ROI calculator labels.
+- **Color contrast (WCAG AA)**: Bumped muted text colors from `#999`/`#888`/`#bbb` to `#767676` on light backgrounds across CSS tokens, homepage inline styles, and all LP inline styles
+- **Video card keyboard access**: Added `role="button"`, `tabindex="0"`, `aria-label`, and `onkeydown` handlers to all 6 case study video cards
+- **Iframe titles**: Added `title` to GTM noscript iframe and YouTube video modal iframe on all pages
+
+### SEO
+- **robots.txt**: Fixed space-in-path (`/business files/` -> `/business%20files/`) — was causing ~1023 crawl errors
+- **Canonical tags**: Added `<link rel="canonical">` to all 8 landing pages
+- **Crawlable nav CTA**: Removed `javascript:void(0)` href override in lead-form.js
+
+---
+
 ## v2.3.0 — Logo Wall Dark Theme, Footer Fix, Testimonial Polish (2026-03-29)
 
 ### Fixed

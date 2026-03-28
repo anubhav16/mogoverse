@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # Block internal/business directories
-Disallow: /business files/
+Disallow: /business%20files/
 Disallow: /research/
 Disallow: /mockups/
 Disallow: /.claude/

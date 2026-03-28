@@ -135,7 +135,7 @@
 
 <script>
 (function() {
-  var _bp = (window.location.pathname.indexOf('/landing-pages/') !== -1 || window.location.pathname.indexOf('/tools/') !== -1 || window.location.pathname.indexOf('/sonic-branding/') !== -1 || window.location.pathname.indexOf('/alternatives/') !== -1) ? '../' : '';
+  var _bp = (window.location.pathname.indexOf('/landing-pages/') !== -1 || window.location.pathname.indexOf('/tools/') !== -1 || window.location.pathname.indexOf('/sonic-branding/') !== -1 || window.location.pathname.indexOf('/alternatives/') !== -1 || window.location.pathname.indexOf('/mockups/') !== -1) ? '../' : '';
 
   var testimonials = [
     { name: "Raja Rajamannar", quote: "Audio strategy is no longer a nice to have but a must have for brands.", title: "CMO, Mastercard", photo: "raja-rajamannar.png" },
@@ -154,7 +154,7 @@
     var t = testimonials[i];
     var photoHtml;
     if (t.photo) {
-      photoHtml = '<img class="testimonial-card-photo" src="' + _bp + 'assets/headshots/' + t.photo + '" alt="' + t.name + '" loading="lazy">';
+      photoHtml = '<img class="testimonial-card-photo" src="' + _bp + 'assets/headshots/' + t.photo + '" alt="' + t.name + '" loading="lazy" width="64" height="64">';
     } else {
       var initials = t.name.split(' ').map(function(n) { return n[0]; }).join('');
       photoHtml = '<div class="testimonial-card-initials">' + initials + '</div>';

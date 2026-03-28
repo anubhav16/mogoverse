@@ -119,10 +119,10 @@ function mogoRenderLeadForm(targetId, source) {
 
   container.innerHTML =
     '<div class="mogo-step1" id="mogo-step1-' + uid + '">' +
-      '<div class="mogo-form-row"><input type="text" id="mogo-name-' + uid + '" name="name" autocomplete="name" placeholder="Your name" class="mogo-input"></div>' +
+      '<div class="mogo-form-row"><label for="mogo-name-' + uid + '" class="sr-only">Your name</label><input type="text" id="mogo-name-' + uid + '" name="name" autocomplete="name" placeholder="Your name" class="mogo-input"></div>' +
       '<div class="mogo-phone-row">' +
-        '<select id="mogo-cc-' + uid + '" name="country_code" autocomplete="tel-country-code" class="mogo-country-code">' + mogoCountryCodeOptions() + '</select>' +
-        '<input type="tel" id="mogo-phone-' + uid + '" name="phone" autocomplete="tel-national" inputmode="numeric" pattern="[0-9]*" placeholder="Phone number" class="mogo-input mogo-phone-input">' +
+        '<label for="mogo-cc-' + uid + '" class="sr-only">Country code</label><select id="mogo-cc-' + uid + '" name="country_code" autocomplete="tel-country-code" class="mogo-country-code">' + mogoCountryCodeOptions() + '</select>' +
+        '<label for="mogo-phone-' + uid + '" class="sr-only">Phone number</label><input type="tel" id="mogo-phone-' + uid + '" name="phone" autocomplete="tel-national" inputmode="numeric" pattern="[0-9]*" placeholder="Phone number" class="mogo-input mogo-phone-input">' +
       '</div>' +
       '<p class="mogo-form-error" id="mogo-error-' + uid + '">Enter a valid phone number (digits only)</p>' +
       '<div class="mogo-cta-buttons">' +
@@ -133,7 +133,7 @@ function mogoRenderLeadForm(targetId, source) {
     '</div>' +
     '<div class="mogo-step2" id="mogo-step2-' + uid + '" style="display:none;">' +
       '<p class="mogo-step2-label">One last thing \u2014 tell us about yourself</p>' +
-      '<select id="mogo-persona-' + uid + '" class="mogo-select">' + mogoPersonaOptions() + '</select>' +
+      '<label for="mogo-persona-' + uid + '" class="sr-only">Your role</label><select id="mogo-persona-' + uid + '" class="mogo-select">' + mogoPersonaOptions() + '</select>' +
       '<button class="mogo-btn-primary" onclick="mogoStep2Submit(\'' + uid + '\')">Done</button>' +
       '<button class="mogo-btn-skip" onclick="mogoStep2Submit(\'' + uid + '\')">Skip</button>' +
     '</div>' +
@@ -433,7 +433,6 @@ function mogoInitLeadForms() {
 
   var navBtns = document.querySelectorAll('.nav-cta');
   navBtns.forEach(function(btn) {
-    btn.href = 'javascript:void(0)';
     btn.onclick = function(e) { e.preventDefault(); mogoNavCTA(); };
   });
 }

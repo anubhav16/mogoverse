@@ -93,23 +93,19 @@
 
 <!-- Styles -->
 <link rel="stylesheet" href="assets/css/global.css">
-<link rel="stylesheet" href="assets/css/lead-form.css">
-
-<!-- [2026-03-28] Preload components for fast rendering -->
-<link rel="preload" href="components/quiz.html" as="fetch" crossorigin>
-<link rel="preload" href="components/logo-wall.html" as="fetch" crossorigin>
-<link rel="preload" href="components/testimonials.html" as="fetch" crossorigin>
+<link rel="stylesheet" href="assets/css/lead-form.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="assets/css/lead-form.css"></noscript>
 
 <!-- [2026-03-28] GTM + Google Ads tracking -->
-<script src="assets/js/tracking.js"></script>
+<script src="assets/js/tracking.js" defer></script>
 <!-- Component loader + lead form -->
-<script src="assets/js/components.js"></script>
+<script src="assets/js/components.js" defer></script>
 <script src="assets/js/lead-form.js" defer></script>
 <script src="assets/js/leads.js" defer></script>
 </head>
 <body>
 <!-- GTM noscript fallback -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFX2NPMP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-TFX2NPMP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ============================================================
      NAVIGATION
@@ -138,6 +134,7 @@
   </button>
 </nav>
 
+<main>
 <!-- ============================================================
      HERO SECTION
      ============================================================ -->
@@ -223,7 +220,7 @@
   <div style="max-width:1100px;margin:0 auto;text-align:center;">
     <div class="section-label" style="color:#a78bfa;">The Market Gap</div>
     <h2 style="color:white;margin-bottom:12px;">The Barbell Problem in <em style="color:#a78bfa;">Brand Audio</em></h2>
-    <p style="font-size:17px;color:#999;max-width:600px;margin:0 auto 48px;line-height:1.7;">Every brand needs sound. But the market only offers two extremes — and nothing in between.</p>
+    <p style="font-size:17px;color:#767676;max-width:600px;margin:0 auto 48px;line-height:1.7;">Every brand needs sound. But the market only offers two extremes — and nothing in between.</p>
 
     <!-- Barbell visual -->
     <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;max-width:900px;margin:0 auto;">
@@ -231,7 +228,7 @@
       <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:16px 0 0 16px;padding:36px 28px;text-align:left;">
         <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#ef4444;margin-bottom:16px;">Cheap &amp; Generic</div>
         <div style="font-size:28px;font-weight:900;color:white;margin-bottom:4px;">$0–$30/mo</div>
-        <p style="font-size:13px;color:#999;margin-bottom:16px;">Suno, Soundraw, Epidemic Sound, Artlist</p>
+        <p style="font-size:13px;color:#767676;margin-bottom:16px;">Suno, Soundraw, Epidemic Sound, Artlist</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
           <li style="font-size:14px;color:#ccc;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#ef4444;font-weight:700;">&times;</span> No brand identity features</li>
           <li style="font-size:14px;color:#ccc;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#ef4444;font-weight:700;">&times;</span> Same tracks used by 10K+ brands</li>
@@ -256,7 +253,7 @@
       <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:0 16px 16px 0;padding:36px 28px;text-align:left;">
         <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#ef4444;margin-bottom:16px;">Expensive &amp; Exclusive</div>
         <div style="font-size:28px;font-weight:900;color:white;margin-bottom:4px;">$15K–$500K</div>
-        <p style="font-size:13px;color:#999;margin-bottom:16px;">Sixieme Son, amp, Made Music Studio</p>
+        <p style="font-size:13px;color:#767676;margin-bottom:16px;">Sixieme Son, amp, Made Music Studio</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
           <li style="font-size:14px;color:#ccc;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#ef4444;font-weight:700;">&times;</span> No self-serve option</li>
           <li style="font-size:14px;color:#ccc;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#ef4444;font-weight:700;">&times;</span> No pricing transparency</li>
@@ -445,7 +442,7 @@
     <p class="desc">These MOGOs were created by BrandMusiq for the world's biggest brands. Mogoverse brings the same quality to every business.</p>
 
     <div class="video-grid">
-      <div class="video-card" onclick="openVideoModal('bSlN694crNY')">
+      <div class="video-card" role="button" tabindex="0" aria-label="Play Mastercard case study video" onclick="openVideoModal('bSlN694crNY')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideoModal('bSlN694crNY')}">
         <div class="thumb">
           <img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard sonic identity MOGO" loading="lazy">
           <div class="play-btn"></div>
@@ -455,7 +452,7 @@
           <p>Best Audio Brand 5 years running. 57M outlets. 500M+ earpoints/year.</p>
         </div>
       </div>
-      <div class="video-card" onclick="openVideoModal('C2YEn8aDOmo')">
+      <div class="video-card" role="button" tabindex="0" aria-label="Play Zomato case study video" onclick="openVideoModal('C2YEn8aDOmo')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideoModal('C2YEn8aDOmo')}">
         <div class="thumb">
           <img src="https://img.youtube.com/vi/C2YEn8aDOmo/hqdefault.jpg" alt="Zomato sonic identity MOGO" loading="lazy">
           <div class="play-btn"></div>
@@ -465,7 +462,7 @@
           <p>Sonic identity for orders, app sounds, and brand comms.</p>
         </div>
       </div>
-      <div class="video-card" onclick="openVideoModal('ACkQPHKuN7w')">
+      <div class="video-card" role="button" tabindex="0" aria-label="Play MG Motors case study video" onclick="openVideoModal('ACkQPHKuN7w')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideoModal('ACkQPHKuN7w')}">
         <div class="thumb">
           <img src="https://img.youtube.com/vi/ACkQPHKuN7w/hqdefault.jpg" alt="MG Motors sonic identity MOGO" loading="lazy">
           <div class="play-btn"></div>
@@ -475,7 +472,7 @@
           <p>Anthemic sonic identity for the MG Hector launch.</p>
         </div>
       </div>
-      <div class="video-card" onclick="openVideoModal('B5M_5mEBL4Y')">
+      <div class="video-card" role="button" tabindex="0" aria-label="Play Vistara case study video" onclick="openVideoModal('B5M_5mEBL4Y')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideoModal('B5M_5mEBL4Y')}">
         <div class="thumb">
           <img src="https://img.youtube.com/vi/B5M_5mEBL4Y/hqdefault.jpg" alt="Vistara sonic identity" loading="lazy">
           <div class="play-btn"></div>
@@ -485,7 +482,7 @@
           <p>Sensorial airline experience — compassion and freedom.</p>
         </div>
       </div>
-      <div class="video-card" onclick="openVideoModal('BiTJmnK4oj4')">
+      <div class="video-card" role="button" tabindex="0" aria-label="Play Raymond case study video" onclick="openVideoModal('BiTJmnK4oj4')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideoModal('BiTJmnK4oj4')}">
         <div class="thumb">
           <img src="https://img.youtube.com/vi/BiTJmnK4oj4/hqdefault.jpg" alt="Raymond sonic identity" loading="lazy">
           <div class="play-btn"></div>
@@ -495,7 +492,7 @@
           <p>Classical heritage reimagined for modern brand relevance.</p>
         </div>
       </div>
-      <div class="video-card" onclick="openVideoModal('RvyRcxuxuP0')">
+      <div class="video-card" role="button" tabindex="0" aria-label="Play RCB case study video" onclick="openVideoModal('RvyRcxuxuP0')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideoModal('RvyRcxuxuP0')}">
         <div class="thumb">
           <img src="https://img.youtube.com/vi/RvyRcxuxuP0/hqdefault.jpg" alt="RCB sonic identity" loading="lazy">
           <div class="play-btn"></div>
@@ -536,7 +533,7 @@
         <h3 style="font-size:18px;font-weight:700;margin-bottom:24px;">Your Brand Details</h3>
 
         <div style="margin-bottom:20px;">
-          <label style="font-size:13px;font-weight:600;color:#666;display:block;margin-bottom:6px;">Industry</label>
+          <label for="calcIndustry" style="font-size:13px;font-weight:600;color:#666;display:block;margin-bottom:6px;">Industry</label>
           <select id="calcIndustry" onchange="updateCalc()" style="width:100%;padding:12px 16px;border:2px solid #e5e5e5;border-radius:8px;font-size:15px;font-family:Inter,sans-serif;background:white;cursor:pointer;">
             <option value="retail">Retail &amp; E-Commerce</option>
             <option value="finance">Financial Services</option>
@@ -549,7 +546,7 @@
         </div>
 
         <div style="margin-bottom:20px;">
-          <label style="font-size:13px;font-weight:600;color:#666;display:block;margin-bottom:6px;">Annual Marketing Budget</label>
+          <label for="calcBudget" style="font-size:13px;font-weight:600;color:#666;display:block;margin-bottom:6px;">Annual Marketing Budget</label>
           <div style="display:flex;align-items:center;gap:12px;">
             <input type="range" id="calcBudget" min="10000" max="10000000" value="500000" step="10000" onchange="updateCalc()" oninput="updateCalc()" style="flex:1;">
             <span id="calcBudgetLabel" style="font-size:16px;font-weight:700;min-width:80px;text-align:right;">$500K</span>
@@ -557,7 +554,7 @@
         </div>
 
         <div style="margin-bottom:20px;">
-          <label style="font-size:13px;font-weight:600;color:#666;display:block;margin-bottom:6px;">Monthly Customer Impressions</label>
+          <label for="calcImpressions" style="font-size:13px;font-weight:600;color:#666;display:block;margin-bottom:6px;">Monthly Customer Impressions</label>
           <div style="display:flex;align-items:center;gap:12px;">
             <input type="range" id="calcImpressions" min="10000" max="50000000" value="1000000" step="50000" onchange="updateCalc()" oninput="updateCalc()" style="flex:1;">
             <span id="calcImpressionsLabel" style="font-size:16px;font-weight:700;min-width:80px;text-align:right;">1M</span>
@@ -597,7 +594,7 @@
           <div style="margin-bottom:24px;">
             <div style="font-size:13px;color:#a78bfa;font-weight:600;margin-bottom:4px;">
               Brand Recall Lift
-              <span class="calc-source" title="Source: +96% brand recall with sonic vs visual alone (MusicGrid/Ipsos)" style="cursor:help;font-size:11px;color:#888;border-bottom:1px dotted #888;margin-left:4px;">Source</span>
+              <span class="calc-source" title="Source: +96% brand recall with sonic vs visual alone (MusicGrid/Ipsos)" style="cursor:help;font-size:11px;color:#767676;border-bottom:1px dotted #767676;margin-left:4px;">Source</span>
             </div>
             <div id="calcRecall" style="font-size:36px;font-weight:900;color:#a78bfa;">+48%</div>
           </div>
@@ -605,7 +602,7 @@
           <div style="margin-bottom:24px;">
             <div style="font-size:13px;color:#a78bfa;font-weight:600;margin-bottom:4px;">
               Ad Effectiveness Gain
-              <span class="calc-source" title="Source: +138% ad effectiveness with sonic assets (Sixieme Son)" style="cursor:help;font-size:11px;color:#888;border-bottom:1px dotted #888;margin-left:4px;">Source</span>
+              <span class="calc-source" title="Source: +138% ad effectiveness with sonic assets (Sixieme Son)" style="cursor:help;font-size:11px;color:#767676;border-bottom:1px dotted #767676;margin-left:4px;">Source</span>
             </div>
             <div id="calcEffectiveness" style="font-size:36px;font-weight:900;color:#a78bfa;">+69%</div>
           </div>
@@ -613,23 +610,23 @@
           <div style="margin-bottom:24px;">
             <div style="font-size:13px;color:#a78bfa;font-weight:600;margin-bottom:4px;">
               Estimated Annual Value
-              <span class="calc-source" title="Source: Based on impression reach x recall lift x industry conversion rate" style="cursor:help;font-size:11px;color:#888;border-bottom:1px dotted #888;margin-left:4px;">Source</span>
+              <span class="calc-source" title="Source: Based on impression reach x recall lift x industry conversion rate" style="cursor:help;font-size:11px;color:#767676;border-bottom:1px dotted #767676;margin-left:4px;">Source</span>
             </div>
             <div id="calcValue" style="font-size:36px;font-weight:900;color:#10b981;">$0</div>
           </div>
 
           <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;">
-            <div style="font-size:13px;color:#999;margin-bottom:8px;">Cost Comparison</div>
+            <div style="font-size:13px;color:#767676;margin-bottom:8px;">Cost Comparison</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
               <div style="background:rgba(239,68,68,0.1);border-radius:8px;padding:12px;text-align:center;">
                 <div style="font-size:11px;color:#ef4444;font-weight:600;margin-bottom:4px;">Agency</div>
                 <div style="font-size:20px;font-weight:900;color:#ef4444;">$15K–$500K</div>
-                <div style="font-size:11px;color:#999;">one-time</div>
+                <div style="font-size:11px;color:#767676;">one-time</div>
               </div>
               <div style="background:rgba(16,185,129,0.1);border-radius:8px;padding:12px;text-align:center;">
                 <div style="font-size:11px;color:#10b981;font-weight:600;margin-bottom:4px;">Mogoverse</div>
                 <div style="font-size:20px;font-weight:900;color:#10b981;">$948/yr</div>
-                <div style="font-size:11px;color:#999;">$79/mo Pro plan</div>
+                <div style="font-size:11px;color:#767676;">$79/mo Pro plan</div>
               </div>
             </div>
           </div>
@@ -662,9 +659,9 @@
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1000px;margin:0 auto;">
     <!-- Free -->
     <div style="background:white;border:2px solid #eee;border-radius:16px;padding:32px 24px;text-align:center;">
-      <div style="font-size:13px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Free</div>
+      <div style="font-size:13px;font-weight:700;color:#767676;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Free</div>
       <div style="font-size:42px;font-weight:900;color:#1a1a2e;margin-bottom:4px;">$0</div>
-      <div style="font-size:13px;color:#999;margin-bottom:24px;">forever</div>
+      <div style="font-size:13px;color:#767676;margin-bottom:24px;">forever</div>
       <ul style="list-style:none;text-align:left;font-size:14px;color:#666;display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
         <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> 3 AI generations</li>
         <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Watermarked output</li>
@@ -675,9 +672,9 @@
 
     <!-- Starter -->
     <div style="background:white;border:2px solid #eee;border-radius:16px;padding:32px 24px;text-align:center;">
-      <div style="font-size:13px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Starter</div>
+      <div style="font-size:13px;font-weight:700;color:#767676;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Starter</div>
       <div style="font-size:42px;font-weight:900;color:#1a1a2e;margin-bottom:4px;">$19</div>
-      <div style="font-size:13px;color:#999;margin-bottom:24px;">per month</div>
+      <div style="font-size:13px;color:#767676;margin-bottom:24px;">per month</div>
       <ul style="list-style:none;text-align:left;font-size:14px;color:#666;display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
         <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> 20 AI generations/mo</li>
         <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Unwatermarked export</li>
@@ -703,9 +700,9 @@
 
     <!-- Business -->
     <div style="background:white;border:2px solid #eee;border-radius:16px;padding:32px 24px;text-align:center;">
-      <div style="font-size:13px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Business</div>
+      <div style="font-size:13px;font-weight:700;color:#767676;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Business</div>
       <div style="font-size:42px;font-weight:900;color:#1a1a2e;margin-bottom:4px;">$199</div>
-      <div style="font-size:13px;color:#999;margin-bottom:24px;">per month</div>
+      <div style="font-size:13px;color:#767676;margin-bottom:24px;">per month</div>
       <ul style="list-style:none;text-align:left;font-size:14px;color:#666;display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
         <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Everything in Pro</li>
         <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Team collaboration</li>
@@ -716,7 +713,7 @@
     </div>
   </div>
 
-  <p style="margin-top:24px;font-size:14px;color:#999;">Enterprise ($999/mo) — <a href="#signup" style="color:#6d28d9;">Contact us</a> for custom integrations, API access, and dedicated support.</p>
+  <p style="margin-top:24px;font-size:14px;color:#767676;">Enterprise ($999/mo) — <a href="#signup" style="color:#6d28d9;">Contact us</a> for custom integrations, API access, and dedicated support.</p>
 </section>
 
 <!-- ============================================================
@@ -943,6 +940,7 @@
 <!-- ============================================================
      14. FOOTER — loaded as component
      ============================================================ -->
+</main>
 <div id="footerComponent"></div>
 
 <!-- ============================================================

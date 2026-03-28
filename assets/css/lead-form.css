@@ -2,6 +2,9 @@
    Mogoverse — Lead Form Component v2
    ============================================================ */
 
+/* Screen-reader only (visually hidden but accessible) */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
 /* Step 1: Name + Phone */
 .mogo-step1{display:flex;flex-direction:column;gap:10px;}
 .mogo-form-row{display:flex;gap:8px;}
