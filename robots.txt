@@ -1,0 +1,15 @@
+# Mogoverse — robots.txt
+# Last updated: 2026-03-28
+
+User-agent: *
+Allow: /
+
+# Block internal/business directories
+Disallow: /business files/
+Disallow: /research/
+Disallow: /mockups/
+Disallow: /.claude/
+Disallow: /.github/
+
+# Sitemap location
+Sitemap: https://www.mogoverse.ai/sitemap.xml

@@ -182,6 +182,7 @@
 </style>
 <!-- Mogoverse Tracking: GTM + Google Ads + UTM -->
 <script src="../assets/js/tracking.js"></script>
+<script src="../assets/js/leads.js"></script>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFX2NPMP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -505,8 +506,10 @@ function nextStep(step) {
   document.getElementById('step' + (step + 1)).classList.add('active');
   if (step === 3) {
     mogoTrackDemoBooked(document.getElementById('email').value);
-    const day = document.querySelector('#step3 .day-tab.selected');
+    var day = document.querySelector('#step3 .day-tab.selected');
     if (day) document.getElementById('confirmDay').textContent = day.textContent.toLowerCase();
+    var time = document.querySelector('#step3 .time-slot.selected');
+    mogoSubmitLead({ email: document.getElementById('email').value, phone: document.getElementById('phone').value, day: day ? day.textContent.trim() : '', time_slot: time ? time.textContent.trim() : '', form_type: 'demo_booking', form_location: 'hero' });
   }
 }
 // Form logic — Footer form
@@ -521,7 +524,12 @@ function nextStepB(step) {
   }
   document.getElementById('step' + step + 'b').classList.remove('active');
   document.getElementById('step' + (step + 1) + 'b').classList.add('active');
-  if (step === 3) { mogoTrackDemoBooked(document.getElementById('email-b').value); }
+  if (step === 3) {
+    mogoTrackDemoBooked(document.getElementById('email-b').value);
+    var dayB = document.querySelector('#step3b .day-tab.selected');
+    var timeB = document.querySelector('#step3b .time-slot.selected');
+    mogoSubmitLead({ email: document.getElementById('email-b').value, phone: document.getElementById('phone-b').value, day: dayB ? dayB.textContent.trim() : '', time_slot: timeB ? timeB.textContent.trim() : '', form_type: 'demo_booking', form_location: 'footer' });
+  }
 }
 // Day tab selection
 function selectDay(el) {
@@ -601,6 +609,7 @@ function submitTimedPopup() {
     return;
   }
   mogoTrackEmailCaptured(email);  mogoTrackAuditRequested(email);
+  mogoSubmitLead({ email: email, form_type: 'timed_popup' });
   popupState.anyFormSubmitted = true;
   var popup = document.getElementById('timedPopup').querySelector('div > div:first-child') || document.getElementById('timedPopup').children[0];
   document.getElementById('timedPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:#1a1a2e;">You\'re in!</h3><p style="font-size:15px;color:#888;">We\'ll reach out within 24 hours to schedule your free demo.</p></div>';
@@ -622,6 +631,7 @@ function submitExitPopup() {
     document.getElementById('exit-email').style.borderColor = '#ef4444';
     return;
   }
+  mogoSubmitLead({ email: email, form_type: 'exit_popup' });
   popupState.anyFormSubmitted = true;
   document.getElementById('exitPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:white;">Audit requested!</h3><p style="font-size:15px;color:#999;">Check your email — we\'ll send your free sonic brand audit within 24 hours.</p></div>';
   setTimeout(function() { closePopup('exitPopup'); }, 2500);

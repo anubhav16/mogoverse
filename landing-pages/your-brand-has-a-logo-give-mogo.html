@@ -185,6 +185,7 @@
 </style>
 <!-- Mogoverse Tracking: GTM + Google Ads + UTM -->
 <script src="../assets/js/tracking.js"></script>
+<script src="../assets/js/leads.js"></script>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFX2NPMP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -603,6 +604,9 @@ function submitForm(src, intent) {
   // Track
   if (typeof mogoTrackDemoBooked === 'function') mogoTrackDemoBooked(fullPhone);
 
+  // Submit lead to Google Sheet
+  mogoSubmitLead({ name: name, country_code: code, phone: phone, use_cases: usecases, form_type: 'contact', form_location: src });
+
   // Show success
   if (src === 'footer') {
     document.getElementById('formFieldsB').style.display = 'none';
@@ -680,6 +684,7 @@ function submitTimedPopup() {
     return;
   }
   mogoTrackEmailCaptured(email);  mogoTrackAuditRequested(email);
+  mogoSubmitLead({ email: email, form_type: 'timed_popup' });
   popupState.anyFormSubmitted = true;
   var popup = document.getElementById('timedPopup').querySelector('div > div:first-child') || document.getElementById('timedPopup').children[0];
   document.getElementById('timedPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:#1a1a2e;">You\'re in!</h3><p style="font-size:15px;color:#888;">We\'ll reach out within 24 hours to schedule your free demo.</p></div>';
@@ -701,6 +706,7 @@ function submitExitPopup() {
     document.getElementById('exit-email').style.borderColor = '#ef4444';
     return;
   }
+  mogoSubmitLead({ email: email, form_type: 'exit_popup' });
   popupState.anyFormSubmitted = true;
   document.getElementById('exitPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:white;">Audit requested!</h3><p style="font-size:15px;color:#999;">Check your email — we\'ll send your free sonic brand audit within 24 hours.</p></div>';
   setTimeout(function() { closePopup('exitPopup'); }, 2500);
