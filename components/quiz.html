@@ -10,7 +10,7 @@
 .quiz-wrapper.quiz-inline .quiz-option{color:#1a1a2e;border-color:#e5e5e5;background:white;}
 .quiz-wrapper.quiz-inline .quiz-option:hover{border-color:#6d28d9;background:#f5f3ff;}
 .quiz-wrapper.quiz-inline #quizFeedback{color:#666;}
-.quiz-wrapper.quiz-inline #quizPlayLabel{color:#999;}
+.quiz-wrapper.quiz-inline #quizPlayLabel{color:#767676;}
 .quiz-wave-bars{display:flex;align-items:center;justify-content:center;gap:3px;height:36px;}
 .quiz-wave-bars span{display:block;width:4px;background:#6d28d9;border-radius:2px;animation:quizWave 0.8s ease-in-out infinite;}
 .quiz-wave-bars span:nth-child(1){height:12px;animation-delay:0s;}
@@ -44,10 +44,10 @@
 
       <!-- Play button -->
       <div id="quizPlayArea" style="margin-bottom:32px;">
-        <button id="quizPlayBtn" style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#6d28d9,#a78bfa);border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;box-shadow:0 8px 30px rgba(109,40,217,0.3);">
+        <button id="quizPlayBtn" aria-label="Play brand sound quiz" style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#6d28d9,#a78bfa);border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;box-shadow:0 8px 30px rgba(109,40,217,0.3);">
           <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><polygon points="6,3 20,12 6,21"/></svg>
         </button>
-        <p style="font-size:14px;color:#999;margin-top:12px;" id="quizPlayLabel">Tap to play the sound</p>
+        <p style="font-size:14px;color:#767676;margin-top:12px;" id="quizPlayLabel">Tap to play the sound</p>
       </div>
 
       <!-- Answer options -->
