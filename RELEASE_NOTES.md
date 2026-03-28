@@ -1,5 +1,19 @@
 # Mogoverse Release Notes
 
+## v2.3.0 — Logo Wall Dark Theme, Footer Fix, Testimonial Polish (2026-03-29)
+
+### Fixed
+- **Logo wall**: White cells on dark navy bg — original brand colors preserved (no more brightness/invert filter). Logos 48px. Dark bg creates section contrast rhythm.
+- **Black bleed-through**: Removed `position:fixed` brand reveal that was bleeding through transparent sections. Now static at bottom.
+- **Testimonials**: Replaced "BrandMusiq" with "They" (Zomato) and "Rajeev and team" (Vistara). Bigger fonts (quote 16px, name 17px, title 14px).
+- **LP hero padding**: 140px→100px desktop, 100px→76px mobile (form visible in first fold)
+- **Quiz lead form**: Post-quiz uses shared lead-form.js with `quiz_result` source identifier
+- **Mobile UX**: 16 fixes (touch targets ≥44px, grid collapses, font sizing)
+- **Popup stacking**: Timed popup won't override exit intent and vice versa
+- **Exit intent**: Now uses same white style as timed popup
+
+---
+
 ## v2.2.0 — UI Polish: Light Quiz, Bigger Logos, Footer Reveal (2026-03-28)
 
 ### Fixed
