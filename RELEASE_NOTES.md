@@ -1,5 +1,19 @@
 # Mogoverse Release Notes
 
+## v2.1.0 — Quiz Polish + Logo Quality + Landing Page Heroes (2026-03-28)
+
+### Changed
+- **Quiz component**: Thinner option buttons with dark-bg contrast, purple hover glow, animated wave bars while audio plays, "0.15 seconds — faster than you can blink"
+- **Logo wall**: All 35 logos now real images from BrandMusiq CDN (zero hand-crafted SVGs), softer grid dividers, more padding, sharper rendering
+- **Landing page heroes**: Quiz moved into hero right column (first fold) on both royalty-free and give-mogo pages
+- **Lead form**: Moved below hero as standalone section on landing pages
+- **"How can we help?"**: Removed from all 3 pages
+
+### New logo downloads from BrandMusiq
+Mastercard, Amazon Pay, Toyota, Tata, HDFC Bank, Infosys, Asian Paints, Zomato, Raymond, Vistara — all replaced crude SVGs with real brand PNGs
+
+---
+
 ## v2.0.0 — Component Architecture + Lead Form Integration (2026-03-28)
 
 ### Added
