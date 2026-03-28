@@ -40,8 +40,9 @@
 </footer>
 </div>
 
-<div class="mogo-brand-reveal" style="background:#111;padding:80px 60px 120px;text-align:center;overflow:hidden;" id="brandRevealSection">
-  <div style="font-size:min(20vw, 200px);font-weight:900;color:rgba(255,255,255,0.06);letter-spacing:-8px;font-family:'Inter',sans-serif;line-height:0.9;user-select:none;">
+<!-- [2026-03-29] Brand reveal: fixed in background, page curtains up to unveil it -->
+<div id="brandRevealSection" style="position:fixed;bottom:0;left:0;width:100%;z-index:-1;background:#111;padding:100px 60px 120px;text-align:center;overflow:hidden;">
+  <div style="font-size:min(22vw, 240px);font-weight:900;color:rgba(255,255,255,0.05);letter-spacing:-10px;font-family:'Inter',sans-serif;line-height:0.85;user-select:none;">
     mogoverse
   </div>
 </div>
@@ -52,11 +53,9 @@
   var _bp = (window.location.pathname.indexOf('/landing-pages/') !== -1 || window.location.pathname.indexOf('/tools/') !== -1 || window.location.pathname.indexOf('/sonic-branding/') !== -1 || window.location.pathname.indexOf('/alternatives/') !== -1) ? '../' : '';
 
   if (isLandingPage) {
-    /* Landing page: show minimal footer, hide full */
     document.getElementById('mogoFooterFull').style.display = 'none';
     document.getElementById('mogoFooterMinimal').style.display = 'block';
   } else {
-    /* Homepage/other: show full footer with all links */
     document.getElementById('footerLinkHIW').href = _bp + '#how-it-works';
     document.getElementById('footerLinkPricing').href = _bp + '#pricing';
     document.getElementById('footerLinkCalc').href = _bp + '#calculator';
@@ -67,28 +66,30 @@
     document.getElementById('footerLinkSuno').href = _bp + 'alternatives/suno-alternative.html';
   }
 
-  /* Issue 9: Footer curtain-lift reveal effect */
+  /* [2026-03-29] Curtain-lift: footer wrapper gets bottom shadow, brand reveal is fixed behind */
   var wrapper = document.getElementById('mogoFooterWrapper');
   if (wrapper) {
-    wrapper.style.position = 'sticky';
-    wrapper.style.bottom = '0';
-    wrapper.style.zIndex = '0';
+    /* Add bottom margin equal to brand reveal height so page scrolls far enough to show it */
+    wrapper.style.marginBottom = '300px';
+    wrapper.style.position = 'relative';
+    wrapper.style.zIndex = '1';
+    wrapper.style.boxShadow = '0 40px 80px rgba(0,0,0,0.3)';
+  }
 
-    /* Add z-index and background to all content sections above footer */
-    var footerContainer = document.getElementById('footerComponent');
-    if (footerContainer) {
-      var prev = footerContainer.previousElementSibling;
-      while (prev) {
-        prev.style.position = 'relative';
-        prev.style.zIndex = '1';
-        if (!prev.style.background && !prev.style.backgroundColor) {
-          var cs = window.getComputedStyle(prev);
-          if (cs.backgroundColor === 'rgba(0, 0, 0, 0)' || cs.backgroundColor === 'transparent') {
-            prev.style.backgroundColor = '#fafafa';
-          }
+  /* Ensure all content above footer has bg so it doesn't show the fixed reveal through */
+  var footerContainer = document.getElementById('footerComponent');
+  if (footerContainer) {
+    var prev = footerContainer.previousElementSibling;
+    while (prev) {
+      prev.style.position = 'relative';
+      prev.style.zIndex = '1';
+      if (!prev.style.background && !prev.style.backgroundColor) {
+        var cs = window.getComputedStyle(prev);
+        if (cs.backgroundColor === 'rgba(0, 0, 0, 0)' || cs.backgroundColor === 'transparent') {
+          prev.style.backgroundColor = '#fafafa';
         }
-        prev = prev.previousElementSibling;
       }
+      prev = prev.previousElementSibling;
     }
   }
 })();
