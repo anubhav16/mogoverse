@@ -665,10 +665,10 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px 16px;
+  padding: 24px 16px;
   transition: all 0.3s;
   text-align: center;
-  min-height: 72px;
+  min-height: 88px;
   position: relative;
 }
 .logo-cell:hover {
@@ -676,10 +676,10 @@ footer {
   box-shadow: inset 0 0 0 2px var(--color-purple);
 }
 .logo-cell img {
-  height: 32px;
-  max-width: 85%;
+  height: 40px;
+  max-width: 80%;
   object-fit: contain;
-  opacity: 0.7;
+  opacity: 0.75;
   transition: all 0.4s;
 }
 .logo-cell:hover img {
@@ -804,8 +804,8 @@ footer {
   /* Logo wall: 3 cols on mobile */
   .logo-wall { padding: 40px 20px 32px; }
   .logo-grid { grid-template-columns: repeat(3, 1fr); }
-  .logo-cell { padding: 14px 8px; min-height: 56px; }
-  .logo-cell img { height: 20px; }
+  .logo-cell { padding: 16px 8px; min-height: 64px; }
+  .logo-cell img { height: 28px; }
 
   .stats-bar .stat-item .number { font-size: 32px; }
 }
