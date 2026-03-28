@@ -107,13 +107,13 @@ nav {
 
 /* --- Hero --- */
 .hero {
-  padding: 140px 60px 80px;
+  padding: 110px 60px 80px;
   max-width: var(--max-width);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  align-items: center;
+  align-items: start;
 }
 .hero-text .eyebrow {
   font-size: var(--font-size-sm);
@@ -781,7 +781,7 @@ footer {
     gap: 16px;
   }
 
-  .hero { grid-template-columns: 1fr; padding: 100px 20px 40px; gap: 32px; }
+  .hero { grid-template-columns: 1fr; padding: 80px 20px 40px; gap: 32px; }
   .hero-text h1 { font-size: 36px; }
 
   .section, .section-dark, .client-bar { padding: var(--space-section-mobile); }

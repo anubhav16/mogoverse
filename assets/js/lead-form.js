@@ -335,7 +335,7 @@ function mogoShowPopupForm(popupId, source, headline, description) {
   overlay.className = 'mogo-popup-overlay';
   overlay.onclick = function(e) { if (e.target === overlay) mogoClosePopup(popupId); };
 
-  var isDark = source === 'exit_popup';
+  var isDark = false;
   var bg = isDark ? '#1a1a2e' : 'white';
   var headColor = isDark ? 'white' : '#1a1a2e';
   var descColor = isDark ? '#999' : '#888';
@@ -375,6 +375,7 @@ function mogoInitPopups() {
   // Timed popup — 15 seconds
   // Suppressed if: form submitted, user is filling a form, or already shown
   setTimeout(function() {
+    if (document.getElementById('mogoExitPopup') && document.getElementById('mogoExitPopup').style.display !== 'none') return;
     if (!popupState.anyFormSubmitted && !state.timed && !mogoFormFocused) {
       mogoShowPopupForm('mogoTimedPopup', 'timed_popup',
         'Hear your brand\'s sound \u2014 free',
@@ -385,6 +386,7 @@ function mogoInitPopups() {
 
   // Exit intent — suppressed if form submitted or user is filling form
   document.addEventListener('mouseout', function(e) {
+    if (document.getElementById('mogoTimedPopup') && document.getElementById('mogoTimedPopup').style.display !== 'none') return;
     if (e.clientY < 5 && !state.exit && !popupState.anyFormSubmitted && !mogoFormFocused) {
       mogoShowPopupForm('mogoExitPopup', 'exit_popup',
         'Wait \u2014 don\'t leave without this',
