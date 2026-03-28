@@ -89,34 +89,47 @@ function mogoTrackConversion(label, extraData) {
 }
 
 // Track: Demo booked (hero form + footer form)
-function mogoTrackDemoBooked(email) {
+function mogoTrackDemoBooked(email, phone) {
+  mogoTrackEnhancedConversion(email, phone);
   mogoTrackConversion(MOGO_TRACKING.CONVERSION_LABELS.demo_booked, {
     type: 'demo_booked',
-    value: 50  // estimated lead value — adjust as needed
+    value: 50
   });
+  if (typeof clarity === 'function') clarity('event', 'demo_booked');
   console.log('[Mogoverse] Conversion tracked: demo_booked', email);
 }
 
 // Track: Audit requested (exit intent popup)
 function mogoTrackAuditRequested(email) {
+  mogoTrackEnhancedConversion(email);
   mogoTrackConversion(MOGO_TRACKING.CONVERSION_LABELS.audit_requested, {
     type: 'audit_requested',
     value: 25
   });
+  if (typeof clarity === 'function') clarity('event', 'audit_requested');
   console.log('[Mogoverse] Conversion tracked: audit_requested', email);
 }
 
 // Track: Email captured (timed popup)
 function mogoTrackEmailCaptured(email) {
+  mogoTrackEnhancedConversion(email);
   mogoTrackConversion(MOGO_TRACKING.CONVERSION_LABELS.email_captured, {
     type: 'email_captured',
     value: 10
   });
+  if (typeof clarity === 'function') clarity('event', 'email_captured');
   console.log('[Mogoverse] Conversion tracked: email_captured', email);
 }
 
 // ============================================================
-// 5. PAGE VIEW + LANDING PAGE TRACKING
+// 5. MICROSOFT CLARITY — loaded via GTM (no manual script needed)
+// [2026-03-28] Project ID: w2uv9zdrgv — connected to GTM-TFX2NPMP
+// Clarity events (clarity('event', ...) and clarity('set', ...))
+// work via the clarity() function exposed by GTM's Clarity tag.
+// ============================================================
+
+// ============================================================
+// 6. PAGE VIEW + LANDING PAGE TRACKING
 // ============================================================
 (function(){
   window.dataLayer = window.dataLayer || [];
@@ -124,8 +137,51 @@ function mogoTrackEmailCaptured(email) {
     event: 'mogo_pageview',
     page_path: window.location.pathname,
     page_title: document.title,
+    page_url: window.location.href,
+    page_referrer: document.referrer,
     landing_page: document.title.replace('Mogoverse — ', ''),
     utm: mogoGetUtm(),
     timestamp: new Date().toISOString()
   });
+
+  // [2026-03-28] Tag Clarity session with UTM + page data
+  if (typeof clarity === 'function') {
+    var utm = mogoGetUtm();
+    if (utm.utm_source) clarity('set', 'utm_source', utm.utm_source);
+    if (utm.utm_medium) clarity('set', 'utm_medium', utm.utm_medium);
+    if (utm.utm_campaign) clarity('set', 'utm_campaign', utm.utm_campaign);
+    if (utm.gclid) clarity('set', 'gclid', utm.gclid);
+    clarity('set', 'page_type', window.location.pathname === '/' ? 'homepage' : 'landing_page');
+  }
 })();
+
+// ============================================================
+// 7. ENHANCED CONVERSION HELPER — sends user data with conversions
+// [2026-03-28] For Google Ads Smart Bidding optimization
+// ============================================================
+function mogoTrackEnhancedConversion(email, phone) {
+  if (typeof gtag !== 'function') return;
+  // Send enhanced conversion data for Google Ads bid optimization
+  gtag('set', 'user_data', {
+    email: email || '',
+    phone_number: phone || ''
+  });
+
+  // Push to dataLayer for GTM Enhanced Conversions
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({
+    event: 'enhanced_conversion',
+    enhanced_conversion_data: {
+      email: email || '',
+      phone_number: phone || ''
+    },
+    utm: mogoGetUtm()
+  });
+
+  // Tag Clarity session with lead info
+  if (typeof clarity === 'function') {
+    clarity('set', 'lead_email_domain', (email || '').split('@')[1] || 'unknown');
+    clarity('set', 'has_phone', phone ? 'yes' : 'no');
+    clarity('identify', email || 'anonymous');
+  }
+}

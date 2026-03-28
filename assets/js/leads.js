@@ -6,7 +6,7 @@
 // ============================================================
 
 var MOGO_LEADS = {
-  SHEET_URL: 'https://script.google.com/macros/s/AKfycbzdH0PCoxeDe_-HKiMrX0TsRDhoO3sFKJeNoxwlNVFuyl4eUDeXHoB7bF-xl2vqWhApqw/exec'
+  SHEET_URL: 'https://script.google.com/macros/s/AKfycbwpiUeI2nOpFm2HcCJU5ixPOnI7G6BICzyr8md9_8yPQHex51nKF81H2qk-5CYSwHhi/exec'
 };
 
 // Submit a lead to Google Sheets. Fire-and-forget — never blocks UX.
@@ -21,6 +21,7 @@ function mogoSubmitLead(data) {
     phone: data.phone || '',
     name: data.name || '',
     country_code: data.country_code || '',
+    persona: data.persona || '',
     use_cases: data.use_cases || [],
     day: data.day || '',
     time_slot: data.time_slot || '',
@@ -29,7 +30,8 @@ function mogoSubmitLead(data) {
     utm_source: utm.utm_source || '',
     utm_medium: utm.utm_medium || '',
     utm_campaign: utm.utm_campaign || '',
-    form_location: data.form_location || ''
+    form_location: data.form_location || '',
+    action: data.action || 'create'
   };
 
   fetch(MOGO_LEADS.SHEET_URL, {

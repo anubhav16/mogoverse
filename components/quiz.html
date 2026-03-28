@@ -1,0 +1,288 @@
+<section id="quiz" class="section" style="background:#f5f3ff;max-width:none;text-align:center;">
+  <div style="max-width:700px;margin:0 auto;">
+    <div class="section-label">Interactive Quiz</div>
+    <h2>Can You Recognize These Brands <em>By Sound Alone?</em></h2>
+    <p class="desc" style="max-width:560px;margin:0 auto 40px;">
+      The world's most iconic brands are recognized in under 0.146 seconds — by sound. Test yourself.
+    </p>
+
+    <!-- Quiz container -->
+    <div id="quizContainer">
+      <!-- Round display -->
+      <div id="quizRound" style="margin-bottom:24px;">
+        <span style="font-size:13px;font-weight:700;color:#6d28d9;text-transform:uppercase;letter-spacing:2px;">Round <span id="roundNum">1</span> of 3</span>
+        <div style="display:flex;gap:6px;justify-content:center;margin-top:8px;">
+          <div class="quiz-dot" id="qd1" style="width:10px;height:10px;border-radius:50%;background:#6d28d9;"></div>
+          <div class="quiz-dot" id="qd2" style="width:10px;height:10px;border-radius:50%;background:#ddd;"></div>
+          <div class="quiz-dot" id="qd3" style="width:10px;height:10px;border-radius:50%;background:#ddd;"></div>
+        </div>
+      </div>
+
+      <!-- Play button -->
+      <div id="quizPlayArea" style="margin-bottom:32px;">
+        <button id="quizPlayBtn" style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#6d28d9,#a78bfa);border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;box-shadow:0 8px 30px rgba(109,40,217,0.3);">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><polygon points="6,3 20,12 6,21"/></svg>
+        </button>
+        <p style="font-size:14px;color:#999;margin-top:12px;" id="quizPlayLabel">Tap to play the sound</p>
+      </div>
+
+      <!-- Answer options -->
+      <div id="quizOptions" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
+      </div>
+
+      <!-- Feedback -->
+      <div id="quizFeedback" style="display:none;padding:20px;border-radius:12px;margin-bottom:20px;">
+      </div>
+
+      <!-- Next round button -->
+      <button id="quizNextBtn" style="display:none;padding:12px 32px;background:#1a1a2e;color:white;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">
+        Next Round
+      </button>
+    </div>
+
+    <!-- Quiz result (hidden until complete) -->
+    <div id="quizResult" style="display:none;">
+      <div style="font-size:64px;margin-bottom:16px;" id="quizEmoji"></div>
+      <h3 style="font-size:28px;font-weight:900;margin-bottom:8px;" id="quizScoreText"></h3>
+      <p style="font-size:17px;color:#666;margin-bottom:32px;" id="quizScoreDesc"></p>
+      <p style="font-size:15px;color:#888;margin-bottom:32px;">Sound is more memorable than you think. That's the power of a <strong style="color:#6d28d9;">MOGO</strong>.</p>
+
+      <!-- Post-quiz email capture -->
+      <div style="max-width:400px;margin:0 auto;">
+        <p style="font-size:15px;font-weight:600;margin-bottom:12px;">Want your brand to be this recognizable?</p>
+        <div class="form-row">
+          <input type="email" id="quizEmail" placeholder="Your work email" aria-label="Work email for early access">
+          <button class="btn-purple" id="quizEmailBtn">Get Early Access</button>
+        </div>
+        <div id="quizEmailSuccess" style="display:none;color:#10b981;font-size:14px;font-weight:600;margin-top:8px;">You're on the list!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quiz audio element (lazy-loaded on play) -->
+<audio id="quizAudio" preload="none"></audio>
+
+<script>
+(function() {
+  var _bp = (window.location.pathname.indexOf('/landing-pages/') !== -1 || window.location.pathname.indexOf('/tools/') !== -1 || window.location.pathname.indexOf('/sonic-branding/') !== -1 || window.location.pathname.indexOf('/alternatives/') !== -1) ? '../' : '';
+
+  var quizData = [
+    {
+      audio: _bp + 'assets/audio-logos/netflix-tadum.mp3',
+      correct: 'Netflix',
+      options: ['Netflix', 'Amazon Prime', 'HBO'],
+      fact: 'Netflix\'s "Ta-Dum" is heard 200M+ times daily. Composed by Lon Bender, just 3 seconds long.'
+    },
+    {
+      audio: _bp + 'assets/audio-logos/airtel-signature-tune.mp3',
+      correct: 'Airtel',
+      options: ['Jio', 'Airtel', 'Vodafone'],
+      fact: 'Airtel\'s signature tune by A.R. Rahman \u2014 over 300 million downloads. A masterclass in sonic branding.'
+    },
+    {
+      audio: _bp + 'assets/audio-logos/indian-railways-jingle.mp3',
+      correct: 'Indian Railways',
+      options: ['Delhi Metro', 'Indian Railways', 'Air India'],
+      fact: 'Indian Railways\' jingle plays across 8,000+ stations daily, reaching 23 million passengers.'
+    }
+  ];
+
+  var quizState = { round: 0, score: 0, answered: false };
+
+  function initQuiz() {
+    quizState = { round: 0, score: 0, answered: false };
+    document.getElementById('quizContainer').style.display = '';
+    document.getElementById('quizResult').style.display = 'none';
+    renderQuizRound();
+
+    /* GTM: quiz started */
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({ event: 'quiz_started' });
+
+    /* Clarity event */
+    if (window.clarity) { try { clarity('event', 'quiz_started'); } catch(e) {} }
+  }
+
+  function renderQuizRound() {
+    var r = quizData[quizState.round];
+    quizState.answered = false;
+
+    document.getElementById('roundNum').textContent = quizState.round + 1;
+    document.getElementById('quizPlayLabel').textContent = 'Tap to play the sound';
+    document.getElementById('quizFeedback').style.display = 'none';
+    document.getElementById('quizNextBtn').style.display = 'none';
+
+    /* Update progress dots */
+    for (var i = 1; i <= 3; i++) {
+      var dot = document.getElementById('qd' + i);
+      if (i < quizState.round + 1) { dot.style.background = '#10b981'; }
+      else if (i === quizState.round + 1) { dot.style.background = '#6d28d9'; }
+      else { dot.style.background = '#ddd'; }
+    }
+
+    /* Render shuffled options */
+    var optHtml = '';
+    var shuffled = r.options.slice().sort(function() { return 0.5 - Math.random(); });
+    for (var j = 0; j < shuffled.length; j++) {
+      optHtml += '<button class="quiz-option" data-answer="' + shuffled[j] + '" style="padding:20px;border:2px solid #e5e5e5;border-radius:12px;background:white;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:Inter,sans-serif;">' + shuffled[j] + '</button>';
+    }
+    document.getElementById('quizOptions').innerHTML = optHtml;
+
+    /* Attach click handlers to options */
+    var optBtns = document.querySelectorAll('#quizOptions .quiz-option');
+    for (var k = 0; k < optBtns.length; k++) {
+      optBtns[k].addEventListener('click', function() {
+        answerQuiz(this.getAttribute('data-answer'));
+      });
+    }
+
+    /* Reset play button */
+    document.getElementById('quizPlayBtn').style.background = 'linear-gradient(135deg,#6d28d9,#a78bfa)';
+
+    /* Reset audio */
+    var audio = document.getElementById('quizAudio');
+    audio.pause();
+    audio.currentTime = 0;
+  }
+
+  function playQuizAudio() {
+    var audio = document.getElementById('quizAudio');
+    var r = quizData[quizState.round];
+
+    /* Lazy-load: set src only on first play */
+    if (!audio.src || !audio.src.endsWith(r.audio.replace(_bp, ''))) {
+      audio.src = r.audio;
+    }
+
+    audio.play().then(function() {
+      document.getElementById('quizPlayLabel').textContent = 'Playing... now guess the brand!';
+      document.getElementById('quizPlayBtn').style.background = 'linear-gradient(135deg,#10b981,#34d399)';
+    }).catch(function() {
+      document.getElementById('quizPlayLabel').textContent = 'Tap again to play';
+    });
+  }
+
+  function answerQuiz(answer) {
+    if (quizState.answered) return;
+    quizState.answered = true;
+
+    var r = quizData[quizState.round];
+    var correct = answer === r.correct;
+    if (correct) quizState.score++;
+
+    /* GTM: track answer */
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({ event: 'quiz_answer', round: quizState.round + 1, correct: correct, brand: r.correct });
+
+    /* Clarity event */
+    if (window.clarity) { try { clarity('event', 'quiz_answer'); } catch(e) {} }
+
+    /* Highlight options */
+    var btns = document.querySelectorAll('.quiz-option');
+    for (var i = 0; i < btns.length; i++) {
+      var btn = btns[i];
+      if (btn.textContent === r.correct) {
+        btn.style.borderColor = '#10b981';
+        btn.style.background = '#f0fdf4';
+        btn.style.color = '#10b981';
+      } else if (btn.textContent === answer && !correct) {
+        btn.style.borderColor = '#ef4444';
+        btn.style.background = '#fef2f2';
+        btn.style.color = '#ef4444';
+      }
+      btn.style.pointerEvents = 'none';
+    }
+
+    /* Show feedback */
+    var fb = document.getElementById('quizFeedback');
+    fb.style.display = 'block';
+    if (correct) {
+      fb.style.background = '#f0fdf4';
+      fb.style.border = '1px solid #86efac';
+      fb.innerHTML = '<p style="font-size:16px;font-weight:700;color:#10b981;margin-bottom:8px;">Correct!</p><p style="font-size:14px;color:#666;line-height:1.6;">' + r.fact + '</p>';
+    } else {
+      fb.style.background = '#fef2f2';
+      fb.style.border = '1px solid #fecaca';
+      fb.innerHTML = '<p style="font-size:16px;font-weight:700;color:#ef4444;margin-bottom:8px;">That was ' + r.correct + '!</p><p style="font-size:14px;color:#666;line-height:1.6;">' + r.fact + '</p>';
+    }
+
+    /* Show next or finish button */
+    var nextBtn = document.getElementById('quizNextBtn');
+    if (quizState.round < 2) {
+      nextBtn.style.display = 'inline-block';
+      nextBtn.textContent = 'Next Round';
+    } else {
+      nextBtn.style.display = 'inline-block';
+      nextBtn.textContent = 'See My Score';
+    }
+  }
+
+  function nextQuizRound() {
+    if (quizState.round < 2) {
+      quizState.round++;
+      renderQuizRound();
+    } else {
+      showQuizResult();
+    }
+  }
+
+  function showQuizResult() {
+    document.getElementById('quizContainer').style.display = 'none';
+    var result = document.getElementById('quizResult');
+    result.style.display = 'block';
+
+    var s = quizState.score;
+    var emoji = s === 3 ? '&#127942;' : s === 2 ? '&#128170;' : s === 1 ? '&#129300;' : '&#128560;';
+    var text = 'You got ' + s + '/3';
+    var desc = s === 3 ? 'Perfect score! You clearly understand the power of sonic branding.' :
+               s === 2 ? 'Strong ears! Most people struggle with this.' :
+               s === 1 ? 'Tricky, right? Now imagine your customers recognizing YOUR brand by sound.' :
+               'Don\'t worry \u2014 89% of people can\'t identify brands by sound. That\'s exactly the opportunity.';
+
+    document.getElementById('quizEmoji').innerHTML = emoji;
+    document.getElementById('quizScoreText').textContent = text;
+    document.getElementById('quizScoreDesc').textContent = desc;
+
+    /* GTM: quiz completed */
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({ event: 'quiz_completed', score: s, total: 3 });
+
+    /* Clarity event */
+    if (window.clarity) { try { clarity('event', 'quiz_completed'); } catch(e) {} }
+  }
+
+  function captureQuizEmail() {
+    var email = document.getElementById('quizEmail').value.trim();
+    if (!email || email.indexOf('@') === -1) {
+      document.getElementById('quizEmail').style.borderColor = '#ef4444';
+      return;
+    }
+    document.getElementById('quizEmailSuccess').style.display = 'block';
+    document.getElementById('quizEmail').disabled = true;
+    document.querySelector('#quizEmailBtn').disabled = true;
+
+    /* GTM: quiz email captured */
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({ event: 'quiz_email_captured', source: 'quiz_result' });
+
+    /* Clarity event */
+    if (window.clarity) { try { clarity('event', 'quiz_email_captured'); } catch(e) {} }
+
+    if (typeof mogoTrackEmailCaptured === 'function') mogoTrackEmailCaptured(email);
+  }
+
+  /* Bind event listeners (no inline onclick for component compatibility) */
+  document.getElementById('quizPlayBtn').addEventListener('click', playQuizAudio);
+  document.getElementById('quizNextBtn').addEventListener('click', nextQuizRound);
+  document.getElementById('quizEmailBtn').addEventListener('click', captureQuizEmail);
+
+  /* Expose globally for any external callers */
+  window.playQuizAudio = playQuizAudio;
+  window.nextQuizRound = nextQuizRound;
+  window.captureQuizEmail = captureQuizEmail;
+
+  /* Initialize */
+  initQuiz();
+})();
+</script>

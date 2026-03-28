@@ -1,0 +1,299 @@
+<style>
+/* Logo wall testimonial tooltip */
+.logo-tooltip {
+  position: absolute;
+  z-index: 100;
+  background: rgba(255,255,255,0.97);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.logo-tooltip.active { opacity: 1; }
+.logo-tooltip-quote {
+  font-size: 13px;
+  font-style: italic;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.logo-tooltip-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-tooltip-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.logo-tooltip-initials {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #6d28d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+  flex-shrink: 0;
+}
+.logo-tooltip-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+.logo-tooltip-title {
+  font-size: 12px;
+  color: #888;
+}
+/* Hide tooltip on mobile (no hover) */
+@media (max-width: 768px) {
+  .logo-tooltip { display: none !important; }
+}
+</style>
+
+<section id="logo-wall" class="logo-wall">
+  <div class="logo-wall-inner">
+    <div class="label">Every brand here has a MOGO — created by BrandMusiq</div>
+    <div class="logo-grid" id="logoGrid">
+      <!-- Row 1: Global megabrands -->
+      <div class="logo-cell" data-brand="mastercard" data-has-testimonial="true">
+        <img src="" data-src="assets/logos/mastercard.svg" alt="Mastercard MOGO — global sonic identity for contactless payments by BrandMusiq" loading="lazy">
+        <span class="logo-name">Mastercard</span>
+      </div>
+      <div class="logo-cell" data-brand="amazon-pay">
+        <img src="" data-src="assets/logos/amazonpay.svg" alt="Amazon Pay MOGO — payment platform sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Amazon Pay</span>
+      </div>
+      <div class="logo-cell" data-brand="toyota">
+        <img src="" data-src="assets/logos/toyota.svg" alt="Toyota MOGO — automotive brand sound identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Toyota</span>
+      </div>
+      <div class="logo-cell" data-brand="nestle">
+        <img src="" data-src="assets/logos/nestle.png" alt="Nestle MOGO — global FMCG sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Nestle</span>
+      </div>
+      <div class="logo-cell" data-brand="7up">
+        <img src="" data-src="assets/logos/7up.png" alt="7UP MOGO — PepsiCo beverage sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">7UP</span>
+      </div>
+      <div class="logo-cell" data-brand="kraft">
+        <img src="" data-src="assets/logos/kraft.png" alt="Kraft MOGO — food brand sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Kraft</span>
+      </div>
+      <div class="logo-cell" data-brand="red-label">
+        <img src="" data-src="assets/logos/red-label.jpg" alt="Red Label MOGO — HUL tea brand sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Red Label</span>
+      </div>
+
+      <!-- Row 2: Indian conglomerates -->
+      <div class="logo-cell" data-brand="reliance-smart">
+        <img src="" data-src="assets/logos/reliance-smart.png" alt="Reliance Smart MOGO — retail chain sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Reliance Smart</span>
+      </div>
+      <div class="logo-cell" data-brand="jio-bp">
+        <img src="" data-src="assets/logos/jio-bp.png" alt="Jio-BP MOGO — energy brand sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Jio-BP</span>
+      </div>
+      <div class="logo-cell" data-brand="tata">
+        <img src="" data-src="assets/logos/tata.svg" alt="Tata MOGO — conglomerate sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Tata</span>
+      </div>
+      <div class="logo-cell" data-brand="hdfc-bank" data-has-testimonial="true">
+        <img src="" data-src="assets/logos/hdfc.svg" alt="HDFC Bank MOGO — banking sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">HDFC Bank</span>
+      </div>
+      <div class="logo-cell" data-brand="infosys">
+        <img src="" data-src="assets/logos/infosys.svg" alt="Infosys MOGO — IT services sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Infosys</span>
+      </div>
+      <div class="logo-cell" data-brand="sbi-life">
+        <img src="" data-src="assets/logos/sbi-life.png" alt="SBI Life MOGO — insurance brand sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">SBI Life</span>
+      </div>
+      <div class="logo-cell" data-brand="bru">
+        <img src="" data-src="assets/logos/bru.png" alt="Bru MOGO — HUL coffee brand sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Bru</span>
+      </div>
+
+      <!-- Row 3: Consumer brands -->
+      <div class="logo-cell" data-brand="asian-paints">
+        <img src="" data-src="assets/logos/asianpaints.svg" alt="Asian Paints MOGO — paint brand sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Asian Paints</span>
+      </div>
+      <div class="logo-cell" data-brand="zomato" data-has-testimonial="true">
+        <img src="" data-src="assets/logos/zomato.svg" alt="Zomato MOGO — food delivery sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Zomato</span>
+      </div>
+      <div class="logo-cell" data-brand="vivo">
+        <img src="" data-src="assets/logos/vivo.png" alt="Vivo MOGO — smartphone brand sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Vivo</span>
+      </div>
+      <div class="logo-cell" data-brand="mg-motors" data-has-testimonial="true">
+        <img src="" data-src="assets/logos/mg-motors.jpg" alt="MG Motors MOGO — automotive sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">MG Motors</span>
+      </div>
+      <div class="logo-cell" data-brand="hdfc-life">
+        <img src="" data-src="assets/logos/hdfc-life.png" alt="HDFC Life MOGO — life insurance sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">HDFC Life</span>
+      </div>
+      <div class="logo-cell" data-brand="aditya-birla">
+        <img src="" data-src="assets/logos/adityabirla.png" alt="Aditya Birla Capital MOGO — financial services sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Aditya Birla Capital</span>
+      </div>
+      <div class="logo-cell" data-brand="saffola">
+        <img src="" data-src="assets/logos/saffola.png" alt="Saffola MOGO — health brand sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Saffola</span>
+      </div>
+
+      <!-- Row 4: Known Indian -->
+      <div class="logo-cell" data-brand="tata-salt">
+        <img src="" data-src="assets/logos/tata-salt.png" alt="Tata Salt MOGO — FMCG sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Tata Salt</span>
+      </div>
+      <div class="logo-cell" data-brand="air-india-express">
+        <img src="" data-src="assets/logos/air-india-express.png" alt="Air India Express MOGO — airline sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Air India Express</span>
+      </div>
+      <div class="logo-cell" data-brand="vistara" data-has-testimonial="true">
+        <img src="" data-src="assets/logos/vistara.svg" alt="Vistara MOGO — premium airline sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Vistara</span>
+      </div>
+      <div class="logo-cell" data-brand="fortune">
+        <img src="" data-src="assets/logos/fortune.jpg" alt="Fortune MOGO — edible oil brand sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Fortune</span>
+      </div>
+      <div class="logo-cell" data-brand="raymond">
+        <img src="" data-src="assets/logos/raymond.svg" alt="Raymond MOGO — textile brand sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Raymond</span>
+      </div>
+      <div class="logo-cell" data-brand="truecaller">
+        <img src="" data-src="assets/logos/truecaller-bmq.png" alt="Truecaller MOGO — caller ID app sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Truecaller</span>
+      </div>
+      <div class="logo-cell" data-brand="bharat-connect">
+        <img src="" data-src="assets/logos/bharat-connect.png" alt="Bharat Connect MOGO — digital payments sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Bharat Connect</span>
+      </div>
+
+      <!-- Row 5: Sector-specific -->
+      <div class="logo-cell" data-brand="rcb">
+        <img src="" data-src="assets/logos/rcb.png" alt="RCB MOGO — IPL cricket team sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">RCB</span>
+      </div>
+      <div class="logo-cell" data-brand="nippon-india">
+        <img src="" data-src="assets/logos/nippon-india.png" alt="Nippon India Mutual Fund MOGO — financial sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Nippon India MF</span>
+      </div>
+      <div class="logo-cell" data-brand="federal-bank">
+        <img src="" data-src="assets/logos/federal-bank.png" alt="Federal Bank MOGO — banking sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Federal Bank</span>
+      </div>
+      <div class="logo-cell" data-brand="bkt-tyres">
+        <img src="" data-src="assets/logos/bkt-tyres.png" alt="BKT Tyres MOGO — tyre brand sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">BKT Tyres</span>
+      </div>
+      <div class="logo-cell" data-brand="kempegowda-airport">
+        <img src="" data-src="assets/logos/kempegowda-airport.png" alt="Bengaluru Airport MOGO — airport sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Bengaluru Airport</span>
+      </div>
+      <div class="logo-cell" data-brand="rupeek" data-has-testimonial="true">
+        <img src="" data-src="assets/logos/rupeek.png" alt="Rupeek MOGO — fintech gold loan sonic branding by BrandMusiq" loading="lazy">
+        <span class="logo-name">Rupeek</span>
+      </div>
+      <div class="logo-cell" data-brand="freshpik">
+        <img src="" data-src="assets/logos/freshpik.png" alt="Freshpik MOGO — grocery brand sonic identity by BrandMusiq" loading="lazy">
+        <span class="logo-name">Freshpik</span>
+      </div>
+    </div>
+    <div class="logo-wall-count"><strong>35</strong> brands. One methodology. Every sound unique.</div>
+  </div>
+
+  <!-- Tooltip element -->
+  <div class="logo-tooltip" id="logoTooltip">
+    <div class="logo-tooltip-quote" id="tooltipQuote"></div>
+    <div class="logo-tooltip-person">
+      <div id="tooltipPhotoWrap"></div>
+      <div>
+        <div class="logo-tooltip-name" id="tooltipName"></div>
+        <div class="logo-tooltip-title" id="tooltipTitle"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  var _bp = (window.location.pathname.indexOf('/landing-pages/') !== -1 || window.location.pathname.indexOf('/tools/') !== -1 || window.location.pathname.indexOf('/sonic-branding/') !== -1 || window.location.pathname.indexOf('/alternatives/') !== -1) ? '../' : '';
+
+  /* Resolve image src paths */
+  var imgs = document.querySelectorAll('#logoGrid img[data-src]');
+  for (var i = 0; i < imgs.length; i++) {
+    imgs[i].src = _bp + imgs[i].getAttribute('data-src');
+  }
+
+  /* Testimonial data */
+  var _testimonials = {
+    'mastercard': { quote: "Audio strategy is no longer a nice to have but a must have for brands.", name: "Raja Rajamannar", title: "CMO, Mastercard", photo: "raja-rajamannar.png" },
+    'zomato': { quote: "BrandMusiq created a unique sound encapsulating our brand identity and user interaction.", name: "Gaurav Verma", title: "CMO Branding, Zomato", photo: "gaurav-verma.png" },
+    'hdfc-bank': { quote: "The intention is to create an emotional engagement among various stakeholders.", name: "Kartik Jain", title: "EVP & Head of Marketing, HDFC Bank", photo: "kartik-jain.png" },
+    'vistara': { quote: "We were impressed with BrandMusiq's holistic approach to sonic branding.", name: "Phee Teik Yeoh", title: "CEO, Vistara", photo: "phee-teik-yeoh.png" },
+    'mg-motors': { quote: "The MG brand anthem is the perfect embodiment of MG's ultramodern sensibilities.", name: "Pallavi Singh", title: "Head of Marketing, MG India", photo: "pallavi-singh.png" },
+    'rupeek': { quote: "If somebody closes their eyes, they should recognize that it is from Rupeek.", name: "Shalabh Atray", title: "Sr. VP, Rupeek", photo: "" }
+  };
+
+  var tooltip = document.getElementById('logoTooltip');
+  var cells = document.querySelectorAll('.logo-cell[data-has-testimonial="true"]');
+
+  for (var j = 0; j < cells.length; j++) {
+    cells[j].addEventListener('mouseenter', function(e) {
+      var brand = this.getAttribute('data-brand');
+      var t = _testimonials[brand];
+      if (!t) return;
+
+      document.getElementById('tooltipQuote').textContent = '"' + t.quote + '"';
+      document.getElementById('tooltipName').textContent = t.name;
+      document.getElementById('tooltipTitle').textContent = t.title;
+
+      var photoWrap = document.getElementById('tooltipPhotoWrap');
+      if (t.photo) {
+        photoWrap.innerHTML = '<img class="logo-tooltip-photo" src="' + _bp + 'assets/headshots/' + t.photo + '" alt="' + t.name + '">';
+      } else {
+        var initials = t.name.split(' ').map(function(n) { return n[0]; }).join('');
+        photoWrap.innerHTML = '<div class="logo-tooltip-initials">' + initials + '</div>';
+      }
+
+      /* Position tooltip */
+      var rect = this.getBoundingClientRect();
+      var section = document.getElementById('logo-wall');
+      var sRect = section.getBoundingClientRect();
+
+      /* Try positioning to the left of the cell; if too close to left edge, position below */
+      var tooltipW = 300;
+      if (rect.left - sRect.left > tooltipW + 20) {
+        tooltip.style.top = (rect.top - sRect.top) + 'px';
+        tooltip.style.left = (rect.left - sRect.left - tooltipW - 12) + 'px';
+      } else {
+        tooltip.style.top = (rect.bottom - sRect.top + 8) + 'px';
+        tooltip.style.left = (rect.left - sRect.left) + 'px';
+      }
+
+      tooltip.classList.add('active');
+    });
+
+    cells[j].addEventListener('mouseleave', function() {
+      tooltip.classList.remove('active');
+    });
+  }
+})();
+</script>

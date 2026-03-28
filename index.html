@@ -93,9 +93,19 @@
 
 <!-- Styles -->
 <link rel="stylesheet" href="assets/css/global.css">
+<link rel="stylesheet" href="assets/css/lead-form.css">
+
+<!-- [2026-03-28] Preload components for fast rendering -->
+<link rel="preload" href="components/quiz.html" as="fetch" crossorigin>
+<link rel="preload" href="components/logo-wall.html" as="fetch" crossorigin>
+<link rel="preload" href="components/testimonials.html" as="fetch" crossorigin>
 
 <!-- [2026-03-28] GTM + Google Ads tracking -->
 <script src="assets/js/tracking.js"></script>
+<!-- Component loader + lead form -->
+<script src="assets/js/components.js"></script>
+<script src="assets/js/lead-form.js" defer></script>
+<script src="assets/js/leads.js" defer></script>
 </head>
 <body>
 <!-- GTM noscript fallback -->
@@ -142,53 +152,12 @@
       heard <strong>500M+ times per year</strong> across 57 million outlets.
     </p>
 
-    <!-- Hero lead form -->
+    <!-- [2026-03-28] Lead form — uses shared lead-form.js component -->
+    <div class="mogo-help-inline" id="helpSection"></div>
     <div class="form-container" id="signup">
-      <div class="form-step active" id="heroStep1">
-        <div class="form-step-indicator"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
-        <div class="form-row">
-          <input type="email" id="heroEmail" placeholder="Enter your work email" aria-label="Work email address">
-          <button class="btn-primary" onclick="heroNextStep(1)">Get Early Access</button>
-        </div>
-        <p class="cta-note">Free to start. No credit card required.</p>
-      </div>
-      <div class="form-step" id="heroStep2">
-        <div class="form-step-indicator"><div class="dot done"></div><div class="dot active"></div><div class="dot"></div></div>
-        <div class="form-row">
-          <select id="heroCountry" aria-label="Country code">
-            <option value="+91">+91 India</option>
-            <option value="+1">+1 USA</option>
-            <option value="+44">+44 UK</option>
-            <option value="+971">+971 UAE</option>
-            <option value="+65">+65 Singapore</option>
-          </select>
-          <input type="tel" id="heroPhone" placeholder="Phone number" aria-label="Phone number">
-          <button class="btn-primary" onclick="heroNextStep(2)">Next</button>
-        </div>
-      </div>
-      <div class="form-step" id="heroStep3">
-        <div class="form-step-indicator"><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div></div>
-        <p style="font-size:14px;font-weight:600;margin-bottom:12px;">Pick a time for your demo:</p>
-        <div class="day-tabs">
-          <div class="day-tab selected" onclick="selectDay(this)">Today</div>
-          <div class="day-tab" onclick="selectDay(this)">Tomorrow</div>
-        </div>
-        <div class="time-grid">
-          <div class="time-slot" onclick="selectTime(this)">10:00 AM<div class="slot-label">Morning</div></div>
-          <div class="time-slot" onclick="selectTime(this)">1:00 PM<div class="slot-label">Afternoon</div></div>
-          <div class="time-slot" onclick="selectTime(this)">4:00 PM<div class="slot-label">Late Afternoon</div></div>
-          <div class="time-slot" onclick="selectTime(this)">7:00 PM<div class="slot-label">Evening</div></div>
-        </div>
-        <button class="btn-primary" style="width:100%;" onclick="heroNextStep(3)">Book My Demo</button>
-      </div>
-      <div class="form-step" id="heroStep4">
-        <div class="success-msg">
-          <div class="check-icon">&#10003;</div>
-          <h3>You're in!</h3>
-          <p>We'll reach out to confirm your demo. Meanwhile, scroll down to hear what sonic branding sounds like.</p>
-        </div>
-      </div>
+      <div id="heroLeadForm"></div>
     </div>
+    <script>document.addEventListener('DOMContentLoaded', function(){ if(typeof mogoRenderHelpSection==='function') mogoRenderHelpSection('helpSection'); if(typeof mogoRenderLeadForm==='function') mogoRenderLeadForm('heroLeadForm', 'hero'); });</script>
   </div>
 
   <!-- Hero right: BrandMusiq credential highlight -->
@@ -220,132 +189,33 @@
 </section>
 
 <!-- ============================================================
-     LOGO WALL — F1 press conference style
-     [2026-03-28] 35 brand logos from BrandMusiq portfolio
-     Desktop: 7-col matrix | Tablet: 5-col | Mobile: 3-col
+     1. QUIZ — top engagement hook, loaded as component
      ============================================================ -->
-<div id="logos" class="logo-wall">
-  <div class="logo-wall-inner">
-    <div class="label">Every brand here has a MOGO — created by BrandMusiq</div>
-    <!-- [2026-03-28] Sorted by parent company valuation / global recognition -->
-    <div class="logo-grid">
-      <!-- Row 1: Global megabrands ($100B+ parent) -->
-      <div class="logo-cell"><img src="assets/logos/mastercard.svg" alt="Mastercard MOGO — sonic identity by BrandMusiq, heard 500M+ times per year" loading="lazy"><span class="logo-name">Mastercard</span></div>
-      <div class="logo-cell"><img src="assets/logos/amazonpay.svg" alt="Amazon Pay MOGO — payment sound and audio branding by BrandMusiq" loading="lazy"><span class="logo-name">Amazon Pay</span></div>
-      <div class="logo-cell"><img src="assets/logos/toyota.svg" alt="Toyota MOGO — automotive sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Toyota</span></div>
-      <div class="logo-cell"><img src="assets/logos/nestle.png" alt="Nestle MOGO — Nestle brand sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Nestle</span></div>
-      <div class="logo-cell"><img src="assets/logos/7up.png" alt="7UP MOGO — global sonic branding by BrandMusiq for PepsiCo" loading="lazy"><span class="logo-name">7UP / PepsiCo</span></div>
-      <div class="logo-cell"><img src="assets/logos/kraft.png" alt="Kraft MOGO — food brand sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Kraft</span></div>
-      <div class="logo-cell"><img src="assets/logos/red-label.jpg" alt="Brooke Bond Red Label MOGO — Unilever tea brand sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Red Label / HUL</span></div>
-      <!-- Row 2: Major Indian conglomerates + global ($20B+) -->
-      <div class="logo-cell"><img src="assets/logos/reliance-smart.png" alt="Reliance Smart MOGO — retail sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Reliance Smart</span></div>
-      <div class="logo-cell"><img src="assets/logos/jio-bp.png" alt="Jio-BP MOGO — Reliance and BP energy brand sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Jio-BP</span></div>
-      <div class="logo-cell"><img src="assets/logos/tata.svg" alt="Tata MOGO — Tata Group sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Tata</span></div>
-      <div class="logo-cell"><img src="assets/logos/hdfc.svg" alt="HDFC Bank MOGO — audio branding and ATM sounds by BrandMusiq" loading="lazy"><span class="logo-name">HDFC Bank</span></div>
-      <div class="logo-cell"><img src="assets/logos/infosys.svg" alt="Infosys MOGO — corporate sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Infosys</span></div>
-      <div class="logo-cell"><img src="assets/logos/sbi-life.png" alt="SBI Life MOGO — State Bank of India insurance sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">SBI Life</span></div>
-      <div class="logo-cell"><img src="assets/logos/bru.png" alt="Bru MOGO — Unilever coffee brand sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Bru / HUL</span></div>
-      <!-- Row 3: Strong consumer brands ($5B+) -->
-      <div class="logo-cell"><img src="assets/logos/asianpaints.svg" alt="Asian Paints MOGO — home decor brand sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">Asian Paints</span></div>
-      <div class="logo-cell"><img src="assets/logos/zomato.svg" alt="Zomato MOGO — delivery notification sound and sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Zomato</span></div>
-      <div class="logo-cell"><img src="assets/logos/vivo.png" alt="Vivo MOGO — smartphone brand sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Vivo</span></div>
-      <div class="logo-cell"><img src="assets/logos/mg-motors.jpg" alt="MG Motors MOGO — SAIC automotive sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">MG Motors</span></div>
-      <div class="logo-cell"><img src="assets/logos/hdfc-life.png" alt="HDFC Life MOGO — insurance sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">HDFC Life</span></div>
-      <div class="logo-cell"><img src="assets/logos/adityabirla.png" alt="Aditya Birla Capital MOGO — financial services sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">Aditya Birla Capital</span></div>
-      <div class="logo-cell"><img src="assets/logos/saffola.png" alt="Saffola MOGO — Marico health brand sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">Saffola</span></div>
-      <!-- Row 4: Known Indian brands -->
-      <div class="logo-cell"><img src="assets/logos/tata-salt.png" alt="Tata Salt MOGO — Tata Consumer Products sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">Tata Salt</span></div>
-      <div class="logo-cell"><img src="assets/logos/air-india-express.png" alt="Air India Express MOGO — Tata Group airline sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Air India Express</span></div>
-      <div class="logo-cell"><img src="assets/logos/vistara.svg" alt="Vistara MOGO — in-flight sonic identity and boarding music by BrandMusiq" loading="lazy"><span class="logo-name">Vistara</span></div>
-      <div class="logo-cell"><img src="assets/logos/fortune.jpg" alt="Fortune MOGO — Adani Wilmar FMCG sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">Fortune</span></div>
-      <div class="logo-cell"><img src="assets/logos/raymond.svg" alt="Raymond MOGO — classical heritage sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Raymond</span></div>
-      <div class="logo-cell"><img src="assets/logos/truecaller-bmq.png" alt="Truecaller MOGO — app notification sound identity by BrandMusiq" loading="lazy"><span class="logo-name">Truecaller</span></div>
-      <div class="logo-cell"><img src="assets/logos/bharat-connect.png" alt="Bharat Connect MOGO — NPCI digital payments sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">Bharat Connect</span></div>
-      <!-- Row 5: Sector-specific + emerging -->
-      <div class="logo-cell"><img src="assets/logos/rcb.png" alt="Royal Challengers Bangalore MOGO — IPL team sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">RCB</span></div>
-      <div class="logo-cell"><img src="assets/logos/nippon-india.png" alt="Nippon India Mutual Fund MOGO — sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">Nippon India MF</span></div>
-      <div class="logo-cell"><img src="assets/logos/federal-bank.png" alt="Federal Bank MOGO — banking sonic identity by BrandMusiq" loading="lazy"><span class="logo-name">Federal Bank</span></div>
-      <div class="logo-cell"><img src="assets/logos/bkt-tyres.png" alt="BKT Tyres MOGO — sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">BKT Tyres</span></div>
-      <div class="logo-cell"><img src="assets/logos/kempegowda-airport.png" alt="Bengaluru Airport MOGO — sonic identity for Kempegowda International Airport by BrandMusiq" loading="lazy"><span class="logo-name">Bengaluru Airport</span></div>
-      <div class="logo-cell"><img src="assets/logos/rupeek.png" alt="Rupeek MOGO — fintech sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">Rupeek</span></div>
-      <div class="logo-cell"><img src="assets/logos/freshpik.png" alt="Freshpik MOGO — retail sonic branding by BrandMusiq" loading="lazy"><span class="logo-name">Freshpik</span></div>
-    </div>
-    <div class="logo-wall-count">35 brands. One methodology. <strong>Every sound unique.</strong></div>
-  </div>
+<div id="quizComponent"></div>
+
+<!-- ============================================================
+     2. LOGO WALL — 35 brands, loaded as component
+     ============================================================ -->
+<div id="logoWallComponent"></div>
+
+<!-- ============================================================
+     3. TESTIMONIALS — horizontal scroll, loaded as component
+     ============================================================ -->
+<div id="testimonialsComponent"></div>
+
+<!-- ============================================================
+     4. BRANDMUSIQ STRIP — thin credential bar (static)
+     ============================================================ -->
+<div class="stats-bar" style="grid-template-columns:repeat(5,1fr);">
+  <div class="stat-item"><div class="number purple">40+</div><div class="label">Brand sonic identities</div></div>
+  <div class="stat-item"><div class="number purple">14</div><div class="label">Years of BrandMusiq</div></div>
+  <div class="stat-item"><div class="number purple">57M</div><div class="label">Outlets (Mastercard)</div></div>
+  <div class="stat-item"><div class="number purple">89%</div><div class="label">Brand recall with sonic ID</div></div>
+  <div class="stat-item"><div class="number purple">5x</div><div class="label">Best Audio Brand winner</div></div>
 </div>
 
 <!-- ============================================================
-     SOUND QUIZ — Moved to top, right after hero + logos
-     [2026-03-28] Interactive 3-round brand sound recognition quiz
-     ============================================================ -->
-<section id="quiz" class="section" style="background:#f5f3ff;max-width:none;text-align:center;">
-  <div style="max-width:700px;margin:0 auto;">
-    <div class="section-label">Interactive Quiz</div>
-    <h2>Can You Recognize These Brands <em>By Sound Alone?</em></h2>
-    <p class="desc" style="max-width:560px;margin:0 auto 40px;">
-      The world's most iconic brands are recognized in under 0.146 seconds — by sound. Test yourself.
-    </p>
-
-    <!-- Quiz container -->
-    <div id="quizContainer">
-      <!-- Round display -->
-      <div id="quizRound" style="margin-bottom:24px;">
-        <span style="font-size:13px;font-weight:700;color:#6d28d9;text-transform:uppercase;letter-spacing:2px;">Round <span id="roundNum">1</span> of 3</span>
-        <div style="display:flex;gap:6px;justify-content:center;margin-top:8px;">
-          <div class="quiz-dot" id="qd1" style="width:10px;height:10px;border-radius:50%;background:#6d28d9;"></div>
-          <div class="quiz-dot" id="qd2" style="width:10px;height:10px;border-radius:50%;background:#ddd;"></div>
-          <div class="quiz-dot" id="qd3" style="width:10px;height:10px;border-radius:50%;background:#ddd;"></div>
-        </div>
-      </div>
-
-      <!-- Play button -->
-      <div id="quizPlayArea" style="margin-bottom:32px;">
-        <button id="quizPlayBtn" onclick="playQuizAudio()" style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#6d28d9,#a78bfa);border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all 0.3s;box-shadow:0 8px 30px rgba(109,40,217,0.3);">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><polygon points="6,3 20,12 6,21"/></svg>
-        </button>
-        <p style="font-size:14px;color:#999;margin-top:12px;" id="quizPlayLabel">Tap to play the sound</p>
-      </div>
-
-      <!-- Answer options -->
-      <div id="quizOptions" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
-        <!-- Populated by JS -->
-      </div>
-
-      <!-- Feedback -->
-      <div id="quizFeedback" style="display:none;padding:20px;border-radius:12px;margin-bottom:20px;">
-      </div>
-
-      <!-- Next round button -->
-      <button id="quizNextBtn" onclick="nextQuizRound()" style="display:none;padding:12px 32px;background:#1a1a2e;color:white;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">
-        Next Round
-      </button>
-    </div>
-
-    <!-- Quiz result (hidden until complete) -->
-    <div id="quizResult" style="display:none;">
-      <div style="font-size:64px;margin-bottom:16px;" id="quizEmoji"></div>
-      <h3 style="font-size:28px;font-weight:900;margin-bottom:8px;" id="quizScoreText"></h3>
-      <p style="font-size:17px;color:#666;margin-bottom:32px;" id="quizScoreDesc"></p>
-      <p style="font-size:15px;color:#888;margin-bottom:32px;">Sound is more memorable than you think. That's the power of a <strong style="color:#6d28d9;">MOGO</strong>.</p>
-
-      <!-- Post-quiz email capture -->
-      <div style="max-width:400px;margin:0 auto;">
-        <p style="font-size:15px;font-weight:600;margin-bottom:12px;">Want your brand to be this recognizable?</p>
-        <div class="form-row">
-          <input type="email" id="quizEmail" placeholder="Your work email" aria-label="Work email for early access">
-          <button class="btn-purple" onclick="captureQuizEmail()">Get Early Access</button>
-        </div>
-        <div id="quizEmailSuccess" style="display:none;color:#10b981;font-size:14px;font-weight:600;margin-top:8px;">You're on the list!</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Quiz audio elements (lazy-loaded on play) -->
-<audio id="quizAudio" preload="none"></audio>
-
-<!-- ============================================================
-     THE PROBLEM — Visual fatigue + agency barrier
+     5. THE PROBLEM — Visual fatigue + agency barrier
      [2026-03-28] Data from BMQ deck + market research
      ============================================================ -->
 <section id="problem" class="section">
@@ -376,7 +246,7 @@
 </section>
 
 <!-- ============================================================
-     THE GAP — Barbell market positioning
+     6. THE GAP — Barbell market positioning
      [2026-03-28] Visual barbell: cheap generic vs expensive agency
      ============================================================ -->
 <section id="gap" style="background:var(--color-navy);color:white;padding:80px 60px;max-width:none;">
@@ -428,7 +298,7 @@
 </section>
 
 <!-- ============================================================
-     HOW IT WORKS — MUSE framework simplified
+     7. HOW IT WORKS — MUSE framework simplified
      [2026-03-28] 3-step process with HowTo schema
      ============================================================ -->
 <section id="how-it-works" class="section" style="text-align:center;">
@@ -494,7 +364,7 @@
 </script>
 
 <!-- ============================================================
-     EARPOINTS ECOSYSTEM
+     8. EARPOINTS ECOSYSTEM
      [2026-03-28] 12 audio touchpoints from BMQ deck
      ============================================================ -->
 <div id="earpoints" class="earpoints-section">
@@ -595,112 +465,7 @@
 </div>
 
 <!-- ============================================================
-     TESTIMONIALS — Horizontal auto-scroll ticker
-     [2026-03-28] Single-line cards, auto-scroll right on page scroll
-     User can also manually scroll left/right
-     ============================================================ -->
-<section id="testimonials" style="background:#1a1a2e;padding:60px 0 48px;overflow:hidden;">
-  <div style="max-width:1200px;margin:0 auto;padding:0 60px;">
-    <div style="text-align:center;margin-bottom:32px;">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#a78bfa;margin-bottom:12px;">What Leaders Say</div>
-      <h2 style="font-size:40px;font-weight:900;letter-spacing:-1.5px;color:white;margin-bottom:8px;">The C-Suite on <em style="font-style:normal;color:#a78bfa;">Sonic Branding</em></h2>
-    </div>
-  </div>
-
-  <!-- Scroll hint -->
-  <div style="text-align:center;margin-bottom:16px;">
-    <span style="font-size:12px;color:#666;letter-spacing:1px;">&#8592; scroll &#8594;</span>
-  </div>
-
-  <!-- Ticker container -->
-  <div id="testimonialTrack" style="display:flex;gap:20px;overflow-x:auto;padding:0 60px 16px;scroll-behavior:smooth;cursor:grab;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#6d28d9 #111;" class="testimonial-ticker">
-    <div class="t-card" style="min-width:420px;max-width:420px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:16px;flex-shrink:0;">
-      <div style="width:44px;height:44px;border-radius:50%;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:white;flex-shrink:0;">RR</div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:14px;color:#ccc;line-height:1.5;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">"Audio strategy is no longer a nice to have but a must have for brands."</div>
-        <div style="font-size:12px;color:#888;margin-top:4px;"><strong style="color:white;">Raja Rajamannar</strong> — CMO, Mastercard</div>
-      </div>
-    </div>
-
-    <div class="t-card" style="min-width:420px;max-width:420px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:16px;flex-shrink:0;">
-      <div style="width:44px;height:44px;border-radius:50%;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:white;flex-shrink:0;">GV</div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:14px;color:#ccc;line-height:1.5;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">"BrandMusiq created a unique sound encapsulating our brand identity. Exactly what we needed."</div>
-        <div style="font-size:12px;color:#888;margin-top:4px;"><strong style="color:white;">Gaurav Verma</strong> — CMO Branding, Zomato</div>
-      </div>
-    </div>
-
-    <div class="t-card" style="min-width:420px;max-width:420px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:16px;flex-shrink:0;">
-      <div style="width:44px;height:44px;border-radius:50%;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:white;flex-shrink:0;">PT</div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:14px;color:#ccc;line-height:1.5;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">"MOGO and MOGOSCAPE was in perfect alignment with our brand. Captures who we are."</div>
-        <div style="font-size:12px;color:#888;margin-top:4px;"><strong style="color:white;">Phee Teik Yeoh</strong> — CEO, Vistara</div>
-      </div>
-    </div>
-
-    <div class="t-card" style="min-width:420px;max-width:420px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:16px;flex-shrink:0;">
-      <div style="width:44px;height:44px;border-radius:50%;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:white;flex-shrink:0;">PS</div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:14px;color:#ccc;line-height:1.5;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">"Perfect embodiment of MG's ultramodern sensibilities mixed with our heritage."</div>
-        <div style="font-size:12px;color:#888;margin-top:4px;"><strong style="color:white;">Pallavi Singh</strong> — Head of Marketing, MG India</div>
-      </div>
-    </div>
-
-    <div class="t-card" style="min-width:420px;max-width:420px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:16px;flex-shrink:0;">
-      <div style="width:44px;height:44px;border-radius:50%;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:white;flex-shrink:0;">KJ</div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:14px;color:#ccc;line-height:1.5;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">"Sonic branding transformed how our customers perceive us. Memorable, always."</div>
-        <div style="font-size:12px;color:#888;margin-top:4px;"><strong style="color:white;">Kartik Jain</strong> — Group Head Marketing, HDFC Bank</div>
-      </div>
-    </div>
-
-    <div class="t-card" style="min-width:420px;max-width:420px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:16px;flex-shrink:0;">
-      <div style="width:44px;height:44px;border-radius:50%;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:white;flex-shrink:0;">SA</div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:14px;color:#ccc;line-height:1.5;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">"When you close your eyes, you should recognize the Rupeek sound. BrandMusiq delivered."</div>
-        <div style="font-size:12px;color:#888;margin-top:4px;"><strong style="color:white;">Shalabh Atray</strong> — Sr. VP, Rupeek</div>
-      </div>
-    </div>
-
-    <div class="t-card" style="min-width:420px;max-width:420px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px 28px;display:flex;align-items:center;gap:16px;flex-shrink:0;">
-      <div style="width:44px;height:44px;border-radius:50%;background:#6d28d9;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:white;flex-shrink:0;">DA</div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:14px;color:#ccc;line-height:1.5;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">"Capture brand vision into sound... memorable... always. Transformed customer perception."</div>
-        <div style="font-size:12px;color:#888;margin-top:4px;"><strong style="color:white;">Dhiren Amin</strong> — CMO, NTUC Income Singapore</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     STATS BAR
-     [2026-03-28] Key credibility numbers with count-up animation
-     ============================================================ -->
-<div class="stats-bar" id="statsBar">
-  <div class="stat-item">
-    <div class="number purple" data-target="40">0</div>
-    <div class="label">Brand sonic identities</div>
-  </div>
-  <div class="stat-item">
-    <div class="number purple" data-target="14">0</div>
-    <div class="label">Years of BrandMusiq</div>
-  </div>
-  <div class="stat-item">
-    <div class="number purple" data-target="57">0</div>
-    <div class="label">Million outlets (Mastercard)</div>
-  </div>
-  <div class="stat-item">
-    <div class="number purple" data-target="89">0</div>
-    <div class="label">% brand recall with sonic ID</div>
-  </div>
-  <div class="stat-item">
-    <div class="number purple" data-target="5">0</div>
-    <div class="label">x Best Audio Brand winner</div>
-  </div>
-</div>
-
-<!-- ============================================================
-     CASE STUDIES
+     9. CASE STUDIES
      [2026-03-28] Mastercard, Zomato, HDFC + more via YouTube embeds
      ============================================================ -->
 <section id="case-studies" class="section-dark">
@@ -783,7 +548,7 @@
 </div>
 
 <!-- ============================================================
-     ROI CALCULATOR
+     10. ROI CALCULATOR
      [2026-03-28] First-ever sonic branding ROI calculator
      All formulas backed by published research
      ============================================================ -->
@@ -914,10 +679,8 @@
   </div>
 </section>
 
-<!-- Logos already shown after hero. Testimonials moved above stats bar. -->
-
 <!-- ============================================================
-     PRICING PREVIEW
+     11. PRICING PREVIEW
      [2026-03-28] 4 tiers anchored against $15K-$500K agency pricing
      ============================================================ -->
 <section id="pricing" class="section" style="text-align:center;">
@@ -987,7 +750,7 @@
 </section>
 
 <!-- ============================================================
-     FAQ — AEO-optimized for LLM citation
+     12. FAQ — AEO-optimized for LLM citation
      [2026-03-28] 10 questions with FAQPage schema
      Definitive statements for featured snippets + AI citation
      ============================================================ -->
@@ -1194,346 +957,28 @@
 </script>
 
 <!-- ============================================================
-     FINAL CTA + LEAD FORM
+     13. FINAL CTA + LEAD FORM
      [2026-03-28] Bottom-of-page conversion section
      ============================================================ -->
 <div class="final-cta">
   <h2>Ready to Give Your Brand <em>a Voice?</em></h2>
   <p class="subtitle">Join the waitlist. Be first to create your MOGO when we launch.</p>
-  <div class="form-container">
-    <div class="form-step active" id="footerStep1">
-      <div class="form-row">
-        <input type="email" id="footerEmail" placeholder="Enter your work email" aria-label="Work email for early access">
-        <button class="btn-primary" onclick="footerSubmit()">Get Early Access</button>
-      </div>
-      <p class="cta-note">Free to start. No credit card required.</p>
-    </div>
-    <div class="form-step" id="footerStep2">
-      <div class="success-msg">
-        <div class="check-icon">&#10003;</div>
-        <h3>You're on the list!</h3>
-        <p>We'll notify you the moment Mogoverse launches. Meanwhile, try the Sound Quiz above.</p>
-      </div>
-    </div>
+  <div class="form-container" style="max-width:440px;margin:0 auto;">
+    <div id="footerLeadForm"></div>
   </div>
+  <script>document.addEventListener('DOMContentLoaded', function(){ if(typeof mogoRenderLeadForm==='function') mogoRenderLeadForm('footerLeadForm', 'footer'); });</script>
   <p class="guarantee">Powered by 14 years of BrandMusiq methodology. 40+ brands. 500M+ annual earpoints.</p>
 </div>
 
 <!-- ============================================================
-     FOOTER
-     [2026-03-28] Site navigation, legal, schema links
+     14. FOOTER — loaded as component
      ============================================================ -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-col">
-      <div class="logo" style="margin-bottom:12px;">mogo<span>verse</span></div>
-      <p>The world's first self-serve, AI-powered sonic branding platform. Built on BrandMusiq's 14-year methodology — creators of Mastercard's sound.</p>
-    </div>
-    <div class="footer-col">
-      <h4>Platform</h4>
-      <a href="#how-it-works">How It Works</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#calculator">ROI Calculator</a>
-      <a href="#quiz">Sound Quiz</a>
-    </div>
-    <div class="footer-col">
-      <h4>Learn</h4>
-      <a href="sonic-branding/">What is Sonic Branding?</a>
-      <a href="#faq">FAQ</a>
-      <a href="#case-studies">Case Studies</a>
-      <a href="alternatives/suno-alternative.html">Suno Alternative</a>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <a href="https://brandmusiq.com" target="_blank" rel="noopener">BrandMusiq</a>
-      <a href="https://brandmusiq.com/work" target="_blank" rel="noopener">Our Work</a>
-      <a href="https://brandmusiq.com/process" target="_blank" rel="noopener">MUSE Process</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    &copy; 2026 Mogoverse by <a href="https://brandmusiq.com" target="_blank" rel="noopener">BrandMusiq</a> — Asia's #1 Sonic Branding Agency. All rights reserved.
-  </div>
-</footer>
+<div id="footerComponent"></div>
 
 <!-- ============================================================
-     POPUPS — Timed, Exit Intent, Sticky Bar
-     [2026-03-28] Reuse patterns from landing pages
-     ============================================================ -->
-<!-- Timed popup (15s) -->
-<div class="popup-overlay" id="timedPopup">
-  <div class="popup-box">
-    <button class="popup-close" onclick="document.getElementById('timedPopup').classList.remove('active');">&times;</button>
-    <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#6d28d9;margin-bottom:12px;">Limited Early Access</div>
-    <h3 style="font-size:24px;font-weight:900;margin-bottom:8px;">Get Your Brand's MOGO Before Launch</h3>
-    <p style="font-size:15px;color:#666;margin-bottom:20px;">Join 200+ brands on the waitlist. Be first to create your sonic identity with AI.</p>
-    <div class="form-row">
-      <input type="email" id="popupEmail" placeholder="Your work email" aria-label="Email for early access popup">
-      <button class="btn-purple" onclick="capturePopupEmail('timed')">Join Waitlist</button>
-    </div>
-  </div>
-</div>
-
-<!-- Exit intent popup -->
-<div class="popup-overlay" id="exitPopup">
-  <div class="popup-box">
-    <button class="popup-close" onclick="document.getElementById('exitPopup').classList.remove('active');">&times;</button>
-    <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#6d28d9;margin-bottom:12px;">Before You Go</div>
-    <h3 style="font-size:24px;font-weight:900;margin-bottom:8px;">Get a Free Sonic Brand Audit</h3>
-    <p style="font-size:15px;color:#666;margin-bottom:20px;">We'll analyze your brand's audio presence and show you what a MOGO could do for you.</p>
-    <div class="form-row">
-      <input type="email" id="exitEmail" placeholder="Your work email" aria-label="Email for brand audit">
-      <button class="btn-purple" onclick="capturePopupEmail('exit')">Get Free Audit</button>
-    </div>
-  </div>
-</div>
-
-<!-- Sticky bottom bar -->
-<div class="sticky-bar" id="stickyBar">
-  Your brand has a logo. Now give it a MOGO. <a href="#signup">Get Early Access &rarr;</a>
-</div>
-
-<!-- ============================================================
-     SCRIPTS: Hero form logic + GTM events
+     SCRIPTS: Page-specific logic
      ============================================================ -->
 <script>
-/* [2026-03-28] Hero multi-step form logic */
-function heroNextStep(current) {
-  var steps = ['heroStep1','heroStep2','heroStep3','heroStep4'];
-
-  if (current === 1) {
-    var email = document.getElementById('heroEmail').value.trim();
-    if (!email || email.indexOf('@') === -1) {
-      document.getElementById('heroEmail').style.borderColor = '#ef4444';
-      return;
-    }
-    /* [2026-03-28] GTM: track email capture */
-    window.dataLayer = window.dataLayer || [];
-    dataLayer.push({ event: 'email_captured', email_hash: email.split('@')[1], source: 'hero_form' });
-    if (typeof mogoTrackEmailCaptured === 'function') mogoTrackEmailCaptured(email);
-  }
-
-  if (current === 2) {
-    var phone = document.getElementById('heroPhone').value.trim();
-    if (!phone || phone.length < 6) {
-      document.getElementById('heroPhone').style.borderColor = '#ef4444';
-      return;
-    }
-  }
-
-  if (current === 3) {
-    /* [2026-03-28] GTM: track demo booked */
-    window.dataLayer = window.dataLayer || [];
-    dataLayer.push({ event: 'demo_booked', source: 'hero_form' });
-    if (typeof mogoTrackDemoBooked === 'function') mogoTrackDemoBooked(document.getElementById('heroEmail').value);
-  }
-
-  /* Hide current, show next */
-  document.getElementById(steps[current - 1]).classList.remove('active');
-  document.getElementById(steps[current]).classList.add('active');
-}
-
-function selectDay(el) {
-  document.querySelectorAll('.day-tab').forEach(function(t) { t.classList.remove('selected'); });
-  el.classList.add('selected');
-}
-
-function selectTime(el) {
-  document.querySelectorAll('.time-slot').forEach(function(t) { t.classList.remove('selected'); });
-  el.classList.add('selected');
-}
-
-/* [2026-03-28] Mobile hamburger toggle handled inline via onclick */
-
-/* ============================================================
-   Sound Quiz Logic
-   [2026-03-28] 3-round brand sound recognition quiz
-   Audio lazy-loaded on first play click
-   ============================================================ */
-var quizData = [
-  {
-    audio: 'assets/audio-logos/netflix-tadum.mp3',
-    correct: 'Netflix',
-    options: ['Netflix', 'Amazon Prime', 'HBO'],
-    fact: 'Netflix\'s "Ta-Dum" is heard 200M+ times daily. It was composed by Lon Bender and is just 3 seconds long — yet instantly recognizable worldwide.'
-  },
-  {
-    audio: 'assets/audio-logos/airtel-signature-tune.mp3',
-    correct: 'Airtel',
-    options: ['Jio', 'Airtel', 'Vodafone'],
-    fact: 'Airtel\'s signature tune by A.R. Rahman is one of the most downloaded mobile tunes in history — over 300 million downloads. A masterclass in sonic branding.'
-  },
-  {
-    audio: 'assets/audio-logos/indian-railways-jingle.mp3',
-    correct: 'Indian Railways',
-    options: ['Delhi Metro', 'Indian Railways', 'Air India'],
-    fact: 'Indian Railways\' jingle plays across 8,000+ stations daily, reaching 23 million passengers. It\'s one of the most heard sonic identities in the world.'
-  }
-];
-
-var quizState = { round: 0, score: 0, answered: false };
-
-function initQuiz() {
-  quizState = { round: 0, score: 0, answered: false };
-  renderQuizRound();
-
-  /* [2026-03-28] GTM: quiz started */
-  window.dataLayer = window.dataLayer || [];
-  dataLayer.push({ event: 'quiz_started' });
-}
-
-function renderQuizRound() {
-  var r = quizData[quizState.round];
-  quizState.answered = false;
-
-  document.getElementById('roundNum').textContent = quizState.round + 1;
-  document.getElementById('quizPlayLabel').textContent = 'Tap to play the sound';
-  document.getElementById('quizFeedback').style.display = 'none';
-  document.getElementById('quizNextBtn').style.display = 'none';
-
-  /* Update progress dots */
-  for (var i = 1; i <= 3; i++) {
-    var dot = document.getElementById('qd' + i);
-    if (i < quizState.round + 1) { dot.style.background = '#10b981'; }
-    else if (i === quizState.round + 1) { dot.style.background = '#6d28d9'; }
-    else { dot.style.background = '#ddd'; }
-  }
-
-  /* Render options */
-  var optHtml = '';
-  /* [2026-03-28] Shuffle options for fairness */
-  var shuffled = r.options.slice().sort(function() { return 0.5 - Math.random(); });
-  for (var j = 0; j < shuffled.length; j++) {
-    optHtml += '<button class="quiz-option" onclick="answerQuiz(\'' + shuffled[j] + '\')" style="padding:20px;border:2px solid #e5e5e5;border-radius:12px;background:white;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:Inter,sans-serif;">' + shuffled[j] + '</button>';
-  }
-  document.getElementById('quizOptions').innerHTML = optHtml;
-
-  /* Reset play button */
-  document.getElementById('quizPlayBtn').style.background = 'linear-gradient(135deg,#6d28d9,#a78bfa)';
-
-  /* Reset audio */
-  var audio = document.getElementById('quizAudio');
-  audio.pause();
-  audio.currentTime = 0;
-}
-
-function playQuizAudio() {
-  var audio = document.getElementById('quizAudio');
-  var r = quizData[quizState.round];
-
-  /* [2026-03-28] Lazy-load: set src only on first play */
-  if (audio.src !== window.location.origin + '/' + r.audio && !audio.src.endsWith(r.audio)) {
-    audio.src = r.audio;
-  }
-
-  audio.play().then(function() {
-    document.getElementById('quizPlayLabel').textContent = 'Playing... now guess the brand!';
-    document.getElementById('quizPlayBtn').style.background = 'linear-gradient(135deg,#10b981,#34d399)';
-  }).catch(function() {
-    document.getElementById('quizPlayLabel').textContent = 'Tap again to play';
-  });
-}
-
-function answerQuiz(answer) {
-  if (quizState.answered) return;
-  quizState.answered = true;
-
-  var r = quizData[quizState.round];
-  var correct = answer === r.correct;
-  if (correct) quizState.score++;
-
-  /* [2026-03-28] GTM: track answer */
-  window.dataLayer = window.dataLayer || [];
-  dataLayer.push({ event: 'quiz_answer', round: quizState.round + 1, correct: correct, brand: r.correct });
-
-  /* Highlight options */
-  var btns = document.querySelectorAll('.quiz-option');
-  for (var i = 0; i < btns.length; i++) {
-    var btn = btns[i];
-    if (btn.textContent === r.correct) {
-      btn.style.borderColor = '#10b981';
-      btn.style.background = '#f0fdf4';
-      btn.style.color = '#10b981';
-    } else if (btn.textContent === answer && !correct) {
-      btn.style.borderColor = '#ef4444';
-      btn.style.background = '#fef2f2';
-      btn.style.color = '#ef4444';
-    }
-    btn.style.pointerEvents = 'none';
-  }
-
-  /* Show feedback */
-  var fb = document.getElementById('quizFeedback');
-  fb.style.display = 'block';
-  if (correct) {
-    fb.style.background = '#f0fdf4';
-    fb.style.border = '1px solid #86efac';
-    fb.innerHTML = '<p style="font-size:16px;font-weight:700;color:#10b981;margin-bottom:8px;">Correct!</p><p style="font-size:14px;color:#666;line-height:1.6;">' + r.fact + '</p>';
-  } else {
-    fb.style.background = '#fef2f2';
-    fb.style.border = '1px solid #fecaca';
-    fb.innerHTML = '<p style="font-size:16px;font-weight:700;color:#ef4444;margin-bottom:8px;">That was ' + r.correct + '!</p><p style="font-size:14px;color:#666;line-height:1.6;">' + r.fact + '</p>';
-  }
-
-  /* Show next or finish */
-  var nextBtn = document.getElementById('quizNextBtn');
-  if (quizState.round < 2) {
-    nextBtn.style.display = 'inline-block';
-    nextBtn.textContent = 'Next Round';
-  } else {
-    nextBtn.style.display = 'inline-block';
-    nextBtn.textContent = 'See My Score';
-  }
-}
-
-function nextQuizRound() {
-  if (quizState.round < 2) {
-    quizState.round++;
-    renderQuizRound();
-  } else {
-    showQuizResult();
-  }
-}
-
-function showQuizResult() {
-  document.getElementById('quizContainer').style.display = 'none';
-  var result = document.getElementById('quizResult');
-  result.style.display = 'block';
-
-  var s = quizState.score;
-  var emoji = s === 3 ? '&#127942;' : s === 2 ? '&#128170;' : s === 1 ? '&#129300;' : '&#128560;';
-  var text = 'You got ' + s + '/3';
-  var desc = s === 3 ? 'Perfect score! You clearly understand the power of sonic branding.' :
-             s === 2 ? 'Strong ears! Most people struggle with this.' :
-             s === 1 ? 'Tricky, right? Now imagine your customers recognizing YOUR brand by sound.' :
-             'Don\'t worry — 89% of people can\'t identify brands by sound. That\'s exactly the opportunity.';
-
-  document.getElementById('quizEmoji').innerHTML = emoji;
-  document.getElementById('quizScoreText').textContent = text;
-  document.getElementById('quizScoreDesc').textContent = desc;
-
-  /* [2026-03-28] GTM: quiz completed */
-  window.dataLayer = window.dataLayer || [];
-  dataLayer.push({ event: 'quiz_completed', score: s, total: 3 });
-}
-
-function captureQuizEmail() {
-  var email = document.getElementById('quizEmail').value.trim();
-  if (!email || email.indexOf('@') === -1) {
-    document.getElementById('quizEmail').style.borderColor = '#ef4444';
-    return;
-  }
-  document.getElementById('quizEmailSuccess').style.display = 'block';
-  document.getElementById('quizEmail').disabled = true;
-
-  /* [2026-03-28] GTM: quiz email captured */
-  window.dataLayer = window.dataLayer || [];
-  dataLayer.push({ event: 'quiz_email_captured', source: 'quiz_result' });
-  if (typeof mogoTrackEmailCaptured === 'function') mogoTrackEmailCaptured(email);
-}
-
-/* Initialize quiz on page load */
-document.addEventListener('DOMContentLoaded', initQuiz);
-
 /* ============================================================
    Video Modal
    [2026-03-28] YouTube embed on click, thumbnail-first for performance
@@ -1562,39 +1007,6 @@ document.addEventListener('click', function(e) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeVideoModal();
 });
-
-/* ============================================================
-   Stats Count-Up Animation
-   [2026-03-28] Triggers when stats bar scrolls into view
-   ============================================================ */
-var statsAnimated = false;
-function animateStats() {
-  if (statsAnimated) return;
-  var bar = document.getElementById('statsBar');
-  if (!bar) return;
-  var rect = bar.getBoundingClientRect();
-  if (rect.top < window.innerHeight && rect.bottom > 0) {
-    statsAnimated = true;
-    var nums = bar.querySelectorAll('[data-target]');
-    nums.forEach(function(el) {
-      var target = parseInt(el.getAttribute('data-target'));
-      var duration = 1500;
-      var start = 0;
-      var startTime = null;
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        var progress = Math.min((timestamp - startTime) / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.floor(eased * target) + (target >= 40 ? '+' : '');
-        if (progress < 1) requestAnimationFrame(step);
-        else el.textContent = target + (target >= 40 ? '+' : target === 89 ? '%' : target === 5 ? 'x' : target === 57 ? 'M' : '');
-      }
-      requestAnimationFrame(step);
-    });
-  }
-}
-window.addEventListener('scroll', animateStats);
-document.addEventListener('DOMContentLoaded', animateStats);
 
 /* ============================================================
    ROI Calculator Logic
@@ -1714,120 +1126,13 @@ function toggleFaq(btn) {
   }
 }
 
-/* ============================================================
-   Footer Form
-   [2026-03-28] Simple email capture
-   ============================================================ */
-function footerSubmit() {
-  var email = document.getElementById('footerEmail').value.trim();
-  if (!email || email.indexOf('@') === -1) {
-    document.getElementById('footerEmail').style.borderColor = '#ef4444';
-    return;
-  }
-  document.getElementById('footerStep1').classList.remove('active');
-  document.getElementById('footerStep2').classList.add('active');
-
-  window.dataLayer = window.dataLayer || [];
-  dataLayer.push({ event: 'email_captured', source: 'footer_form' });
-  if (typeof mogoTrackEmailCaptured === 'function') mogoTrackEmailCaptured(email);
-}
-
-/* ============================================================
-   Popup System
-   [2026-03-28] Timed (15s), Exit Intent, Sticky Bar (30% scroll)
-   ============================================================ */
-var popupShown = { timed: false, exit: false, sticky: false };
-
-/* Timed popup: 15 seconds */
-setTimeout(function() {
-  if (!popupShown.timed) {
-    popupShown.timed = true;
-    document.getElementById('timedPopup').classList.add('active');
-  }
-}, 15000);
-
-/* Exit intent popup */
-document.addEventListener('mouseout', function(e) {
-  if (e.clientY < 5 && !popupShown.exit) {
-    popupShown.exit = true;
-    document.getElementById('exitPopup').classList.add('active');
-  }
+/* [2026-03-28] Load shared components */
+document.addEventListener('DOMContentLoaded', function() {
+  mogoLoadComponent('quizComponent', 'components/quiz.html');
+  mogoLoadComponent('logoWallComponent', 'components/logo-wall.html');
+  mogoLoadComponent('testimonialsComponent', 'components/testimonials.html');
+  mogoLoadComponent('footerComponent', 'components/footer.html');
 });
-
-/* Sticky bar: shows after 30% scroll */
-window.addEventListener('scroll', function() {
-  if (popupShown.sticky) return;
-  var scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-  if (scrollPct > 0.3) {
-    popupShown.sticky = true;
-    document.getElementById('stickyBar').classList.add('active');
-  }
-});
-
-/* ============================================================
-   Testimonial Auto-Scroll on Page Scroll
-   [2026-03-28] Scrolls testimonial track right as user scrolls page
-   User can also manually drag/scroll horizontally
-   ============================================================ */
-(function() {
-  var track = document.getElementById('testimonialTrack');
-  if (!track) return;
-  var lastScrollY = window.scrollY;
-  var userDragging = false;
-
-  /* Auto-scroll right when page scrolls down, left when scrolling up */
-  window.addEventListener('scroll', function() {
-    if (userDragging) return;
-    var delta = window.scrollY - lastScrollY;
-    lastScrollY = window.scrollY;
-    track.scrollLeft += delta * 0.8;
-  });
-
-  /* Drag-to-scroll support */
-  var startX, scrollStart;
-  track.addEventListener('mousedown', function(e) {
-    userDragging = true;
-    startX = e.pageX;
-    scrollStart = track.scrollLeft;
-    track.style.cursor = 'grabbing';
-  });
-  document.addEventListener('mousemove', function(e) {
-    if (!userDragging) return;
-    e.preventDefault();
-    track.scrollLeft = scrollStart - (e.pageX - startX);
-  });
-  document.addEventListener('mouseup', function() {
-    if (userDragging) {
-      userDragging = false;
-      track.style.cursor = 'grab';
-    }
-  });
-
-  /* Release drag lock after touch scroll on mobile */
-  track.addEventListener('touchstart', function() { userDragging = true; });
-  track.addEventListener('touchend', function() {
-    setTimeout(function() { userDragging = false; }, 500);
-  });
-})();
-
-function capturePopupEmail(type) {
-  var inputId = type === 'timed' ? 'popupEmail' : 'exitEmail';
-  var popupId = type === 'timed' ? 'timedPopup' : 'exitPopup';
-  var email = document.getElementById(inputId).value.trim();
-  if (!email || email.indexOf('@') === -1) {
-    document.getElementById(inputId).style.borderColor = '#ef4444';
-    return;
-  }
-
-  document.getElementById(popupId).classList.remove('active');
-
-  window.dataLayer = window.dataLayer || [];
-  var eventName = type === 'timed' ? 'email_captured' : 'audit_requested';
-  dataLayer.push({ event: eventName, source: type + '_popup' });
-
-  if (type === 'exit' && typeof mogoTrackAuditRequested === 'function') mogoTrackAuditRequested(email);
-  else if (typeof mogoTrackEmailCaptured === 'function') mogoTrackEmailCaptured(email);
-}
 </script>
 
 </body>

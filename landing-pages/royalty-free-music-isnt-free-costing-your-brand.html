@@ -18,12 +18,13 @@
   .nav-cta{background:#1a1a2e;color:white;padding:10px 24px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;transition:all 0.2s;}
   .nav-cta:hover{background:#6d28d9;}
 
-  .hero{padding:140px 60px 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .hero{padding:140px 60px 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
   .hero-text .eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#6d28d9;margin-bottom:16px;}
   .hero-text h1{font-size:52px;font-weight:900;line-height:1.08;letter-spacing:-2px;margin-bottom:20px;color:#1a1a2e;}
   .hero-text h1 em{font-style:normal;color:#6d28d9;}
   .hero-text .subtitle{font-size:18px;color:#666;line-height:1.7;margin-bottom:32px;max-width:480px;}
   .hero-text .subtitle strong{color:#1a1a2e;}
+  .hero-right{padding-top:20px;}
 
   /* Form container */
   .form-container{max-width:440px;}
@@ -154,8 +155,12 @@
 <!-- Mogoverse Tracking: GTM + Google Ads + UTM -->
 <link rel="stylesheet" href="../assets/css/lead-form.css">
 <script src="../assets/js/tracking.js"></script>
+<script src="../assets/js/components.js"></script>
 <script src="../assets/js/leads.js"></script>
 <script src="../assets/js/lead-form.js" defer></script>
+<link rel="preload" href="../components/quiz.html" as="fetch" crossorigin>
+<link rel="preload" href="../components/logo-wall.html" as="fetch" crossorigin>
+<link rel="preload" href="../components/testimonials.html" as="fetch" crossorigin>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFX2NPMP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -175,19 +180,29 @@
     <h1>Royalty free music isn't free.<br><em>It's costing your brand.</em></h1>
     <p class="subtitle">You pay $9–$49/mo in subscriptions. You pay in hours spent browsing. You pay in copyright claims that demonetize your videos. And the biggest cost? <strong>Your brand sounds exactly like your competitor's.</strong></p>
 
+  </div>
+  <div class="hero-right">
+    <!-- How can we help? (above form, sets context) -->
+    <div class="mogo-help-inline" id="helpSection"></div>
     <!-- Lead capture form -->
     <div class="form-container" id="signup">
       <div id="heroLeadForm"></div>
     </div>
-    <script>document.addEventListener('DOMContentLoaded', function(){ mogoRenderLeadForm('heroLeadForm', 'hero'); });</script>
-  </div>
-  <div class="hero-media">
-    <div onclick="openVideo('bSlN694crNY')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard MOGO by BrandMusiq" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div>
+    <script>document.addEventListener('DOMContentLoaded', function(){ mogoRenderHelpSection('helpSection'); mogoRenderLeadForm('heroLeadForm', 'hero'); });</script>
   </div>
 </section>
 
-<!-- Client logos -->
-<section class="client-bar">
+<!-- Quiz Component -->
+<div id="quizComponent"></div>
+
+<!-- Logo Wall Component -->
+<div id="logoWallComponent"></div>
+
+<!-- Testimonials Component -->
+<div id="testimonialsComponent"></div>
+
+<!-- Client logos (legacy — hidden, replaced by logo wall component) -->
+<section class="client-bar" style="display:none;">
   <div class="label">These brands stopped paying the hidden cost</div>
   <div class="client-logos">
     <img src="../assets/logos/mastercard.png" alt="Mastercard" title="Mastercard">
@@ -367,22 +382,6 @@
   </div>
 </section>
 
-<!-- Testimonials -->
-<section class="section-dark">
-  <div style="max-width:1100px;margin:0 auto;text-align:center;">
-    <div class="section-label">What Leaders Say</div>
-    <h2 style="margin:0 auto 48px;">They stopped paying the hidden cost. You should too.</h2>
-    <div class="testimonials-grid">
-      <div class="testimonial-card"><div class="quote">"Audio strategy is no longer a nice to have but a must have for brands looking to connect with consumers."</div><div class="author"><div class="avatar">RR</div><div><div class="name">Raja Rajamannar</div><div class="title">CMO & President, Mastercard</div></div></div></div>
-      <div class="testimonial-card"><div class="quote">"BrandMusiq created a unique sound encapsulating our brand identity and user interaction. Exactly what we needed."</div><div class="author"><div class="avatar">GV</div><div><div class="name">Gaurav Verma</div><div class="title">CMO — Branding, Zomato</div></div></div></div>
-      <div class="testimonial-card"><div class="quote">"MOGO® and MOGOSCAPE® was in perfect alignment with our brand. The sonic identity captures who we are."</div><div class="author"><div class="avatar">PT</div><div><div class="name">Phee Teik Yeoh</div><div class="title">CEO, Vistara</div></div></div></div>
-      <div class="testimonial-card"><div class="quote">"Perfect embodiment of MG's ultramodern sensibilities mixed with our heritage. Sound that tells our story."</div><div class="author"><div class="avatar">PS</div><div><div class="name">Pallavi Singh</div><div class="title">Head of Marketing, MG India</div></div></div></div>
-      <div class="testimonial-card"><div class="quote">"When you close your eyes, you should recognize the Rupeek sound. That's exactly what BrandMusiq delivered."</div><div class="author"><div class="avatar">SA</div><div><div class="name">Shalabh Atray</div><div class="title">Sr. VP, Rupeek</div></div></div></div>
-      <div class="testimonial-card"><div class="quote">"Capture brand vision into sound... memorable... always. Sonic branding transformed how our customers perceive us."</div><div class="author"><div class="avatar">DA</div><div><div class="name">Dhiren Amin</div><div class="title">CMO, NTUC Income, Singapore</div></div></div></div>
-    </div>
-  </div>
-</section>
-
 <!-- Comparison -->
 <section class="section" style="text-align:center;">
   <div class="section-label">The Real Math</div>
@@ -405,9 +404,18 @@
   <p class="guarantee" style="margin-top:20px;">Built on 10+ years of BrandMusiq's sonic branding expertise.</p>
 </section>
 
-<footer>&copy; 2026 Mogoverse — a <a href="https://brandmusiq.com" target="_blank">BrandMusiq</a> company. Asia's first and leading sonic branding agency.</footer>
+<!-- Footer Component -->
+<div id="footerComponent"></div>
 
 <!-- Video Popup Modal --><div id="videoModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;cursor:pointer;backdrop-filter:blur(6px);" onclick="if(event.target===this)closeVideo()"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:860px;"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.5);"><iframe id="videoFrame" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><button onclick="closeVideo()" style="position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:white;border:none;font-size:18px;font-weight:700;cursor:pointer;color:#1a1a2e;box-shadow:0 4px 16px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">X</button></div></div><script>function openVideo(id){document.getElementById('videoFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';document.getElementById('videoModal').style.display='block';document.body.style.overflow='hidden';}function closeVideo(){document.getElementById('videoFrame').src='';document.getElementById('videoModal').style.display='none';document.body.style.overflow='';}document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideo();});</script>
 <!-- Lead forms, popups, sticky bar all handled by lead-form.js -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  mogoLoadComponent('quizComponent', mogoComponentPath('quiz.html'));
+  mogoLoadComponent('logoWallComponent', mogoComponentPath('logo-wall.html'));
+  mogoLoadComponent('testimonialsComponent', mogoComponentPath('testimonials.html'));
+  mogoLoadComponent('footerComponent', mogoComponentPath('footer.html'));
+});
+</script>
 </body>
 </html>

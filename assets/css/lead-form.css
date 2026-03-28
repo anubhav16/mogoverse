@@ -1,9 +1,9 @@
 /* ============================================================
-   Mogoverse — Lead Form Component Styles
+   Mogoverse — Lead Form Component v2
    ============================================================ */
 
-/* Form fields */
-.mogo-form-fields{display:flex;flex-direction:column;gap:10px;}
+/* Step 1: Name + Phone */
+.mogo-step1{display:flex;flex-direction:column;gap:10px;}
 .mogo-form-row{display:flex;gap:8px;}
 .mogo-input{flex:1;padding:14px 18px;border-radius:6px;border:2px solid #e5e5e5;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;}
 .mogo-input:focus{border-color:#6d28d9;}
@@ -14,16 +14,7 @@
 .mogo-country-code{width:110px;flex:none;padding:14px 12px;border-radius:6px;border:2px solid #e5e5e5;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;}
 .mogo-country-code:focus{border-color:#6d28d9;}
 .mogo-phone-input{flex:1;}
-
-/* Error */
 .mogo-form-error{font-size:12px;color:#ef4444;margin-top:-4px;display:none;}
-
-/* Use-case chips */
-.mogo-usecase-prompt{font-size:13px;color:#999;margin-top:16px;margin-bottom:10px;}
-.mogo-usecase-chips{display:flex;flex-wrap:wrap;gap:8px;}
-.mogo-chip{padding:8px 16px;border:1.5px solid #e5e5e5;border-radius:20px;font-size:13px;font-weight:500;color:#666;cursor:pointer;transition:all 0.2s;background:white;font-family:'Inter',sans-serif;}
-.mogo-chip:hover{border-color:#6d28d9;color:#6d28d9;background:#f5f3ff;}
-.mogo-chip.selected{border-color:#6d28d9;background:#6d28d9;color:white;}
 
 /* CTA buttons */
 .mogo-cta-buttons{display:flex;gap:10px;margin-top:4px;}
@@ -33,15 +24,39 @@
 .mogo-btn-secondary:hover{border-color:#6d28d9;color:#6d28d9;}
 .mogo-cta-note{font-size:12px;color:#999;margin-top:8px;}
 
+/* Step 2: Persona dropdown */
+.mogo-step2{display:flex;flex-direction:column;gap:10px;animation:mogoFadeIn 0.3s ease;padding:8px 0;}
+.mogo-step2-label{font-size:15px;font-weight:600;color:#1a1a2e;margin:0 0 4px;}
+.mogo-step2 .mogo-select{margin-bottom:6px;}
+.mogo-step2 .mogo-btn-primary{margin-top:2px;}
+.mogo-select{width:100%;padding:14px 18px;border-radius:6px;border:2px solid #e5e5e5;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;}
+.mogo-select:focus{border-color:#6d28d9;}
+.mogo-select option{color:#1a1a2e;}
+.mogo-btn-skip{background:none;border:none;color:#999;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;text-align:center;padding:8px 4px;transition:color 0.2s;}
+.mogo-btn-skip:hover{color:#6d28d9;}
+
 /* Success state */
-.mogo-success{background:#f0fdf4;border:2px solid #86efac;border-radius:12px;padding:28px;text-align:center;}
+.mogo-success{background:#f0fdf4;border:2px solid #86efac;border-radius:12px;padding:28px;text-align:center;animation:mogoFadeIn 0.3s ease;}
 .mogo-success .mogo-check{width:48px;height:48px;border-radius:50%;background:#10b981;color:white;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;margin:0 auto 12px;}
 .mogo-success h3{font-size:18px;font-weight:700;margin-bottom:8px;color:#1a1a2e;}
 .mogo-success p{font-size:14px;color:#666;}
 
+/* "How can we help?" — inline above form in hero */
+.mogo-help-inline{margin-bottom:20px;}
+.mogo-help-inline .mogo-help-header{text-align:left;}
+.mogo-help-inline .mogo-help-cards{justify-content:flex-start;}
+/* "How can we help?" — standalone section (if used outside hero) */
+.mogo-help-section{max-width:1200px;margin:0 auto;padding:48px 60px;text-align:center;}
+/* Shared help styles */
+.mogo-help-header{font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:14px;letter-spacing:-0.3px;}
+.mogo-help-cards{display:flex;flex-wrap:wrap;gap:8px;}
+.mogo-help-card{padding:10px 18px;border:1.5px solid #e5e5e5;border-radius:6px;cursor:pointer;transition:all 0.2s;background:white;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:#555;}
+.mogo-help-card:hover{border-color:#6d28d9;color:#6d28d9;background:#f5f3ff;}
+.mogo-help-card.selected{border-color:#6d28d9;background:#6d28d9;color:white;}
+
 /* Popup overlay */
 .mogo-popup-overlay{display:block;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9990;backdrop-filter:blur(4px);}
-.mogo-popup-card{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:16px;padding:44px;max-width:480px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.25);text-align:center;}
+.mogo-popup-card{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:16px;padding:44px;max-width:420px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.25);text-align:center;}
 .mogo-popup-card h3{font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;}
 .mogo-popup-card p{font-size:15px;line-height:1.6;margin-bottom:20px;}
 .mogo-popup-close{position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;}
@@ -56,12 +71,16 @@
 .mogo-sticky-sub{font-size:12px;color:#999;margin:2px 0 0;}
 .mogo-sticky-btn{flex:none !important;padding:12px 24px !important;font-size:14px !important;}
 
+/* Animation */
+@keyframes mogoFadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
 /* Mobile */
 @media(max-width:768px){
   .mogo-cta-buttons{flex-direction:column;}
   .mogo-phone-row{flex-direction:row;}
   .mogo-country-code{width:100px;}
-  .mogo-usecase-chips{gap:6px;}
-  .mogo-chip{padding:6px 12px;font-size:12px;}
   .mogo-popup-card{padding:28px 20px;}
+  .mogo-help-section{padding:32px 20px;}
+  .mogo-help-cards{gap:8px;}
+  .mogo-help-card{padding:10px 16px;font-size:13px;}
 }
