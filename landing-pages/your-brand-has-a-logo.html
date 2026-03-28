@@ -25,33 +25,31 @@
   .hero-text .subtitle{font-size:18px;color:#666;line-height:1.7;margin-bottom:32px;max-width:480px;}
   .hero-text .subtitle strong{color:#1a1a2e;}
 
-  /* Multi-step form */
+  /* Lead form */
   .form-container{max-width:440px;}
-  .form-step{display:none;}
-  .form-step.active{display:block;}
-  .form-row{display:flex;gap:8px;margin-bottom:8px;}
-  .form-row input,.form-row select{flex:1;padding:14px 18px;border-radius:6px;border:2px solid #e5e5e5;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;}
-  .form-row input:focus,.form-row select:focus{border-color:#6d28d9;}
+  .form-fields{display:flex;flex-direction:column;gap:10px;}
+  .form-row{display:flex;gap:8px;}
+  .form-row input{flex:1;padding:14px 18px;border-radius:6px;border:2px solid #e5e5e5;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;}
+  .form-row input:focus{border-color:#6d28d9;}
   .form-row input::placeholder{color:#bbb;}
-  .form-row select{cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;}
-  .form-row select option{color:#1a1a2e;}
-  .btn-primary{padding:14px 28px;background:#1a1a2e;color:white;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s;font-family:'Inter',sans-serif;}
+  .phone-row{display:flex;gap:8px;}
+  .phone-row .country-code{width:110px;flex:none;padding:14px 12px;border-radius:6px;border:2px solid #e5e5e5;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;}
+  .phone-row .country-code:focus{border-color:#6d28d9;}
+  .phone-row input[type="tel"]{flex:1;padding:14px 18px;border-radius:6px;border:2px solid #e5e5e5;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;}
+  .phone-row input[type="tel"]:focus{border-color:#6d28d9;}
+  .phone-row input[type="tel"]::placeholder{color:#bbb;}
+  .form-error{font-size:12px;color:#ef4444;margin-top:-4px;display:none;}
+  .cta-buttons{display:flex;gap:10px;margin-top:4px;}
+  .btn-primary{flex:1;padding:14px 28px;background:#1a1a2e;color:white;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s;font-family:'Inter',sans-serif;text-align:center;}
   .btn-primary:hover{background:#6d28d9;}
+  .btn-secondary{flex:1;padding:14px 28px;background:white;color:#1a1a2e;border:2px solid #1a1a2e;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s;font-family:'Inter',sans-serif;text-align:center;}
+  .btn-secondary:hover{border-color:#6d28d9;color:#6d28d9;}
   .cta-note{font-size:12px;color:#999;margin-top:8px;}
-  .form-step-indicator{display:flex;gap:6px;margin-bottom:16px;}
-  .form-step-indicator .dot{width:8px;height:8px;border-radius:50%;background:#ddd;}
-  .form-step-indicator .dot.active{background:#6d28d9;}
-  .form-step-indicator .dot.done{background:#10b981;}
-  .time-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-  .time-slot{padding:12px;border:2px solid #e5e5e5;border-radius:8px;text-align:center;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;background:white;}
-  .time-slot:hover{border-color:#6d28d9;background:#f5f3ff;}
-  .time-slot.selected{border-color:#6d28d9;background:#6d28d9;color:white;}
-  .time-slot .slot-label{font-size:12px;color:#999;font-weight:400;margin-top:2px;}
-  .time-slot.selected .slot-label{color:rgba(255,255,255,0.7);}
-  .day-tabs{display:flex;gap:8px;margin-bottom:12px;}
-  .day-tab{padding:10px 20px;border:2px solid #e5e5e5;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;background:white;flex:1;text-align:center;}
-  .day-tab:hover{border-color:#6d28d9;}
-  .day-tab.selected{border-color:#6d28d9;background:#6d28d9;color:white;}
+  .usecase-prompt{font-size:13px;color:#999;margin-top:16px;margin-bottom:10px;}
+  .usecase-chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .usecase-chip{padding:8px 16px;border:1.5px solid #e5e5e5;border-radius:20px;font-size:13px;font-weight:500;color:#666;cursor:pointer;transition:all 0.2s;background:white;font-family:'Inter',sans-serif;}
+  .usecase-chip:hover{border-color:#6d28d9;color:#6d28d9;background:#f5f3ff;}
+  .usecase-chip.selected{border-color:#6d28d9;background:#6d28d9;color:white;}
   .success-msg{background:#f0fdf4;border:2px solid #86efac;border-radius:12px;padding:28px;text-align:center;}
   .success-msg .check-icon{width:48px;height:48px;border-radius:50%;background:#10b981;color:white;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;margin:0 auto 12px;}
   .success-msg h3{font-size:18px;font-weight:700;margin-bottom:8px;color:#1a1a2e;}
@@ -143,6 +141,11 @@
     .stats-bar{grid-template-columns:1fr 1fr;padding:40px 20px;}
     .problem-grid,.steps-grid,.comparison,.testimonials-grid,.video-grid{grid-template-columns:1fr;}
     .form-row{flex-direction:column;}
+    .phone-row{flex-direction:row;}
+    .phone-row .country-code{width:100px;}
+    .cta-buttons{flex-direction:column;}
+    .usecase-chips{gap:6px;}
+    .usecase-chip{padding:6px 12px;font-size:12px;}
     .client-logos{gap:20px;}
     .client-logos img{height:22px;}
   }
@@ -182,6 +185,14 @@
 </style>
 <!-- Mogoverse Tracking: GTM + Google Ads + UTM -->
 <script src="../assets/js/tracking.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18045691311"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18045691311');
+</script>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -201,45 +212,52 @@
     <h1>Your brand has a logo.<br>Now give it a <em>MOGO®</em></h1>
     <p class="subtitle">A MOGO® is a musical logo designed to express your brand essence in just 3 secs. Our team of experts gave MOGOs for 100+ brands like Mastercard, 7UP, Zomato, and HDFC Bank. <strong>Mogoverse brings the same expertise in your hands — powered by AI, at a fraction of the cost.</strong></p>
 
-    <!-- Multi-step form -->
+    <!-- Lead capture form -->
     <div class="form-container" id="signup">
-      <div class="form-step active" id="step1">
-        <div class="form-step-indicator"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+      <div id="formFields" class="form-fields">
         <div class="form-row">
-          <input type="email" id="email" placeholder="Enter your work email">
-          <button class="btn-primary" onclick="nextStep(1)">Next</button>
+          <input type="text" id="name" placeholder="Your name">
         </div>
-        <p class="cta-note">Free to start. No credit card required.</p>
+        <div class="phone-row">
+          <select id="country-code" class="country-code">
+            <option value="+91">🇮🇳 +91</option>
+            <option value="+1">🇺🇸 +1</option>
+            <option value="+44">🇬🇧 +44</option>
+            <option value="+971">🇦🇪 +971</option>
+            <option value="+65">🇸🇬 +65</option>
+            <option value="+61">🇦🇺 +61</option>
+            <option value="+49">🇩🇪 +49</option>
+            <option value="+81">🇯🇵 +81</option>
+            <option value="+86">🇨🇳 +86</option>
+            <option value="+33">🇫🇷 +33</option>
+            <option value="+55">🇧🇷 +55</option>
+            <option value="+27">🇿🇦 +27</option>
+            <option value="+234">🇳🇬 +234</option>
+            <option value="+254">🇰🇪 +254</option>
+          </select>
+          <input type="tel" id="phone" placeholder="Phone number">
+        </div>
+        <p class="form-error" id="phone-error">Please enter a valid phone number</p>
+        <div class="usecase-prompt">How can we help?</div>
+        <div class="usecase-chips" id="usecases">
+          <div class="usecase-chip" onclick="toggleChip(this)" data-value="audio-logo">Audio Logo</div>
+          <div class="usecase-chip" onclick="toggleChip(this)" data-value="ad-jingles">Ad Jingles</div>
+          <div class="usecase-chip" onclick="toggleChip(this)" data-value="hold-music">Hold Music</div>
+          <div class="usecase-chip" onclick="toggleChip(this)" data-value="podcast-intro">Podcast Intro</div>
+          <div class="usecase-chip" onclick="toggleChip(this)" data-value="social-reels">Social / Reels</div>
+          <div class="usecase-chip" onclick="toggleChip(this)" data-value="brand-identity">Full Sonic Identity</div>
+          <div class="usecase-chip" onclick="toggleChip(this)" data-value="other">Other</div>
+        </div>
+        <div class="cta-buttons">
+          <button class="btn-primary" onclick="submitForm('hero','demo')">Get a Demo</button>
+          <button class="btn-secondary" onclick="submitForm('hero','trial')">Get Started Free</button>
+        </div>
+        <p class="cta-note">No credit card required. Powered by BrandMusiq.</p>
       </div>
-      <div class="form-step" id="step2">
-        <div class="form-step-indicator"><div class="dot done"></div><div class="dot active"></div><div class="dot"></div></div>
-        <div class="form-row">
-          <input type="tel" id="phone" placeholder="Phone number (we'll call to confirm)">
-          <button class="btn-primary" onclick="nextStep(2)">Next</button>
-        </div>
-        <p class="cta-note">We'll send a quick confirmation — no spam, ever.</p>
-      </div>
-      <div class="form-step" id="step3">
-        <div class="form-step-indicator"><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div></div>
-        <p style="font-size:14px;font-weight:600;margin-bottom:12px;color:#1a1a2e;">When should we call you for a demo?</p>
-        <div class="day-tabs">
-          <div class="day-tab selected" onclick="selectDay(this)">Today</div>
-          <div class="day-tab" onclick="selectDay(this)">Tomorrow</div>
-        </div>
-        <div class="time-grid">
-          <div class="time-slot" onclick="selectTime(this)">Morning<div class="slot-label">9 AM – 12 PM</div></div>
-          <div class="time-slot" onclick="selectTime(this)">Afternoon<div class="slot-label">12 PM – 3 PM</div></div>
-          <div class="time-slot" onclick="selectTime(this)">Evening<div class="slot-label">3 PM – 6 PM</div></div>
-          <div class="time-slot" onclick="selectTime(this)">Late Evening<div class="slot-label">6 PM – 9 PM</div></div>
-        </div>
-        <button class="btn-primary" style="width:100%;" onclick="nextStep(3)">Book My Demo</button>
-      </div>
-      <div class="form-step" id="step4">
-        <div class="success-msg">
-          <div class="check-icon">✓</div>
-          <h3>You're in! Demo booked.</h3>
-          <p>We'll call you <strong id="confirmDay">today</strong> during your selected time slot to walk you through Mogoverse. Check your email for confirmation.</p>
-        </div>
+      <div id="formSuccess" class="success-msg" style="display:none;">
+        <div class="check-icon">✓</div>
+        <h3>You're in!</h3>
+        <p>We'll reach out shortly to walk you through Mogoverse.</p>
       </div>
     </div>
   </div>
@@ -461,28 +479,50 @@
   <h2>Your brand has a look.<br>Give it a sound that's <em>unmistakably yours.</em></h2>
   <p class="subtitle">Not another generic AI music tool. Mogoverse generates music that reflects who your brand is — because it learns who you are first. Free to start.</p>
   <div class="form-container">
-    <div class="form-step active" id="step1b">
-      <div class="form-step-indicator"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
-      <div class="form-row"><input type="email" id="email-b" placeholder="Enter your work email"><button class="btn-primary" onclick="nextStepB(1)">Next</button></div>
-    </div>
-    <div class="form-step" id="step2b">
-      <div class="form-step-indicator"><div class="dot done"></div><div class="dot active"></div><div class="dot"></div></div>
-      <div class="form-row"><input type="tel" id="phone-b" placeholder="Phone number"><button class="btn-primary" onclick="nextStepB(2)">Next</button></div>
-    </div>
-    <div class="form-step" id="step3b">
-      <div class="form-step-indicator"><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div></div>
-      <p style="font-size:14px;font-weight:600;margin-bottom:12px;">When should we call for a demo?</p>
-      <div class="day-tabs"><div class="day-tab selected" onclick="selectDay(this)">Today</div><div class="day-tab" onclick="selectDay(this)">Tomorrow</div></div>
-      <div class="time-grid">
-        <div class="time-slot" onclick="selectTime(this)">Morning<div class="slot-label">9 AM – 12 PM</div></div>
-        <div class="time-slot" onclick="selectTime(this)">Afternoon<div class="slot-label">12 PM – 3 PM</div></div>
-        <div class="time-slot" onclick="selectTime(this)">Evening<div class="slot-label">3 PM – 6 PM</div></div>
-        <div class="time-slot" onclick="selectTime(this)">Late Evening<div class="slot-label">6 PM – 9 PM</div></div>
+    <div id="formFieldsB" class="form-fields">
+      <div class="form-row">
+        <input type="text" id="name-b" placeholder="Your name">
       </div>
-      <button class="btn-primary" style="width:100%;" onclick="nextStepB(3)">Book My Demo</button>
+      <div class="phone-row">
+        <select id="country-code-b" class="country-code">
+          <option value="+91">🇮🇳 +91</option>
+          <option value="+1">🇺🇸 +1</option>
+          <option value="+44">🇬🇧 +44</option>
+          <option value="+971">🇦🇪 +971</option>
+          <option value="+65">🇸🇬 +65</option>
+          <option value="+61">🇦🇺 +61</option>
+          <option value="+49">🇩🇪 +49</option>
+          <option value="+81">🇯🇵 +81</option>
+          <option value="+86">🇨🇳 +86</option>
+          <option value="+33">🇫🇷 +33</option>
+          <option value="+55">🇧🇷 +55</option>
+          <option value="+27">🇿🇦 +27</option>
+          <option value="+234">🇳🇬 +234</option>
+          <option value="+254">🇰🇪 +254</option>
+        </select>
+        <input type="tel" id="phone-b" placeholder="Phone number">
+      </div>
+      <p class="form-error" id="phone-error-b">Please enter a valid phone number</p>
+      <div class="usecase-prompt">How can we help?</div>
+      <div class="usecase-chips" id="usecases-b">
+        <div class="usecase-chip" onclick="toggleChip(this)" data-value="audio-logo">Audio Logo</div>
+        <div class="usecase-chip" onclick="toggleChip(this)" data-value="ad-jingles">Ad Jingles</div>
+        <div class="usecase-chip" onclick="toggleChip(this)" data-value="hold-music">Hold Music</div>
+        <div class="usecase-chip" onclick="toggleChip(this)" data-value="podcast-intro">Podcast Intro</div>
+        <div class="usecase-chip" onclick="toggleChip(this)" data-value="social-reels">Social / Reels</div>
+        <div class="usecase-chip" onclick="toggleChip(this)" data-value="brand-identity">Full Sonic Identity</div>
+        <div class="usecase-chip" onclick="toggleChip(this)" data-value="other">Other</div>
+      </div>
+      <div class="cta-buttons">
+        <button class="btn-primary" onclick="submitForm('footer','demo')">Get a Demo</button>
+        <button class="btn-secondary" onclick="submitForm('footer','trial')">Get Started Free</button>
+      </div>
+      <p class="cta-note">No credit card required. Powered by BrandMusiq.</p>
     </div>
-    <div class="form-step" id="step4b">
-      <div class="success-msg"><div class="check-icon">✓</div><h3>You're in! Demo booked.</h3><p>We'll call you during your selected time slot. Check your email for confirmation.</p></div>
+    <div id="formSuccessB" class="success-msg" style="display:none;">
+      <div class="check-icon">✓</div>
+      <h3>You're in!</h3>
+      <p>We'll reach out shortly to walk you through Mogoverse.</p>
     </div>
   </div>
   <p class="guarantee" style="margin-top:20px;">Built on 10+ years of BrandMusiq's sonic branding expertise.</p>
@@ -491,47 +531,94 @@
 <footer>&copy; 2026 Mogoverse — a <a href="https://brandmusiq.com" target="_blank">BrandMusiq</a> company. Asia's first and leading sonic branding agency.</footer>
 
 <script>
-// Form logic — Hero form
-function nextStep(step) {
-  if (step === 1) {
-    const email = document.getElementById('email').value;
-    if (!email || !email.includes('@')) { document.getElementById('email').style.borderColor='#ef4444'; return; }
-  }
-  if (step === 2) {
-    const phone = document.getElementById('phone').value;
-    if (!phone || phone.length < 7) { document.getElementById('phone').style.borderColor='#ef4444'; return; }
-  }
-  document.getElementById('step' + step).classList.remove('active');
-  document.getElementById('step' + (step + 1)).classList.add('active');
-  if (step === 3) {
-    mogoTrackDemoBooked(document.getElementById('email').value);
-    const day = document.querySelector('#step3 .day-tab.selected');
-    if (day) document.getElementById('confirmDay').textContent = day.textContent.toLowerCase();
+// Country codes sorted longest first so +234 matches before +2
+var countryCodes = ['+971','+254','+234','+91','+86','+81','+65','+61','+55','+49','+44','+33','+27','+1'];
+
+// Strip spaces, dashes, parens — return only digits (and leading +)
+function cleanPhone(val) {
+  return val.replace(/[\s\-\(\)]/g, '');
+}
+
+// Extract country code from raw input if present, auto-set dropdown
+function extractCountryCode(phoneInput, codeSelect) {
+  var raw = cleanPhone(phoneInput.value);
+  if (raw.charAt(0) !== '+') return;
+  for (var i = 0; i < countryCodes.length; i++) {
+    if (raw.indexOf(countryCodes[i]) === 0) {
+      codeSelect.value = countryCodes[i];
+      // Remove the code from input, keep the rest
+      var rest = raw.substring(countryCodes[i].length);
+      phoneInput.value = rest;
+      return;
+    }
   }
 }
-// Form logic — Footer form
-function nextStepB(step) {
-  if (step === 1) {
-    const email = document.getElementById('email-b').value;
-    if (!email || !email.includes('@')) { document.getElementById('email-b').style.borderColor='#ef4444'; return; }
-  }
-  if (step === 2) {
-    const phone = document.getElementById('phone-b').value;
-    if (!phone || phone.length < 7) { document.getElementById('phone-b').style.borderColor='#ef4444'; return; }
-  }
-  document.getElementById('step' + step + 'b').classList.remove('active');
-  document.getElementById('step' + (step + 1) + 'b').classList.add('active');
-  if (step === 3) { mogoTrackDemoBooked(document.getElementById('email-b').value); }
+
+// Validate: 7-15 digits after stripping non-digits
+function isValidPhone(val) {
+  var digits = cleanPhone(val).replace(/\+/g, '').replace(/\D/g, '');
+  return digits.length >= 7 && digits.length <= 15;
 }
-// Day tab selection
-function selectDay(el) {
-  el.parentElement.querySelectorAll('.day-tab').forEach(t => t.classList.remove('selected'));
-  el.classList.add('selected');
+
+// Auto-detect on input/paste for both forms
+['', '-b'].forEach(function(suffix) {
+  var phoneEl = document.getElementById('phone' + suffix);
+  var codeEl = document.getElementById('country-code' + suffix);
+  if (!phoneEl || !codeEl) return;
+  phoneEl.addEventListener('input', function() { extractCountryCode(phoneEl, codeEl); });
+  phoneEl.addEventListener('paste', function() {
+    setTimeout(function() { extractCountryCode(phoneEl, codeEl); }, 0);
+  });
+});
+
+// Use-case chip toggle (multi-select)
+function toggleChip(el) {
+  el.classList.toggle('selected');
 }
-// Time slot selection
-function selectTime(el) {
-  el.closest('.time-grid').querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
-  el.classList.add('selected');
+
+function submitForm(src, intent) {
+  var suffix = src === 'footer' ? '-b' : '';
+  var phoneInput = document.getElementById('phone' + suffix);
+  var codeSelect = document.getElementById('country-code' + suffix);
+  var phoneError = document.getElementById('phone-error' + suffix);
+
+  // Clean up: strip any leftover country code the user typed
+  extractCountryCode(phoneInput, codeSelect);
+  var phone = cleanPhone(phoneInput.value).replace(/\+/g, '').replace(/\D/g, '');
+
+  // Reset
+  phoneInput.style.borderColor = '#e5e5e5';
+  phoneError.style.display = 'none';
+
+  if (!phone || phone.length < 7 || phone.length > 15) {
+    phoneInput.style.borderColor = '#ef4444';
+    phoneError.style.display = 'block';
+    phoneInput.focus();
+    return;
+  }
+
+  // Collect data
+  var code = codeSelect.value;
+  var name = document.getElementById('name' + suffix).value.trim();
+  var fullPhone = code + ' ' + phone;
+
+  // Collect selected use cases
+  var chipContainer = src === 'footer' ? 'usecases-b' : 'usecases';
+  var selected = document.querySelectorAll('#' + chipContainer + ' .usecase-chip.selected');
+  var usecases = [];
+  selected.forEach(function(c) { usecases.push(c.getAttribute('data-value')); });
+
+  // Track
+  if (typeof mogoTrackDemoBooked === 'function') mogoTrackDemoBooked(fullPhone);
+
+  // Show success
+  if (src === 'footer') {
+    document.getElementById('formFieldsB').style.display = 'none';
+    document.getElementById('formSuccessB').style.display = 'block';
+  } else {
+    document.getElementById('formFields').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
 }
 </script>
 
