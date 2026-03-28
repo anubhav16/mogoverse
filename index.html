@@ -1128,10 +1128,11 @@ function toggleFaq(btn) {
 
 /* [2026-03-28] Load shared components */
 document.addEventListener('DOMContentLoaded', function() {
-  mogoLoadComponent('quizComponent', 'components/quiz.html');
-  mogoLoadComponent('logoWallComponent', 'components/logo-wall.html');
-  mogoLoadComponent('testimonialsComponent', 'components/testimonials.html');
-  mogoLoadComponent('footerComponent', 'components/footer.html');
+  /* [2026-03-28 20:15] Fix: use mogoComponentPath() for consistency */
+  mogoLoadComponent('quizComponent', mogoComponentPath('quiz.html'));
+  mogoLoadComponent('logoWallComponent', mogoComponentPath('logo-wall.html'));
+  mogoLoadComponent('testimonialsComponent', mogoComponentPath('testimonials.html'));
+  mogoLoadComponent('footerComponent', mogoComponentPath('footer.html'));
 });
 </script>
 
