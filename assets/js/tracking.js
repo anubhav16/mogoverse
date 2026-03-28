@@ -8,8 +8,8 @@
 // ============================================================
 
 var MOGO_TRACKING = {
-  GTM_ID: 'GTM-XXXXXXX',                    // Replace with your GTM container ID
-  GADS_ID: 'AW-XXXXXXXXXX',                 // Replace with your Google Ads conversion ID
+  GTM_ID: '',                                  // No GTM container yet — leave blank to skip
+  GADS_ID: 'AW-18045691311',                 // Google Ads conversion ID
   CONVERSION_LABELS: {
     demo_booked: 'XXXXXXXXXXXXXXXXXXX',      // Replace: conversion label for "Book Demo"
     audit_requested: 'XXXXXXXXXXXXXXXXXXX',  // Replace: conversion label for "Get Free Audit"
@@ -21,7 +21,7 @@ var MOGO_TRACKING = {
 // 1. GOOGLE TAG MANAGER — inject container snippet
 // ============================================================
 (function(w,d,s,l,i){
-  if (i === 'GTM-XXXXXXX') { console.warn('[Mogoverse Tracking] GTM_ID not configured — skipping GTM.'); return; }
+  if (!i || i === 'GTM-XXXXXXX') { return; }
   w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
   var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
   j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -31,7 +31,7 @@ var MOGO_TRACKING = {
 // 2. GOOGLE ADS GTAG.JS — load global site tag
 // ============================================================
 (function(){
-  if (MOGO_TRACKING.GADS_ID === 'AW-XXXXXXXXXX') { console.warn('[Mogoverse Tracking] GADS_ID not configured — skipping gtag.'); return; }
+  if (!MOGO_TRACKING.GADS_ID || MOGO_TRACKING.GADS_ID === 'AW-XXXXXXXXXX') { return; }
   var s = document.createElement('script');
   s.async = true;
   s.src = 'https://www.googletagmanager.com/gtag/js?id=' + MOGO_TRACKING.GADS_ID;
