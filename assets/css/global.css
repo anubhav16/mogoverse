@@ -630,6 +630,84 @@ footer {
 .sticky-bar.active { display: block; }
 .sticky-bar a { color: white; text-decoration: underline; margin-left: 12px; }
 
+/* --- Logo Wall (F1 press conference style) --- */
+.logo-wall {
+  background: var(--color-navy);
+  padding: 60px 60px 48px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.logo-wall-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.logo-wall .label {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--color-purple-light);
+  margin-bottom: 36px;
+}
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.logo-cell {
+  background: var(--color-navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 18px;
+  transition: all 0.3s;
+  text-align: center;
+  min-height: 100px;
+}
+.logo-cell:hover {
+  background: rgba(109,40,217,0.1);
+}
+.logo-cell img {
+  height: 32px;
+  max-width: 90%;
+  object-fit: contain;
+  filter: brightness(0) invert(1) opacity(0.55);
+  transition: all 0.4s;
+}
+.logo-cell:hover img {
+  filter: brightness(0) invert(1) opacity(1);
+  transform: scale(1.08);
+}
+.logo-name {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.3);
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.logo-cell:hover .logo-name {
+  color: var(--color-purple-light);
+}
+.logo-wall-count {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+}
+.logo-wall-count strong {
+  color: var(--color-purple-light);
+}
+
 /* --- Testimonial Ticker --- */
 .testimonial-ticker::-webkit-scrollbar { height: 6px; }
 .testimonial-ticker::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 3px; }
@@ -722,7 +800,19 @@ footer {
   .final-cta h2 { font-size: 32px; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
 
+  /* Logo wall: 3 cols on mobile */
+  .logo-wall { padding: 40px 20px 32px; }
+  .logo-grid { grid-template-columns: repeat(3, 1fr); }
+  .logo-cell { padding: 16px 10px 12px; min-height: 72px; }
+  .logo-cell img { height: 22px; }
+  .logo-name { font-size: 8px; margin-top: 5px; }
+
   .stats-bar .stat-item .number { font-size: 32px; }
+}
+
+@media (max-width: 1024px) {
+  /* Logo wall: 5 cols on tablet */
+  .logo-grid { grid-template-columns: repeat(5, 1fr); }
 }
 
 @media (max-width: 480px) {
