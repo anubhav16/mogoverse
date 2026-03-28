@@ -1,4 +1,5 @@
-<footer>
+<div class="mogo-footer-wrapper" id="mogoFooterWrapper">
+<footer id="mogoFooterFull">
   <div class="footer-grid">
     <div class="footer-col">
       <div class="logo" style="margin-bottom:12px;">mogo<span>verse</span></div>
@@ -30,20 +31,59 @@
   </div>
 </footer>
 
+<footer id="mogoFooterMinimal" style="display:none;">
+  <div style="text-align:center;padding:32px 20px;">
+    <div class="logo" style="margin-bottom:8px;font-size:20px;font-weight:900;letter-spacing:-1px;color:#1a1a2e;">mogo<span style="color:#6d28d9;">verse</span></div>
+    <div style="font-size:12px;color:#999;margin-bottom:16px;">by <strong style="color:#666;">BrandMusiq</strong></div>
+    <div style="font-size:12px;color:#ccc;">&copy; 2026 Mogoverse by <a href="https://brandmusiq.com" target="_blank" rel="noopener" style="color:#6d28d9;text-decoration:none;">BrandMusiq</a>. All rights reserved.</div>
+  </div>
+</footer>
+</div>
+
 <script>
 (function() {
+  var isLandingPage = window.location.pathname.indexOf('/landing-pages/') !== -1;
   var _bp = (window.location.pathname.indexOf('/landing-pages/') !== -1 || window.location.pathname.indexOf('/tools/') !== -1 || window.location.pathname.indexOf('/sonic-branding/') !== -1 || window.location.pathname.indexOf('/alternatives/') !== -1) ? '../' : '';
 
-  /* Platform links — anchor-based, relative to root */
-  document.getElementById('footerLinkHIW').href = _bp + '#how-it-works';
-  document.getElementById('footerLinkPricing').href = _bp + '#pricing';
-  document.getElementById('footerLinkCalc').href = _bp + '#calculator';
-  document.getElementById('footerLinkQuiz').href = _bp + '#quiz';
+  if (isLandingPage) {
+    /* Landing page: show minimal footer, hide full */
+    document.getElementById('mogoFooterFull').style.display = 'none';
+    document.getElementById('mogoFooterMinimal').style.display = 'block';
+  } else {
+    /* Homepage/other: show full footer with all links */
+    document.getElementById('footerLinkHIW').href = _bp + '#how-it-works';
+    document.getElementById('footerLinkPricing').href = _bp + '#pricing';
+    document.getElementById('footerLinkCalc').href = _bp + '#calculator';
+    document.getElementById('footerLinkQuiz').href = _bp + '#quiz';
+    document.getElementById('footerLinkSonic').href = _bp + 'sonic-branding/';
+    document.getElementById('footerLinkFAQ').href = _bp + '#faq';
+    document.getElementById('footerLinkCases').href = _bp + '#case-studies';
+    document.getElementById('footerLinkSuno').href = _bp + 'alternatives/suno-alternative.html';
+  }
 
-  /* Learn links */
-  document.getElementById('footerLinkSonic').href = _bp + 'sonic-branding/';
-  document.getElementById('footerLinkFAQ').href = _bp + '#faq';
-  document.getElementById('footerLinkCases').href = _bp + '#case-studies';
-  document.getElementById('footerLinkSuno').href = _bp + 'alternatives/suno-alternative.html';
+  /* Issue 9: Footer curtain-lift reveal effect */
+  var wrapper = document.getElementById('mogoFooterWrapper');
+  if (wrapper) {
+    wrapper.style.position = 'sticky';
+    wrapper.style.bottom = '0';
+    wrapper.style.zIndex = '0';
+
+    /* Add z-index and background to all content sections above footer */
+    var footerContainer = document.getElementById('footerComponent');
+    if (footerContainer) {
+      var prev = footerContainer.previousElementSibling;
+      while (prev) {
+        prev.style.position = 'relative';
+        prev.style.zIndex = '1';
+        if (!prev.style.background && !prev.style.backgroundColor) {
+          var cs = window.getComputedStyle(prev);
+          if (cs.backgroundColor === 'rgba(0, 0, 0, 0)' || cs.backgroundColor === 'transparent') {
+            prev.style.backgroundColor = '#fafafa';
+          }
+        }
+        prev = prev.previousElementSibling;
+      }
+    }
+  }
 })();
 </script>

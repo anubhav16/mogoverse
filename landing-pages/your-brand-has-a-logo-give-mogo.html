@@ -69,7 +69,7 @@
   .step-card .time-badge{display:inline-block;margin-top:12px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(167,139,250,0.15);color:#a78bfa;}
 
   .comparison{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:800px;margin:0 auto;}
-  .comp-card{padding:40px;border-radius:12px;border:2px solid #eee;}
+  .comp-card{padding:40px;border-radius:12px;border:2px solid #eee;text-align:left;}
   .comp-card.old{background:#fef2f2;border-color:#fecaca;}
   .comp-card.new{background:#f5f3ff;border-color:#c4b5fd;}
   .comp-card h3{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;}
@@ -179,19 +179,15 @@
     <h1>Your brand has a logo.<br>Now give it a <em>MOGO®</em></h1>
     <p class="subtitle">A MOGO® is a musical logo designed to express your brand essence in just 3 secs. Our team of experts gave MOGOs for 100+ brands like Mastercard, 7UP, Zomato, and HDFC Bank. <strong>Mogoverse brings the same expertise in your hands — powered by AI, at a fraction of the cost.</strong></p>
 
+    <!-- Lead form inside hero -->
+    <div class="form-container">
+      <div id="heroLeadForm"></div>
+      <script>document.addEventListener('DOMContentLoaded', function(){ mogoRenderLeadForm('heroLeadForm', 'hero'); });</script>
+    </div>
   </div>
   <!-- Hero right: Interactive quiz -->
   <div id="quizComponent" style="min-height:380px;"></div>
 </section>
-
-<!-- Lead form (moved below hero for better first-fold engagement) -->
-<div style="background:#f5f3ff;padding:40px 60px;text-align:center;">
-  <div style="max-width:440px;margin:0 auto;">
-    <p style="font-size:18px;font-weight:700;margin-bottom:16px;color:#1a1a2e;">Get Early Access</p>
-    <div id="heroLeadForm"></div>
-    <script>document.addEventListener('DOMContentLoaded', function(){ mogoRenderLeadForm('heroLeadForm', 'hero'); });</script>
-  </div>
-</div>
 
 <!-- Logo Wall Component -->
 <div id="logoWallComponent"></div>

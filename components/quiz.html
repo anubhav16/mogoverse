@@ -2,17 +2,17 @@
 /* [2026-03-28 21:00] Quiz adapts: compact in hero, full section standalone */
 .quiz-wrapper{text-align:center;font-family:'Inter',sans-serif;}
 .quiz-wrapper.quiz-standalone{background:#f5f3ff;padding:80px 60px;max-width:none;}
-.quiz-wrapper.quiz-inline{background:linear-gradient(135deg,#0f0a1e,#1a1a2e);border-radius:16px;padding:32px 28px;color:white;}
-.quiz-wrapper.quiz-inline .section-label{color:#a78bfa;}
-.quiz-wrapper.quiz-inline h2{font-size:24px;color:white;letter-spacing:-1px;margin-bottom:8px;}
-.quiz-wrapper.quiz-inline h2 em{color:#a78bfa;}
-.quiz-wrapper.quiz-inline .desc{color:#999;font-size:14px;margin-bottom:24px;}
-.quiz-wrapper.quiz-inline .quiz-option{color:#e5e5e5;border-color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);}
-.quiz-wrapper.quiz-inline .quiz-option:hover{border-color:#a78bfa;background:rgba(109,40,217,0.15);}
-.quiz-wrapper.quiz-inline #quizFeedback{color:#ccc;}
-.quiz-wrapper.quiz-inline #quizPlayLabel{color:#888;}
+.quiz-wrapper.quiz-inline{background:rgba(245,243,255,0.95);backdrop-filter:blur(10px);border:1px solid #e5e5e5;border-radius:16px;padding:32px 28px;color:#1a1a2e;}
+.quiz-wrapper.quiz-inline .section-label{color:#6d28d9;}
+.quiz-wrapper.quiz-inline h2{font-size:24px;color:#1a1a2e;letter-spacing:-1px;margin-bottom:8px;}
+.quiz-wrapper.quiz-inline h2 em{color:#6d28d9;}
+.quiz-wrapper.quiz-inline .desc{color:#666;font-size:14px;margin-bottom:24px;}
+.quiz-wrapper.quiz-inline .quiz-option{color:#1a1a2e;border-color:#e5e5e5;background:white;}
+.quiz-wrapper.quiz-inline .quiz-option:hover{border-color:#6d28d9;background:#f5f3ff;}
+.quiz-wrapper.quiz-inline #quizFeedback{color:#666;}
+.quiz-wrapper.quiz-inline #quizPlayLabel{color:#999;}
 .quiz-wave-bars{display:flex;align-items:center;justify-content:center;gap:3px;height:36px;}
-.quiz-wave-bars span{display:block;width:4px;background:white;border-radius:2px;animation:quizWave 0.8s ease-in-out infinite;}
+.quiz-wave-bars span{display:block;width:4px;background:#6d28d9;border-radius:2px;animation:quizWave 0.8s ease-in-out infinite;}
 .quiz-wave-bars span:nth-child(1){height:12px;animation-delay:0s;}
 .quiz-wave-bars span:nth-child(2){height:24px;animation-delay:0.15s;}
 .quiz-wave-bars span:nth-child(3){height:18px;animation-delay:0.3s;}
@@ -59,7 +59,7 @@
       </div>
 
       <!-- Next round button -->
-      <button id="quizNextBtn" style="display:none;padding:12px 32px;background:#1a1a2e;color:white;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;">
+      <button id="quizNextBtn" style="display:none;background:#6d28d9;color:white;border:none;border-radius:8px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;transition:all 0.2s;">
         Next Round
       </button>
     </div>
@@ -149,7 +149,7 @@
     var optHtml = '';
     var shuffled = r.options.slice().sort(function() { return 0.5 - Math.random(); });
     for (var j = 0; j < shuffled.length; j++) {
-      optHtml += '<button class="quiz-option" data-answer="' + shuffled[j] + '" style="padding:14px 20px;border:1.5px solid rgba(255,255,255,0.15);border-radius:10px;background:rgba(255,255,255,0.04);font-size:15px;font-weight:600;color:#e5e5e5;cursor:pointer;transition:all 0.2s;font-family:Inter,sans-serif;">' + shuffled[j] + '</button>';
+      optHtml += '<button class="quiz-option" data-answer="' + shuffled[j] + '" style="padding:14px 20px;border:1.5px solid #e5e5e5;border-radius:10px;background:white;font-size:15px;font-weight:600;color:#1a1a2e;cursor:pointer;transition:all 0.2s;font-family:Inter,sans-serif;">' + shuffled[j] + '</button>';
     }
     document.getElementById('quizOptions').innerHTML = optHtml;
 
@@ -164,8 +164,8 @@
     /* Hover states for options */
     var allOpts = document.querySelectorAll('.quiz-option');
     allOpts.forEach(function(o) {
-      o.addEventListener('mouseenter', function() { if (!quizState.answered) { this.style.borderColor='#a78bfa'; this.style.background='rgba(109,40,217,0.15)'; } });
-      o.addEventListener('mouseleave', function() { if (!quizState.answered) { this.style.borderColor='rgba(255,255,255,0.15)'; this.style.background='rgba(255,255,255,0.04)'; } });
+      o.addEventListener('mouseenter', function() { if (!quizState.answered) { this.style.borderColor='#6d28d9'; this.style.background='#f5f3ff'; } });
+      o.addEventListener('mouseleave', function() { if (!quizState.answered) { this.style.borderColor='#e5e5e5'; this.style.background='white'; } });
     });
 
     /* Reset play button */

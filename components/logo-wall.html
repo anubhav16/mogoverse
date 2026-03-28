@@ -1,18 +1,18 @@
 <style>
 /* [2026-03-28 21:00] Logo wall grid — self-contained for pages without global.css */
-.logo-wall{background:#f8f8f8;padding:60px 60px 48px;border-top:1px solid #eee;border-bottom:1px solid #eee;}
+.logo-wall{background:#f8f8f8;padding:60px 60px 48px;border-top:1px solid #eee;border-bottom:1px solid #eee;position:relative;}
 .logo-wall-inner{max-width:1200px;margin:0 auto;}
 .logo-wall .label{text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:#6d28d9;margin-bottom:36px;}
 .logo-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:#f0f0f0;border:1px solid #f0f0f0;border-radius:12px;overflow:hidden;}
-.logo-cell{background:white;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 20px;transition:all 0.3s;text-align:center;min-height:96px;position:relative;}
+.logo-cell{background:white;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 20px;transition:all 0.3s;text-align:center;min-height:104px;position:relative;}
 .logo-cell:hover{background:#f5f3ff;box-shadow:inset 0 0 0 2px #6d28d9;}
-.logo-cell img{height:36px;max-width:75%;object-fit:contain;opacity:0.8;transition:all 0.4s;image-rendering:auto;}
+.logo-cell img{height:44px;max-width:70%;object-fit:contain;opacity:0.8;transition:all 0.4s;image-rendering:auto;}
 .logo-cell:hover img{opacity:1;transform:scale(1.05);}
 .logo-name{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 .logo-wall-count{text-align:center;margin-top:28px;font-size:14px;color:#999;letter-spacing:0.5px;}
 .logo-wall-count strong{color:#6d28d9;}
 @media(max-width:1024px){.logo-grid{grid-template-columns:repeat(5,1fr);}}
-@media(max-width:768px){.logo-wall{padding:40px 20px 32px;}.logo-grid{grid-template-columns:repeat(3,1fr);}.logo-cell{padding:16px 8px;min-height:64px;}.logo-cell img{height:28px;}}
+@media(max-width:768px){.logo-wall{padding:40px 20px 32px;}.logo-grid{grid-template-columns:repeat(3,1fr);}.logo-cell{padding:16px 8px;min-height:64px;}.logo-cell img{height:32px;}}
 
 /* Logo wall testimonial tooltip */
 .logo-tooltip {
