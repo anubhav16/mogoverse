@@ -1,5 +1,18 @@
 # Mogoverse Release Notes
 
+## v2.2.0 — UI Polish: Light Quiz, Bigger Logos, Footer Reveal (2026-03-28)
+
+### Fixed
+- **Lead form** back inside hero on landing pages (was in standalone section below)
+- **Quiz**: frosted glass light mode (was too dark), purple next button, proper hover states
+- **Logo wall**: 44px logos (was 36px), tooltip hover now works (position:relative fix)
+- **Testimonials**: light gray bg (was dark navy, clashed with adjacent sections)
+- **Landing page footer**: minimal (logo + copyright only, no SEO links)
+- **Footer curtain-lift reveal**: Amplitude-style sticky footer, content slides over it
+- **Comparison text**: left-aligned in landing pages
+
+---
+
 ## v2.1.0 — Quiz Polish + Logo Quality + Landing Page Heroes (2026-03-28)
 
 ### Changed
