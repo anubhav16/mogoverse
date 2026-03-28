@@ -51,6 +51,7 @@ function mogoComponentPath(filename) {
   var isSubdir = window.location.pathname.indexOf('/landing-pages/') !== -1 ||
                  window.location.pathname.indexOf('/sonic-branding/') !== -1 ||
                  window.location.pathname.indexOf('/alternatives/') !== -1 ||
-                 window.location.pathname.indexOf('/tools/') !== -1;
+                 window.location.pathname.indexOf('/tools/') !== -1 ||
+                 window.location.pathname.indexOf('/mockups/') !== -1;
   return (isSubdir ? '../' : '') + 'components/' + filename;
 }

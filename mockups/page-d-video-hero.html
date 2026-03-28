@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mogoverse — This Is What a Brand Sounds Like</title>
+<link rel="stylesheet" href="../assets/css/global.css">
+<link rel="stylesheet" href="../assets/css/lead-form.css">
+<style>
+  /* ============================================================
+     Video Hero — Cinematic Landing Page
+     [2026-03-28] EXPERIMENT: Full-bleed video background hero
+     Apple product launch meets Spotify bold typography
+     ============================================================ */
+
+  /* --- Video Hero Section --- */
+  .video-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #0a0a0f;
+  }
+
+  .video-hero video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  /* Dark overlay — bottom-heavy gradient for text readability */
+  .video-hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.1) 30%,
+      rgba(0, 0, 0, 0.15) 50%,
+      rgba(0, 0, 0, 0.5) 75%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
+  }
+
+  /* Overlay content — centered, minimal, lots of negative space */
+  .video-hero .hero-content {
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  .hero-content .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 60px;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -2.5px;
+    color: #ffffff;
+    margin-bottom: 16px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-content .subtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    white-space: nowrap;
+    max-width: 520px;
+    margin: 0 auto 36px;
+    font-weight: 400;
+  }
+
+  .hero-content .cta-btn {
+    display: inline-block;
+    padding: 16px 36px;
+    background: #6d28d9;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    letter-spacing: 0.2px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .hero-content .cta-btn:hover {
+    background: #5b21b6;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(109, 40, 217, 0.4);
+  }
+
+  /* --- Sound Toggle Button (top-right, icon only) --- */
+  .sound-toggle {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 101;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+  }
+
+  .sound-toggle:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: scale(1.1);
+  }
+
+  .sound-toggle.unmuted {
+    animation: none;
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgba(109, 40, 217, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(109, 40, 217, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(109, 40, 217, 0); }
+  }
+
+  /* --- Scroll Indicator --- */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: scroll-bounce 2s ease-in-out infinite;
+  }
+
+  .scroll-indicator .chevron {
+    display: block;
+    margin-top: 6px;
+    font-size: 18px;
+  }
+
+  @keyframes scroll-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+    50% { transform: translateX(-50%) translateY(8px); opacity: 0.8; }
+  }
+
+  /* --- Nav override for video hero (transparent on top) --- */
+  nav.video-nav {
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: none;
+    transition: background 0.3s, backdrop-filter 0.3s;
+  }
+
+  nav.video-nav.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid #eee;
+  }
+
+  nav.video-nav .logo {
+    color: white;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  nav.video-nav.scrolled .logo {
+    color: #1a1a2e;
+  }
+
+  nav.video-nav .powered-by {
+    color: rgba(255, 255, 255, 0.7);
+    border-left-color: rgba(255, 255, 255, 0.3);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  nav.video-nav.scrolled .powered-by {
+    color: #999;
+    border-left-color: #ddd;
+  }
+
+  nav.video-nav .nav-links a {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  }
+
+  nav.video-nav.scrolled .nav-links a {
+    color: #666;
+  }
+
+  nav.video-nav .nav-cta {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+
+  nav.video-nav.scrolled .nav-cta {
+    background: #1a1a2e;
+    border: 1px solid #1a1a2e;
+  }
+
+  /* --- Floating Lead Form (right side of video) --- */
+  .floating-lead {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 32px 28px;
+    width: 380px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    color: white;
+  }
+
+  .floating-lead h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    color: white;
+  }
+
+  .floating-lead p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+
+  /* Override lead form styles inside floating container for dark bg */
+  .floating-lead .lead-form input,
+  .floating-lead .lead-form select {
+    background: rgba(255,255,255,0.1) !important;
+    border-color: rgba(255,255,255,0.25) !important;
+    color: white !important;
+  }
+
+  .floating-lead .lead-form input::placeholder {
+    color: rgba(255,255,255,0.4) !important;
+  }
+
+  .floating-lead .lead-form label {
+    color: rgba(255,255,255,0.6) !important;
+  }
+
+  .floating-lead .lead-form .lead-form-error {
+    color: #fca5a5 !important;
+  }
+
+  /* --- Lead + Quiz Section (below hero) --- */
+  .lead-quiz-section {
+    padding: 80px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .lead-quiz-section .lead-side h2 {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    margin-bottom: 12px;
+    color: #1a1a2e;
+  }
+
+  .lead-quiz-section .lead-side h2 em {
+    font-style: normal;
+    color: #6d28d9;
+  }
+
+  .lead-quiz-section .lead-side > p {
+    font-size: 16px;
+    color: #777;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  /* --- FOMO Typing Animation --- */
+  .fomo-line {
+    display: inline;
+  }
+
+  .fomo-blank {
+    display: inline;
+    position: relative;
+  }
+
+  .fomo-blank .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: #ffffff;
+    margin-left: 2px;
+    animation: blink-cursor 0.8s step-end infinite;
+    vertical-align: text-bottom;
+  }
+
+  @keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* --- Below-the-fold sections (inherit from global.css) --- */
+
+  /* Video modal */
+  .video-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .video-modal.active {
+    display: flex;
+  }
+
+  .video-modal .modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    aspect-ratio: 16/9;
+  }
+
+  .video-modal .modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+  }
+
+  .video-modal iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 768px) {
+    .video-hero {
+      height: 70vh;
+    }
+
+    .video-hero .hero-content {
+      bottom: 18%;
+    }
+
+    .hero-content h1 {
+      font-size: 32px;
+      letter-spacing: -1px;
+      max-width: 360px;
+    }
+
+    .hero-content .subtitle {
+      font-size: clamp(11px, 3.5vw, 15px);
+      max-width: none;
+      margin-bottom: 28px;
+    }
+
+    .hero-content .cta-btn {
+      padding: 14px 28px;
+      font-size: 15px;
+    }
+
+    .hero-content .eyebrow {
+      font-size: 10px;
+      letter-spacing: 3px;
+    }
+
+    .sound-toggle {
+      top: 16px;
+      right: 16px;
+    }
+
+    .floating-lead { display: none; }
+
+    .lead-quiz-section {
+      grid-template-columns: 1fr !important;
+      padding: 48px 20px !important;
+      gap: 32px !important;
+    }
+
+    .lead-quiz-section .lead-side h2 {
+      font-size: 28px !important;
+    }
+
+    .scroll-indicator {
+      display: none;
+    }
+
+    nav.video-nav {
+      padding: 12px 20px;
+    }
+
+    nav.video-nav .powered-by {
+      display: none;
+    }
+
+    .stats-bar {
+      grid-template-columns: 1fr 1fr !important;
+    }
+
+    .problem-grid,
+    .steps-grid,
+    .video-grid,
+    .testimonials-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .section, .section-dark {
+      padding: 60px 20px !important;
+    }
+
+    .barbell-grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .barbell-center {
+      margin: 0 !important;
+    }
+
+    .final-cta h2 {
+      font-size: 32px !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVIGATION — transparent over video, solid on scroll
+     ============================================================ -->
+<nav class="video-nav">
+  <div class="logo-group">
+    <a href="/" style="text-decoration:none;">
+      <div class="logo">mogo<span>verse</span></div>
+    </a>
+    <div class="powered-by">by Asia's #1 Sonic Branding Firm</div>
+  </div>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#case-studies">Case Studies</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+
+  <a href="#signup" class="nav-cta">Get Early Access</a>
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" onclick="document.getElementById('navLinks').classList.toggle('mobile-open'); this.classList.toggle('active');">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============================================================
+     HERO — Full-bleed cinematic video background
+     ============================================================ -->
+<section class="video-hero">
+  <video
+    id="heroVideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster=""
+    src="../assets/extracted-video/S71-bmq-client-showcase-reel.mp4"
+  ></video>
+
+  <div class="overlay"></div>
+
+  <div class="hero-content">
+    <h1>This is what a brand sounds like.</h1>
+    <p class="subtitle">
+      <span class="fomo-line">Mastercard. Raymond. HDFC Bank.</span>
+      <span class="fomo-blank" id="fomoBlank"><span id="fomoText"></span><span class="cursor"></span></span>
+    </p>
+    <a href="#lead-section" class="cta-btn" onclick="scrollToLead(event)">Create Your Sound Identity &rarr;</a>
+  </div>
+
+  <!-- Floating lead form on right — uses shared component -->
+  <div class="floating-lead">
+    <h3>Get Started Free</h3>
+    <p>Create your brand's sonic identity today.</p>
+    <div id="floatingLeadForm"></div>
+  </div>
+
+  <div class="scroll-indicator">
+    Scroll to explore
+    <span class="chevron">&#8964;</span>
+  </div>
+</section>
+
+<!-- Sound Toggle Button -->
+<button class="sound-toggle" id="soundToggle" onclick="toggleSound()" aria-label="Toggle sound">
+  <span id="soundIcon">&#128263;</span>
+</button>
+
+<!-- ============================================================
+     LEAD FORM + QUIZ — just below hero
+     ============================================================ -->
+<section class="lead-quiz-section" id="lead-section">
+  <div class="lead-side">
+    <h2>Ready to Give Your Brand <em>a Voice?</em></h2>
+    <p>Create your brand's unique sonic identity in minutes. Powered by 14 years of BrandMusiq methodology.</p>
+    <div id="heroLeadForm"></div>
+  </div>
+  <div id="quiz"><div id="quizComponent" style="min-height:400px;"></div></div>
+</section>
+<script>document.addEventListener('DOMContentLoaded', function(){
+  if(typeof mogoRenderLeadForm==='function') {
+    mogoRenderLeadForm('heroLeadForm', 'hero');
+    mogoRenderLeadForm('floatingLeadForm', 'floating-video');
+  }
+});</script>
+
+<!-- ============================================================
+     LOGO WALL — loaded as component (same as homepage)
+     ============================================================ -->
+<div id="logoWallComponent"></div>
+
+<!-- ============================================================
+     TESTIMONIALS — loaded as component (same as homepage)
+     ============================================================ -->
+<div id="testimonialsComponent"></div>
+
+<!-- ============================================================
+     BRANDMUSIQ STRIP — thin credential bar
+     ============================================================ -->
+<div class="stats-bar" style="grid-template-columns:repeat(5,1fr);">
+  <div class="stat-item"><div class="number purple">40+</div><div class="label">Brand sonic identities</div></div>
+  <div class="stat-item"><div class="number purple">14</div><div class="label">Years of BrandMusiq</div></div>
+  <div class="stat-item"><div class="number purple">57M</div><div class="label">Outlets (Mastercard)</div></div>
+  <div class="stat-item"><div class="number purple">89%</div><div class="label">Brand recall with sonic ID</div></div>
+  <div class="stat-item"><div class="number purple">5x</div><div class="label">Best Audio Brand winner</div></div>
+</div>
+
+<!-- ============================================================
+     THE PROBLEM
+     ============================================================ -->
+<section id="problem" class="section">
+  <div class="section-label">The Problem</div>
+  <h2>44% of brands have no <em>sonic identity.</em></h2>
+  <p class="desc">The digital age brought visual fatigue, shorter attention spans, and billions of "opportunities to hear" — yet most brands are still invisible to the ear.</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="price-tag">$15K–$500K</div>
+      <h3>Agency Barrier</h3>
+      <p>Traditional sonic branding agencies charge $15,000 to $500,000+ for a single sonic identity. Only the top 5% of brands can afford it.</p>
+      <div class="source">Verified: Sixieme Son, amp, Made Music Studio pricing</div>
+    </div>
+    <div class="problem-card">
+      <div class="price-tag">3–6 months</div>
+      <h3>Timeline Barrier</h3>
+      <p>Agency timelines run 3 to 6 months from brief to delivery. By the time you have your sonic identity, your campaign window has closed.</p>
+      <div class="source">Average across 13 agencies analyzed</div>
+    </div>
+    <div class="problem-card">
+      <div class="price-tag">0 tools</div>
+      <h3>Self-Serve Barrier</h3>
+      <p>No self-serve platform exists for brand audio identity. AI music generators (Suno, Soundraw) make generic music — not YOUR brand's music.</p>
+      <div class="source">Competitive gap analysis, March 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     THE GAP — Barbell
+     ============================================================ -->
+<section id="gap" style="background:var(--color-navy);color:white;padding:80px 60px;max-width:none;">
+  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+    <div class="section-label" style="color:#a78bfa;">The Market Gap</div>
+    <h2 style="color:white;margin-bottom:12px;">The Barbell Problem in <em style="color:#a78bfa;">Brand Audio</em></h2>
+    <p style="font-size:17px;color:#999;max-width:600px;margin:0 auto 48px;line-height:1.7;">Every brand needs sound. But the market only offers two extremes — and nothing in between.</p>
+
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;max-width:900px;margin:0 auto;">
+      <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:16px 0 0 16px;padding:36px 28px;text-align:left;">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#ef4444;margin-bottom:16px;">Cheap &amp; Generic</div>
+        <div style="font-size:28px;font-weight:900;color:white;margin-bottom:4px;">$0–$30/mo</div>
+        <p style="font-size:13px;color:#999;margin-bottom:16px;">Suno, Soundraw, Epidemic Sound, Artlist</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+          <li style="font-size:14px;color:#ccc;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#ef4444;font-weight:700;">&times;</span> No brand identity features</li>
+          <li style="font-size:14px;color:#ccc;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#ef4444;font-weight:700;">&times;</span> Same tracks used by 10K+ brands</li>
+          <li style="font-size:14px;color:#ccc;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#ef4444;font-weight:700;">&times;</span> Zero brand recall built</li>
+        </ul>
+      </div>
+
+      <div style="background:linear-gradient(180deg,#6d28d9,#5b21b6);border-radius:16px;padding:36px 32px;text-align:center;z-index:2;margin:-12px 0;box-shadow:0 8px 40px rgba(109,40,217,0.4);min-width:220px;">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.7);margin-bottom:16px;">The Empty Middle</div>
+        <div style="font-size:32px;font-weight:900;color:white;margin-bottom:4px;">MOGOVERSE</div>
+        <div style="font-size:20px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:16px;">$0–$199/mo</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+          <li style="font-size:14px;color:white;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#86efac;font-weight:700;">&#10003;</span> AI + BrandMusiq methodology</li>
+          <li style="font-size:14px;color:white;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#86efac;font-weight:700;">&#10003;</span> Brand-aligned, unique to you</li>
+          <li style="font-size:14px;color:white;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#86efac;font-weight:700;">&#10003;</span> Self-serve, ready in minutes</li>
+          <li style="font-size:14px;color:white;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#86efac;font-weight:700;">&#10003;</span> 89% brand recognition</li>
+        </ul>
+      </div>
+
+      <div style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:0 16px 16px 0;padding:36px 28px;text-align:left;">
+        <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#ef4444;margin-bottom:16px;">Expensive &amp; Exclusive</div>
+        <div style="font-size:28px;font-weight:900;color:white;margin-bottom:4px;">$15K–$500K</div>
+        <p style="font-size:13px;color:#999;margin-bottom:16px;">Sixieme Son, amp, Made Music Studio</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+          <li style="font-size:14px;color:#ccc;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#ef4444;font-weight:700;">&times;</span> No self-serve option</li>
+          <li style="font-size:14px;color:#ccc;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#ef4444;font-weight:700;">&times;</span> No pricing transparency</li>
+          <li style="font-size:14px;color:#ccc;padding-left:24px;position:relative;"><span style="position:absolute;left:0;color:#ef4444;font-weight:700;">&times;</span> 3–6 month timelines</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOW IT WORKS
+     ============================================================ -->
+<section id="how-it-works" class="section" style="text-align:center;">
+  <div class="section-label">How It Works</div>
+  <h2>Three Steps to Your <em>Brand's Sound</em></h2>
+  <p class="desc" style="max-width:600px;margin:0 auto 48px;">
+    Powered by BrandMusiq's MUSE framework (Musical Strategy Exercise) — the same methodology behind Mastercard's 5x award-winning sonic identity.
+  </p>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <h3>Tell Us Who Your Brand Is</h3>
+      <p>Describe your brand's personality and emotion. Our AI maps it to BrandMusiq's Avatar + Rasa framework — the same system used for Mastercard and Zomato.</p>
+      <div class="time-badge">30 seconds</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <h3>AI Generates Your MOGO</h3>
+      <p>Our AI creates a unique musical logo (MOGO) that captures your brand essence — plus a full MOGOSCAPE of brand-aligned music and Mini-MOGOs for short touchpoints.</p>
+      <div class="time-badge">2 minutes</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <h3>Deploy Everywhere</h3>
+      <p>Use your MOGO across every earpoint — TVCs, podcasts, social media, app sounds, IVR, in-store, and more. Sound the same everywhere your brand shows up.</p>
+      <div class="time-badge">Ready to use</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EARPOINTS ECOSYSTEM
+     ============================================================ -->
+<div id="earpoints" class="earpoints-section">
+  <div class="earpoints-inner">
+    <div class="earpoints-hero">
+      <div class="section-label">The Earpoints Ecosystem</div>
+      <h2>Your MOGO Plays <em>Everywhere</em></h2>
+      <p class="desc">A single sonic identity deployed across every touchpoint becomes millions of brand impressions. Mastercard proved it — one MOGO, 500M+ plays per year.</p>
+      <div class="earpoints-mega-stat">
+        <div class="mega-num">500M+</div>
+        <div class="mega-label">Annual earpoints from <strong>one MOGO</strong> deployed across Mastercard's <strong>57 million outlets</strong></div>
+      </div>
+    </div>
+
+    <div class="earpoints-grid">
+      <div class="earpoint-card"><span class="ep-icon">&#128250;</span><div class="ep-name">TV Commercials</div><div class="ep-detail">Open/close every TVC</div><div class="ep-freq">Every ad airing</div></div>
+      <div class="earpoint-card"><span class="ep-icon">&#127908;</span><div class="ep-name">Podcast Intro/Outro</div><div class="ep-detail">Branded audio bookends</div><div class="ep-freq">2x per episode</div></div>
+      <div class="earpoint-card"><span class="ep-icon">&#128241;</span><div class="ep-name">Instagram &amp; TikTok</div><div class="ep-detail">Reels, stories, video ads</div><div class="ep-freq">Every video post</div></div>
+      <div class="earpoint-card"><span class="ep-icon">&#128227;</span><div class="ep-name">Social Campaigns</div><div class="ep-detail">Campaign videos, sponsored</div><div class="ep-freq">Millions of impressions</div></div>
+      <div class="earpoint-card"><span class="ep-icon">&#128179;</span><div class="ep-name">POS Transactions</div><div class="ep-detail">Mastercard card tap</div><div class="ep-freq">500M+ times/year</div></div>
+      <div class="earpoint-card"><span class="ep-icon">&#127974;</span><div class="ep-name">ATM Withdrawals</div><div class="ep-detail">Brand sound on screen</div><div class="ep-freq">Every transaction</div></div>
+      <div class="earpoint-card"><span class="ep-icon">&#9992;&#65039;</span><div class="ep-name">Airlines &amp; Lounges</div><div class="ep-detail">Boarding, in-flight, arrival</div><div class="ep-freq">Every passenger</div></div>
+      <div class="earpoint-card"><span class="ep-icon">&#127962;&#65039;</span><div class="ep-name">Hotels &amp; Retail</div><div class="ep-detail">Lobby, elevator, spa</div><div class="ep-freq">24/7 ambient</div></div>
+      <div class="earpoint-card"><span class="ep-icon">&#128222;</span><div class="ep-name">IVR &amp; Hold Music</div><div class="ep-detail">Customer call experience</div><div class="ep-freq">Every call</div></div>
+      <div class="earpoint-card"><span class="ep-icon">&#128265;</span><div class="ep-name">Smart Speakers</div><div class="ep-detail">Alexa skills, voice apps</div><div class="ep-freq">Every interaction</div></div>
+      <div class="earpoint-card"><span class="ep-icon">&#129302;</span><div class="ep-name">Voice Bots &amp; AI</div><div class="ep-detail">Chatbot greetings, AI agents</div><div class="ep-freq">Every conversation</div></div>
+      <div class="earpoint-card"><span class="ep-icon">&#128187;</span><div class="ep-name">App &amp; Notifications</div><div class="ep-detail">Mini-MOGOs for app sounds</div><div class="ep-freq">Every interaction</div></div>
+    </div>
+
+    <div class="earpoints-callout">
+      <div class="callout-icon">&#127911;</div>
+      <div class="callout-text">
+        <h3>Mastercard: From One MOGO to Cultural Integration</h3>
+        <p>Deployed one MOGO across all earpoints, then partnered with musicians to <strong>embed sonic DNA into original songs</strong> people choose to listen to. Won <strong>Best Audio Brand 5 years running</strong> (2020–2024).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CASE STUDIES
+     ============================================================ -->
+<section id="case-studies" class="section-dark">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label" style="color:#a78bfa;">Case Studies</div>
+    <h2 style="color:white;">Hear the <em style="color:#a78bfa;">Proof</em></h2>
+    <p class="desc">These MOGOs were created by BrandMusiq for the world's biggest brands. Mogoverse brings the same quality to every business.</p>
+
+    <div class="video-grid">
+      <div class="video-card" onclick="openVideoModal('bSlN694crNY')">
+        <div class="thumb"><img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard sonic identity MOGO" loading="lazy"><div class="play-btn"></div></div>
+        <div class="info"><h3>Mastercard</h3><p>Best Audio Brand 5 years running. 57M outlets. 500M+ earpoints/year.</p></div>
+      </div>
+      <div class="video-card" onclick="openVideoModal('C2YEn8aDOmo')">
+        <div class="thumb"><img src="https://img.youtube.com/vi/C2YEn8aDOmo/hqdefault.jpg" alt="Zomato sonic identity MOGO" loading="lazy"><div class="play-btn"></div></div>
+        <div class="info"><h3>Zomato</h3><p>Sonic identity for orders, app sounds, and brand comms.</p></div>
+      </div>
+      <div class="video-card" onclick="openVideoModal('ACkQPHKuN7w')">
+        <div class="thumb"><img src="https://img.youtube.com/vi/ACkQPHKuN7w/hqdefault.jpg" alt="MG Motors sonic identity MOGO" loading="lazy"><div class="play-btn"></div></div>
+        <div class="info"><h3>MG Motors</h3><p>Anthemic sonic identity for the MG Hector launch.</p></div>
+      </div>
+      <div class="video-card" onclick="openVideoModal('B5M_5mEBL4Y')">
+        <div class="thumb"><img src="https://img.youtube.com/vi/B5M_5mEBL4Y/hqdefault.jpg" alt="Vistara sonic identity" loading="lazy"><div class="play-btn"></div></div>
+        <div class="info"><h3>Vistara</h3><p>Sensorial airline experience — compassion and freedom.</p></div>
+      </div>
+      <div class="video-card" onclick="openVideoModal('BiTJmnK4oj4')">
+        <div class="thumb"><img src="https://img.youtube.com/vi/BiTJmnK4oj4/hqdefault.jpg" alt="Raymond sonic identity" loading="lazy"><div class="play-btn"></div></div>
+        <div class="info"><h3>Raymond</h3><p>Classical heritage reimagined for modern brand relevance.</p></div>
+      </div>
+      <div class="video-card" onclick="openVideoModal('RvyRcxuxuP0')">
+        <div class="thumb"><img src="https://img.youtube.com/vi/RvyRcxuxuP0/hqdefault.jpg" alt="RCB sonic identity" loading="lazy"><div class="play-btn"></div></div>
+        <div class="info"><h3>Royal Challengers Bangalore</h3><p>The iconic fan chant reverberating across India.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeVideoModal()">&times;</button>
+    <iframe id="videoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
+<!-- ============================================================
+     ROI CALCULATOR
+     ============================================================ -->
+<section id="calculator" class="section" style="background:#f5f3ff;max-width:none;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="section-label">Free Tool</div>
+      <h2>Calculate Your Sonic Branding <em>ROI</em></h2>
+      <p class="desc" style="max-width:600px;margin:0 auto;">The first sonic branding ROI calculator — every number backed by published research from MusicGrid, SoundOut, and Sixieme Son.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+      <div style="background:white;border-radius:16px;padding:32px;border:1px solid #eee;">
+        <h3 style="font-size:18px;font-weight:700;margin-bottom:24px;">Your Brand Details</h3>
+
+        <div style="margin-bottom:20px;">
+          <label style="font-size:13px;font-weight:600;color:#666;display:block;margin-bottom:6px;">Industry</label>
+          <select id="calcIndustry" onchange="updateCalc()" style="width:100%;padding:12px 16px;border:2px solid #e5e5e5;border-radius:8px;font-size:15px;font-family:Inter,sans-serif;background:white;cursor:pointer;">
+            <option value="retail">Retail &amp; E-Commerce</option>
+            <option value="finance">Financial Services</option>
+            <option value="tech">Technology</option>
+            <option value="fmcg">FMCG / Consumer Goods</option>
+            <option value="hospitality">Hospitality &amp; Travel</option>
+            <option value="media">Media &amp; Entertainment</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="font-size:13px;font-weight:600;color:#666;display:block;margin-bottom:6px;">Annual Marketing Budget</label>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <input type="range" id="calcBudget" min="10000" max="10000000" value="500000" step="10000" onchange="updateCalc()" oninput="updateCalc()" style="flex:1;">
+            <span id="calcBudgetLabel" style="font-size:16px;font-weight:700;min-width:80px;text-align:right;">$500K</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <label style="font-size:13px;font-weight:600;color:#666;display:block;margin-bottom:6px;">Monthly Customer Impressions</label>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <input type="range" id="calcImpressions" min="10000" max="50000000" value="1000000" step="50000" onchange="updateCalc()" oninput="updateCalc()" style="flex:1;">
+            <span id="calcImpressionsLabel" style="font-size:16px;font-weight:700;min-width:80px;text-align:right;">1M</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom:8px;">
+          <label style="font-size:13px;font-weight:600;color:#666;display:block;margin-bottom:10px;">Audio Touchpoints (select all that apply)</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="calcTouchpoints">
+            <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 12px;border:1px solid #eee;border-radius:8px;"><input type="checkbox" checked onchange="updateCalc()"> TV/Video Ads</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 12px;border:1px solid #eee;border-radius:8px;"><input type="checkbox" checked onchange="updateCalc()"> Social Media</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 12px;border:1px solid #eee;border-radius:8px;"><input type="checkbox" onchange="updateCalc()"> Podcast/Radio</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 12px;border:1px solid #eee;border-radius:8px;"><input type="checkbox" onchange="updateCalc()"> App/Notifications</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 12px;border:1px solid #eee;border-radius:8px;"><input type="checkbox" onchange="updateCalc()"> IVR/Hold Music</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;padding:8px 12px;border:1px solid #eee;border-radius:8px;"><input type="checkbox" onchange="updateCalc()"> In-Store/Events</label>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:linear-gradient(135deg,#1a1a2e,#2d1b69);border-radius:16px;padding:32px;color:white;margin-bottom:16px;">
+          <h3 style="font-size:18px;font-weight:700;margin-bottom:24px;color:white;">Your Estimated ROI</h3>
+          <div style="margin-bottom:24px;">
+            <div style="font-size:13px;color:#a78bfa;font-weight:600;margin-bottom:4px;">Brand Recall Lift <span class="calc-source" title="Source: +96% brand recall with sonic vs visual alone (MusicGrid/Ipsos)" style="cursor:help;font-size:11px;color:#888;border-bottom:1px dotted #888;margin-left:4px;">Source</span></div>
+            <div id="calcRecall" style="font-size:36px;font-weight:900;color:#a78bfa;">+48%</div>
+          </div>
+          <div style="margin-bottom:24px;">
+            <div style="font-size:13px;color:#a78bfa;font-weight:600;margin-bottom:4px;">Ad Effectiveness Gain <span class="calc-source" title="Source: +138% ad effectiveness with sonic assets (Sixieme Son)" style="cursor:help;font-size:11px;color:#888;border-bottom:1px dotted #888;margin-left:4px;">Source</span></div>
+            <div id="calcEffectiveness" style="font-size:36px;font-weight:900;color:#a78bfa;">+69%</div>
+          </div>
+          <div style="margin-bottom:24px;">
+            <div style="font-size:13px;color:#a78bfa;font-weight:600;margin-bottom:4px;">Estimated Annual Value <span class="calc-source" title="Source: Based on impression reach x recall lift x industry conversion rate" style="cursor:help;font-size:11px;color:#888;border-bottom:1px dotted #888;margin-left:4px;">Source</span></div>
+            <div id="calcValue" style="font-size:36px;font-weight:900;color:#10b981;">$0</div>
+          </div>
+          <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;">
+            <div style="font-size:13px;color:#999;margin-bottom:8px;">Cost Comparison</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div style="background:rgba(239,68,68,0.1);border-radius:8px;padding:12px;text-align:center;">
+                <div style="font-size:11px;color:#ef4444;font-weight:600;margin-bottom:4px;">Agency</div>
+                <div style="font-size:20px;font-weight:900;color:#ef4444;">$15K–$500K</div>
+                <div style="font-size:11px;color:#999;">one-time</div>
+              </div>
+              <div style="background:rgba(16,185,129,0.1);border-radius:8px;padding:12px;text-align:center;">
+                <div style="font-size:11px;color:#10b981;font-weight:600;margin-bottom:4px;">Mogoverse</div>
+                <div style="font-size:20px;font-weight:900;color:#10b981;">$948/yr</div>
+                <div style="font-size:11px;color:#999;">$79/mo Pro plan</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="background:white;border-radius:12px;padding:20px;border:1px solid #eee;text-align:center;">
+          <p style="font-size:14px;font-weight:600;margin-bottom:10px;">Get a detailed ROI report for your brand</p>
+          <div class="form-row">
+            <input type="email" id="calcEmail" placeholder="Your work email" aria-label="Email for ROI report">
+            <button class="btn-purple" onclick="captureCalcEmail()">Send Report</button>
+          </div>
+          <div id="calcEmailSuccess" style="display:none;color:#10b981;font-size:14px;font-weight:600;margin-top:8px;">Report requested! We'll be in touch.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRICING
+     ============================================================ -->
+<section id="pricing" class="section" style="text-align:center;">
+  <div class="section-label">Pricing</div>
+  <h2>Enterprise Quality. <em>Startup Pricing.</em></h2>
+  <p class="desc" style="max-width:600px;margin:0 auto 16px;">Agencies charge $15,000–$500,000 for a sonic identity. Mogoverse gives you the same quality, powered by AI.</p>
+  <p style="font-size:14px;color:#ef4444;font-weight:700;margin-bottom:48px;">You pay $79/mo. Agencies charge $15K–$500K.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1000px;margin:0 auto;">
+    <div style="background:white;border:2px solid #eee;border-radius:16px;padding:32px 24px;text-align:center;">
+      <div style="font-size:13px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Free</div>
+      <div style="font-size:42px;font-weight:900;color:#1a1a2e;margin-bottom:4px;">$0</div>
+      <div style="font-size:13px;color:#999;margin-bottom:24px;">forever</div>
+      <ul style="list-style:none;text-align:left;font-size:14px;color:#666;display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> 3 AI generations</li>
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Watermarked output</li>
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Brand personality quiz</li>
+      </ul>
+      <a href="#lead-section" onclick="scrollToLead(event)" class="btn-primary" style="display:block;text-decoration:none;text-align:center;">Try Free</a>
+    </div>
+
+    <div style="background:white;border:2px solid #eee;border-radius:16px;padding:32px 24px;text-align:center;">
+      <div style="font-size:13px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Starter</div>
+      <div style="font-size:42px;font-weight:900;color:#1a1a2e;margin-bottom:4px;">$19</div>
+      <div style="font-size:13px;color:#999;margin-bottom:24px;">per month</div>
+      <ul style="list-style:none;text-align:left;font-size:14px;color:#666;display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> 20 AI generations/mo</li>
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Unwatermarked export</li>
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Commercial license</li>
+      </ul>
+      <a href="#lead-section" onclick="scrollToLead(event)" class="btn-primary" style="display:block;text-decoration:none;text-align:center;">Get Started</a>
+    </div>
+
+    <div style="background:#6d28d9;border:2px solid #6d28d9;border-radius:16px;padding:32px 24px;text-align:center;position:relative;color:white;">
+      <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:white;font-size:11px;font-weight:700;padding:4px 16px;border-radius:20px;text-transform:uppercase;letter-spacing:1px;">Most Popular</div>
+      <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Pro</div>
+      <div style="font-size:42px;font-weight:900;color:white;margin-bottom:4px;">$79</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:24px;">per month</div>
+      <ul style="list-style:none;text-align:left;font-size:14px;color:rgba(255,255,255,0.9);display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#86efac;">&#10003;</span> Unlimited generations</li>
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#86efac;">&#10003;</span> MOGO + MOGOSCAPE</li>
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#86efac;">&#10003;</span> Brand audio guidelines</li>
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#86efac;">&#10003;</span> Full commercial rights</li>
+      </ul>
+      <a href="#lead-section" onclick="scrollToLead(event)" style="display:block;background:white;color:#6d28d9;padding:14px 28px;border-radius:6px;text-decoration:none;font-weight:700;font-size:15px;">Get Early Access</a>
+    </div>
+
+    <div style="background:white;border:2px solid #eee;border-radius:16px;padding:32px 24px;text-align:center;">
+      <div style="font-size:13px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Business</div>
+      <div style="font-size:42px;font-weight:900;color:#1a1a2e;margin-bottom:4px;">$199</div>
+      <div style="font-size:13px;color:#999;margin-bottom:24px;">per month</div>
+      <ul style="list-style:none;text-align:left;font-size:14px;color:#666;display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Everything in Pro</li>
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Team collaboration</li>
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Audio asset management</li>
+        <li style="padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:#10b981;">&#10003;</span> Priority support</li>
+      </ul>
+      <a href="#lead-section" onclick="scrollToLead(event)" class="btn-primary" style="display:block;text-decoration:none;text-align:center;">Contact Sales</a>
+    </div>
+  </div>
+  <p style="margin-top:24px;font-size:14px;color:#999;">Enterprise ($999/mo) — <a href="#lead-section" onclick="scrollToLead(event)" style="color:#6d28d9;">Contact us</a> for custom integrations, API access, and dedicated support.</p>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section id="faq" class="section" style="max-width:none;background:#fafafa;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="section-label">FAQ</div>
+      <h2>Frequently Asked <em>Questions</em></h2>
+    </div>
+
+    <div id="faqAccordion">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>What is sonic branding?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p><strong>Sonic branding is the strategic use of sound to reinforce brand identity across every customer touchpoint.</strong> It includes sonic logos (short audio signatures like Intel's bong or Netflix's ta-dum), brand music, notification sounds, and audio guidelines. The global sonic branding market is valued at $1.12 billion (2024) and growing at 13.9% CAGR.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>How much does sonic branding cost?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p><strong>Traditional sonic branding agencies charge $15,000 to $500,000+ for a single sonic identity.</strong> Timeline: 3–6 months. Mogoverse changes this: using AI trained on BrandMusiq's 14-year methodology, you can create a brand-aligned sonic identity starting at $0 (free tier) up to $199/month for teams.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>What is a MOGO?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p><strong>A MOGO (Musical Logo) is a short audio signature — typically 3 seconds — that captures a brand's essence in sound.</strong> Coined and trademarked by BrandMusiq. Mastercard's MOGO is heard 500M+ times per year across 57 million merchant outlets.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>How is Mogoverse different from Suno or Epidemic Sound?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p><strong>Suno and Epidemic Sound generate generic music. Mogoverse generates YOUR brand's music.</strong> Mogoverse occupies the empty middle: AI-powered, brand-specific sonic identity creation at $0–199/month, trained on BrandMusiq's methodology.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>What ROI can I expect from sonic branding?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p><strong>Sonic branding delivers measurable ROI.</strong> Published research shows: +96% brand recall vs visual-only (MusicGrid/Ipsos), +138% advertising effectiveness (Sixieme Son), +77% consumer trust (Mastercard/GfK), and +20% purchase intent in retail.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>Is Mogoverse's music copyright safe?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a"><p><strong>Yes — every piece of music generated by Mogoverse is 100% original, AI-created, and comes with full commercial rights.</strong> No copyright claims, no Content ID strikes, no royalty payments.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FINAL CTA
+     ============================================================ -->
+<div class="final-cta">
+  <h2>Ready to Give Your Brand <em>a Voice?</em></h2>
+  <p class="subtitle">Create your brand's unique sonic identity in minutes.</p>
+  <a href="#lead-section" onclick="scrollToLead(event)" style="display:inline-block;padding:16px 36px;background:#6d28d9;color:white;font-size:16px;font-weight:700;border-radius:8px;text-decoration:none;letter-spacing:0.2px;transition:all 0.3s;">Get Early Access &rarr;</a>
+  <p class="guarantee">Powered by 14 years of BrandMusiq methodology. 40+ brands. 500M+ annual earpoints.</p>
+</div>
+
+<!-- ============================================================
+     FOOTER — loaded as component
+     ============================================================ -->
+<div id="footerComponent"></div>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="../assets/js/tracking.js"></script>
+<script src="../assets/js/components.js"></script>
+<script src="../assets/js/lead-form.js" defer></script>
+<script src="../assets/js/leads.js" defer></script>
+
+<script>
+/* ============================================================
+   Video Hero — 30-second loop logic
+   ============================================================ */
+(function() {
+  var video = document.getElementById('heroVideo');
+  if (!video) return;
+
+  video.addEventListener('timeupdate', function() {
+    if (video.currentTime >= 30) {
+      video.currentTime = 0;
+    }
+  });
+})();
+
+/* ============================================================
+   Scroll-based volume fade — video out = music out
+   ============================================================ */
+(function() {
+  var video = document.getElementById('heroVideo');
+  var hero = document.querySelector('.video-hero');
+  if (!video || !hero) return;
+
+  window.addEventListener('scroll', function() {
+    var rect = hero.getBoundingClientRect();
+    var heroH = hero.offsetHeight;
+    var visible = Math.max(0, Math.min(1, (rect.bottom) / heroH));
+    video.volume = visible;
+  }, { passive: true });
+})();
+
+/* ============================================================
+   Sound Toggle — unmute/mute hero video
+   ============================================================ */
+function toggleSound() {
+  var video = document.getElementById('heroVideo');
+  var btn = document.getElementById('soundToggle');
+  var icon = document.getElementById('soundIcon');
+
+  if (!video) return;
+
+  if (video.muted) {
+    video.muted = false;
+    btn.classList.add('unmuted');
+    icon.innerHTML = '&#128266;';
+  } else {
+    video.muted = true;
+    btn.classList.remove('unmuted');
+    icon.innerHTML = '&#128263;';
+  }
+}
+
+/* ============================================================
+   Scroll to lead form + auto-focus name input
+   ============================================================ */
+function scrollToLead(e) {
+  e.preventDefault();
+  var section = document.getElementById('lead-section');
+  if (!section) return;
+  section.scrollIntoView({ behavior: 'smooth' });
+  setTimeout(function() {
+    var nameInput = section.querySelector('input[name="name"], input[type="text"]');
+    if (nameInput) nameInput.focus();
+  }, 700);
+}
+
+
+/* ============================================================
+   FOMO typing animation — cycles through phrases
+   ============================================================ */
+(function() {
+  var phrases = ['Your competitor already did.', 'Your brand is next.', 'Can you hear your brand?', "Don't get left on mute."];
+  var el = document.getElementById('fomoText');
+  if (!el) return;
+
+  var phraseIdx = 0;
+  var charIdx = 0;
+  var deleting = false;
+
+  function tick() {
+    var phrase = phrases[phraseIdx];
+
+    if (!deleting) {
+      charIdx++;
+      el.textContent = phrase.substring(0, charIdx);
+      if (charIdx === phrase.length) {
+        setTimeout(function() { deleting = true; tick(); }, 2000);
+        return;
+      }
+      setTimeout(tick, 80);
+    } else {
+      charIdx--;
+      el.textContent = phrase.substring(0, charIdx);
+      if (charIdx === 0) {
+        deleting = false;
+        phraseIdx = (phraseIdx + 1) % phrases.length;
+        setTimeout(tick, 400);
+        return;
+      }
+      setTimeout(tick, 40);
+    }
+  }
+
+  setTimeout(tick, 1500);
+})();
+
+/* ============================================================
+   Nav scroll — transparent to solid transition
+   ============================================================ */
+(function() {
+  var nav = document.querySelector('nav.video-nav');
+  if (!nav) return;
+
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 80) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+})();
+
+/* ============================================================
+   Video Modal (YouTube embeds)
+   ============================================================ */
+function openVideoModal(videoId) {
+  var modal = document.getElementById('videoModal');
+  var iframe = document.getElementById('videoIframe');
+  iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&modestbranding=1&rel=0';
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+  var modal = document.getElementById('videoModal');
+  var iframe = document.getElementById('videoIframe');
+  iframe.src = '';
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('video-modal')) closeVideoModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeVideoModal();
+});
+
+/* ============================================================
+   ROI Calculator Logic
+   ============================================================ */
+var industryRates = {
+  retail: 0.025, finance: 0.015, tech: 0.02, fmcg: 0.03,
+  hospitality: 0.018, media: 0.022, other: 0.02
+};
+
+var calcInitialized = false;
+
+function updateCalc() {
+  if (!calcInitialized) {
+    calcInitialized = true;
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({ event: 'calculator_started' });
+  }
+
+  var budget = parseInt(document.getElementById('calcBudget').value);
+  var impressions = parseInt(document.getElementById('calcImpressions').value);
+  var industry = document.getElementById('calcIndustry').value;
+  var checkboxes = document.querySelectorAll('#calcTouchpoints input[type="checkbox"]');
+  var touchpoints = 0;
+  checkboxes.forEach(function(cb) { if (cb.checked) touchpoints++; });
+
+  var budgetLabel = budget >= 1000000 ? '$' + (budget / 1000000).toFixed(1) + 'M' : '$' + Math.round(budget / 1000) + 'K';
+  document.getElementById('calcBudgetLabel').textContent = budgetLabel;
+
+  var impLabel = impressions >= 1000000 ? (impressions / 1000000).toFixed(1) + 'M' : Math.round(impressions / 1000) + 'K';
+  document.getElementById('calcImpressionsLabel').textContent = impLabel;
+
+  var baseRecall = 96;
+  var touchpointMultiplier = Math.min(touchpoints / 6, 1);
+  var recallLift = Math.round(baseRecall * (0.3 + 0.7 * touchpointMultiplier));
+  document.getElementById('calcRecall').textContent = '+' + recallLift + '%';
+
+  var baseEffectiveness = 138;
+  var effectivenessLift = Math.round(baseEffectiveness * (0.5 + 0.5 * touchpointMultiplier));
+  document.getElementById('calcEffectiveness').textContent = '+' + effectivenessLift + '%';
+
+  var convRate = industryRates[industry] || 0.02;
+  var annualImpressions = impressions * 12;
+  var recallFactor = recallLift / 100;
+  var incrementalConversions = annualImpressions * recallFactor * convRate * 0.01;
+  var avgValue = Math.max(20, Math.min(200, budget / annualImpressions * 100));
+  var annualValue = Math.round(incrementalConversions * avgValue);
+  annualValue = Math.max(annualValue, Math.round(budget * 0.05));
+
+  var formattedValue = annualValue >= 1000000 ? '$' + (annualValue / 1000000).toFixed(1) + 'M' :
+                       annualValue >= 1000 ? '$' + Math.round(annualValue / 1000) + 'K' :
+                       '$' + annualValue;
+  document.getElementById('calcValue').textContent = formattedValue;
+
+  if (touchpoints > 0) {
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({ event: 'calculator_completed', industry: industry, budget: budget, touchpoints: touchpoints });
+  }
+}
+
+function captureCalcEmail() {
+  var email = document.getElementById('calcEmail').value.trim();
+  if (!email || email.indexOf('@') === -1) {
+    document.getElementById('calcEmail').style.borderColor = '#ef4444';
+    return;
+  }
+  document.getElementById('calcEmailSuccess').style.display = 'block';
+  document.getElementById('calcEmail').disabled = true;
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({ event: 'calculator_email_captured', source: 'roi_calculator' });
+  if (typeof mogoTrackEmailCaptured === 'function') mogoTrackEmailCaptured(email);
+}
+
+document.addEventListener('DOMContentLoaded', updateCalc);
+
+/* ============================================================
+   FAQ Accordion
+   ============================================================ */
+function toggleFaq(btn) {
+  var item = btn.parentElement;
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(fi) {
+    fi.classList.remove('open');
+    fi.querySelector('.faq-icon').textContent = '+';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    btn.querySelector('.faq-icon').textContent = '\u2212';
+  }
+}
+
+/* ============================================================
+   Load shared components
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', function() {
+  mogoLoadComponent('quizComponent', mogoComponentPath('quiz.html'));
+  mogoLoadComponent('logoWallComponent', mogoComponentPath('logo-wall.html'), initLogoAudio);
+  mogoLoadComponent('testimonialsComponent', mogoComponentPath('testimonials.html'));
+  mogoLoadComponent('footerComponent', mogoComponentPath('footer.html'));
+});
+
+/* ============================================================
+   Logo Wall MOGO Audio — play brand sound on click
+   Runs as callback after logo-wall component loads
+   ============================================================ */
+var _mogoAudioMap = {
+  'mastercard':       'Mastercard MOGO®️.mp3',
+  'amazon-pay':       'Amazon Pay MOGO®.mp3',
+  'toyota':           'Toyota MOGO®.mp3',
+  '7up':              '7UP MOGO®.mp3',
+  'kraft':            'ABC Soy Kraft Heinz-Mogo-(Mid).mp3',
+  'red-label':        'RED LABEL MOGO®️ .mp3',
+  'reliance-smart':   'Reliance Smart MOGO®.mp3',
+  'jio-bp':           'Jio BP MOGO Big.mp3',
+  'tata':             'Tata Neu MOGO® 2s (1).mp3',
+  'hdfc-bank':        'HDFC-Approved Mogo-131115.mp3',
+  'infosys':          'Infosys MOGO®.mp3',
+  'sbi-life':         'SBI Life-MOGO® 5 Sec_V4.mp3',
+  'bru':              'Bru Mogo®.mp3',
+  'asian-paints':     'Asian Paints MOGO®️.mp3',
+  'zomato':           'Zomato MOGO®-Voice.mp3',
+  'vivo':             'VIVO Approved MOGO 241122.mp3',
+  'mg-motors':        'MG-MOGO® 3 Sec V2.mp3',
+  'hdfc-life':        'HDFC Life Piano MOGO®-050119.mp3',
+  'aditya-birla':     'Aditya Birla Capital Approved MOGO®.mp3',
+  'saffola':          'Saffola Approved MOGO® 271023.mp3',
+  'tata-salt':        'Tata Salt Mogo Final.mp3',
+  'vistara':          'Vistara-MOGO-Voice-101214.mp3',
+  'fortune':          'Fortune Approved MOGO 220323.mp3',
+  'raymond':          'Raymond MOGO® Piano.mp3',
+  'truecaller':       'Truecaller Approved MOGO®️.mp3',
+  'bharat-connect':   'BharatConnect MOGO® 270824.mp3',
+  'rcb':              'RCB MOGO®️ .mp3',
+  'nippon-india':     'Nippon India Mutual Fund MOGO® with Vox-240424.mp3',
+  'federal-bank':     'Federal Bank MOGO.mp3',
+  'bkt-tyres':        'BKT MOGO®️ -180226.mp3',
+  'kempegowda-airport': 'BIAL MOGO®️.mp3',
+  'rupeek':           'Rupeek.mp3',
+  'freshpik':         'Freshpik MOGO®.mp3'
+};
+
+/* HQ logo replacements */
+var _hqLogos = {
+  'raymond':      'assets/logos/Raymond_logo_hq.png',
+  'vistara':      'assets/logos/Vistara_Logo_hq.png',
+  'asian-paints': 'assets/logos/asian-paints-vector-logo_hq.svg'
+};
+
+var _currentMogoAudio = null;
+var _currentMogoCell = null;
+var _audioCtx = null;
+var _analyser = null;
+var _beatRAF = null;
+var _sourceCache = new WeakMap();
+
+function _ensureAudioCtx() {
+  if (!_audioCtx) {
+    _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    _analyser = _audioCtx.createAnalyser();
+    _analyser.fftSize = 256;
+    _analyser.smoothingTimeConstant = 0.4;
+    _analyser.connect(_audioCtx.destination);
+  }
+  if (_audioCtx.state === 'suspended') _audioCtx.resume();
+}
+
+function _startBeatLoop(cell) {
+  var dataArray = new Uint8Array(_analyser.frequencyBinCount);
+  var img = cell.querySelector('img');
+  var icon = cell.querySelector('.mogo-play-indicator');
+  if (!img) return;
+
+  /* Track energy for beat detection */
+  var prevEnergy = 0;
+  var threshold = 0.25;
+
+  function loop() {
+    if (!_currentMogoAudio || _currentMogoAudio.paused) {
+      img.style.transform = '';
+      if (icon) icon.style.transform = '';
+      return;
+    }
+    _analyser.getByteFrequencyData(dataArray);
+
+    /* Compute energy from low-mid frequencies (bass = beats) */
+    var sum = 0;
+    var count = Math.min(32, dataArray.length);
+    for (var i = 0; i < count; i++) sum += dataArray[i];
+    var energy = sum / (count * 255); /* 0..1 */
+
+    /* Beat = energy spike above threshold relative to previous frame */
+    var delta = energy - prevEnergy;
+    var isBeat = delta > threshold && energy > 0.25;
+    prevEnergy = energy;
+
+    /* Amplified bounce: scale up to 1.35x, translate up to -10px on beats */
+    var scale = 1 + energy * 0.35;
+    var ty = isBeat ? -10 : -energy * 5;
+    var t = 'scale(' + scale.toFixed(3) + ') translateY(' + ty.toFixed(1) + 'px)';
+    img.style.transform = t;
+
+    /* Music icon: same bounce + rotation for playful feel */
+    if (icon) {
+      var rot = isBeat ? (Math.random() > 0.5 ? 15 : -15) : energy * 8;
+      icon.style.transform = 'scale(' + scale.toFixed(3) + ') translateY(' + ty.toFixed(1) + 'px) rotate(' + rot.toFixed(0) + 'deg)';
+    }
+
+    _beatRAF = requestAnimationFrame(loop);
+  }
+  _beatRAF = requestAnimationFrame(loop);
+}
+
+function _stopBeatLoop(cell) {
+  if (_beatRAF) {
+    cancelAnimationFrame(_beatRAF);
+    _beatRAF = null;
+  }
+  var img = cell ? cell.querySelector('img') : null;
+  var icon = cell ? cell.querySelector('.mogo-play-indicator') : null;
+  if (img) img.style.transform = '';
+  if (icon) icon.style.transform = '';
+}
+
+function initLogoAudio() {
+  var bp = (window.location.pathname.indexOf('/mockups/') !== -1) ? '../' : '';
+
+  /* Fix image paths — component script doesn't know about /mockups/ */
+  if (bp) {
+    var imgs = document.querySelectorAll('#logoGrid img[data-src]');
+    for (var i = 0; i < imgs.length; i++) {
+      imgs[i].src = bp + imgs[i].getAttribute('data-src');
+    }
+  }
+
+  var cells = document.querySelectorAll('#logoGrid .logo-cell');
+
+  cells.forEach(function(cell) {
+    var brand = cell.getAttribute('data-brand');
+    if (!brand) return;
+
+    /* Replace with HQ logo if available */
+    if (_hqLogos[brand]) {
+      var img = cell.querySelector('img');
+      if (img) img.src = bp + _hqLogos[brand];
+    }
+
+    /* Add audio play indicator + hover/click behavior */
+    if (_mogoAudioMap[brand]) {
+      cell.style.cursor = 'pointer';
+
+      var indicator = document.createElement('div');
+      indicator.className = 'mogo-play-indicator';
+      indicator.innerHTML = '&#9835;';
+      cell.appendChild(indicator);
+
+      /* Play MOGO helper */
+      (function(c, b) {
+        function playMogo() {
+          var file = _mogoAudioMap[b];
+          if (!file) return;
+
+          /* If same brand is already playing, do nothing (hover re-enter) */
+          if (_currentMogoCell === c && _currentMogoAudio && !_currentMogoAudio.paused) return;
+
+          /* Stop any currently playing */
+          if (_currentMogoAudio) {
+            _currentMogoAudio.pause();
+            _stopBeatLoop(_currentMogoCell);
+            if (_currentMogoCell) _currentMogoCell.classList.remove('mogo-playing');
+          }
+
+          _ensureAudioCtx();
+
+          _currentMogoAudio = new Audio(bp + 'assets/extracted-audio/mogos/' + file);
+          _currentMogoAudio.crossOrigin = 'anonymous';
+          _currentMogoCell = c;
+          c.classList.add('mogo-playing');
+
+          /* Connect to Web Audio API analyser (only once per Audio element) */
+          if (!_sourceCache.has(_currentMogoAudio)) {
+            var source = _audioCtx.createMediaElementSource(_currentMogoAudio);
+            source.connect(_analyser);
+            _sourceCache.set(_currentMogoAudio, source);
+          }
+
+          _currentMogoAudio.play().then(function() {
+            _startBeatLoop(c);
+          }).catch(function() {
+            c.classList.remove('mogo-playing');
+          });
+
+          _currentMogoAudio.addEventListener('ended', function() {
+            _stopBeatLoop(c);
+            c.classList.remove('mogo-playing');
+            _currentMogoCell = null;
+          });
+        }
+
+        function pauseMogo() {
+          if (_currentMogoCell === c && _currentMogoAudio && !_currentMogoAudio.paused) {
+            _currentMogoAudio.pause();
+            _stopBeatLoop(c);
+            c.classList.remove('mogo-playing');
+            _currentMogoCell = null;
+          }
+        }
+
+        /* Hover: play on enter, pause on leave */
+        c.addEventListener('mouseenter', playMogo);
+        c.addEventListener('mouseleave', pauseMogo);
+
+        /* Click: toggle play/pause (for mobile + intentional interaction) */
+        c.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (_currentMogoCell === c && _currentMogoAudio && !_currentMogoAudio.paused) {
+            pauseMogo();
+          } else {
+            playMogo();
+          }
+        });
+      })(cell, brand);
+    }
+  });
+}
+</script>
+
+<!-- Logo wall audio play styles -->
+<style>
+  .mogo-play-indicator {
+    position: absolute;
+    bottom: 6px;
+    left: 8px;
+    font-size: 12px;
+    color: #6d28d9;
+    opacity: 0.3;
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+
+  .logo-cell:hover .mogo-play-indicator {
+    opacity: 0.7;
+  }
+
+  .logo-cell.mogo-playing {
+    background: #f5f3ff !important;
+    box-shadow: inset 0 0 0 2px #6d28d9 !important;
+  }
+
+  .logo-cell.mogo-playing .mogo-play-indicator {
+    opacity: 1;
+    color: #6d28d9;
+    transition: transform 0.08s ease-out;
+  }
+
+  .logo-cell.mogo-playing img {
+    opacity: 1 !important;
+    transition: transform 0.08s ease-out;
+  }
+</style>
+
+</body>
+</html>
