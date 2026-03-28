@@ -1,8 +1,24 @@
-<section id="quiz" class="section" style="background:#f5f3ff;max-width:none;text-align:center;">
+<style>
+/* [2026-03-28 21:00] Quiz adapts: compact in hero, full section standalone */
+.quiz-wrapper{text-align:center;font-family:'Inter',sans-serif;}
+.quiz-wrapper.quiz-standalone{background:#f5f3ff;padding:80px 60px;max-width:none;}
+.quiz-wrapper.quiz-inline{background:linear-gradient(135deg,#0f0a1e,#1a1a2e);border-radius:16px;padding:32px 28px;color:white;}
+.quiz-wrapper.quiz-inline .section-label{color:#a78bfa;}
+.quiz-wrapper.quiz-inline h2{font-size:24px;color:white;letter-spacing:-1px;margin-bottom:8px;}
+.quiz-wrapper.quiz-inline h2 em{color:#a78bfa;}
+.quiz-wrapper.quiz-inline .desc{color:#999;font-size:14px;margin-bottom:24px;}
+.quiz-wrapper.quiz-inline .quiz-option{color:#ccc;border-color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);}
+.quiz-wrapper.quiz-inline .quiz-option:hover{border-color:#a78bfa;background:rgba(109,40,217,0.15);}
+.quiz-wrapper.quiz-inline #quizFeedback{color:#ccc;}
+.quiz-wrapper.quiz-inline #quizPlayLabel{color:#888;}
+@media(max-width:768px){.quiz-wrapper.quiz-standalone{padding:60px 20px;}}
+</style>
+
+<div id="quizWrap" class="quiz-wrapper">
   <div style="max-width:700px;margin:0 auto;">
     <div class="section-label">Interactive Quiz</div>
     <h2>Can You Recognize These Brands <em>By Sound Alone?</em></h2>
-    <p class="desc" style="max-width:560px;margin:0 auto 40px;">
+    <p class="desc" style="max-width:560px;margin:0 auto 24px;">
       The world's most iconic brands are recognized in under 0.146 seconds — by sound. Test yourself.
     </p>
 
@@ -284,5 +300,13 @@
 
   /* Initialize */
   initQuiz();
+
+  /* [2026-03-28 21:00] Auto-detect mode: inline (in hero) vs standalone (full section) */
+  var wrap = document.getElementById('quizWrap');
+  if (wrap) {
+    var parent = wrap.parentElement;
+    var isInHero = parent && (parent.classList.contains('hero') || parent.closest('.hero'));
+    wrap.classList.add(isInHero ? 'quiz-inline' : 'quiz-standalone');
+  }
 })();
 </script>
