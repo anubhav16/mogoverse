@@ -25,35 +25,8 @@
   .hero-text .subtitle{font-size:18px;color:#666;line-height:1.7;margin-bottom:32px;max-width:480px;}
   .hero-text .subtitle strong{color:#1a1a2e;}
 
-  /* Lead form */
+  /* Form container */
   .form-container{max-width:440px;}
-  .form-fields{display:flex;flex-direction:column;gap:10px;}
-  .form-row{display:flex;gap:8px;}
-  .form-row input{flex:1;padding:14px 18px;border-radius:6px;border:2px solid #e5e5e5;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;}
-  .form-row input:focus{border-color:#6d28d9;}
-  .form-row input::placeholder{color:#bbb;}
-  .phone-row{display:flex;gap:8px;}
-  .phone-row .country-code{width:110px;flex:none;padding:14px 12px;border-radius:6px;border:2px solid #e5e5e5;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;}
-  .phone-row .country-code:focus{border-color:#6d28d9;}
-  .phone-row input[type="tel"]{flex:1;padding:14px 18px;border-radius:6px;border:2px solid #e5e5e5;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border 0.2s;background:white;color:#1a1a2e;}
-  .phone-row input[type="tel"]:focus{border-color:#6d28d9;}
-  .phone-row input[type="tel"]::placeholder{color:#bbb;}
-  .form-error{font-size:12px;color:#ef4444;margin-top:-4px;display:none;}
-  .cta-buttons{display:flex;gap:10px;margin-top:4px;}
-  .btn-primary{flex:1;padding:14px 28px;background:#1a1a2e;color:white;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s;font-family:'Inter',sans-serif;text-align:center;}
-  .btn-primary:hover{background:#6d28d9;}
-  .btn-secondary{flex:1;padding:14px 28px;background:white;color:#1a1a2e;border:2px solid #1a1a2e;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.2s;font-family:'Inter',sans-serif;text-align:center;}
-  .btn-secondary:hover{border-color:#6d28d9;color:#6d28d9;}
-  .cta-note{font-size:12px;color:#999;margin-top:8px;}
-  .usecase-prompt{font-size:13px;color:#999;margin-top:16px;margin-bottom:10px;}
-  .usecase-chips{display:flex;flex-wrap:wrap;gap:8px;}
-  .usecase-chip{padding:8px 16px;border:1.5px solid #e5e5e5;border-radius:20px;font-size:13px;font-weight:500;color:#666;cursor:pointer;transition:all 0.2s;background:white;font-family:'Inter',sans-serif;}
-  .usecase-chip:hover{border-color:#6d28d9;color:#6d28d9;background:#f5f3ff;}
-  .usecase-chip.selected{border-color:#6d28d9;background:#6d28d9;color:white;}
-  .success-msg{background:#f0fdf4;border:2px solid #86efac;border-radius:12px;padding:28px;text-align:center;}
-  .success-msg .check-icon{width:48px;height:48px;border-radius:50%;background:#10b981;color:white;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;margin:0 auto 12px;}
-  .success-msg h3{font-size:18px;font-weight:700;margin-bottom:8px;color:#1a1a2e;}
-  .success-msg p{font-size:14px;color:#666;}
 
   .hero-media{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.12);background:#000;aspect-ratio:16/9;}
   .hero-media iframe{width:100%;height:100%;border:none;display:block;}
@@ -140,12 +113,6 @@
     .section,.section-dark,.client-bar{padding:60px 20px;}
     .stats-bar{grid-template-columns:1fr 1fr;padding:40px 20px;}
     .problem-grid,.steps-grid,.comparison,.testimonials-grid,.video-grid{grid-template-columns:1fr;}
-    .form-row{flex-direction:column;}
-    .phone-row{flex-direction:row;}
-    .phone-row .country-code{width:100px;}
-    .cta-buttons{flex-direction:column;}
-    .usecase-chips{gap:6px;}
-    .usecase-chip{padding:6px 12px;font-size:12px;}
     .client-logos{gap:20px;}
     .client-logos img{height:22px;}
   }
@@ -184,8 +151,10 @@
   }
 </style>
 <!-- Mogoverse Tracking: GTM + Google Ads + UTM -->
+<link rel="stylesheet" href="../assets/css/lead-form.css">
 <script src="../assets/js/tracking.js"></script>
 <script src="../assets/js/leads.js"></script>
+<script src="../assets/js/lead-form.js" defer></script>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFX2NPMP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -207,52 +176,9 @@
 
     <!-- Lead capture form -->
     <div class="form-container" id="signup">
-      <div id="formFields" class="form-fields">
-        <div class="form-row">
-          <input type="text" id="name" placeholder="Your name">
-        </div>
-        <div class="phone-row">
-          <select id="country-code" class="country-code">
-            <option value="+91">🇮🇳 +91</option>
-            <option value="+1">🇺🇸 +1</option>
-            <option value="+44">🇬🇧 +44</option>
-            <option value="+971">🇦🇪 +971</option>
-            <option value="+65">🇸🇬 +65</option>
-            <option value="+61">🇦🇺 +61</option>
-            <option value="+49">🇩🇪 +49</option>
-            <option value="+81">🇯🇵 +81</option>
-            <option value="+86">🇨🇳 +86</option>
-            <option value="+33">🇫🇷 +33</option>
-            <option value="+55">🇧🇷 +55</option>
-            <option value="+27">🇿🇦 +27</option>
-            <option value="+234">🇳🇬 +234</option>
-            <option value="+254">🇰🇪 +254</option>
-          </select>
-          <input type="tel" id="phone" placeholder="Phone number">
-        </div>
-        <p class="form-error" id="phone-error">Please enter a valid phone number</p>
-        <div class="usecase-prompt">How can we help?</div>
-        <div class="usecase-chips" id="usecases">
-          <div class="usecase-chip" onclick="toggleChip(this)" data-value="audio-logo">Audio Logo</div>
-          <div class="usecase-chip" onclick="toggleChip(this)" data-value="ad-jingles">Ad Jingles</div>
-          <div class="usecase-chip" onclick="toggleChip(this)" data-value="hold-music">Hold Music</div>
-          <div class="usecase-chip" onclick="toggleChip(this)" data-value="podcast-intro">Podcast Intro</div>
-          <div class="usecase-chip" onclick="toggleChip(this)" data-value="social-reels">Social / Reels</div>
-          <div class="usecase-chip" onclick="toggleChip(this)" data-value="brand-identity">Full Sonic Identity</div>
-          <div class="usecase-chip" onclick="toggleChip(this)" data-value="other">Other</div>
-        </div>
-        <div class="cta-buttons">
-          <button class="btn-primary" onclick="submitForm('hero','demo')">Get a Demo</button>
-          <button class="btn-secondary" onclick="submitForm('hero','trial')">Get Started Free</button>
-        </div>
-        <p class="cta-note">No credit card required. Powered by BrandMusiq.</p>
-      </div>
-      <div id="formSuccess" class="success-msg" style="display:none;">
-        <div class="check-icon">✓</div>
-        <h3>You're in!</h3>
-        <p>We'll reach out shortly to walk you through Mogoverse.</p>
-      </div>
+      <div id="heroLeadForm"></div>
     </div>
+    <script>document.addEventListener('DOMContentLoaded', function(){ mogoRenderLeadForm('heroLeadForm', 'hero'); });</script>
   </div>
   <div class="hero-media">
     <div onclick="openVideo('bSlN694crNY')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard MOGO by BrandMusiq" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div>
@@ -472,267 +398,15 @@
   <h2>Your brand has a look.<br>Give it a sound that's <em>unmistakably yours.</em></h2>
   <p class="subtitle">Not another generic AI music tool. Mogoverse generates music that reflects who your brand is — because it learns who you are first. Free to start.</p>
   <div class="form-container">
-    <div id="formFieldsB" class="form-fields">
-      <div class="form-row">
-        <input type="text" id="name-b" placeholder="Your name">
-      </div>
-      <div class="phone-row">
-        <select id="country-code-b" class="country-code">
-          <option value="+91">🇮🇳 +91</option>
-          <option value="+1">🇺🇸 +1</option>
-          <option value="+44">🇬🇧 +44</option>
-          <option value="+971">🇦🇪 +971</option>
-          <option value="+65">🇸🇬 +65</option>
-          <option value="+61">🇦🇺 +61</option>
-          <option value="+49">🇩🇪 +49</option>
-          <option value="+81">🇯🇵 +81</option>
-          <option value="+86">🇨🇳 +86</option>
-          <option value="+33">🇫🇷 +33</option>
-          <option value="+55">🇧🇷 +55</option>
-          <option value="+27">🇿🇦 +27</option>
-          <option value="+234">🇳🇬 +234</option>
-          <option value="+254">🇰🇪 +254</option>
-        </select>
-        <input type="tel" id="phone-b" placeholder="Phone number">
-      </div>
-      <p class="form-error" id="phone-error-b">Please enter a valid phone number</p>
-      <div class="usecase-prompt">How can we help?</div>
-      <div class="usecase-chips" id="usecases-b">
-        <div class="usecase-chip" onclick="toggleChip(this)" data-value="audio-logo">Audio Logo</div>
-        <div class="usecase-chip" onclick="toggleChip(this)" data-value="ad-jingles">Ad Jingles</div>
-        <div class="usecase-chip" onclick="toggleChip(this)" data-value="hold-music">Hold Music</div>
-        <div class="usecase-chip" onclick="toggleChip(this)" data-value="podcast-intro">Podcast Intro</div>
-        <div class="usecase-chip" onclick="toggleChip(this)" data-value="social-reels">Social / Reels</div>
-        <div class="usecase-chip" onclick="toggleChip(this)" data-value="brand-identity">Full Sonic Identity</div>
-        <div class="usecase-chip" onclick="toggleChip(this)" data-value="other">Other</div>
-      </div>
-      <div class="cta-buttons">
-        <button class="btn-primary" onclick="submitForm('footer','demo')">Get a Demo</button>
-        <button class="btn-secondary" onclick="submitForm('footer','trial')">Get Started Free</button>
-      </div>
-      <p class="cta-note">No credit card required. Powered by BrandMusiq.</p>
-    </div>
-    <div id="formSuccessB" class="success-msg" style="display:none;">
-      <div class="check-icon">✓</div>
-      <h3>You're in!</h3>
-      <p>We'll reach out shortly to walk you through Mogoverse.</p>
-    </div>
+    <div id="footerLeadForm"></div>
   </div>
+  <script>document.addEventListener('DOMContentLoaded', function(){ mogoRenderLeadForm('footerLeadForm', 'footer'); });</script>
   <p class="guarantee" style="margin-top:20px;">Built on 10+ years of BrandMusiq's sonic branding expertise.</p>
 </section>
 
 <footer>&copy; 2026 Mogoverse — a <a href="https://brandmusiq.com" target="_blank">BrandMusiq</a> company. Asia's first and leading sonic branding agency.</footer>
 
-<script>
-// Country codes sorted longest first so +234 matches before +2
-var countryCodes = ['+971','+254','+234','+91','+86','+81','+65','+61','+55','+49','+44','+33','+27','+1'];
-
-// Strip spaces, dashes, parens — return only digits (and leading +)
-function cleanPhone(val) {
-  return val.replace(/[\s\-\(\)]/g, '');
-}
-
-// Extract country code from raw input if present, auto-set dropdown
-function extractCountryCode(phoneInput, codeSelect) {
-  var raw = cleanPhone(phoneInput.value);
-  if (raw.charAt(0) !== '+') return;
-  for (var i = 0; i < countryCodes.length; i++) {
-    if (raw.indexOf(countryCodes[i]) === 0) {
-      codeSelect.value = countryCodes[i];
-      // Remove the code from input, keep the rest
-      var rest = raw.substring(countryCodes[i].length);
-      phoneInput.value = rest;
-      return;
-    }
-  }
-}
-
-// Validate: 7-15 digits after stripping non-digits
-function isValidPhone(val) {
-  var digits = cleanPhone(val).replace(/\+/g, '').replace(/\D/g, '');
-  return digits.length >= 7 && digits.length <= 15;
-}
-
-// Auto-detect on input/paste for both forms
-['', '-b'].forEach(function(suffix) {
-  var phoneEl = document.getElementById('phone' + suffix);
-  var codeEl = document.getElementById('country-code' + suffix);
-  if (!phoneEl || !codeEl) return;
-  phoneEl.addEventListener('input', function() { extractCountryCode(phoneEl, codeEl); });
-  phoneEl.addEventListener('paste', function() {
-    setTimeout(function() { extractCountryCode(phoneEl, codeEl); }, 0);
-  });
-});
-
-// Use-case chip toggle (multi-select)
-function toggleChip(el) {
-  el.classList.toggle('selected');
-}
-
-function submitForm(src, intent) {
-  var suffix = src === 'footer' ? '-b' : '';
-  var phoneInput = document.getElementById('phone' + suffix);
-  var codeSelect = document.getElementById('country-code' + suffix);
-  var phoneError = document.getElementById('phone-error' + suffix);
-
-  // Clean up: strip any leftover country code the user typed
-  extractCountryCode(phoneInput, codeSelect);
-  var phone = cleanPhone(phoneInput.value).replace(/\+/g, '').replace(/\D/g, '');
-
-  // Reset
-  phoneInput.style.borderColor = '#e5e5e5';
-  phoneError.style.display = 'none';
-
-  if (!phone || phone.length < 7 || phone.length > 15) {
-    phoneInput.style.borderColor = '#ef4444';
-    phoneError.style.display = 'block';
-    phoneInput.focus();
-    return;
-  }
-
-  // Collect data
-  var code = codeSelect.value;
-  var name = document.getElementById('name' + suffix).value.trim();
-  var fullPhone = code + ' ' + phone;
-
-  // Collect selected use cases
-  var chipContainer = src === 'footer' ? 'usecases-b' : 'usecases';
-  var selected = document.querySelectorAll('#' + chipContainer + ' .usecase-chip.selected');
-  var usecases = [];
-  selected.forEach(function(c) { usecases.push(c.getAttribute('data-value')); });
-
-  // Track
-  if (typeof mogoTrackDemoBooked === 'function') mogoTrackDemoBooked(fullPhone);
-
-  // Submit lead to Google Sheet
-  mogoSubmitLead({ name: name, country_code: code, phone: phone, use_cases: usecases, form_type: 'contact', form_location: src });
-
-  // Show success
-  if (src === 'footer') {
-    document.getElementById('formFieldsB').style.display = 'none';
-    document.getElementById('formSuccessB').style.display = 'block';
-  } else {
-    document.getElementById('formFields').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-  }
-}
-</script>
-
-<!-- Video Popup Modal --><div id="videoModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;cursor:pointer;backdrop-filter:blur(6px);" onclick="if(event.target===this)closeVideo()"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:860px;"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.5);"><iframe id="videoFrame" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><button onclick="closeVideo()" style="position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:white;border:none;font-size:18px;font-weight:700;cursor:pointer;color:#1a1a2e;box-shadow:0 4px 16px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">X</button></div></div><script>function openVideo(id){document.getElementById('videoFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';document.getElementById('videoModal').style.display='block';document.body.style.overflow='hidden';}function closeVideo(){document.getElementById('videoFrame').src='';document.getElementById('videoModal').style.display='none';document.body.style.overflow='';}document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideo();});</script><!-- LEAD CAPTURE POPUPS — include before </body> -->
-
-<!-- 1. Timed Popup (15 seconds) -->
-<div id="timedPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9990;backdrop-filter:blur(4px);" onclick="if(event.target===this)closePopup('timedPopup')">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:white;border-radius:16px;padding:44px;max-width:460px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.25);text-align:center;">
-    <button onclick="closePopup('timedPopup')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#999;">✕</button>
-    <div style="font-size:48px;margin-bottom:12px;">🎧</div>
-    <h3 style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;color:#1a1a2e;">Hear your brand's sound — free</h3>
-    <p style="font-size:15px;color:#888;margin-bottom:24px;line-height:1.6;">Book a 15-min demo. We'll create a sample sonic identity for your brand — on the house. Powered by BrandMusiq's 40+ brand portfolio.</p>
-    <div style="display:flex;gap:8px;margin-bottom:8px;">
-      <input type="email" id="timed-email" placeholder="Work email" style="flex:1;padding:14px 16px;border:2px solid #e5e5e5;border-radius:8px;font-size:15px;outline:none;font-family:Inter,sans-serif;">
-      <button onclick="submitTimedPopup()" style="padding:14px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;">Book Free Demo</button>
-    </div>
-    <p style="font-size:12px;color:#bbb;">No spam. Unsubscribe anytime.</p>
-  </div>
-</div>
-
-<!-- 2. Exit Intent Popup -->
-<div id="exitPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9991;backdrop-filter:blur(4px);" onclick="if(event.target===this)closePopup('exitPopup')">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#1a1a2e;border-radius:16px;padding:44px;max-width:480px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.4);text-align:center;color:white;">
-    <button onclick="closePopup('exitPopup')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#666;">✕</button>
-    <div style="font-size:48px;margin-bottom:12px;">⏳</div>
-    <h3 style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;">Wait — don't leave without this</h3>
-    <p style="font-size:15px;color:#999;margin-bottom:8px;line-height:1.6;">Get a <strong style="color:#a78bfa;">free sonic brand audit</strong> — we'll analyze your current brand audio and show you what's missing. Only takes 5 minutes.</p>
-    <div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:12px;margin-bottom:20px;">
-      <p style="font-size:13px;color:#a78bfa;font-weight:600;">✓ Free audit &nbsp;·&nbsp; ✓ No commitment &nbsp;·&nbsp; ✓ Results in 24h</p>
-    </div>
-    <div style="display:flex;gap:8px;margin-bottom:8px;">
-      <input type="email" id="exit-email" placeholder="Work email" style="flex:1;padding:14px 16px;border:2px solid #333;border-radius:8px;font-size:15px;outline:none;background:#111;color:white;font-family:Inter,sans-serif;">
-      <button onclick="submitExitPopup()" style="padding:14px 24px;background:#7c5cfc;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;">Get Free Audit</button>
-    </div>
-    <p style="font-size:12px;color:#555;">Join 200+ brands already on the waitlist.</p>
-  </div>
-</div>
-
-<!-- 3. Sticky Bottom CTA Bar (appears on mobile after scroll) -->
-<div id="stickyCTA" style="display:none;position:fixed;bottom:0;left:0;width:100%;background:white;border-top:2px solid #eee;padding:12px 20px;z-index:9980;box-shadow:0 -4px 20px rgba(0,0,0,0.08);">
-  <div style="max-width:600px;margin:0 auto;display:flex;gap:8px;align-items:center;">
-    <div style="flex:1;">
-      <p style="font-size:14px;font-weight:700;color:#1a1a2e;margin:0;">Get your free sonic brand demo</p>
-      <p style="font-size:12px;color:#999;margin:2px 0 0;">Powered by BrandMusiq · No credit card</p>
-    </div>
-    <a href="#signup" onclick="closePopup('stickyCTA')" style="padding:12px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;font-family:Inter,sans-serif;">Book Demo</a>
-  </div>
-</div>
-
-<script>
-// State tracking
-var popupState = { timed: false, exit: false, anyFormSubmitted: false };
-
-// ====== 1. TIMED POPUP — 15 seconds ======
-setTimeout(function() {
-  if (!popupState.anyFormSubmitted && !popupState.timed) {
-    document.getElementById('timedPopup').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    popupState.timed = true;
-  }
-}, 15000);
-
-function submitTimedPopup() {
-  var email = document.getElementById('timed-email').value;
-  if (!email || !email.includes('@')) {
-    document.getElementById('timed-email').style.borderColor = '#ef4444';
-    return;
-  }
-  mogoTrackEmailCaptured(email);  mogoTrackAuditRequested(email);
-  mogoSubmitLead({ email: email, form_type: 'timed_popup' });
-  popupState.anyFormSubmitted = true;
-  var popup = document.getElementById('timedPopup').querySelector('div > div:first-child') || document.getElementById('timedPopup').children[0];
-  document.getElementById('timedPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:#1a1a2e;">You\'re in!</h3><p style="font-size:15px;color:#888;">We\'ll reach out within 24 hours to schedule your free demo.</p></div>';
-  setTimeout(function() { closePopup('timedPopup'); }, 2500);
-}
-
-// ====== 2. EXIT INTENT — mouse leaves viewport ======
-document.addEventListener('mouseout', function(e) {
-  if (e.clientY < 5 && !popupState.exit && !popupState.anyFormSubmitted) {
-    document.getElementById('exitPopup').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    popupState.exit = true;
-  }
-});
-
-function submitExitPopup() {
-  var email = document.getElementById('exit-email').value;
-  if (!email || !email.includes('@')) {
-    document.getElementById('exit-email').style.borderColor = '#ef4444';
-    return;
-  }
-  mogoSubmitLead({ email: email, form_type: 'exit_popup' });
-  popupState.anyFormSubmitted = true;
-  document.getElementById('exitPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:white;">Audit requested!</h3><p style="font-size:15px;color:#999;">Check your email — we\'ll send your free sonic brand audit within 24 hours.</p></div>';
-  setTimeout(function() { closePopup('exitPopup'); }, 2500);
-}
-
-// ====== 3. STICKY CTA BAR — shows after scrolling 30% ======
-var stickyShown = false;
-window.addEventListener('scroll', function() {
-  if (stickyShown) return;
-  var scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-  if (scrollPercent > 30) {
-    document.getElementById('stickyCTA').style.display = 'block';
-    stickyShown = true;
-  }
-});
-
-// ====== Shared: close popup ======
-function closePopup(id) {
-  document.getElementById(id).style.display = 'none';
-  // Only restore scroll if no other popup is open
-  if (document.getElementById('timedPopup').style.display !== 'block' &&
-      document.getElementById('exitPopup').style.display !== 'block' &&
-      document.getElementById('videoModal').style.display !== 'block') {
-    document.body.style.overflow = '';
-  }
-}
-</script>
+<!-- Video Popup Modal --><div id="videoModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;cursor:pointer;backdrop-filter:blur(6px);" onclick="if(event.target===this)closeVideo()"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:860px;"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.5);"><iframe id="videoFrame" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><button onclick="closeVideo()" style="position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:white;border:none;font-size:18px;font-weight:700;cursor:pointer;color:#1a1a2e;box-shadow:0 4px 16px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">X</button></div></div><script>function openVideo(id){document.getElementById('videoFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';document.getElementById('videoModal').style.display='block';document.body.style.overflow='hidden';}function closeVideo(){document.getElementById('videoFrame').src='';document.getElementById('videoModal').style.display='none';document.body.style.overflow='';}document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideo();});</script>
+<!-- Lead forms, popups, sticky bar all handled by lead-form.js -->
 </body>
 </html>
