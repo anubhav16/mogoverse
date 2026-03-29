@@ -805,7 +805,7 @@ footer {
     background: var(--color-purple-bg);
   }
 
-  .hero { grid-template-columns: 1fr; padding: 80px 20px 40px; gap: 32px; }
+  .hero { grid-template-columns: 1fr; padding: 80px 20px 40px; gap: 24px; }
   .hero-text h1 { font-size: 36px; }
 
   /* Mobile hero: reduce cognitive load — hide eyebrow, trim subtitle */
@@ -817,7 +817,6 @@ footer {
   .value-prop { display: block; font-size: 15px; font-weight: 600; color: var(--color-purple); margin-bottom: 16px; line-height: 1.4; }
 
   /* Homepage: show quiz BEFORE text+form on mobile (foot-in-the-door) */
-  .hero { gap: 24px; }
   .hero #quiz, .hero #quizComponent { order: -1; }
 
   .section, .section-dark, .client-bar { padding: var(--space-section-mobile); }
@@ -838,6 +837,10 @@ footer {
 
   .final-cta h2 { font-size: 32px; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+
+  /* [2026-03-29] Fix: mobile padding overrides for inline-styled sections */
+  #gap { padding: 60px 20px !important; }
+  footer { padding: 40px 20px 32px; }
 
   /* Nav CTA: ensure 44px touch target */
   .nav-cta { padding: 12px 24px; min-height: 44px; display: inline-flex; align-items: center; }
