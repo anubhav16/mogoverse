@@ -1,5 +1,21 @@
 # Mogoverse Release Notes
 
+## v2.4.1 — Lighthouse A11Y & SEO Polish (2026-03-29)
+
+### Accessibility
+- **Quiz play button**: Added `aria-label="Play brand sound quiz"` (was failing button-name audit)
+- **Quiz label contrast**: `#999` → `#767676` on play label (inline + CSS rule)
+- **Lead form CTA note**: `.mogo-cta-note` contrast `#999` → `#767676` in lead-form.css
+
+### SEO
+- **Meta descriptions**: Added to `your-brand-has-a-logo-give-mogo` and `royalty-free-music-isnt-free-costing-your-brand` LPs (were missing, SEO 92 → 100)
+
+### Results
+- A11Y: 71 → **92-96** across all pages
+- SEO: 85 → **100** across all pages
+
+---
+
 ## v2.4.0 — Lighthouse Performance, Accessibility & SEO Fixes (2026-03-29)
 
 ### Performance
