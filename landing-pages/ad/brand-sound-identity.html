@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Mogoverse — Your Brand Has a Logo. Where's Its Sound?</title>
+<meta name="description" content="Every brand has a visual identity. Mogoverse gives yours a sonic one — an AI-powered audio logo used by Mastercard, Zomato, and 40+ brands.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#fafafa;color:#1a1a2e;line-height:1.6;overflow-x:hidden;}
+
+/* Nav — logo only */
+nav{display:flex;align-items:center;padding:14px 24px;position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,0.97);backdrop-filter:blur(16px);border-bottom:1px solid #eee;}
+.logo{font-size:22px;font-weight:900;letter-spacing:-1px;color:#1a1a2e;}
+.logo span{color:#6d28d9;}
+
+/* Hero */
+.hero{max-width:560px;margin:0 auto;padding:80px 24px 40px;text-align:center;}
+.hero h1{font-size:36px;font-weight:900;line-height:1.12;letter-spacing:-1.5px;margin-bottom:16px;}
+.hero h1 em{font-style:normal;color:#6d28d9;}
+.hero .subtitle{font-size:16px;color:#555;line-height:1.6;margin-bottom:8px;max-width:440px;margin-left:auto;margin-right:auto;}
+.hero .subtitle strong{color:#1a1a2e;}
+
+/* "You already know these sounds" — recognition hook */
+.sound-hook{max-width:440px;margin:0 auto 24px;text-align:center;padding:20px;background:white;border:1px solid #eee;border-radius:12px;}
+.sound-hook .sh-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#6d28d9;margin-bottom:12px;}
+.sound-examples{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;}
+.sound-example{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.sound-example .se-brand{font-size:12px;font-weight:600;color:#1a1a2e;}
+.sound-example .se-sound{font-size:11px;color:#767676;font-style:italic;}
+
+/* Form */
+.form-container{max-width:440px;margin:0 auto 32px;}
+
+/* Trust strip */
+.trust{text-align:center;padding:24px 20px 32px;max-width:560px;margin:0 auto;}
+.trust .trust-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#999;margin-bottom:16px;}
+.trust-logos{display:flex;justify-content:center;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:16px;}
+.trust-logos img{height:24px;object-fit:contain;filter:grayscale(100%) opacity(0.5);}
+.trust-stat{font-size:13px;color:#767676;}
+.trust-stat strong{color:#6d28d9;}
+
+/* Why section */
+.why{max-width:560px;margin:0 auto;padding:0 24px 40px;}
+.why h2{font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:16px;text-align:center;}
+.why-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+.why-card{background:white;border:1px solid #eee;border-radius:10px;padding:20px;display:flex;gap:14px;align-items:flex-start;}
+.why-card .why-icon{font-size:24px;flex-shrink:0;line-height:1;}
+.why-card h3{font-size:15px;font-weight:700;margin-bottom:4px;color:#1a1a2e;}
+.why-card p{font-size:13px;color:#767676;line-height:1.5;}
+
+/* Bottom CTA */
+.bottom-cta{text-align:center;padding:32px 24px 48px;background:linear-gradient(180deg,#fafafa,#f0ecff);}
+.bottom-cta h2{font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;}
+.bottom-cta h2 em{font-style:normal;color:#6d28d9;}
+.bottom-cta p{font-size:14px;color:#767676;margin-bottom:20px;}
+.bottom-cta .form-container{max-width:440px;margin:0 auto;}
+
+footer{text-align:center;padding:24px;color:#bbb;font-size:11px;border-top:1px solid #eee;background:white;}
+
+@media(min-width:769px){
+  .hero{padding:120px 24px 48px;}
+  .hero h1{font-size:44px;}
+  .why-grid{grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  .why-card{flex-direction:column;text-align:center;padding:24px;}
+  .why-card .why-icon{margin:0 auto 8px;}
+}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+</style>
+<!-- GTM -->
+<script src="../../assets/js/tracking.js" defer></script>
+<link rel="stylesheet" href="../../assets/css/lead-form.css">
+<script src="../../assets/js/components.js" defer></script>
+<script src="../../assets/js/leads.js" defer></script>
+<script src="../../assets/js/lead-form.js" defer></script>
+</head>
+<body>
+<noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-TFX2NPMP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<nav>
+  <div class="logo">mogo<span>verse</span></div>
+</nav>
+
+<!-- HERO — Awareness hook -->
+<section class="hero">
+  <h1>Your brand has a logo.<br>Where's its <em>sound?</em></h1>
+  <p class="subtitle">Intel has a bong. Netflix has a ta-dum. Mastercard has a melody. <strong>What does your brand sound like?</strong></p>
+
+  <!-- Recognition hook — make it tangible -->
+  <div class="sound-hook">
+    <div class="sh-label">You already know these sounds</div>
+    <div class="sound-examples">
+      <div class="sound-example"><span class="se-brand">Intel</span><span class="se-sound">"bong bong bong bong"</span></div>
+      <div class="sound-example"><span class="se-brand">Netflix</span><span class="se-sound">"ta-dum"</span></div>
+      <div class="sound-example"><span class="se-brand">McDonald's</span><span class="se-sound">"ba-da-ba-ba-ba"</span></div>
+    </div>
+  </div>
+
+  <div class="form-container" id="signup">
+    <div id="heroLeadForm"></div>
+  </div>
+  <script>document.addEventListener('DOMContentLoaded', function(){ if(typeof mogoRenderLeadForm==='function') mogoRenderLeadForm('heroLeadForm', 'ad_brandsound'); });</script>
+</section>
+
+<!-- Trust strip -->
+<div class="trust">
+  <div class="trust-label">We created sonic identities for 40+ brands</div>
+  <div class="trust-logos">
+    <img src="../../assets/logos/mastercard-bmq.png" alt="Mastercard" width="80" height="24">
+    <img src="../../assets/logos/zomato-bmq.png" alt="Zomato" width="80" height="24">
+    <img src="../../assets/logos/hdfc-bmq.png" alt="HDFC Bank" width="80" height="24">
+    <img src="../../assets/logos/asianpaints-bmq.png" alt="Asian Paints" width="80" height="24">
+    <img src="../../assets/logos/toyota-bmq.png" alt="Toyota" width="80" height="24">
+    <img src="../../assets/logos/infosys-bmq.png" alt="Infosys" width="80" height="24">
+  </div>
+  <p class="trust-stat"><strong>89%</strong> brand recognition after just 3 exposures to a sonic identity</p>
+</div>
+
+<!-- Why — educate cold traffic -->
+<section class="why">
+  <h2>What is a sonic identity?</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🎵</div>
+      <div>
+        <h3>Your brand in 3 seconds of sound</h3>
+        <p>A sonic identity is an audio signature — like a logo for your ears. Unique to your brand, used everywhere.</p>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📱</div>
+      <div>
+        <h3>Works across every touchpoint</h3>
+        <p>Ads, reels, podcasts, hold music, app notifications, events — one sound, everywhere your brand is heard.</p>
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <div>
+        <h3>Used to cost $50K+. Now AI.</h3>
+        <p>Enterprise sonic branding was agency-only. Mogoverse makes it self-serve — AI-powered, ready in minutes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom CTA -->
+<div class="bottom-cta">
+  <h2>Give your brand a <em>voice.</em></h2>
+  <p>Free 15-min demo. We'll create a sample sonic identity for your brand.</p>
+  <div class="form-container">
+    <div id="bottomLeadForm"></div>
+  </div>
+  <script>document.addEventListener('DOMContentLoaded', function(){ if(typeof mogoRenderLeadForm==='function') mogoRenderLeadForm('bottomLeadForm', 'ad_brandsound_bottom'); });</script>
+</div>
+
+<footer>&copy; 2026 Mogoverse. 14 years of sonic branding expertise. 40+ brands.</footer>
+</body>
+</html>

@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://www.mogoverse.ai/landing-pages/royalty-free-music-isnt-free-costing-your-brand">
 <title>Mogoverse — Royalty Free Music Is Costing Your Brand More Than You Think</title>
-<meta name="description" content="Royalty-free music costs your brand more than you think — diluted identity, zero recall, shared sounds. Get a unique sonic identity with AI from $0/mo.">
+<meta name="description" content="Royalty-free music costs your brand more than you think — diluted identity, zero recall, shared sounds. Get a unique sonic identity with AI — ready in minutes.">
+<meta name="robots" content="noindex, nofollow">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -27,6 +28,7 @@
   .hero-text .subtitle{font-size:18px;color:#666;line-height:1.7;margin-bottom:32px;max-width:480px;}
   .hero-text .subtitle strong{color:#1a1a2e;}
   .hero-right{padding-top:20px;}
+  .value-prop{display:none;} /* hidden on desktop — subtitle is enough */
 
   /* Form container */
   .form-container{max-width:440px;}
@@ -113,13 +115,22 @@
     nav{padding:12px 20px;}
     .nav-cta{padding:12px 24px;min-height:44px;display:inline-flex;align-items:center;}
     .powered-by{display:none;}
-    .hero{grid-template-columns:1fr;padding:76px 20px 32px;gap:32px;}
+    .hero{grid-template-columns:1fr;padding:76px 20px 32px;gap:24px;}
     .hero-text h1{font-size:36px;}
+    /* Reduce cognitive load: hide eyebrow, shorten subtitle */
+    .hero-text .eyebrow{display:none;}
+    .hero-text .subtitle{font-size:16px;line-height:1.5;margin-bottom:20px;}
+    .hero-text .subtitle .mobile-hide{display:none;}
+    /* Show quiz before text+form on mobile */
+    .hero #quizComponent{order:-1;}
+    /* Mobile value prop — bridges pain point to CTA */
+    .value-prop{display:block;font-size:15px;font-weight:600;color:#6d28d9;margin-bottom:16px;line-height:1.4;}
     .section,.section-dark,.client-bar{padding:60px 20px;}
     .section h2{font-size:28px;}
     .stats-bar{grid-template-columns:1fr 1fr;padding:40px 20px;}
     .stats-bar .stat-item .number{font-size:32px;}
     .problem-grid,.steps-grid,.comparison,.testimonials-grid,.video-grid{grid-template-columns:1fr;}
+    .problem-grid{gap:16px;}.problem-card{padding:24px;}
     .form-row{flex-direction:column;}
     .client-logos{gap:20px;}
     .client-logos img{height:22px;}
@@ -185,7 +196,9 @@
   <div class="hero-text">
     <div class="eyebrow">Your stock music subscription builds $0 in brand equity</div>
     <h1>Royalty free music isn't free.<br><em>It's costing your brand.</em></h1>
-    <p class="subtitle">You pay $9–$49/mo in subscriptions. You pay in hours spent browsing. You pay in copyright claims that demonetize your videos. And the biggest cost? <strong>Your brand sounds exactly like your competitor's.</strong></p>
+    <p class="subtitle"><span class="mobile-hide">You pay $9–$49/mo in subscriptions. You pay in hours spent browsing. You pay in copyright claims that demonetize your videos. And the biggest cost?</span> <strong>Your brand sounds exactly like your competitor's.</strong></p>
+
+    <p class="value-prop">Get a unique sonic identity for your brand — AI-powered, ready in minutes.</p>
 
     <!-- Lead form inside hero -->
     <div class="form-container">
@@ -230,32 +243,8 @@
   <div class="stat-item"><div class="number purple">$0</div><div class="label">Brand equity built by generic stock music</div></div>
 </section>
 
-<!-- Problem -->
-<section class="section">
-  <div class="section-label">The True Cost</div>
-  <h2>Royalty free music has three hidden costs. You're paying all of them.</h2>
-  <p class="desc">The subscription fee is the smallest line item. The real costs are the ones you don't see on an invoice — but your customers feel every day.</p>
-  <div class="problem-grid">
-    <div class="problem-card">
-      <div class="price-tag">4 hrs</div>
-      <h3>Time — hours wasted browsing</h3>
-      <p>4 hours average per video project browsing 35,000 tracks to find one that's "close enough." Multiply by your content calendar. That's a full-time employee's worth of wasted time per year.</p>
-      <div class="source">Source: Content creator workflow surveys, 2025</div>
-    </div>
-    <div class="problem-card">
-      <div class="price-tag">722M</div>
-      <h3>Revenue — copyright claims on "licensed" tracks</h3>
-      <p>722 million Content ID claims per year. Even licensed royalty free tracks get flagged — Content ID matches audio fingerprints, not your subscription status. One false claim = demonetized video, lost revenue.</p>
-      <div class="source">Source: YouTube Content ID, 722M+ claims in 2023</div>
-    </div>
-    <div class="problem-card">
-      <div class="price-tag">$0</div>
-      <h3>Brand equity — $0 built, ever</h3>
-      <p>You've paid $588/year for years. What have you built? No sonic identity. No brand recall. No consistency. Just a rotating catalog of tracks that 10,000 other brands also use. You rented sound. You built nothing.</p>
-      <div class="source">Source: 44% of major brands still lack any sonic identity</div>
-    </div>
-  </div>
-</section>
+<!-- The True Cost section: hidden for ad campaign — lighter page -->
+
 
 <!-- How it works -->
 <section class="section-dark">
@@ -271,8 +260,8 @@
   </div>
 </section>
 
-<!-- Earpoints: The Power of Sonic Branding -->
-<section class="earpoints-section">
+<!-- Earpoints: hidden for ad campaign (faster load, shorter page) -->
+<section class="earpoints-section" style="display:none;">
   <div class="earpoints-inner">
     <div class="earpoints-hero">
       <div class="section-label">The Scale of What You're Losing</div>
@@ -378,9 +367,7 @@
     <div class="video-card"><div class="embed"><div onclick="openVideo('bSlN694crNY')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Mastercard</h3><p>Best Audio Brand 3 years running. 2.5M+ earpoints.</p></div></div>
     <div class="video-card"><div class="embed"><div onclick="openVideo('C2YEn8aDOmo')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/C2YEn8aDOmo/hqdefault.jpg" alt="Zomato" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Zomato</h3><p>Sonic identity for orders, app sounds, and brand comms.</p></div></div>
     <div class="video-card"><div class="embed"><div onclick="openVideo('ACkQPHKuN7w')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/ACkQPHKuN7w/hqdefault.jpg" alt="MG Motors" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>MG Motors</h3><p>Anthemic sonic identity for the MG Hector launch.</p></div></div>
-    <div class="video-card"><div class="embed"><div onclick="openVideo('B5M_5mEBL4Y')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/B5M_5mEBL4Y/hqdefault.jpg" alt="Vistara" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Vistara</h3><p>Sensorial airline experience — compassion and freedom.</p></div></div>
-    <div class="video-card"><div class="embed"><div onclick="openVideo('BiTJmnK4oj4')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/BiTJmnK4oj4/hqdefault.jpg" alt="Raymond" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Raymond</h3><p>Classical heritage reimagined for modern brand relevance.</p></div></div>
-    <div class="video-card"><div class="embed"><div onclick="openVideo('RvyRcxuxuP0')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/RvyRcxuxuP0/hqdefault.jpg" alt="RCB" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Royal Challengers Bangalore</h3><p>The iconic fan chant reverberating across India.</p></div></div>
+    <!-- Vistara, Raymond, RCB hidden for ad campaign — top 3 only -->
   </div>
 </section>
 

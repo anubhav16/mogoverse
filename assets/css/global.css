@@ -144,6 +144,7 @@ nav {
   max-width: 480px;
 }
 .hero-text .subtitle strong { color: var(--color-text); }
+.value-prop { display: none; } /* hidden on desktop — subtitle is enough */
 
 /* --- Sections (generic) --- */
 .section {
@@ -807,9 +808,23 @@ footer {
   .hero { grid-template-columns: 1fr; padding: 80px 20px 40px; gap: 32px; }
   .hero-text h1 { font-size: 36px; }
 
+  /* Mobile hero: reduce cognitive load — hide eyebrow, trim subtitle */
+  .hero-text .eyebrow { display: none; }
+  .hero-text .subtitle { font-size: 16px; line-height: 1.5; margin-bottom: 24px; }
+  .hero-text .subtitle .mobile-hide { display: none; }
+
+  /* Mobile value prop — bridges pain point to CTA */
+  .value-prop { display: block; font-size: 15px; font-weight: 600; color: var(--color-purple); margin-bottom: 16px; line-height: 1.4; }
+
+  /* Homepage: show quiz BEFORE text+form on mobile (foot-in-the-door) */
+  .hero { gap: 24px; }
+  .hero #quiz, .hero #quizComponent { order: -1; }
+
   .section, .section-dark, .client-bar { padding: var(--space-section-mobile); }
   .stats-bar { grid-template-columns: 1fr 1fr; padding: 40px 20px; }
   .problem-grid, .steps-grid, .comparison, .testimonials-grid, .video-grid { grid-template-columns: 1fr; }
+  .problem-grid { gap: 16px; }
+  .problem-card { padding: 24px; }
   .form-row { flex-direction: column; }
   .client-logos { gap: 20px; }
   .client-logos img { height: 22px; }
@@ -830,8 +845,11 @@ footer {
   /* Hamburger: ensure 44px touch target */
   .hamburger { min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
 
-  /* Powered-by: hide on very small screens to prevent overflow */
+  /* Powered-by: hide on mobile to prevent overflow */
   .powered-by { display: none; }
+
+  /* Push nav-cta + hamburger to far right */
+  .logo-group { flex: 1; }
 
   /* Section headings: scale down for mobile */
   .section h2 { font-size: 28px; }

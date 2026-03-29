@@ -48,10 +48,14 @@ function mogoLoadComponent(containerId, path, callback) {
  * Root pages use /components/ directly.
  */
 function mogoComponentPath(filename) {
-  var isSubdir = window.location.pathname.indexOf('/landing-pages/') !== -1 ||
-                 window.location.pathname.indexOf('/sonic-branding/') !== -1 ||
-                 window.location.pathname.indexOf('/alternatives/') !== -1 ||
-                 window.location.pathname.indexOf('/tools/') !== -1 ||
-                 window.location.pathname.indexOf('/mockups/') !== -1;
+  var path = window.location.pathname;
+  // Two levels deep (e.g., /landing-pages/ad/)
+  if (path.indexOf('/landing-pages/ad/') !== -1) return '../../components/' + filename;
+  // One level deep
+  var isSubdir = path.indexOf('/landing-pages/') !== -1 ||
+                 path.indexOf('/sonic-branding/') !== -1 ||
+                 path.indexOf('/alternatives/') !== -1 ||
+                 path.indexOf('/tools/') !== -1 ||
+                 path.indexOf('/mockups/') !== -1;
   return (isSubdir ? '../' : '') + 'components/' + filename;
 }

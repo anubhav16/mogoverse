@@ -129,7 +129,7 @@ function mogoRenderLeadForm(targetId, source) {
         '<button class="mogo-btn-primary" onclick="mogoStep1Submit(\'' + uid + '\',\'' + source + '\',\'demo\')">Get a Demo</button>' +
         '<button class="mogo-btn-secondary" onclick="mogoStep1Submit(\'' + uid + '\',\'' + source + '\',\'trial\')">Get Started Free</button>' +
       '</div>' +
-      '<p class="mogo-cta-note">No credit card required. Powered by BrandMusiq.</p>' +
+      '<p class="mogo-cta-note">No credit card required.</p>' +
     '</div>' +
     '<div class="mogo-step2" id="mogo-step2-' + uid + '" style="display:none;">' +
       '<p class="mogo-step2-label">One last thing \u2014 tell us about yourself</p>' +
@@ -404,19 +404,31 @@ function mogoInitStickyBar() {
   bar.innerHTML =
     '<div class="mogo-sticky-inner">' +
       '<div class="mogo-sticky-text">' +
-        '<p class="mogo-sticky-title">Get your free sonic brand demo</p>' +
-        '<p class="mogo-sticky-sub">Powered by BrandMusiq \u00B7 No credit card</p>' +
+        '<p class="mogo-sticky-title">Your brand deserves its own sound</p>' +
       '</div>' +
       '<button class="mogo-btn-primary mogo-sticky-btn" onclick="mogoShowPopupForm(\'mogoBottomPopup\',\'bottom_bar\',\'Get a Demo\',\'Enter your phone number and we\\\'ll walk you through Mogoverse.\')">Book Demo</button>' +
     '</div>';
   document.body.appendChild(bar);
 
-  var shown = false;
-  window.addEventListener('scroll', function() {
-    if (shown) return;
-    var pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-    if (pct > 30) { bar.style.display = 'block'; shown = true; }
-  });
+  // Show bar when hero section scrolls out of view, hide when it's back
+  var hero = document.querySelector('.hero');
+  if (hero && 'IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        // Hero is visible → hide sticky bar; hero is gone → show sticky bar
+        bar.style.display = entry.isIntersecting ? 'none' : 'block';
+      });
+    }, { threshold: 0 });
+    observer.observe(hero);
+  } else {
+    // Fallback: show after 30% scroll (old behavior)
+    var shown = false;
+    window.addEventListener('scroll', function() {
+      if (shown) return;
+      var pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      if (pct > 30) { bar.style.display = 'block'; shown = true; }
+    });
+  }
 }
 
 // ====== Nav CTA handler ======
@@ -428,8 +440,12 @@ function mogoNavCTA() {
 
 // ====== Init ======
 function mogoInitLeadForms() {
-  mogoInitPopups();
-  mogoInitStickyBar();
+  // Skip popups + sticky bar on ad landing pages (clean conversion path)
+  var isAdPage = window.location.pathname.indexOf('/ad/') !== -1;
+  if (!isAdPage) {
+    mogoInitPopups();
+    mogoInitStickyBar();
+  }
 
   var navBtns = document.querySelectorAll('.nav-cta');
   navBtns.forEach(function(btn) {

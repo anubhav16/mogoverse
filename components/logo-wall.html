@@ -85,15 +85,72 @@
 .logo-cell[data-has-testimonial="true"]:hover::after {
   opacity: 1;
 }
-/* Hide tooltip on mobile (no hover) */
+/* Mobile: tooltip hidden, bottom sheet instead */
 @media (max-width: 768px) {
   .logo-tooltip { display: none !important; }
+  .logo-cell.mobile-active { background: #f5f3ff; box-shadow: inset 0 0 0 2px #6d28d9; }
+}
+
+/* Bottom sheet for mobile testimonials */
+.logo-bottom-sheet-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 9990;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.logo-bottom-sheet-overlay.active { display: block; opacity: 1; }
+.logo-bottom-sheet {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 20px 20px 0 0;
+  padding: 24px 24px 32px;
+  z-index: 9991;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.12);
+  font-family: 'Inter', sans-serif;
+}
+.logo-bottom-sheet.active { transform: translateY(0); }
+.logo-bottom-sheet .lbs-handle {
+  width: 36px; height: 4px; border-radius: 2px; background: #ddd;
+  margin: 0 auto 20px;
+}
+.logo-bottom-sheet .lbs-content {
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.logo-bottom-sheet .lbs-photo {
+  width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+}
+.logo-bottom-sheet .lbs-initials {
+  width: 52px; height: 52px; border-radius: 50%; background: #6d28d9;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 18px; color: white; flex-shrink: 0;
+}
+.logo-bottom-sheet .lbs-quote {
+  font-size: 15px; font-style: italic; color: #333; line-height: 1.6; margin-bottom: 14px;
+}
+.logo-bottom-sheet .lbs-name { font-size: 14px; font-weight: 700; color: #1a1a2e; }
+.logo-bottom-sheet .lbs-title { font-size: 13px; color: #767676; }
+
+/* Scroll hint: soft blink on logos with testimonials (plays once) */
+@keyframes logoBlink {
+  0%, 100% { box-shadow: inset 0 0 0 0 transparent; }
+  50% { box-shadow: inset 0 0 0 2px rgba(109,40,217,0.3); }
+}
+.logo-cell.hint-blink {
+  animation: logoBlink 1.2s ease 1;
 }
 </style>
 
 <section id="logo-wall" class="logo-wall">
   <div class="logo-wall-inner">
-    <div class="label">Every brand here has a MOGO — created by BrandMusiq</div>
+    <div class="label">Every brand here has a MOGO — a sonic identity</div>
     <div class="logo-grid" id="logoGrid">
       <!-- Row 1: Global megabrands -->
       <div class="logo-cell" data-brand="mastercard" data-has-testimonial="true">
@@ -283,46 +340,118 @@
 
   var tooltip = document.getElementById('logoTooltip');
   var cells = document.querySelectorAll('.logo-cell[data-has-testimonial="true"]');
+  var isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-  for (var j = 0; j < cells.length; j++) {
-    cells[j].addEventListener('mouseenter', function(e) {
-      var brand = this.getAttribute('data-brand');
-      var t = _testimonials[brand];
-      if (!t) return;
+  if (!isMobile) {
+    /* Desktop: hover tooltips */
+    for (var j = 0; j < cells.length; j++) {
+      cells[j].addEventListener('mouseenter', function(e) {
+        var brand = this.getAttribute('data-brand');
+        var t = _testimonials[brand];
+        if (!t) return;
 
-      document.getElementById('tooltipQuote').textContent = '"' + t.quote + '"';
-      document.getElementById('tooltipName').textContent = t.name;
-      document.getElementById('tooltipTitle').textContent = t.title;
+        document.getElementById('tooltipQuote').textContent = '\u201C' + t.quote + '\u201D';
+        document.getElementById('tooltipName').textContent = t.name;
+        document.getElementById('tooltipTitle').textContent = t.title;
 
-      var photoWrap = document.getElementById('tooltipPhotoWrap');
-      if (t.photo) {
-        photoWrap.innerHTML = '<img class="logo-tooltip-photo" src="' + _bp + 'assets/headshots/' + t.photo + '" alt="' + t.name + '">';
-      } else {
-        var initials = t.name.split(' ').map(function(n) { return n[0]; }).join('');
-        photoWrap.innerHTML = '<div class="logo-tooltip-initials">' + initials + '</div>';
-      }
+        var photoWrap = document.getElementById('tooltipPhotoWrap');
+        if (t.photo) {
+          photoWrap.innerHTML = '<img class="logo-tooltip-photo" src="' + _bp + 'assets/headshots/' + t.photo + '" alt="' + t.name + '">';
+        } else {
+          var initials = t.name.split(' ').map(function(n) { return n[0]; }).join('');
+          photoWrap.innerHTML = '<div class="logo-tooltip-initials">' + initials + '</div>';
+        }
 
-      /* Position tooltip */
-      var rect = this.getBoundingClientRect();
-      var section = document.getElementById('logo-wall');
-      var sRect = section.getBoundingClientRect();
+        var rect = this.getBoundingClientRect();
+        var section = document.getElementById('logo-wall');
+        var sRect = section.getBoundingClientRect();
+        var tooltipW = 300;
+        if (rect.left - sRect.left > tooltipW + 20) {
+          tooltip.style.top = (rect.top - sRect.top) + 'px';
+          tooltip.style.left = (rect.left - sRect.left - tooltipW - 12) + 'px';
+        } else {
+          tooltip.style.top = (rect.bottom - sRect.top + 8) + 'px';
+          tooltip.style.left = (rect.left - sRect.left) + 'px';
+        }
+        tooltip.classList.add('active');
+      });
 
-      /* Try positioning to the left of the cell; if too close to left edge, position below */
-      var tooltipW = 300;
-      if (rect.left - sRect.left > tooltipW + 20) {
-        tooltip.style.top = (rect.top - sRect.top) + 'px';
-        tooltip.style.left = (rect.left - sRect.left - tooltipW - 12) + 'px';
-      } else {
-        tooltip.style.top = (rect.bottom - sRect.top + 8) + 'px';
-        tooltip.style.left = (rect.left - sRect.left) + 'px';
-      }
+      cells[j].addEventListener('mouseleave', function() {
+        tooltip.classList.remove('active');
+      });
+    }
+  } else {
+    /* Mobile: tap to show bottom sheet testimonial */
+    var overlay = document.createElement('div');
+    overlay.className = 'logo-bottom-sheet-overlay';
+    document.body.appendChild(overlay);
 
-      tooltip.classList.add('active');
-    });
+    var sheet = document.createElement('div');
+    sheet.className = 'logo-bottom-sheet';
+    sheet.innerHTML = '<div class="lbs-handle"></div><div class="lbs-content"><div id="lbsPhotoWrap"></div><div><div class="lbs-quote" id="lbsQuote"></div><div class="lbs-name" id="lbsName"></div><div class="lbs-title" id="lbsTitle"></div></div></div>';
+    document.body.appendChild(sheet);
 
-    cells[j].addEventListener('mouseleave', function() {
-      tooltip.classList.remove('active');
-    });
+    function closeSheet() {
+      sheet.classList.remove('active');
+      overlay.classList.remove('active');
+      var prev = document.querySelector('.logo-cell.mobile-active');
+      if (prev) prev.classList.remove('mobile-active');
+      setTimeout(function() { overlay.style.display = 'none'; }, 300);
+    }
+    overlay.addEventListener('click', closeSheet);
+    sheet.querySelector('.lbs-handle').addEventListener('click', closeSheet);
+
+    for (var k = 0; k < cells.length; k++) {
+      cells[k].addEventListener('click', function(e) {
+        e.preventDefault();
+        var brand = this.getAttribute('data-brand');
+        var t = _testimonials[brand];
+        if (!t) return;
+
+        var prev = document.querySelector('.logo-cell.mobile-active');
+        if (prev) prev.classList.remove('mobile-active');
+        this.classList.add('mobile-active');
+
+        document.getElementById('lbsQuote').textContent = '\u201C' + t.quote + '\u201D';
+        document.getElementById('lbsName').textContent = t.name;
+        document.getElementById('lbsTitle').textContent = t.title;
+
+        var photoWrap = document.getElementById('lbsPhotoWrap');
+        if (t.photo) {
+          photoWrap.innerHTML = '<img class="lbs-photo" src="' + _bp + 'assets/headshots/' + t.photo + '" alt="' + t.name + '">';
+        } else {
+          var ini = t.name.split(' ').map(function(n) { return n[0]; }).join('');
+          photoWrap.innerHTML = '<div class="lbs-initials">' + ini + '</div>';
+        }
+
+        overlay.style.display = 'block';
+        requestAnimationFrame(function() {
+          overlay.classList.add('active');
+          sheet.classList.add('active');
+        });
+      });
+    }
+  }
+
+  /* Scroll-triggered blink hint: pulse testimonial logos once when wall enters viewport */
+  if ('IntersectionObserver' in window) {
+    var logoWall = document.getElementById('logo-wall');
+    var blinkDone = false;
+    var blinkObserver = new IntersectionObserver(function(entries) {
+      if (blinkDone) return;
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          blinkDone = true;
+          for (var b = 0; b < cells.length; b++) {
+            (function(cell, delay) {
+              setTimeout(function() { cell.classList.add('hint-blink'); }, delay);
+            })(cells[b], b * 200);
+          }
+          blinkObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    if (logoWall) blinkObserver.observe(logoWall);
   }
 })();
 </script>

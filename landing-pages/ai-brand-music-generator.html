@@ -26,6 +26,7 @@
   .hero-text .subtitle{font-size:18px;color:#666;line-height:1.7;margin-bottom:32px;max-width:480px;}
   .hero-text .subtitle strong{color:#1a1a2e;}
 
+  .value-prop{display:none;}
   /* Multi-step form */
   .form-container{max-width:440px;}
   .form-step{display:none;}
@@ -138,11 +139,17 @@
 
   @media(max-width:768px){
     nav{padding:12px 20px;}
-    .hero{grid-template-columns:1fr;padding:100px 20px 40px;gap:32px;}
+    .powered-by{display:none;}
+    .hero{grid-template-columns:1fr;padding:80px 20px 32px;gap:24px;}
     .hero-text h1{font-size:36px;}
+    .hero-text .eyebrow{display:none;}
+    .hero-text .subtitle{font-size:16px;line-height:1.5;margin-bottom:12px;}
+    .hero-text .subtitle .mobile-hide{display:none;}
+    .value-prop{display:block;font-size:15px;font-weight:600;color:#6d28d9;margin-bottom:16px;line-height:1.4;}
     .section,.section-dark,.client-bar{padding:60px 20px;}
     .stats-bar{grid-template-columns:1fr 1fr;padding:40px 20px;}
     .problem-grid,.steps-grid,.comparison,.testimonials-grid,.video-grid{grid-template-columns:1fr;}
+    .problem-grid{gap:16px;}.problem-card{padding:24px;}
     .form-row{flex-direction:column;}
     .client-logos{gap:20px;}
     .client-logos img{height:22px;}
@@ -200,9 +207,11 @@
 <!-- Hero -->
 <section class="hero">
   <div class="hero-text">
-    <div class="eyebrow">Powered by BrandMusiq — creators of Mastercard's sound</div>
+    <div class="eyebrow">AI music that actually sounds like your brand</div>
     <h1>Not random AI music.<br>Music that reflects <em>your brand.</em></h1>
-    <p class="subtitle">Every AI music tool gives you the same generic output. A "corporate upbeat" track that could belong to any brand — or no brand at all. Mogoverse is different. It learns your brand's personality and generates music that <strong>sounds like you, not like everyone else.</strong></p>
+    <p class="subtitle"><span class="mobile-hide">Every AI music tool gives you the same generic output. A "corporate upbeat" track that could belong to any brand — or no brand at all. Mogoverse is different. It learns your brand's personality and generates music that</span> <strong>sounds like you, not like everyone else.</strong></p>
+
+    <p class="value-prop">AI that learns your brand, then creates music that reflects it — ready in minutes.</p>
 
     <!-- Multi-step form -->
     <div class="form-container" id="signup">
@@ -421,7 +430,7 @@
 <section class="section" style="text-align:center;">
   <div class="section-label">Hear the Difference</div>
   <h2 style="margin:0 auto 16px;">Generic AI music vs. brand-reflective music.</h2>
-  <p class="desc" style="margin:0 auto 48px;text-align:center;">These brands don't sound generic. They sound like themselves. That's what Mogoverse creates for you — powered by BrandMusiq's 10+ years of making brands unforgettable through sound.</p>
+  <p class="desc" style="margin:0 auto 48px;text-align:center;">These brands don't sound generic. They sound like themselves. That's what Mogoverse creates for you.</p>
   <div class="video-grid">
     <div class="video-card"><div class="embed"><div onclick="openVideo('bSlN694crNY')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Mastercard</h3><p>Best Audio Brand 3 years running. 2.5M+ earpoints.</p></div></div>
     <div class="video-card"><div class="embed"><div onclick="openVideo('C2YEn8aDOmo')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/C2YEn8aDOmo/hqdefault.jpg" alt="Zomato" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Zomato</h3><p>Sonic identity for orders, app sounds, and brand comms.</p></div></div>
@@ -454,7 +463,7 @@
   <h2 style="margin:0 auto 48px;">Random AI music vs. music that reflects your brand.</h2>
   <div class="comparison">
     <div class="comp-card old"><h3>Random AI Music (Suno, Udio, etc.)</h3><ul><li>Same "upbeat corporate" for every brand</li><li>No brand personality in the output</li><li>Generate 10 tracks, get 10 different vibes</li><li>No way to maintain sonic consistency</li><li>Copyright lawsuits pending (Suno, Udio)</li><li>Music that fills silence — doesn't build brands</li></ul></div>
-    <div class="comp-card new"><h3>Mogoverse — Music That Reflects You</h3><ul><li>Learns your brand personality before generating a note</li><li>Every track sounds like YOUR brand — not generic</li><li>Consistent sound across ads, social, hold, events</li><li>Brand audio library your whole team can access</li><li>100% copyright-safe, full commercial rights</li><li>Built on BrandMusiq's methodology (Mastercard, Zomato, HDFC)</li></ul></div>
+    <div class="comp-card new"><h3>Mogoverse — Music That Reflects You</h3><ul><li>Learns your brand personality before generating a note</li><li>Every track sounds like YOUR brand — not generic</li><li>Consistent sound across ads, social, hold, events</li><li>Brand audio library your whole team can access</li><li>100% copyright-safe, full commercial rights</li><li>Built on Mastercard, Zomato, HDFC methodology</li></ul></div>
   </div>
 </section>
 
@@ -488,7 +497,7 @@
       <div class="success-msg"><div class="check-icon">✓</div><h3>You're in! Demo booked.</h3><p>We'll call you during your selected time slot. Check your email for confirmation.</p></div>
     </div>
   </div>
-  <p class="guarantee" style="margin-top:20px;">Built on 10+ years of BrandMusiq's sonic branding expertise.</p>
+  <p class="guarantee" style="margin-top:20px;">14 years of sonic branding expertise. 40+ brands. Enterprise quality.</p>
 </section>
 
 </main>
@@ -554,7 +563,7 @@ function selectTime(el) {
     <button onclick="closePopup('timedPopup')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#767676;">✕</button>
     <div style="font-size:48px;margin-bottom:12px;">🎧</div>
     <h3 style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;color:#1a1a2e;">Hear your brand's sound — free</h3>
-    <p style="font-size:15px;color:#767676;margin-bottom:24px;line-height:1.6;">Book a 15-min demo. We'll create a sample sonic identity for your brand — on the house. Powered by BrandMusiq's 40+ brand portfolio.</p>
+    <p style="font-size:15px;color:#767676;margin-bottom:24px;line-height:1.6;">Book a 15-min demo. We'll create a sample sonic identity for your brand — on the house.</p>
     <div style="display:flex;gap:8px;margin-bottom:8px;">
       <input type="email" id="timed-email" placeholder="Work email" style="flex:1;padding:14px 16px;border:2px solid #e5e5e5;border-radius:8px;font-size:15px;outline:none;font-family:Inter,sans-serif;">
       <button onclick="submitTimedPopup()" style="padding:14px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;">Book Free Demo</button>
@@ -586,7 +595,7 @@ function selectTime(el) {
   <div style="max-width:600px;margin:0 auto;display:flex;gap:8px;align-items:center;">
     <div style="flex:1;">
       <p style="font-size:14px;font-weight:700;color:#1a1a2e;margin:0;">Get your free sonic brand demo</p>
-      <p style="font-size:12px;color:#767676;margin:2px 0 0;">Powered by BrandMusiq · No credit card</p>
+      <p style="font-size:12px;color:#767676;margin:2px 0 0;">No credit card required</p>
     </div>
     <a href="#signup" onclick="closePopup('stickyCTA')" style="padding:12px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;font-family:Inter,sans-serif;">Book Demo</a>
   </div>

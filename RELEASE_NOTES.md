@@ -1,5 +1,37 @@
 # Mogoverse Release Notes
 
+## v2.5.0 — Mobile Conversion UX + Ad Campaign Prep (2026-03-29)
+
+### Mobile UX (all pages)
+- **Nav CTA right-aligned**: `.logo-group { flex: 1 }` pushes "Get Early Access" + hamburger to far right
+- **Hero cognitive load reduced**: Eyebrow hidden, subtitle trimmed to 1 line, purple value prop bridge added
+- **Quiz-first on mobile**: Homepage quiz renders before text+form via CSS `order: -1` (foot-in-the-door)
+- **Card spacing**: `.problem-grid` gap 24→16px, card padding 32→24px on mobile
+
+### Sticky Bottom Bar
+- **Hero-aware show/hide**: Uses `IntersectionObserver` — appears when hero scrolls out, hides when hero returns (was: fixed 30% scroll threshold)
+- **Slimmed down**: Single-line, 8px padding, subtitle hidden, better copy
+
+### Logo Wall
+- **Mobile testimonials**: Tap a logo → bottom sheet slides up (was: hidden on mobile)
+- **Scroll hint blink**: Logos with testimonials pulse once when wall enters viewport
+
+### Ad Campaign Landing Pages
+- **2 ad LPs created**: `landing-pages/ad/royalty-free-music.html` and `brand-sound-identity.html`
+- **Ad pages optimized**: No nav links, no popups, no sticky bar, ~8KB each
+- **noindex**: Added to all 4 ad-targeted pages
+- **Existing LPs trimmed**: Earpoints section hidden, videos trimmed to top 3, "True Cost" section removed
+
+### Content
+- **BrandMusiq reduced**: Removed from sticky bar, form notes, logo wall label, stats bar, case studies desc — kept in nav, footer, testimonial quotes
+- **$0/mo removed**: Replaced with "ready in minutes" across all pages and meta tags
+- **Value prop added**: Mobile-only purple line between subtitle and form on all pages
+
+### Files changed
+- 16 modified, 2 new (`landing-pages/ad/`)
+
+---
+
 ## v2.4.1 — Lighthouse A11Y & SEO Polish (2026-03-29)
 
 ### Accessibility
