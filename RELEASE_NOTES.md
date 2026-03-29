@@ -1,5 +1,16 @@
 # Mogoverse Release Notes
 
+## v2.5.1 — Fix Asset Paths on Landing Pages (2026-03-29)
+
+### Bug Fix
+- **Asset 404s on landing pages**: Logo images, HQ logos, and MOGO audio files returned 404 on `/landing-pages/` routes because the base-path (`bp`) only detected `/mockups/` subdirectory
+- **Fix**: `bp` detection now includes `/landing-pages/`, prepending `../` to all relative asset paths
+
+### Files changed
+- 1 modified (`landing-pages/sonic-branding-platform.html`)
+
+---
+
 ## v2.5.0 — Mobile Conversion UX + Ad Campaign Prep (2026-03-29)
 
 ### Mobile UX (all pages)
