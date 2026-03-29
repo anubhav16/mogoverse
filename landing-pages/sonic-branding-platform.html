@@ -1363,10 +1363,9 @@ function _startBeatLoop(cell) {
     var t = 'scale(' + scale.toFixed(3) + ') translateY(' + ty.toFixed(1) + 'px)';
     img.style.transform = t;
 
-    /* Music icon: same bounce + rotation for playful feel */
+    /* Pause icon: bounce with logo (no rotation) */
     if (icon) {
-      var rot = isBeat ? (Math.random() > 0.5 ? 15 : -15) : energy * 8;
-      icon.style.transform = 'scale(' + scale.toFixed(3) + ') translateY(' + ty.toFixed(1) + 'px) rotate(' + rot.toFixed(0) + 'deg)';
+      icon.style.transform = 'scale(' + scale.toFixed(3) + ') translateY(' + ty.toFixed(1) + 'px)';
     }
 
     _beatRAF = requestAnimationFrame(loop);
@@ -1414,7 +1413,7 @@ function initLogoAudio() {
 
       var indicator = document.createElement('div');
       indicator.className = 'mogo-play-indicator';
-      indicator.innerHTML = '&#9835;';
+      indicator.innerHTML = '&#9654;';
       cell.appendChild(indicator);
 
       /* Play MOGO helper */
@@ -1439,6 +1438,8 @@ function initLogoAudio() {
           _currentMogoAudio.crossOrigin = 'anonymous';
           _currentMogoCell = c;
           c.classList.add('mogo-playing');
+          var ind = c.querySelector('.mogo-play-indicator');
+          if (ind) ind.innerHTML = '\u275A\u275A';
 
           /* Connect to Web Audio API analyser (only once per Audio element) */
           if (!_sourceCache.has(_currentMogoAudio)) {
@@ -1456,6 +1457,8 @@ function initLogoAudio() {
           _currentMogoAudio.addEventListener('ended', function() {
             _stopBeatLoop(c);
             c.classList.remove('mogo-playing');
+            var ind = c.querySelector('.mogo-play-indicator');
+            if (ind) ind.innerHTML = '\u25B6';
             _currentMogoCell = null;
           });
         }
@@ -1465,15 +1468,20 @@ function initLogoAudio() {
             _currentMogoAudio.pause();
             _stopBeatLoop(c);
             c.classList.remove('mogo-playing');
+            var ind = c.querySelector('.mogo-play-indicator');
+            if (ind) ind.innerHTML = '\u25B6';
             _currentMogoCell = null;
           }
         }
 
-        /* Hover: play on enter, pause on leave */
-        c.addEventListener('mouseenter', playMogo);
-        c.addEventListener('mouseleave', pauseMogo);
+        /* Hover: play on enter, pause on leave (desktop only) */
+        var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if (!isTouchDevice) {
+          c.addEventListener('mouseenter', playMogo);
+          c.addEventListener('mouseleave', pauseMogo);
+        }
 
-        /* Click: toggle play/pause (for mobile + intentional interaction) */
+        /* Click/tap: toggle play/pause */
         c.addEventListener('click', function(e) {
           e.stopPropagation();
           if (_currentMogoCell === c && _currentMogoAudio && !_currentMogoAudio.paused) {
