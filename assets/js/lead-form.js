@@ -443,8 +443,11 @@ function mogoInitLeadForms() {
   // Skip popups + sticky bar on ad landing pages (clean conversion path)
   var isAdPage = window.location.pathname.indexOf('/ad/') !== -1;
   if (!isAdPage) {
-    mogoInitPopups();
-    mogoInitStickyBar();
+    // [2026-04-03] Perf: defer non-critical UI to after LCP — sticky bar and popup listeners
+    // don't need to exist during first paint. Sticky bar: 2s (after hero visible).
+    // Popup init: 5s (timed popup fires at 15s internally; exit intent rarely fires <5s).
+    setTimeout(mogoInitStickyBar, 2000);
+    setTimeout(mogoInitPopups, 5000);
   }
 
   var navBtns = document.querySelectorAll('.nav-cta');

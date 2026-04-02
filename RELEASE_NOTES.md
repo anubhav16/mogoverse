@@ -1,5 +1,17 @@
 # Mogoverse Release Notes
 
+## v2.6.3 — Performance: Defer Popup + Sticky Bar Init (2026-04-03)
+
+### Performance
+- **Sticky bar deferred 2s**: `mogoInitStickyBar` now runs via `setTimeout(..., 2000)` instead of at DOMContentLoaded — DOM node creation and `IntersectionObserver` attachment no longer block LCP
+- **Popup init deferred 5s**: `mogoInitPopups` now runs via `setTimeout(..., 5000)` — `mouseout` listener and `popupState` wiring happen after first paint. Timed popup still fires at ~20s total (5s init + 15s internal timer); exit intent active from 5s onward
+- **Ad pages unaffected**: existing `/ad/` guard still skips both inits entirely
+
+### Files changed
+- 1 modified (`assets/js/lead-form.js`, +3/-2 lines)
+
+---
+
 ## v2.6.2 — Performance: Top 10 Images Converted to WebP (2026-04-03)
 
 ### Performance
