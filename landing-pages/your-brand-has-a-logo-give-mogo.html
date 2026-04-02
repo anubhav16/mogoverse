@@ -7,8 +7,15 @@
 <title>Mogoverse — Your brand has a logo. Now give it a MOGO®</title>
 <meta name="description" content="Your brand has a visual identity — now give it a sonic one. Create your MOGO (musical logo) with AI — ready in minutes, used by Mastercard and 40+ brands.">
 <meta name="robots" content="noindex, nofollow">
+<!-- [2026-04-02] Perf: preconnect to eliminate DNS lookup delay for fonts + GTM -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- [2026-04-02] Perf: moved from @import (render-blocking) to <link> — drops weights 300+500 (unused per Lighthouse) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  /* [2026-04-02] Perf: @import removed — font now loaded via <link> above */
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Inter',sans-serif;background:#fafafa;color:#1a1a2e;line-height:1.6;overflow-x:hidden;}
 
@@ -169,7 +176,9 @@
   }
 </style>
 <!-- Mogoverse Tracking: GTM + Google Ads + UTM -->
-<link rel="stylesheet" href="../assets/css/lead-form.css">
+<!-- [2026-04-02] Perf: async-load lead-form.css — safe because form is JS-injected after DOMContentLoaded, no FOUC risk -->
+<link rel="preload" href="../assets/css/lead-form.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="../assets/css/lead-form.css"></noscript>
 <script src="../assets/js/tracking.js" defer></script>
 <!-- [2026-03-29 01:30] Fix: defer components.js, remove preloads for below-fold components -->
 <script src="../assets/js/components.js" defer></script>

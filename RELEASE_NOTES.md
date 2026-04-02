@@ -1,5 +1,22 @@
 # Mogoverse Release Notes
 
+## v2.6.0 — Landing Page Performance: Render-Blocking Fix (2026-04-02)
+
+### Performance
+- **Google Fonts @import removed**: Moved from render-blocking `@import` inside `<style>` to `<link rel="stylesheet">` with `preconnect` hints — saves ~958ms on FCP (mobile)
+- **Font weights trimmed**: Dropped Inter 300 and 500 (confirmed unused by Lighthouse) — loads 400/600/700/800/900 only
+- **lead-form.css async-loaded**: Replaced blocking `<link rel="stylesheet">` with `<link rel="preload" as="style" onload>` pattern — saves ~230ms. Safe: form is JS-injected after DOMContentLoaded, no FOUC risk
+- **GTM preconnect added**: `<link rel="preconnect">` + `<link rel="dns-prefetch">` for `www.googletagmanager.com`
+
+### Target
+- Baseline: Performance 67, LCP 9.4s, FCP 3.1s (mobile)
+- Goal: Performance 90+ (multi-step plan — this is Step 1 of 5)
+
+### Files changed
+- 1 modified (`landing-pages/your-brand-has-a-logo-give-mogo.html`, +10/-2 lines)
+
+---
+
 ## v2.5.1 — Fix Asset Paths on Landing Pages (2026-03-29)
 
 ### Bug Fix
