@@ -1,5 +1,16 @@
 # Mogoverse Release Notes
 
+## v2.6.6 — Fix: Hamburger nudge CTA not rendering (2026-04-03)
+
+### Bug Fix
+- **Nudge suppressed permanently**: The `localStorage.getItem('mogo_form_submitted')` check blocked the nudge for any user who had ever submitted a form (including testing). Removed cross-session check — nudge now only suppresses when `popupState.anyFormSubmitted` is true in the **current session**
+- **Nudge width in flex container**: Added `width:100%; box-sizing:border-box` to `.nav-lead-nudge` so the dark card fills the full menu width when displayed as a flex child
+
+### Files changed
+- 2 modified (`assets/js/lead-form.js` +1/-2, `assets/css/global.css` +2/-0)
+
+---
+
 ## v2.6.5 — Fix: Mobile Nav 3 Bugs (hamburger bars, menu auto-close, scroll offset) (2026-04-03)
 
 ### Bug Fixes

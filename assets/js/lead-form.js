@@ -450,9 +450,8 @@ function mogoToggleNav(btn) {
 
   if (!nudge) return;
   if (isOpening) {
-    // Suppress if already converted this session or cross-session
+    // [2026-04-03] Only suppress for current session — localStorage flag would hide nudge permanently
     var submitted = (typeof popupState !== 'undefined' && popupState.anyFormSubmitted);
-    try { submitted = submitted || localStorage.getItem('mogo_form_submitted') === 'true'; } catch(e) {}
     nudge.style.display = submitted ? 'none' : 'block';
 
     // [2026-04-03] Bug 2 fix: close menu when any anchor link inside it is tapped

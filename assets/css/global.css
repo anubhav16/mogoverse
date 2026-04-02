@@ -815,6 +815,8 @@ footer {
     border-radius: 10px;
     padding: 16px;
     margin-top: 8px;
+    width: 100%; /* fills flex container (menu is display:flex when open) */
+    box-sizing: border-box;
   }
   .nav-nudge-proof {
     font-size: 11px;
