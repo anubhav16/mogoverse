@@ -1,5 +1,18 @@
 # Mogoverse Release Notes
 
+## v2.6.4 — Fix: Homepage Mobile Nav CTA Overflow (2026-04-03)
+
+### Bug Fix
+- **Root cause**: `.nav-cta` was a flex sibling of `.hamburger` in the homepage nav. On mobile, `.logo-group { flex:1 }` consumed remaining space, pushing `.nav-cta` to render as a large dark block at its natural `inline-flex` size
+- **Fix**: Hide `.nav-cta` on mobile (`display: none` inside `@media (max-width: 768px)`)
+- **CTA preserved in mobile menu**: Added `<li class="nav-cta-mobile">` as last item in `<ul class="nav-links">` — shown only when menu is open, hidden on desktop via `.nav-cta-mobile { display: none }` default rule
+- **Landing pages unaffected**: Use inline `<style>` tags, not `global.css`
+
+### Files changed
+- 2 modified (`assets/css/global.css` +14/-1, `index.html` +2/-1)
+
+---
+
 ## v2.6.3 — Performance: Defer Popup + Sticky Bar Init (2026-04-03)
 
 ### Performance

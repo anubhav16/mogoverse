@@ -776,6 +776,9 @@ footer {
 }
 .faq-a p strong { color: var(--color-text); }
 
+/* [2026-04-03] Fix: mobile-only CTA item inside hamburger menu — hidden on desktop */
+.nav-cta-mobile { display: none; }
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
   nav { padding: 12px 20px; }
@@ -842,8 +845,23 @@ footer {
   #gap { padding: 60px 20px !important; }
   footer { padding: 40px 20px 32px; }
 
-  /* Nav CTA: ensure 44px touch target */
-  .nav-cta { padding: 12px 24px; min-height: 44px; display: inline-flex; align-items: center; }
+  /* [2026-04-03] Fix: hide desktop nav CTA on mobile — was rendering as large dark block
+     in 3-item flex nav when .nav-links hidden. CTA moved into hamburger menu below. */
+  .nav-cta { display: none; }
+  .nav-cta-mobile { display: list-item; }
+  .nav-cta-mobile-link {
+    display: block;
+    background: #1a1a2e;
+    color: white !important;
+    text-align: center;
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 14px 24px;
+    min-height: 44px;
+    margin-top: 8px;
+    text-decoration: none;
+  }
+  .nav-cta-mobile-link:hover { background: #6d28d9 !important; }
 
   /* Hamburger: ensure 44px touch target */
   .hamburger { min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
