@@ -7,10 +7,11 @@
 <title>Mogoverse — Royalty Free Music Is Costing Your Brand More Than You Think</title>
 <meta name="description" content="Royalty-free music costs your brand more than you think — diluted identity, zero recall, shared sounds. Get a unique sonic identity with AI — ready in minutes.">
 <meta name="robots" content="noindex, nofollow">
-<!-- [2026-04-03] Perf: preconnect + <link> font loading replaces render-blocking @import -->
+<!-- [2026-04-03] Perf: async font — preload/onload removes ~1000ms blocking chain on cache miss -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"></noscript>
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <style>

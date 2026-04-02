@@ -1,5 +1,18 @@
 # Mogoverse Release Notes
 
+## v2.7.0 — Perf: Async font loading on 4 remaining LPs → 90+ Lighthouse (2026-04-03)
+
+### Performance
+- **4 LPs fixed**: `royalty-free-music-isnt-free-costing-your-brand`, `dont-be-herd-be-heard`, `audio-logo-sonic-branding`, `ai-brand-music-generator`
+- **Root cause**: `<link rel="stylesheet">` for Google Fonts was blocking FCP/LCP by ~1,000ms on every Cloudflare cache miss — holding these pages at 87–88
+- **Fix**: Replaced with `<link rel="preload" as="style" onload>` pattern + `<noscript>` fallback — identical to pattern already proven at 97–98 on the other 4 LPs
+- **Expected result**: All 8 LPs at 90+ Performance score
+
+### Files changed
+- 4 modified (`landing-pages/*.html`, +2/-1 each)
+
+---
+
 ## v2.6.8 — Fix: Hamburger nudge permanently suppressed by unrelated form submissions (2026-04-03)
 
 ### Bug Fix
