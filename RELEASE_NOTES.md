@@ -1,5 +1,19 @@
 # Mogoverse Release Notes
 
+## v2.6.1 — Performance: Render-Blocking Fix Rolled Out to All Pages (2026-04-03)
+
+### Performance
+- **All 9 remaining pages fixed**: `@import` Google Fonts replaced with `<link rel="preconnect">` + `<link rel="stylesheet">` across all landing pages and homepage
+- **global.css @import removed**: `index.html` now loads Inter directly via `<link>` before `global.css` — eliminates the double render-block (blocking CSS → blocking @import inside it)
+- **lead-form.css async on 3 more pages**: `royalty-free-music-isnt-free`, `ad/brand-sound-identity`, `ad/royalty-free-music` — now preload/onload pattern with `<noscript>` fallback
+- **Font weights trimmed site-wide**: All pages now load Inter `wght@400;600;700;800;900` only (dropped 300 + 500, confirmed unused)
+- **GTM preconnect added site-wide**: `preconnect` + `dns-prefetch` for `www.googletagmanager.com` on all pages
+
+### Files changed
+- 9 modified (`landing-pages/*.html`, `landing-pages/ad/*.html`) + `index.html` + `assets/css/global.css`
+
+---
+
 ## v2.6.0 — Landing Page Performance: Render-Blocking Fix (2026-04-02)
 
 ### Performance

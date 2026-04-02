@@ -6,8 +6,14 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Mogoverse — Stop Using Generic Music. Get Your Brand's Own Sound.</title>
 <meta name="description" content="Royalty-free music makes your brand sound like everyone else. Get a unique sonic identity — AI-powered, used by Mastercard and 40+ brands.">
+<!-- [2026-04-03] Perf: preconnect + <link> font loading replaces render-blocking @import -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+/* [2026-04-03] Perf: @import removed — font loaded via <link> above */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Inter',sans-serif;background:#fafafa;color:#1a1a2e;line-height:1.6;overflow-x:hidden;}
 
@@ -73,7 +79,9 @@ footer{text-align:center;padding:24px;color:#bbb;font-size:11px;border-top:1px s
 </style>
 <!-- GTM -->
 <script src="../../assets/js/tracking.js" defer></script>
-<link rel="stylesheet" href="../../assets/css/lead-form.css">
+<!-- [2026-04-03] Perf: async-load lead-form.css — form is JS-injected after DOMContentLoaded, no FOUC risk -->
+<link rel="preload" href="../../assets/css/lead-form.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="../../assets/css/lead-form.css"></noscript>
 <script src="../../assets/js/components.js" defer></script>
 <script src="../../assets/js/leads.js" defer></script>
 <script src="../../assets/js/lead-form.js" defer></script>
