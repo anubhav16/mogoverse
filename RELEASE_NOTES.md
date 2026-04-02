@@ -1,5 +1,18 @@
 # Mogoverse Release Notes
 
+## v2.6.8 — Fix: Hamburger nudge permanently suppressed by unrelated form submissions (2026-04-03)
+
+### Bug Fix
+- **Root cause**: `mogoInitPopups` (deferred 5s) read `localStorage('mogo_form_submitted')` and set `popupState.anyFormSubmitted = true` for any returning user. After 5s, `mogoToggleNav` read this flag and hid the nudge permanently — even if the user never submitted the hamburger form
+- **Fix 1**: Nudge suppression now checks `popupState.hamburgerSubmitted` (new flag), not `popupState.anyFormSubmitted` — so timed popup submissions, exit intent submissions, or cross-session flags don't affect the nudge
+- **Fix 2**: `mogoStep1Submit` sets `popupState.hamburgerSubmitted = true` only when `source === 'hamburger_menu'`
+- **Fix 3**: Removed `localStorage → anyFormSubmitted` sync from `mogoInitPopups` — this was poisoning `popupState` for all returning users on every page load, suppressing timed popup and nudge alike
+
+### Files changed
+- 1 modified (`assets/js/lead-form.js` +4/-5)
+
+---
+
 ## v2.6.7 — Fix: Hamburger nudge disappears after CTA click without form submit (2026-04-03)
 
 ### Bug Fix

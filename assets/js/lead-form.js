@@ -215,7 +215,11 @@ function mogoStep1Submit(uid, source, intent) {
   if (typeof mogoTrackDemoBooked === 'function') mogoTrackDemoBooked(code + ' ' + phone);
 
   // Mark submitted — suppresses all future popups
-  if (typeof popupState !== 'undefined') popupState.anyFormSubmitted = true;
+  if (typeof popupState !== 'undefined') {
+    popupState.anyFormSubmitted = true;
+    // [2026-04-03] Track hamburger-specific submission to suppress nudge independently
+    if (source === 'hamburger_menu') popupState.hamburgerSubmitted = true;
+  }
   try { localStorage.setItem('mogo_form_submitted', 'true'); } catch(e) {}
 
   // Show step 2
@@ -363,14 +367,9 @@ function mogoClosePopup(popupId) {
 // ====== Popup triggers ======
 function mogoInitPopups() {
   var state = { timed: false, exit: false };
-  if (typeof popupState === 'undefined') window.popupState = { anyFormSubmitted: false };
-
-  // Check if form was previously submitted (cross-session)
-  try {
-    if (localStorage.getItem('mogo_form_submitted') === 'true') {
-      popupState.anyFormSubmitted = true;
-    }
-  } catch(e) {}
+  if (typeof popupState === 'undefined') window.popupState = { anyFormSubmitted: false, hamburgerSubmitted: false };
+  // [2026-04-03] Removed localStorage→anyFormSubmitted sync: was poisoning popupState after 5s
+  // for all returning users, permanently suppressing nudge and timed popup on repeat visits.
 
   // Timed popup — 15 seconds
   // Suppressed if: form submitted, user is filling a form, or already shown
@@ -450,8 +449,8 @@ function mogoToggleNav(btn) {
 
   if (!nudge) return;
   if (isOpening) {
-    // [2026-04-03] Only suppress for current session — localStorage flag would hide nudge permanently
-    var submitted = (typeof popupState !== 'undefined' && popupState.anyFormSubmitted);
+    // [2026-04-03] Only suppress when hamburger form itself was submitted this session
+    var submitted = (typeof popupState !== 'undefined' && popupState.hamburgerSubmitted);
     nudge.style.display = submitted ? 'none' : 'block';
 
     // [2026-04-03] Bug 2 fix: close menu when any anchor link inside it is tapped
