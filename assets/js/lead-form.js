@@ -472,13 +472,11 @@ function mogoToggleNav(btn) {
 }
 
 function mogoHamburgerCTA() {
-  // Close menu first — clean UX before popup appears
+  // Close menu — nudge stays hidden with menu; will reappear on next open if form not submitted
   var nav = document.getElementById('navLinks');
   var btn = document.getElementById('hamburger');
-  var nudge = document.getElementById('navLeadNudge');
   if (nav) nav.classList.remove('mobile-open');
   if (btn) btn.classList.remove('active');
-  if (nudge) nudge.style.display = 'none';
 
   mogoShowPopupForm('mogoHamburgerPopup', 'hamburger_menu',
     'Hear your brand\'s sound \u2014 free',

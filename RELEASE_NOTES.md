@@ -1,5 +1,16 @@
 # Mogoverse Release Notes
 
+## v2.6.7 — Fix: Hamburger nudge disappears after CTA click without form submit (2026-04-03)
+
+### Bug Fix
+- **Nudge permanently hidden on CTA tap**: `mogoHamburgerCTA()` was explicitly setting `nudge.style.display = 'none'` when the button was tapped. If the user dismissed the popup without submitting, the nudge was gone for the rest of the session — only `anyFormSubmitted` should suppress it
+- **Fix**: Removed `nudge.style.display = 'none'` from `mogoHamburgerCTA()`. Menu closes (`.mobile-open` removed), nudge reappears naturally on next menu open since `anyFormSubmitted` is still false
+
+### Files changed
+- 1 modified (`assets/js/lead-form.js` +1/-2)
+
+---
+
 ## v2.6.6 — Fix: Hamburger nudge CTA not rendering (2026-04-03)
 
 ### Bug Fix
