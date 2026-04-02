@@ -806,17 +806,13 @@ footer {
     background: var(--color-purple-bg);
   }
 
-  /* [2026-04-03] Hamburger menu lead nudge — fixed to bottom of screen (thumb zone)
-     z-index 101 keeps it above the fixed nav (100) and menu (99) */
+  /* [2026-04-03] Hamburger menu lead nudge — inline at bottom of open menu */
   .nav-lead-nudge {
-    position: fixed;
-    bottom: 0; left: 0;
-    width: 100%;
+    list-style: none;
     background: #1a1a2e;
-    padding: 20px 20px 28px;
-    box-shadow: 0 -4px 24px rgba(0,0,0,0.2);
-    z-index: 101;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 8px;
   }
   .nav-nudge-proof {
     font-size: 11px;
