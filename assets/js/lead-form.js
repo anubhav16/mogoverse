@@ -454,6 +454,19 @@ function mogoToggleNav(btn) {
     var submitted = (typeof popupState !== 'undefined' && popupState.anyFormSubmitted);
     try { submitted = submitted || localStorage.getItem('mogo_form_submitted') === 'true'; } catch(e) {}
     nudge.style.display = submitted ? 'none' : 'block';
+
+    // [2026-04-03] Bug 2 fix: close menu when any anchor link inside it is tapped
+    if (!nav._closeOnLinkAdded) {
+      nav.addEventListener('click', function(e) {
+        var link = e.target.closest('a[href]');
+        if (link && nav.classList.contains('mobile-open')) {
+          nav.classList.remove('mobile-open');
+          btn.classList.remove('active');
+          nudge.style.display = 'none';
+        }
+      });
+      nav._closeOnLinkAdded = true;
+    }
   } else {
     nudge.style.display = 'none';
   }

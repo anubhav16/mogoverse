@@ -778,10 +778,12 @@ footer {
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
+  /* [2026-04-03] Bug 3 fix: offset anchor scroll target below fixed nav (~60px tall on mobile) */
+  html { scroll-padding-top: 72px; }
   nav { padding: 12px 20px; }
   .nav-links { display: none; }
-  /* [2026-04-03] Fix: display:block keeps span children stacking vertically (3 bars visible) */
-  .hamburger { display: block; min-width: 44px; min-height: 44px; padding: 10px 8px; }
+  /* [2026-04-03] Fix: flex column centres the 3 bar spans inside the touch target */
+  .hamburger { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 8px; }
   .nav-links.mobile-open {
     display: flex;
     flex-direction: column;

@@ -1,5 +1,17 @@
 # Mogoverse Release Notes
 
+## v2.6.5 — Fix: Mobile Nav 3 Bugs (hamburger bars, menu auto-close, scroll offset) (2026-04-03)
+
+### Bug Fixes
+- **Bug 1 — Hamburger bars invisible**: Changed `.hamburger` mobile rule from `display:block` to `display:flex; flex-direction:column; align-items:center; justify-content:center` — this properly centres the 3 `<span>` bars inside the touch target
+- **Bug 2 — Menu stays open after link tap**: Added delegated `click` listener on `#navLinks` inside `mogoToggleNav` — tapping any `<a href>` inside the open menu now removes `.mobile-open`, resets hamburger state, and hides the nudge
+- **Bug 3 — Section heading hidden under fixed nav**: Added `html { scroll-padding-top: 72px }` inside `@media (max-width: 768px)` — anchors now scroll to a position that clears the ~60px fixed nav bar
+
+### Files changed
+- 2 modified (`assets/css/global.css` +3/-1, `assets/js/lead-form.js` +9/-0)
+
+---
+
 ## v2.6.4 — Fix: Homepage Mobile Nav CTA Overflow (2026-04-03)
 
 ### Bug Fix
