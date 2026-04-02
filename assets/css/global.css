@@ -780,7 +780,8 @@ footer {
 @media (max-width: 768px) {
   nav { padding: 12px 20px; }
   .nav-links { display: none; }
-  .hamburger { display: block; }
+  /* [2026-04-03] Fix: display:block keeps span children stacking vertically (3 bars visible) */
+  .hamburger { display: block; min-width: 44px; min-height: 44px; padding: 10px 8px; }
   .nav-links.mobile-open {
     display: flex;
     flex-direction: column;
@@ -844,9 +845,6 @@ footer {
 
   /* [2026-04-03] Fix: hide nav CTA on mobile — homepage has hamburger menu, CTA not needed in nav bar */
   .nav-cta { display: none; }
-
-  /* Hamburger: ensure 44px touch target */
-  .hamburger { min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
 
   /* Powered-by: hide on mobile to prevent overflow */
   .powered-by { display: none; }
