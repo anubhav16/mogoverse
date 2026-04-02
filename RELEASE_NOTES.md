@@ -1,5 +1,20 @@
 # Mogoverse Release Notes
 
+## v2.6.2 — Performance: Top 10 Images Converted to WebP (2026-04-03)
+
+### Performance
+- **10 priority images converted PNG → WebP**: tata-salt, saffola, rcb, bkt-tyres, toyota-bmq, nestle (logos) + pallavi-singh, raja-rajamannar, gaurav-verma, dhiren-amin (headshots)
+- **Total savings: 222KB / 81% reduction** (273KB PNG → 51KB WebP) — directly addresses Lighthouse image-delivery-insight finding (676KB total savings available; these 10 are the highest-impact subset)
+- **No `<picture>` fallback needed**: WebP supported in all target browsers (Safari 14+ / 2020+)
+- **CLS unaffected**: All `width`/`height` attributes preserved on logo `<img>` tags and testimonial headshot rendering
+- **Original PNGs retained on disk** for remaining logo-wall images not yet converted
+
+### Files changed
+- 2 modified (`components/logo-wall.html`, `components/testimonials.html`)
+- 10 new files (`assets/logos/*.webp` × 6, `assets/headshots/*.webp` × 4)
+
+---
+
 ## v2.6.1 — Performance: Render-Blocking Fix Rolled Out to All Pages (2026-04-03)
 
 ### Performance
