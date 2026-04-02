@@ -438,6 +438,41 @@ function mogoNavCTA() {
     'Enter your phone number and we\'ll walk you through Mogoverse.');
 }
 
+// ====== Hamburger toggle + contextual nudge ======
+// [2026-04-03] Shows lead nudge card below menu on open; suppressed after form submission
+function mogoToggleNav(btn) {
+  var nav = document.getElementById('navLinks');
+  var nudge = document.getElementById('navLeadNudge');
+  var isOpening = !nav.classList.contains('mobile-open');
+
+  nav.classList.toggle('mobile-open');
+  btn.classList.toggle('active');
+
+  if (!nudge) return;
+  if (isOpening) {
+    // Suppress if already converted this session or cross-session
+    var submitted = (typeof popupState !== 'undefined' && popupState.anyFormSubmitted);
+    try { submitted = submitted || localStorage.getItem('mogo_form_submitted') === 'true'; } catch(e) {}
+    nudge.style.display = submitted ? 'none' : 'block';
+  } else {
+    nudge.style.display = 'none';
+  }
+}
+
+function mogoHamburgerCTA() {
+  // Close menu first — clean UX before popup appears
+  var nav = document.getElementById('navLinks');
+  var btn = document.getElementById('hamburger');
+  var nudge = document.getElementById('navLeadNudge');
+  if (nav) nav.classList.remove('mobile-open');
+  if (btn) btn.classList.remove('active');
+  if (nudge) nudge.style.display = 'none';
+
+  mogoShowPopupForm('mogoHamburgerPopup', 'hamburger_menu',
+    'Hear your brand\'s sound \u2014 free',
+    'Book a 15-min demo. We\'ll create a sample sonic identity for your brand on the house.');
+}
+
 // ====== Init ======
 function mogoInitLeadForms() {
   // Skip popups + sticky bar on ad landing pages (clean conversion path)
