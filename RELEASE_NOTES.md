@@ -1,5 +1,18 @@
 # Mogoverse Release Notes
 
+## v2.8.1 — Perf: CLS fix — reserved min-height on lazy component placeholders (2026-04-04)
+
+### CLS Fix
+- **Root cause identified from live Lighthouse**: `logoWallComponent`, `testimonialsComponent`, `footerComponent` had no reserved height. When IntersectionObserver fires and injects content, the page reflows → CLS 0.169–0.244 on live site.
+- **Fix**: Added `style="min-height:400px"` (logo-wall), `min-height:500px"` (testimonials), `min-height:200px"` (footer) to placeholder divs on both `give-mogo` and `royalty-free-isnt-free`.
+- Live Lighthouse before fix: mobile 61 / desktop 88 (give-mogo), mobile 36 / desktop 70 (royalty-free). CLS was 0.169–0.244.
+- Expected after fix: CLS ≤ 0.05 on both pages.
+
+### Files changed
+- 2 modified (`landing-pages/your-brand-has-a-logo-give-mogo.html`, `landing-pages/royalty-free-music-isnt-free-costing-your-brand.html`)
+
+---
+
 ## v2.8.0 — Perf: CLS + TBT fixes → give-mogo 90+ (font-display:optional, lazy components, Clarity defer, WebP logos) (2026-04-04)
 
 ### Performance — give-mogo / royalty-free-isnt-free / homepage

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- BUILD: v2.7.1 / d219a7d / 2026-04-04 -->
+<!-- BUILD: v2.8.1 / b7043e9 / 2026-04-04 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://www.mogoverse.ai/landing-pages/your-brand-has-a-logo-give-mogo">
 <title>Mogoverse — Your brand has a logo. Now give it a MOGO®</title>
@@ -220,10 +220,10 @@
 </section>
 
 <!-- Logo Wall Component -->
-<div id="logoWallComponent"></div>
+<div id="logoWallComponent" style="min-height:400px;"></div>
 
 <!-- Testimonials Component -->
-<div id="testimonialsComponent"></div>
+<div id="testimonialsComponent" style="min-height:500px;"></div>
 
 <!-- Client logos (legacy — hidden, replaced by logo wall component) -->
 <section class="client-bar" style="display:none;">
@@ -428,7 +428,7 @@
 </section>
 
 <!-- Footer Component -->
-<div id="footerComponent"></div>
+<div id="footerComponent" style="min-height:200px;"></div>
 
 <!-- Video Popup Modal --><div id="videoModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;cursor:pointer;backdrop-filter:blur(6px);" onclick="if(event.target===this)closeVideo()"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:860px;"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.5);"><iframe id="videoFrame" title="YouTube video player" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><button onclick="closeVideo()" style="position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:white;border:none;font-size:18px;font-weight:700;cursor:pointer;color:#1a1a2e;box-shadow:0 4px 16px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">X</button></div></div><script>function openVideo(id){document.getElementById('videoFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';document.getElementById('videoModal').style.display='block';document.body.style.overflow='hidden';}function closeVideo(){document.getElementById('videoFrame').src='';document.getElementById('videoModal').style.display='none';document.body.style.overflow='';}document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideo();});</script>
 <!-- Lead forms, popups, sticky bar all handled by lead-form.js -->
