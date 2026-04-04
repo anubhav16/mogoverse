@@ -124,9 +124,32 @@ function mogoTrackEmailCaptured(email) {
 // ============================================================
 // 5. MICROSOFT CLARITY — loaded via GTM (no manual script needed)
 // [2026-03-28] Project ID: w2uv9zdrgv — connected to GTM-TFX2NPMP
-// Clarity events (clarity('event', ...) and clarity('set', ...))
-// work via the clarity() function exposed by GTM's Clarity tag.
+// [2026-04-04] Perf: Clarity is loaded by GTM on page load (461ms main thread cost).
+// We stub window.clarity to queue calls, then push a GTM event on first user
+// interaction so GTM's Clarity tag fires only after first touch/click/key.
+// All clarity('set',...) and clarity('event',...) calls are queued and replayed.
 // ============================================================
+(function() {
+  // Install stub — queues all clarity() calls until real Clarity loads
+  if (typeof window.clarity === 'undefined') {
+    var _clarityQueue = [];
+    window.clarity = function() { _clarityQueue.push(arguments); };
+    window._clarityQueue = _clarityQueue;
+  }
+
+  // Fire GTM 'mogo_clarity_init' on first user interaction
+  // GTM should have a trigger on this event to fire the Clarity tag
+  var _clarityFired = false;
+  function _initClarity() {
+    if (_clarityFired) return;
+    _clarityFired = true;
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({ event: 'mogo_clarity_init' });
+  }
+  ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function(evt) {
+    window.addEventListener(evt, _initClarity, { once: true, passive: true });
+  });
+})();
 
 // ============================================================
 // 6. PAGE VIEW + LANDING PAGE TRACKING

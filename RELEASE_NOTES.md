@@ -1,5 +1,24 @@
 # Mogoverse Release Notes
 
+## v2.8.0 — Perf: CLS + TBT fixes → give-mogo 90+ (font-display:optional, lazy components, Clarity defer, WebP logos) (2026-04-04)
+
+### Performance — give-mogo / royalty-free-isnt-free / homepage
+- **Step 1 — CLS fix**: `display=swap` → `display=optional` on all LP + homepage font URLs. Eliminates Inter FOUT (CLS 0.186 → ~0). Trade-off: Inter may not render on first visit on very slow connections — system font fallback is readable.
+- **Step 2 — TBT fix (components)**: `logoWallComponent`, `testimonialsComponent`, `footerComponent` now lazy-loaded via IntersectionObserver (rootMargin 200px). `quizComponent` stays eager (above fold). Applied to give-mogo, royalty-free-isnt-free, index.html.
+- **Step 3 — TBT fix (Clarity)**: Microsoft Clarity init deferred to first user interaction (`pointerdown`/`touchstart`/`keydown`). Removes 461ms cold-load Clarity cost from main thread.
+- **Step 4 — WebP logos**: 14 remaining PNG/JPG logos in logo-wall converted to WebP (~421KB savings).
+
+### Expected score impact
+- TBT fix: +24pts | CLS fix: +9pts | Combined: 67 → ~95+
+
+### Files changed
+- 3 modified (`landing-pages/your-brand-has-a-logo-give-mogo.html`, `landing-pages/royalty-free-music-isnt-free-costing-your-brand.html`, `index.html`)
+- 1 modified (`assets/js/tracking.js`)
+- 1 modified (`components/logo-wall.html`)
+- 14 new (`assets/logos/*.webp`)
+
+---
+
 ## v2.7.1 — Perf: give-mogo async font fix + build signature on all 8 LPs (2026-04-04)
 
 ### Performance

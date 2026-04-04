@@ -94,7 +94,7 @@
 <!-- [2026-04-03] Perf: preconnect + <link> replaces @import in global.css — eliminates render-blocking font request -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=optional">
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <!-- Styles -->
@@ -1112,11 +1112,25 @@ function toggleFaq(btn) {
 
 /* [2026-03-28] Load shared components */
 document.addEventListener('DOMContentLoaded', function() {
-  /* [2026-03-28 20:15] Fix: use mogoComponentPath() for consistency */
+  // [2026-04-04] Perf: quiz is above-fold — load eagerly
   mogoLoadComponent('quizComponent', mogoComponentPath('quiz.html'));
-  mogoLoadComponent('logoWallComponent', mogoComponentPath('logo-wall.html'));
-  mogoLoadComponent('testimonialsComponent', mogoComponentPath('testimonials.html'));
-  mogoLoadComponent('footerComponent', mogoComponentPath('footer.html'));
+
+  // [2026-04-04] Perf: lazy-load below-fold components via IntersectionObserver (rootMargin 200px)
+  var lazyComponents = {
+    logoWallComponent: 'logo-wall.html',
+    testimonialsComponent: 'testimonials.html',
+    footerComponent: 'footer.html'
+  };
+  Object.keys(lazyComponents).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    new IntersectionObserver(function(entries, obs) {
+      if (entries[0].isIntersecting) {
+        mogoLoadComponent(id, mogoComponentPath(lazyComponents[id]));
+        obs.disconnect();
+      }
+    }, { rootMargin: '200px' }).observe(el);
+  });
 });
 </script>
 

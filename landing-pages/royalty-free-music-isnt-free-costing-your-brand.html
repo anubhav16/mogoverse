@@ -11,8 +11,8 @@
 <!-- [2026-04-03] Perf: async font — preload/onload removes ~1000ms blocking chain on cache miss -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"></noscript>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=optional" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=optional"></noscript>
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <style>
@@ -410,10 +410,25 @@
 <!-- Lead forms, popups, sticky bar all handled by lead-form.js -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  // [2026-04-04] Perf: quiz is above-fold — load eagerly
   mogoLoadComponent('quizComponent', mogoComponentPath('quiz.html'));
-  mogoLoadComponent('logoWallComponent', mogoComponentPath('logo-wall.html'));
-  mogoLoadComponent('testimonialsComponent', mogoComponentPath('testimonials.html'));
-  mogoLoadComponent('footerComponent', mogoComponentPath('footer.html'));
+
+  // [2026-04-04] Perf: lazy-load below-fold components via IntersectionObserver (rootMargin 200px)
+  var lazyComponents = {
+    logoWallComponent: 'logo-wall.html',
+    testimonialsComponent: 'testimonials.html',
+    footerComponent: 'footer.html'
+  };
+  Object.keys(lazyComponents).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    new IntersectionObserver(function(entries, obs) {
+      if (entries[0].isIntersecting) {
+        mogoLoadComponent(id, mogoComponentPath(lazyComponents[id]));
+        obs.disconnect();
+      }
+    }, { rootMargin: '200px' }).observe(el);
+  });
 });
 </script>
 </main>
