@@ -1,5 +1,18 @@
 # Mogoverse Release Notes
 
+## v2.7.1 — Perf: give-mogo async font fix + build signature on all 8 LPs (2026-04-04)
+
+### Performance
+- **`your-brand-has-a-logo-give-mogo`**: Replaced blocking `<link rel="stylesheet">` for Google Fonts with `preload/onload` + `<noscript>` fallback — was the last LP still scoring 65 on its canonical clean URL
+
+### Build Verification
+- **Build signature added to all 8 LPs**: `<!-- BUILD: v2.7.1 / {git-hash} / 2026-04-04 -->` in `<head>` — allows instant `curl | grep BUILD` verification that the correct deployment is live on Cloudflare
+
+### Files changed
+- 8 modified (`landing-pages/*.html`, +2/-1 on give-mogo, +1/-0 on remaining 7)
+
+---
+
 ## v2.7.0 — Perf: Async font loading on 4 remaining LPs → 90+ Lighthouse (2026-04-03)
 
 ### Performance

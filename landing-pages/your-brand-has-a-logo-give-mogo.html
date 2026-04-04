@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- BUILD: v2.7.1 / d219a7d / 2026-04-04 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://www.mogoverse.ai/landing-pages/your-brand-has-a-logo-give-mogo">
 <title>Mogoverse — Your brand has a logo. Now give it a MOGO®</title>
@@ -10,8 +11,9 @@
 <!-- [2026-04-02] Perf: preconnect to eliminate DNS lookup delay for fonts + GTM -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- [2026-04-02] Perf: moved from @import (render-blocking) to <link> — drops weights 300+500 (unused per Lighthouse) -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap">
+<!-- [2026-04-04] Perf: async font — preload/onload removes ~1000ms blocking chain on cache miss -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"></noscript>
 <link rel="preconnect" href="https://www.googletagmanager.com">
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <style>
