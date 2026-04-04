@@ -2,10 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- BUILD: v2.7.1 / d219a7d / 2026-04-04 -->
+<!-- BUILD: v2.8.0 / 2026-04-05 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://www.mogoverse.ai/landing-pages/audio-logo-sonic-branding">
 <title>Mogoverse — Your Brand Has a Logo. Now Give It a Voice.</title>
+<meta name="description" content="Create your brand's audio logo with AI. BrandMusiq — creators of Mastercard's sonic identity — now self-serve. Own it forever, no subscription.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.mogoverse.ai/audio-logo-sonic-branding">
+<meta property="og:title" content="Audio Logo for Your Brand — Mogoverse">
+<meta property="og:description" content="Create your brand's audio logo with AI. By BrandMusiq — creators of Mastercard's sonic identity.">
+<meta property="og:site_name" content="Mogoverse">
 <!-- [2026-04-03] Perf: async font — preload/onload removes ~1000ms blocking chain on cache miss -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -195,8 +201,12 @@
   }
 </style>
 <!-- Mogoverse Tracking: GTM + Google Ads + UTM -->
+<!-- [2026-04-02] Perf: async-load lead-form.css — safe because form is JS-injected after DOMContentLoaded, no FOUC risk -->
+<link rel="stylesheet" href="../assets/css/lead-form.css" media="print" onload="this.media='all'">
 <script src="../assets/js/tracking.js" defer></script>
+<script src="../assets/js/components.js" defer></script>
 <script src="../assets/js/leads.js" defer></script>
+<script src="../assets/js/lead-form.js" defer></script>
 </head>
 <body>
 <noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-TFX2NPMP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -217,71 +227,19 @@
     <h1>Your brand has a logo.<br>Now give it <em>a voice.</em></h1>
     <p class="subtitle">BrandMusiq has created sonic identities for <strong>40+ brands like Mastercard, Zomato, and HDFC Bank.</strong> Now, Mogoverse puts that same expertise in your hands — powered by AI, at a fraction of the cost.</p>
 
-    <!-- Multi-step form -->
+    <!-- Lead form inside hero -->
     <div class="form-container" id="signup">
-      <div class="form-step active" id="step1">
-        <div class="form-step-indicator"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
-        <div class="form-row">
-          <input type="email" id="email" placeholder="Enter your work email" aria-label="Work email">
-          <button class="btn-primary" onclick="nextStep(1)">Next</button>
-        </div>
-        <p class="cta-note">Free to start. No credit card required.</p>
-      </div>
-      <div class="form-step" id="step2">
-        <div class="form-step-indicator"><div class="dot done"></div><div class="dot active"></div><div class="dot"></div></div>
-        <div class="form-row">
-          <input type="tel" id="phone" placeholder="Phone number (we'll call to confirm)" aria-label="Phone number">
-          <button class="btn-primary" onclick="nextStep(2)">Next</button>
-        </div>
-        <p class="cta-note">We'll send a quick confirmation — no spam, ever.</p>
-      </div>
-      <div class="form-step" id="step3">
-        <div class="form-step-indicator"><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div></div>
-        <p style="font-size:14px;font-weight:600;margin-bottom:12px;color:#1a1a2e;">When should we call you for a demo?</p>
-        <div class="day-tabs">
-          <div class="day-tab selected" onclick="selectDay(this)">Today</div>
-          <div class="day-tab" onclick="selectDay(this)">Tomorrow</div>
-        </div>
-        <div class="time-grid">
-          <div class="time-slot" onclick="selectTime(this)">Morning<div class="slot-label">9 AM – 12 PM</div></div>
-          <div class="time-slot" onclick="selectTime(this)">Afternoon<div class="slot-label">12 PM – 3 PM</div></div>
-          <div class="time-slot" onclick="selectTime(this)">Evening<div class="slot-label">3 PM – 6 PM</div></div>
-          <div class="time-slot" onclick="selectTime(this)">Late Evening<div class="slot-label">6 PM – 9 PM</div></div>
-        </div>
-        <button class="btn-primary" style="width:100%;" onclick="nextStep(3)">Book My Demo</button>
-      </div>
-      <div class="form-step" id="step4">
-        <div class="success-msg">
-          <div class="check-icon">✓</div>
-          <h3>You're in! Demo booked.</h3>
-          <p>We'll call you <strong id="confirmDay">today</strong> during your selected time slot to walk you through Mogoverse. Check your email for confirmation.</p>
-        </div>
-      </div>
+      <div id="heroLeadForm"></div>
     </div>
+    <script>document.addEventListener('DOMContentLoaded', function(){ if(typeof mogoRenderLeadForm==='function') mogoRenderLeadForm('heroLeadForm', 'hero'); });</script>
   </div>
   <div class="hero-media">
     <div onclick="openVideo('bSlN694crNY')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard MOGO by BrandMusiq" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div>
   </div>
 </section>
 
-<!-- Client logos -->
-<section class="client-bar">
-  <div class="label">Trusted by brands you know</div>
-  <div class="client-logos">
-    <img src="../assets/logos/mastercard.png" alt="Mastercard" title="Mastercard" width="80" height="28">
-    <img src="../assets/logos/zomato.svg" alt="Zomato" title="Zomato" width="80" height="28">
-    <img src="../assets/logos/hdfc.png" alt="HDFC Bank" title="HDFC Bank" width="80" height="28">
-    <img src="../assets/logos/asianpaints.svg" alt="Asian Paints" title="Asian Paints" width="80" height="28">
-    <img src="../assets/logos/vistara.svg" alt="Vistara" title="Vistara" width="80" height="28">
-    <img src="../assets/logos/raymond.svg" alt="Raymond" title="Raymond" width="80" height="28">
-    <img src="../assets/logos/mg.svg" alt="MG Motors" title="MG Motors" width="80" height="28">
-    <img src="../assets/logos/infosys.png" alt="Infosys" title="Infosys" width="80" height="28">
-    <img src="../assets/logos/amazonpay.png" alt="Amazon Pay" title="Amazon Pay" width="80" height="28">
-    <img src="../assets/logos/tata.png" alt="Tata" title="Tata" width="80" height="28">
-    <img src="../assets/logos/truecaller.svg" alt="Truecaller" title="Truecaller" width="80" height="28">
-    <img src="../assets/logos/toyota.png" alt="Toyota" title="Toyota" width="80" height="28">
-  </div>
-</section>
+<!-- Logo Wall Component -->
+<div id="logoWallComponent"></div>
 
 <!-- Stats -->
 <section class="stats-bar">
@@ -436,12 +394,12 @@
   <h2 style="margin:0 auto 16px;">Hear what $15K–$500K sonic branding sounds like.</h2>
   <p class="desc" style="margin:0 auto 48px;text-align:center;">These MOGOs® were created by BrandMusiq for the world's biggest brands. Mogoverse brings the same quality to every business.</p>
   <div class="video-grid">
-    <div class="video-card"><div class="embed"><div onclick="openVideo('bSlN694crNY')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Mastercard</h3><p>Best Audio Brand 3 years running. 2.5M+ earpoints.</p></div></div>
-    <div class="video-card"><div class="embed"><div onclick="openVideo('C2YEn8aDOmo')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/C2YEn8aDOmo/hqdefault.jpg" alt="Zomato" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Zomato</h3><p>Sonic identity for orders, app sounds, and brand comms.</p></div></div>
-    <div class="video-card"><div class="embed"><div onclick="openVideo('ACkQPHKuN7w')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/ACkQPHKuN7w/hqdefault.jpg" alt="MG Motors" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>MG Motors</h3><p>Anthemic sonic identity for the MG Hector launch.</p></div></div>
-    <div class="video-card"><div class="embed"><div onclick="openVideo('B5M_5mEBL4Y')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/B5M_5mEBL4Y/hqdefault.jpg" alt="Vistara" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Vistara</h3><p>Sensorial airline experience — compassion and freedom.</p></div></div>
-    <div class="video-card"><div class="embed"><div onclick="openVideo('BiTJmnK4oj4')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/BiTJmnK4oj4/hqdefault.jpg" alt="Raymond" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Raymond</h3><p>Classical heritage reimagined for modern brand relevance.</p></div></div>
-    <div class="video-card"><div class="embed"><div onclick="openVideo('RvyRcxuxuP0')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/RvyRcxuxuP0/hqdefault.jpg" alt="RCB" style="width:100%;height:100%;object-fit:cover;display:block;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Royal Challengers Bangalore</h3><p>The iconic fan chant reverberating across India.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('bSlN694crNY')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/bSlN694crNY/hqdefault.jpg" alt="Mastercard" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Mastercard</h3><p>Best Audio Brand 3 years running. 2.5M+ earpoints.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('C2YEn8aDOmo')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/C2YEn8aDOmo/hqdefault.jpg" alt="Zomato" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Zomato</h3><p>Sonic identity for orders, app sounds, and brand comms.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('ACkQPHKuN7w')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/ACkQPHKuN7w/hqdefault.jpg" alt="MG Motors" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>MG Motors</h3><p>Anthemic sonic identity for the MG Hector launch.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('B5M_5mEBL4Y')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/B5M_5mEBL4Y/hqdefault.jpg" alt="Vistara" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Vistara</h3><p>Sensorial airline experience — compassion and freedom.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('BiTJmnK4oj4')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/BiTJmnK4oj4/hqdefault.jpg" alt="Raymond" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Raymond</h3><p>Classical heritage reimagined for modern brand relevance.</p></div></div>
+    <div class="video-card"><div class="embed"><div onclick="openVideo('RvyRcxuxuP0')" style="cursor:pointer;width:100%;height:100%;position:relative;"><img src="https://img.youtube.com/vi/RvyRcxuxuP0/hqdefault.jpg" alt="RCB" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:48px;background:rgba(255,0,0,0.85);border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform 0.2s;"><div style="width:0;height:0;border-left:18px solid white;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div></div></div></div><div class="info"><h3>Royal Challengers Bangalore</h3><p>The iconic fan chant reverberating across India.</p></div></div>
   </div>
 </section>
 
@@ -477,30 +435,9 @@
   <h2>Sound like a <em>Mastercard.</em><br>Pay like a startup.</h2>
   <p class="subtitle">Join the waitlist for Mogoverse — the AI-powered sonic branding platform from the team behind 40+ iconic brand sounds.</p>
   <div class="form-container">
-    <div class="form-step active" id="step1b">
-      <div class="form-step-indicator"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
-      <div class="form-row"><input type="email" id="email-b" placeholder="Enter your work email"><button class="btn-primary" onclick="nextStepB(1)">Next</button></div>
-    </div>
-    <div class="form-step" id="step2b">
-      <div class="form-step-indicator"><div class="dot done"></div><div class="dot active"></div><div class="dot"></div></div>
-      <div class="form-row"><input type="tel" id="phone-b" placeholder="Phone number"><button class="btn-primary" onclick="nextStepB(2)">Next</button></div>
-    </div>
-    <div class="form-step" id="step3b">
-      <div class="form-step-indicator"><div class="dot done"></div><div class="dot done"></div><div class="dot active"></div></div>
-      <p style="font-size:14px;font-weight:600;margin-bottom:12px;">When should we call for a demo?</p>
-      <div class="day-tabs"><div class="day-tab selected" onclick="selectDay(this)">Today</div><div class="day-tab" onclick="selectDay(this)">Tomorrow</div></div>
-      <div class="time-grid">
-        <div class="time-slot" onclick="selectTime(this)">Morning<div class="slot-label">9 AM – 12 PM</div></div>
-        <div class="time-slot" onclick="selectTime(this)">Afternoon<div class="slot-label">12 PM – 3 PM</div></div>
-        <div class="time-slot" onclick="selectTime(this)">Evening<div class="slot-label">3 PM – 6 PM</div></div>
-        <div class="time-slot" onclick="selectTime(this)">Late Evening<div class="slot-label">6 PM – 9 PM</div></div>
-      </div>
-      <button class="btn-primary" style="width:100%;" onclick="nextStepB(3)">Book My Demo</button>
-    </div>
-    <div class="form-step" id="step4b">
-      <div class="success-msg"><div class="check-icon">✓</div><h3>You're in! Demo booked.</h3><p>We'll call you during your selected time slot. Check your email for confirmation.</p></div>
-    </div>
+    <div id="footerLeadForm"></div>
   </div>
+  <script>document.addEventListener('DOMContentLoaded', function(){ if(typeof mogoRenderLeadForm==='function') mogoRenderLeadForm('footerLeadForm', 'footer'); });</script>
   <p class="guarantee" style="margin-top:20px;">Built on 10+ years of BrandMusiq's sonic branding expertise.</p>
 </section>
 
@@ -508,172 +445,24 @@
 <footer>&copy; 2026 Mogoverse — a <a href="https://brandmusiq.com" target="_blank" rel="noopener">BrandMusiq</a> company. Asia's first and leading sonic branding agency.</footer>
 
 <script>
-// Form logic — Hero form
-function nextStep(step) {
-  if (step === 1) {
-    const email = document.getElementById('email').value;
-    if (!email || !email.includes('@')) { document.getElementById('email').style.borderColor='#ef4444'; return; }
-  }
-  if (step === 2) {
-    const phone = document.getElementById('phone').value;
-    if (!phone || phone.length < 7) { document.getElementById('phone').style.borderColor='#ef4444'; return; }
-  }
-  document.getElementById('step' + step).classList.remove('active');
-  document.getElementById('step' + (step + 1)).classList.add('active');
-  if (step === 3) {
-    mogoTrackDemoBooked(document.getElementById('email').value);
-    var day = document.querySelector('#step3 .day-tab.selected');
-    if (day) document.getElementById('confirmDay').textContent = day.textContent.toLowerCase();
-    var time = document.querySelector('#step3 .time-slot.selected');
-    mogoSubmitLead({ email: document.getElementById('email').value, phone: document.getElementById('phone').value, day: day ? day.textContent.trim() : '', time_slot: time ? time.textContent.trim() : '', form_type: 'demo_booking', form_location: 'hero' });
-  }
-}
-// Form logic — Footer form
-function nextStepB(step) {
-  if (step === 1) {
-    const email = document.getElementById('email-b').value;
-    if (!email || !email.includes('@')) { document.getElementById('email-b').style.borderColor='#ef4444'; return; }
-  }
-  if (step === 2) {
-    const phone = document.getElementById('phone-b').value;
-    if (!phone || phone.length < 7) { document.getElementById('phone-b').style.borderColor='#ef4444'; return; }
-  }
-  document.getElementById('step' + step + 'b').classList.remove('active');
-  document.getElementById('step' + (step + 1) + 'b').classList.add('active');
-  if (step === 3) {
-    mogoTrackDemoBooked(document.getElementById('email-b').value);
-    var dayB = document.querySelector('#step3b .day-tab.selected');
-    var timeB = document.querySelector('#step3b .time-slot.selected');
-    mogoSubmitLead({ email: document.getElementById('email-b').value, phone: document.getElementById('phone-b').value, day: dayB ? dayB.textContent.trim() : '', time_slot: timeB ? timeB.textContent.trim() : '', form_type: 'demo_booking', form_location: 'footer' });
-  }
-}
-// Day tab selection
-function selectDay(el) {
-  el.parentElement.querySelectorAll('.day-tab').forEach(t => t.classList.remove('selected'));
-  el.classList.add('selected');
-}
-// Time slot selection
-function selectTime(el) {
-  el.closest('.time-grid').querySelectorAll('.time-slot').forEach(t => t.classList.remove('selected'));
-  el.classList.add('selected');
-}
-</script>
-
-<!-- Video Popup Modal --><div id="videoModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;cursor:pointer;backdrop-filter:blur(6px);" onclick="if(event.target===this)closeVideo()"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:860px;"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.5);"><iframe id="videoFrame" title="YouTube video player" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><button onclick="closeVideo()" style="position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:white;border:none;font-size:18px;font-weight:700;cursor:pointer;color:#1a1a2e;box-shadow:0 4px 16px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">X</button></div></div><script>function openVideo(id){document.getElementById('videoFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';document.getElementById('videoModal').style.display='block';document.body.style.overflow='hidden';}function closeVideo(){document.getElementById('videoFrame').src='';document.getElementById('videoModal').style.display='none';document.body.style.overflow='';}document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideo();});</script><!-- LEAD CAPTURE POPUPS — include before </body> -->
-
-<!-- 1. Timed Popup (15 seconds) -->
-<div id="timedPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9990;backdrop-filter:blur(4px);" onclick="if(event.target===this)closePopup('timedPopup')">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:white;border-radius:16px;padding:44px;max-width:460px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.25);text-align:center;">
-    <button onclick="closePopup('timedPopup')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#767676;">✕</button>
-    <div style="font-size:48px;margin-bottom:12px;">🎧</div>
-    <h3 style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;color:#1a1a2e;">Hear your brand's sound — free</h3>
-    <p style="font-size:15px;color:#767676;margin-bottom:24px;line-height:1.6;">Book a 15-min demo. We'll create a sample sonic identity for your brand — on the house. Powered by BrandMusiq's 40+ brand portfolio.</p>
-    <div style="display:flex;gap:8px;margin-bottom:8px;">
-      <input type="email" id="timed-email" placeholder="Work email" style="flex:1;padding:14px 16px;border:2px solid #e5e5e5;border-radius:8px;font-size:15px;outline:none;font-family:Inter,sans-serif;">
-      <button onclick="submitTimedPopup()" style="padding:14px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;">Book Free Demo</button>
-    </div>
-    <p style="font-size:12px;color:#767676;">No spam. Unsubscribe anytime.</p>
-  </div>
-</div>
-
-<!-- 2. Exit Intent Popup -->
-<div id="exitPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9991;backdrop-filter:blur(4px);" onclick="if(event.target===this)closePopup('exitPopup')">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#1a1a2e;border-radius:16px;padding:44px;max-width:480px;width:90%;box-shadow:0 24px 80px rgba(0,0,0,0.4);text-align:center;color:white;">
-    <button onclick="closePopup('exitPopup')" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#666;">✕</button>
-    <div style="font-size:48px;margin-bottom:12px;">⏳</div>
-    <h3 style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;">Wait — don't leave without this</h3>
-    <p style="font-size:15px;color:#767676;margin-bottom:8px;line-height:1.6;">Get a <strong style="color:#a78bfa;">free sonic brand audit</strong> — we'll analyze your current brand audio and show you what's missing. Only takes 5 minutes.</p>
-    <div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:12px;margin-bottom:20px;">
-      <p style="font-size:13px;color:#a78bfa;font-weight:600;">✓ Free audit &nbsp;·&nbsp; ✓ No commitment &nbsp;·&nbsp; ✓ Results in 24h</p>
-    </div>
-    <div style="display:flex;gap:8px;margin-bottom:8px;">
-      <input type="email" id="exit-email" placeholder="Work email" style="flex:1;padding:14px 16px;border:2px solid #333;border-radius:8px;font-size:15px;outline:none;background:#111;color:white;font-family:Inter,sans-serif;">
-      <button onclick="submitExitPopup()" style="padding:14px 24px;background:#7c5cfc;color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;">Get Free Audit</button>
-    </div>
-    <p style="font-size:12px;color:#555;">Join 200+ brands already on the waitlist.</p>
-  </div>
-</div>
-
-<!-- 3. Sticky Bottom CTA Bar (appears on mobile after scroll) -->
-<div id="stickyCTA" style="display:none;position:fixed;bottom:0;left:0;width:100%;background:white;border-top:2px solid #eee;padding:12px 20px;z-index:9980;box-shadow:0 -4px 20px rgba(0,0,0,0.08);">
-  <div style="max-width:600px;margin:0 auto;display:flex;gap:8px;align-items:center;">
-    <div style="flex:1;">
-      <p style="font-size:14px;font-weight:700;color:#1a1a2e;margin:0;">Get your free sonic brand demo</p>
-      <p style="font-size:12px;color:#767676;margin:2px 0 0;">Powered by BrandMusiq · No credit card</p>
-    </div>
-    <a href="#signup" onclick="closePopup('stickyCTA')" style="padding:12px 24px;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;font-family:Inter,sans-serif;">Book Demo</a>
-  </div>
-</div>
-
-<script>
-// State tracking
-var popupState = { timed: false, exit: false, anyFormSubmitted: false };
-
-// ====== 1. TIMED POPUP — 15 seconds ======
-setTimeout(function() {
-  if (!popupState.anyFormSubmitted && !popupState.timed) {
-    document.getElementById('timedPopup').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    popupState.timed = true;
-  }
-}, 15000);
-
-function submitTimedPopup() {
-  var email = document.getElementById('timed-email').value;
-  if (!email || !email.includes('@')) {
-    document.getElementById('timed-email').style.borderColor = '#ef4444';
-    return;
-  }
-  mogoTrackEmailCaptured(email);  mogoTrackAuditRequested(email);
-  mogoSubmitLead({ email: email, form_type: 'timed_popup' });
-  popupState.anyFormSubmitted = true;
-  var popup = document.getElementById('timedPopup').querySelector('div > div:first-child') || document.getElementById('timedPopup').children[0];
-  document.getElementById('timedPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:#1a1a2e;">You\'re in!</h3><p style="font-size:15px;color:#767676;">We\'ll reach out within 24 hours to schedule your free demo.</p></div>';
-  setTimeout(function() { closePopup('timedPopup'); }, 2500);
-}
-
-// ====== 2. EXIT INTENT — mouse leaves viewport ======
-document.addEventListener('mouseout', function(e) {
-  if (e.clientY < 5 && !popupState.exit && !popupState.anyFormSubmitted) {
-    document.getElementById('exitPopup').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    popupState.exit = true;
-  }
+document.addEventListener('DOMContentLoaded', function() {
+  // [2026-04-04] Perf: lazy-load below-fold components via IntersectionObserver (rootMargin 200px)
+  // Defers logo-wall (35 images + DOM) until user scrolls near it
+  var lazyComponents = {
+    logoWallComponent: 'logo-wall.html'
+  };
+  Object.keys(lazyComponents).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    new IntersectionObserver(function(entries, obs) {
+      if (entries[0].isIntersecting) {
+        mogoLoadComponent(id, mogoComponentPath(lazyComponents[id]));
+        obs.disconnect();
+      }
+    }, { rootMargin: '200px' }).observe(el);
+  });
 });
-
-function submitExitPopup() {
-  var email = document.getElementById('exit-email').value;
-  if (!email || !email.includes('@')) {
-    document.getElementById('exit-email').style.borderColor = '#ef4444';
-    return;
-  }
-  mogoSubmitLead({ email: email, form_type: 'exit_popup' });
-  popupState.anyFormSubmitted = true;
-  document.getElementById('exitPopup').children[0].innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:12px;">✅</div><h3 style="font-size:22px;font-weight:900;margin-bottom:8px;color:white;">Audit requested!</h3><p style="font-size:15px;color:#999;">Check your email — we\'ll send your free sonic brand audit within 24 hours.</p></div>';
-  setTimeout(function() { closePopup('exitPopup'); }, 2500);
-}
-
-// ====== 3. STICKY CTA BAR — shows after scrolling 30% ======
-var stickyShown = false;
-window.addEventListener('scroll', function() {
-  if (stickyShown) return;
-  var scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-  if (scrollPercent > 30) {
-    document.getElementById('stickyCTA').style.display = 'block';
-    stickyShown = true;
-  }
-});
-
-// ====== Shared: close popup ======
-function closePopup(id) {
-  document.getElementById(id).style.display = 'none';
-  // Only restore scroll if no other popup is open
-  if (document.getElementById('timedPopup').style.display !== 'block' &&
-      document.getElementById('exitPopup').style.display !== 'block' &&
-      document.getElementById('videoModal').style.display !== 'block') {
-    document.body.style.overflow = '';
-  }
-}
 </script>
+<!-- Video Popup Modal --><div id="videoModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;cursor:pointer;backdrop-filter:blur(6px);" onclick="if(event.target===this)closeVideo()"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:90%;max-width:860px;"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.5);"><iframe id="videoFrame" title="YouTube video player" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div><button onclick="closeVideo()" style="position:absolute;top:-44px;right:0;width:36px;height:36px;border-radius:50%;background:white;border:none;font-size:18px;font-weight:700;cursor:pointer;color:#1a1a2e;box-shadow:0 4px 16px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">X</button></div></div><script>function openVideo(id){document.getElementById('videoFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';document.getElementById('videoModal').style.display='block';document.body.style.overflow='hidden';}function closeVideo(){document.getElementById('videoFrame').src='';document.getElementById('videoModal').style.display='none';document.body.style.overflow='';}document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideo();});</script><!-- Lead forms, popups, sticky bar all handled by lead-form.js -->
 </body>
 </html>

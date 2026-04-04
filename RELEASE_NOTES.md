@@ -1,5 +1,25 @@
 # Mogoverse Release Notes
 
+## v2.8.2 — Landing page parity: component forms, logo wall, meta, OG tags (2026-04-05)
+
+### What changed
+- **Forms**: Replaced hardcoded 4-step forms + inline popups in 3 landing pages with `mogoRenderLeadForm()` component — single source of truth, no more per-page form maintenance
+- **Logo wall**: Replaced hardcoded 12-logo bars with `logoWallComponent` lazy-loaded via IntersectionObserver — all pages now show full 35+ logo wall
+- **Performance**: Added `loading="lazy"` to all non-hero images across 3 pages
+- **Meta**: Added unique `<meta name="description">` to all 3 pages (was missing)
+- **OG tags**: Added page-specific Open Graph tags to all 3 pages
+- **Build tag**: All 3 pages stamped `BUILD: v2.8.0 / 2026-04-05` for deploy verification
+
+### Files changed
+- `landing-pages/audio-logo-sonic-branding.html` — −221 lines (form/popup code removed)
+- `landing-pages/dont-be-herd-be-heard.html` — −221 lines
+- `landing-pages/ai-brand-music-generator.html` — −221 lines
+
+### Why
+These 3 pages are now live sitelink destinations in Google Ads campaign. Required parity with reference page before paid traffic hits them.
+
+---
+
 ## v2.8.1 — Perf: CLS fix — reserved min-height on lazy component placeholders (2026-04-04)
 
 ### CLS Fix
